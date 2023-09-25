@@ -1,0 +1,82 @@
+[enu default]
+
+NCH_LABEL_TIME = "T";
+NCH_LABEL_KILLS = "K";
+NCH_LABEL_ITEMS = "I";
+NCH_LABEL_SECRETS = "S";
+NCH_LABEL_AIR = "Air";
+NCH_MONGENNAME = "<Target>";
+NCH_LABEL_DAMAGE = "Damage";
+
+// Used by Brutal Doom/64 patches.
+NCH_LABEL_STAMINA = "Stamina";
+
+// Used by Combined Arms patch.
+NCH_LABEL_OVERHEATED = "Overheated!";
+NCH_LABEL_HEATLEVEL = "Heat Level";
+
+// Used by Faspons patch.
+NCH_LABEL_ADRENALINE = "Adrenaline";
+
+// Used by MetaDoom patch.
+NCH_LABEL_POINTS = "P";
+
+// ------------------------------------------------------------------------------------------------
+//
+//   Options menu
+//
+// ------------------------------------------------------------------------------------------------
+
+NCH_OPTMNU_TITLE = "Metal Ops HUD Options";
+
+NCH_OPTVAL_COUNTERS = "Counters";
+NCH_OPTVAL_COUNTERS_AND_PRC = "Counters and %";
+NCH_OPTVAL_OWNEDWEAPONSONLY = "Owned weapons only";
+NCH_OPTVAL_ALL = "All";
+NCH_OPTVAL_OVERMAX = "Over max";
+NCH_OPTVAL_OVER100 = "Over 100";
+NCH_OPTVAL_ALWAYS = "Always";
+NCH_OPTVAL_HPONLY = "Health only";
+NCH_OPTVAL_HP_AND_SPAWNHP = "Health and spawn health";
+NCH_OPTVAL_C_PINK = "Pink";
+
+NCH_OPTMNU_GENERAL = "General Options";
+NCH_OPTMNU_AMMOLIST = "Ammo List Options";
+NCH_OPTMNU_OVERMAXBARMODE = "Overmax Bar Mode Options";
+NCH_OPTMNU_BARSLOWSTATE = "Bars Low State (%) Options";
+NCH_OPTMNU_MONSHPBAR = "Monster Health Bar Options";
+NCH_OPTMNU_COLOR = "Color Options";
+
+NCH_OPTION_STATS = "Statistics";
+NCH_OPTION_RECDMG = "Received damage";
+NCH_OPTION_AIRBAR = "Air supply bar";
+NCH_OPTION_APOWERUPS = "Active powerups";
+NCH_OPTION_DRAWMODE = "Draw mode";
+NCH_OPTION_AMMOLISTOVERRIDE = "Allow list override?";
+NCH_OPTION_MODE = "Mode";
+NCH_OPTION_BARMAXOUT = "Bar maxes out at";
+NCH_OPTION_HEALTH = "Health";
+NCH_OPTION_ARMOR = "Armor";
+NCH_OPTION_AMMO1 = "Primary ammo";
+NCH_OPTION_AMMO2 = "Secondary ammo";
+NCH_OPTION_AIR = "Air supply";
+NCH_OPTION_NAMEISGENERIC = "Name is generic?";
+NCH_OPTION_INCFRIEND = "Include friendlies?";
+NCH_OPTION_HPCOUNTER = "Health counter";
+NCH_OPTION_SPAWNHPTHRESHOLD = "Spawn health threshold";
+NCH_OPTION_BGCOLOR = "Backgrounds";
+NCH_OPTION_HICOLOR = "Highlight";
+
+//Metal ops Language
+GOTENFPISTOL = "You got the Enforcer Sidearm! (Slot 2)";
+GOTLVRSHOT = "You got the Lever Action Shotgun! (Slot 3");
+TAG_LVRSHOT = "Lever Action Shotgun";
+TAG_KATANA = "Katana";
+//OB_LVRSHOT = "
+HUD_WARN1 = "Press = to switch the HUD to fullscreen.";
+HUD_WARN2 = "Make sure alternative HUD is disabled!";
+GOTUNMAKER = "You got the Unmaker! Unleash the power of Hell itself on your foes! (Slot 7)";
+TAG_UNMAKER = "The Unmaker";
+OB_UNMAKER = "%o got decimated by %k's Unmaker.";
+GOTUNMAKER2 = "What The Fuck is this?! (Slot 7)";
+

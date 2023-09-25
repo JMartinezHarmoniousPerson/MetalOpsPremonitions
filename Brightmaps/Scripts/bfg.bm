@@ -1,0 +1,15 @@
+brightmap sprite B7GGA0 {map "Brightmaps/Weapons/BFG/B7GGA0_BM.png"}
+brightmap sprite B7GGB0 {map "Brightmaps/Weapons/BFG/B7GGA0_BM.png"}
+brightmap sprite B7GGC0 {map "Brightmaps/Weapons/BFG/B7GGA0_BM.png"}
+brightmap sprite B7GGD0 {map "Brightmaps/Weapons/BFG/B7GGA0_BM.png"}
+brightmap sprite B7GGE0 {map "Brightmaps/Weapons/BFG/B7GGA0_BM.png"}
+
+brightmap sprite B7GFA0 {map "Brightmaps/Weapons/BFG/B7GFA0_BM.png" DISABLEFULLBRIGHT}
+brightmap sprite B7GFB0 {map "Brightmaps/Weapons/BFG/B7GFA0_BM.png" DISABLEFULLBRIGHT}
+brightmap sprite B7GFC0 {map "Brightmaps/Weapons/BFG/B7GFA0_BM.png" DISABLEFULLBRIGHT}
+brightmap sprite B7GFD0 {map "Brightmaps/Weapons/BFG/B7GFA0_BM.png" DISABLEFULLBRIGHT}
+brightmap sprite B7GFE0 {map "Brightmaps/Weapons/BFG/B7GFA0_BM.png" DISABLEFULLBRIGHT}
+brightmap sprite B7GGF0 {map "Brightmaps/Weapons/BFG/B7GFA0_BM.png" DISABLEFULLBRIGHT}
+brightmap sprite B7GGG0 {map "Brightmaps/Weapons/BFG/B7GFA0_BM.png" DISABLEFULLBRIGHT}
+brightmap sprite B7GGH0 {map "Brightmaps/Weapons/BFG/B7GFA0_BM.png" DISABLEFULLBRIGHT}
+brightmap sprite B7GGI0 {map "Brightmaps/Weapons/BFG/B7GFA0_BM.png" DISABLEFULLBRIGHT}

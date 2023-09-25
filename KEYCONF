@@ -1,0 +1,16 @@
+clearplayerclasses
+addplayerclass JMPlayerPawn
+addplayerclass JMPlayerDeagleStart
+
+addkeysection "Metal Ops Keybinds" MOBinds
+addmenukey "Toss Throwable" +user1
+defaultbind G +user1
+
+addmenukey "Kick Attack" +user2
+defaultbind Q +user2
+
+addmenukey "Switch Throwables" +user3
+defaultbind N +user3
+
+addmenukey "Special Action" +user4
+defaultbind X +user4

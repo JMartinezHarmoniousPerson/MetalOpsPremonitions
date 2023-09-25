@@ -1,0 +1,4 @@
+#include "Actors/Replacers/WepReplacers.txt"
+#include "Actors/Replacers/AmmoReplacers.txt"
+#include "Actors/Replacers/HPAPReplacers.txt"
+#include "Actors/Replacers/PowerupReplacers.txt"

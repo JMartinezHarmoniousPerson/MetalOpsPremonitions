@@ -1,0 +1,332 @@
+//Minigun
+
+class MO_MiniGun : JMWeapon
+{
+	Default
+	{
+		Weapon.AmmoUse 1;
+		Weapon.AmmoGive 20;
+		Weapon.AmmoType "HighCalClip";
+		Inventory.PickupMessage "You got the Vulcan Minigun! (Slot 4)";
+		Obituary "$OB_MPCHAINGUN";
+		Tag "Vulcan Minigun";
+		Inventory.PickupSound "weapons/minigun/pickup";
+	}
+	States
+	{
+	ContinueSelect:
+		MGNG AAAAAAAAAAAAAAAAAA 0 A_Raise();
+	Ready:
+	SelectAnimation:
+		MGNG A 0 A_StartSound("weapons/minigun/pickup",0);
+		MGNS ABCDEFGH 1;
+	ReadyToFire:
+		TNT1 A 0 A_JumpIfInventory("MinigunSpin",1,"ReadyToFire2");
+		MGNG A 1 JM_WeaponReady();
+		Loop;
+	Deselect:
+		tnt1 a 0;
+		TNT1 A 0 A_JumpIfInventory("MinigunSpin",1,"DeselectMinigunSpin");
+		TNT1 A 0 A_StopSound(CHAN_WEAPON);
+		TNT1 A 0 A_StopSound(CHAN_AUTO);
+	ActuallySwitchWeapons:
+		MGNS HGFEDCBA 1;
+		MGNG A 0 A_Lower(12);
+		Wait;
+	Select:
+		TNT1 A 0;
+		Goto ClearAudioAndResetOverlays;
+	Fire:
+		TNT1 A 0 A_JumpIf(CountInv("MinigunSpin") == 1, "Hold");
+		TNT1 A 0 A_CheckReload();
+		TNT1 A 0 A_StartSound("weapons/minigun/start",0);
+		MGNG BBB 1;
+		MGNF C 1 BRIGHT{
+			A_FireBullets(5.6, 0, 1, 20, "MinigunPuff", FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
+			A_Overlay(-5, "MuzzleFlash");
+			A_SpawnItemEx("EmptyRifleBrass",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			A_SpawnItemEx("MinigunBeltPiece",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
+			A_StartSound("weapons/minigun/startfire",2);
+			JM_CheckForQuadDamage();
+			}
+		TNT1 A 0 
+		{
+			if(!GetCvar("mo_nogunrecoil"))
+			{
+			A_SetPitch(pitch-0.9,SPF_Interpolate);
+			}
+		 }
+        MGNG CDDEEF 1;
+		TNT1 A 0 A_CheckReload();
+		MGNF F 1 BRIGHT{
+			A_FireBullets(5.6, 0, 1, 20, "MinigunPuff", FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
+			A_Overlay(-5, "MuzzleFlash");
+			A_SpawnItemEx("EmptyRifleBrass",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			A_SpawnItemEx("MinigunBeltPiece",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
+			A_StartSound("weapons/minigun/startfire",2);
+			JM_CheckForQuadDamage();
+			}
+		TNT1 A 0 
+		{
+			if(!GetCvar("mo_nogunrecoil"))
+			{
+			A_SetPitch(pitch-0.9,SPF_Interpolate);
+			}
+		 }
+		MGNG GGGH 1;
+		TNT1 A 0 A_CheckReload();
+		MGNF H 1 BRIGHT{
+			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
+			A_Overlay(-5, "MuzzleFlash");
+			A_SpawnItemEx("EmptyRifleBrass",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			A_SpawnItemEx("MinigunBeltPiece",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
+			A_StartSound("weapons/minigun/startfire",2);
+			JM_CheckForQuadDamage();
+			}
+		TNT1 A 0 
+		{
+			if(!GetCvar("mo_nogunrecoil"))
+			{
+			A_SetPitch(pitch-0.9,SPF_Interpolate);
+			}
+		 }
+		MGNG HAB 1;
+		TNT1 A 0 A_CheckReload();
+		MGNF C 1 BRIGHT{
+			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
+			A_Overlay(-5, "MuzzleFlash");
+			A_SpawnItemEx("EmptyRifleBrass",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			A_SpawnItemEx("MinigunBeltPiece",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
+			A_StartSound("weapons/minigun/startfire",2);
+			JM_CheckForQuadDamage();
+			}
+		TNT1 A 0 
+		{
+			if(!GetCvar("mo_nogunrecoil"))
+			{
+			A_SetPitch(pitch-0.9,SPF_Interpolate);
+			}
+		 }
+		MGNF DE 1;
+		TNT1 A 0 A_CheckReload();
+		MGNF F 1 BRIGHT{
+			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
+			A_Overlay(-5, "MuzzleFlash");
+			A_SpawnItemEx("EmptyRifleBrass",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			A_SpawnItemEx("MinigunBeltPiece",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
+			A_StartSound("weapons/minigun/startfire",2);
+			JM_CheckForQuadDamage();
+			}
+		TNT1 A 0 
+		{
+			if(!GetCvar("mo_nogunrecoil"))
+			{
+			A_SetPitch(pitch-0.9,SPF_Interpolate);
+			}
+		 }
+        MGNG GH 1;
+	Hold:
+		TNT1 A 0 A_CheckReload();
+		TNT1 A 0 A_StartSound("weapons/minigun/fire",1,CHANF_LOOP);
+	HoldingFire:
+		TNT1 A 0 A_CheckReload();
+		MGNF A 1 BRIGHT{
+			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
+			A_Overlay(-5, "MuzzleFlash");
+			A_SpawnItemEx("EmptyRifleBrass",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			A_SpawnItemEx("MinigunBeltPiece",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
+			JM_CheckForQuadDamage();
+			}
+		TNT1 A 0 
+		{
+			if(!GetCvar("mo_nogunrecoil"))
+			{
+			A_SetPitch(pitch-0.9,SPF_Interpolate);
+			}
+		 }
+		MGNF B 1 BRIGHT;
+		TNT1 A 0 A_CheckReload();
+		MGNF C 1 BRIGHT {
+			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
+				A_SpawnItemEx("EmptyRifleBrass",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			A_SpawnItemEx("MinigunBeltPiece",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
+			A_Overlay(-5, "MuzzleFlash");
+			}
+		TNT1 A 0 
+		{
+			if(!GetCvar("mo_nogunrecoil"))
+			{
+			A_SetPitch(pitch-0.9,SPF_Interpolate);
+			}
+		 }
+		MGNF D 1 BRIGHT;
+		TNT1 A 0 A_CheckReload();
+		MGNF E 1 BRIGHT{
+			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
+				A_SpawnItemEx("EmptyRifleBrass",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			A_SpawnItemEx("MinigunBeltPiece",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			A_Overlay(-5, "MuzzleFlash");
+			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
+			JM_CheckForQuadDamage();
+			}
+		TNT1 A 0 
+		{
+			if(!GetCvar("mo_nogunrecoil"))
+			{
+			A_SetPitch(pitch-0.9,SPF_Interpolate);
+			}
+		 }
+		MGNF F 1 BRIGHT;
+		TNT1 A 0 A_CheckReload();
+		MGNF G 1 BRIGHT {
+			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
+			A_SpawnItemEx("EmptyRifleBrass",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			A_SpawnItemEx("MinigunBeltPiece",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
+			A_Overlay(-5, "MuzzleFlash");
+			}
+		TNT1 A 0 
+		{
+			if(!GetCvar("mo_nogunrecoil"))
+			{
+			A_SetPitch(pitch-0.9,SPF_Interpolate);
+			}
+		 }
+		MGNF H 1 BRIGHT;
+		MGNG B 0 A_JumpIf(PressingFire(), "HoldingFire");
+		Goto StopSpin;
+	
+	StopAltFire:
+		TNT1 A 0 {
+			A_StopSound(1);
+			A_StopSound(5);
+			A_StopSound(4);
+			}
+		TNT1 A 0 A_SetInventory("MinigunSpin",0);
+	StopSpin:
+		TNT1 A 0 A_JumpIf(CountInv("MinigunSpin") == 1, "ReadyToFire2");
+		TNT1 A 0
+		{
+			A_StopSound(CHAN_5);
+			A_StopSound(CHAN_WEAPON);
+			A_StopSound(CHAN_AUTO);
+			A_StopSound(CHAN_6);
+		}
+		TNT1 A 0 A_StartSound("weapons/Minigun/stop",1);
+		MGNG ABCDEF 1;
+		MGNG GGHH 1;
+		MGNG AABBCCDD 1;
+		MGNG EEFFGGGHHH 1;
+		Goto ReadyToFire;
+	DeselectSpin:
+		TNT1 A 0
+		{
+			A_StopSound(CHAN_5);
+			A_StopSound(CHAN_WEAPON);
+			A_StopSound(CHAN_AUTO);
+			A_StopSound(CHAN_6);
+			A_SetInventory("MinigunSpin",0);
+		}
+		TNT1 A 0 A_StartSound("weapons/Minigun/stop",1);
+		MGNG ABCDEF 1;
+		MGNG GGHH 1;
+		MGNG AABBCCDD 1;
+		MGNG EEFFGGGHHH 1;
+		Goto ActuallySwitchWeapons;
+	AltFire:
+		TNT1 A 0 A_JumpIf(CountInv("MinigunSpin") == 1, "StopAltFire");
+		TNT1 A 0 A_StartSound("weapons/minigun/start",0);
+		TNT1 A 0 A_SetInventory("MinigunSpin",1);
+		MGNG AAAABBBBCCCCDDDD 1;
+		MGNG EFGH 3;
+		MGNG AABBCCDD 1;
+		TNT1 A 0 A_StartSound("Weapons/Minigun/Loop",6, CHANF_LOOPING);
+		MGNG EFGH 1;
+	ReadyToFire2:
+		TNT1 A 0 A_StartSound("Weapons/Minigun/Loop",6, CHANF_LOOPING);
+		TNT1 A 0 A_StopSound(CHAN_WEAPON);
+		MGNG ABCDEFGH 1 JM_WeaponReady();
+		Loop;
+	MuzzleFlashStarting:
+		TNT1 A 0 A_Jump(256, "MS1", "MS2", "MS3", "MS4");
+		Stop;
+	MS1:
+		MGF1 A 1 BRIGHT;
+		Stop;
+	MS2:
+		MGF1 B 1 BRIGHT;
+		Stop;
+	MS3:
+		MGF1 C 1 BRIGHT;
+	Stop;
+	MS4:
+		MGF1 D 1 BRIGHT;
+		Stop;
+		
+	MuzzleFlash:
+		TNT1 A 0 A_Jump(256, "M1", "M2", "M3", "M4");
+		Stop;
+	M1:
+		MGF1 AC 1 BRIGHT;
+		STOP;
+	M2:
+		MGF1 BD 1 BRIGHT;
+		STOP;
+	M3:
+		MGF1 AB 1 BRIGHT;
+		STOP;
+	M4:
+		MGF1 CD 1 BRIGHT;
+		STOP;
+	Spawn:
+		MGUN A -1;
+		Stop;
+	FlashKick:
+		TNT1 A 0 A_JumpIfInventory("MinigunSpin",1,"FlashKickSpin");
+		TNT1 A 0 A_JumpIfInventory("MO_POWERSPEED",1,"FlashKickFast");
+		MG1K ABCDEFGHGFEDCBA 1;
+		Goto ReadyToFire;
+	FlashAirKick:
+		TNT1 A 0 A_JumpIfInventory("MinigunSpin",1,"FlashKickSpin");
+		TNT1 A 0 A_JumpIfInventory("MO_POWERSPEED",1,"FlashAirKickFast");
+		MG1K ABCDEFGHHHGFEDCBA 1;
+		Goto ReadyToFire;
+	FlashKickSpin:
+		TNT1 A 0 A_JumpIfInventory("MO_POWERSPEED",1,"FlashKickSpinFast");
+		MG2K ABCDEFGHIJKLMNO 1;
+		MGNG H 1;
+		Goto ReadyToFire;
+	FlashAirKickSpin:
+		TNT1 A 0 A_JumpIfInventory("MO_POWERSPEED",1,"FlashAirKickSpinFast");
+		MG2K ABCDEFGHHHIJKLMNO 1;
+		MGNG H 1;
+		Goto ReadyToFire;
+		
+	FlashKickFast:
+		MG1K ABCDEFGFEDCBA 1;
+		Goto ReadyToFire;
+	FlashAirKickFast:
+		MG1K ABCDEFGHGFEDCBA 1;
+		Goto ReadyToFire;
+	FlashKickSpinFast:
+		MG2K ABCDEFJKLMNO 1;
+		Goto ReadyToFire;
+	FlashAirKickSpinFast:
+		MG2K ABCDEFGHHIJKLMNO 1;
+		Goto ReadyToFire;
+	}
+}
+
+Class MinigunSpin : Inventory
+{
+	Default{Inventory.MaxAmount 1;}
+}
+
+Class IsChangingWeapons : MinigunSpin{}

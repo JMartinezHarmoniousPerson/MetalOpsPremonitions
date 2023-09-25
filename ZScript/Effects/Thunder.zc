@@ -1,0 +1,148 @@
+
+Class GreenLightningSmall : BaseVisualSFX
+{
+	Default
+	{
+	RenderStyle 'Add';
+	Scale 0.25;
+	Alpha 0.55;
+	}
+	States
+	{
+	Spawn:
+		TNT1 A 0;
+		TNT1 A 0 A_Jump(256,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72);
+	Select:
+		GRL1 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade");
+		GRL2 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade");
+		GRL3 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade");
+		GRL4 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade");
+	Fade:
+		"----" A 1 bright A_FadeOut(0.15);
+		loop;
+	}
+}
+
+Class GreenLightningMini : GreenLightningSmall
+{
+	Default{Scale 0.07;}
+}
+
+class GreenLightningTiny : GreenLightningSmall
+{
+	Default{Scale 0.15;}
+}
+
+class GreenLightningMedium : GreenLightningSmall
+{
+	default{Scale 0.4;}
+}
+
+class GreenLightningLarge : GreenLightningSmall
+{
+	default{Scale 0.65;}
+}
+
+class GreenLightningHuge : GreenLightningSmall
+{
+	default{Scale 0.8;}
+}
+
+Class BlueLightningSmall : GreenLightningSmall
+{
+	Default
+	{
+	RenderStyle 'Add';
+	Scale 0.25;
+	Alpha 0.55;
+	}
+	States
+	{
+	Spawn:
+		TNT1 A 0;
+		TNT1 A 0 A_Jump(256,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72);
+	Select:
+		BLL1 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade");
+		BLL2 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade");
+		BLL3 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade");
+		BLL4 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade");
+	Fade:
+		"----" A 1 bright A_FadeOut(0.15);
+		loop;
+	}
+}
+
+Class BlueLightningMini : BlueLightningSmall
+{
+	Default{Scale 0.07;}
+}
+
+class BlueLightningTiny : BlueLightningSmall
+{
+	Default{Scale 0.15;}
+}
+
+class BlueLightningMedium : BlueLightningSmall
+{
+	default{Scale 0.4;}
+}
+
+class BlueLightningLarge : BlueLightningSmall
+{
+	default{Scale 0.65;}
+}
+
+class BlueLightningHuge : BlueLightningSmall
+{
+	default{Scale 0.8;}
+}
+
+Class RedLightningSmall : BlueLightningSmall
+{
+	Default
+	{
+	RenderStyle 'Add';
+	Scale 0.25;
+	Alpha 0.55;
+	Translation "192:207=168:192";
+	}
+	States
+	{
+	Spawn:
+		TNT1 A 0;
+		TNT1 A 0 A_Jump(256,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72);
+	Select:
+		BLL1 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade");
+		BLL2 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade");
+		BLL3 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade");
+		BLL4 ABCDEFGHIJKLMNOPQR 0 A_Jump(256,"Fade");
+	Fade:
+		"----" A 1 bright A_FadeOut(0.15);
+		loop;
+	}
+}
+
+Class RedLightningMini : RedLightningSmall
+{
+	Default{Scale 0.07;}
+}
+
+class RedLightningTiny : RedLightningSmall
+{
+	Default{Scale 0.15;}
+}
+
+class RedLightningMedium : RedLightningSmall
+{
+	default{Scale 0.4;}
+}
+
+class RedLightningLarge : RedLightningSmall
+{
+	default{Scale 0.65;}
+}
+
+class RedLightningHuge : RedLightningSmall
+{
+	default{Scale 0.8;}
+}

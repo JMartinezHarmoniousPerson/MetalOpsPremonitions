@@ -1,0 +1,90 @@
+//Chex Quest Weapon Replacers
+
+Actor SuperBootsporkReplacer replaces SuperBootspork
+{
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItem("Chainsaw")
+		Stop
+	}
+}
+
+Actor MiniZorcherReplacer replaces MiniZorcher
+{
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItem("Pistol")
+		Stop
+	}
+}
+
+Actor LargeZorcherReplacer replaces LargeZorcher
+{
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItem("Shotgun")
+		Stop
+	}
+}
+
+Actor SuperLargeZorcherReplacer replaces SuperLargeZorcher
+{
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItem("SuperShotgun")
+		Stop
+	}
+}
+
+
+Actor RapidZorcherReplacer replaces RapidZorcher
+{
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItem("Chaingun")
+		Stop
+	}
+}
+
+Actor ZorchPropulsorReplacer replaces ZorchPropulsor
+{
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItem("RocketLauncher")
+		Stop
+	}
+}
+
+Actor PhasingZorcherReplacer replaces PhasingZorcher
+{
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItem("PlasmaRifle")
+		Stop
+	}
+}
+
+Actor LAZDeviceReplacer replaces LAZDevice
+{
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_SpawnItem("BFG9000")
+		Stop
+	}
+}

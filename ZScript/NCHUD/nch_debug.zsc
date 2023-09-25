@@ -1,0 +1,67 @@
+// ------------------------------------------------------------------------------------------------
+//
+//   Testing/debugging stuff.
+//
+// ------------------------------------------------------------------------------------------------
+
+class NCH_Blend : CustomInventory
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0 A_SetBlend("FF00FF", 1.0, 0x3FFFFFFF);
+		Stop;
+	}
+}
+
+class NCH_DoDamage : CustomInventory
+{
+	States
+	{
+	Pickup:
+		TNT1 A 0 A_DamageSelf(5);
+		Stop;
+	}
+}
+
+class NCH_Thing : Actor
+{
+	Default
+	{
+		Health 99999;
+		Monster;
+	}
+
+	States
+	{
+	Spawn:
+		SOUL ABCD 6 Bright;
+		Loop;
+	}
+}
+
+class NCH_Thing2 : NCH_Thing
+{
+	States
+	{
+	Spawn:
+		SOUL A 0 NoDelay Bright A_GiveInventory("NCH_NoHpBar");
+		Goto Super::Spawn;
+	}
+}
+
+class NCH_Thing3 : NCH_Thing
+{
+	Default
+	{
+		+INVULNERABLE
+	}
+}
+
+class NCHF_Soulsphere : Soulsphere
+{
+	Default
+	{
+		Inventory.MaxAmount 300;
+	}
+}

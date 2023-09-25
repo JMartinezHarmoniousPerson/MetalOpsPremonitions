@@ -1,0 +1,12 @@
+//SSG
+
+//Fire
+brightmap sprite SG2FA0 {map "Brightmaps/Weapons/SSG/SG2FA0_BM.png" disablefullbright}
+brightmap sprite SG2FB0 {map "Brightmaps/Weapons/SSG/SG2FB0_BM.png" disablefullbright}
+
+//Fire Right
+brightmap sprite SG2AB0 {map "Brightmaps/Weapons/SSG/SG2AB0_BM.png" disablefullbright}
+
+//Fire Left
+brightmap sprite SG2AC0 {map "Brightmaps/Weapons/SSG/SG2AC0_BM.png" disablefullbright}
+brightmap sprite SG2AD0 {map "Brightmaps/Weapons/SSG/SG2AD0_BM.png" disablefullbright}

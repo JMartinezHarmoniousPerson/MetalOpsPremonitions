@@ -1,0 +1,186 @@
+
+Sprite "KTAFA0", 432, 262
+{
+	Offset -93, 73
+	Patch "KTAFA", -11, 13
+}
+
+Sprite "KTAFB0", 456, 230
+{
+	Offset -104, 28
+	Patch "KTAFC", 0, 0
+}
+
+Sprite "KTAFC0", 456, 230
+{
+	Offset -117, 39
+	Patch "KTAFC", 0, 6
+}
+
+Sprite "KTAFD0", 456, 230
+{
+	Offset -123, 43
+	Patch "KTAFC", 0, 6
+}
+
+Sprite "KTAFE0", 514, 258
+{
+	Offset -72, 43
+	Patch "KTAFD", -14, 4
+}
+
+Sprite "KTAFF0", 807, 309
+{
+	Offset 238, 110
+	Patch "KTAFF", 0, 0
+}
+
+Sprite "KTAFG0", 807, 309
+{
+	Offset 238, 110
+	Patch "KTAFG", 0, 0
+}
+
+Sprite "KTAHG0", 807, 309
+{
+	Offset 238, 110
+	Patch "KTAFG", -26, 9
+}
+
+Sprite "KTAFH0", 807, 309
+{
+	Offset 238, 110
+	Patch "KTAFH", 0, 0
+}
+
+Sprite "KTAFI0", 807, 309
+{
+	Offset 238, 110
+	Patch "KTAFI", 0, 0
+}
+
+Sprite "KTAFJ0", 807, 309
+{
+	Offset 238, 110
+	Patch "KTAFJ", 0, 0
+}
+
+Sprite "KTAFK0", 807, 309
+{
+	Offset 238, 110
+	Patch "KTAFK", 0, 0
+}
+
+Sprite "KTAFL0", 807, 309
+{
+	Offset 210, 110
+	Patch "KTAFL", 0, 0
+}
+
+Sprite "KTAFM0", 807, 309
+{
+	Offset 194, 110
+	Patch "KTAFM", -13, 0
+}
+
+Sprite "KTAFN0", 807, 310
+{
+	Offset 190, 110
+	Patch "KTAFN", -16, -6
+}
+
+Sprite "KTAFO0", 807, 309
+{
+	Offset 200, 104
+	Patch "KTAFO", -41, -21
+}
+
+Sprite "KTAFQ0", 807, 309
+{
+	Offset 179, 117
+	Patch "KTAFQ", -103, -10
+}
+
+Sprite "KTAFR0", 807, 309
+{
+	Offset 165, 110
+	Patch "KTAFR", -132, -17
+}
+
+Sprite "KTAFS0", 807, 309
+{
+	Offset 165, 110
+	Patch "KTAFS", -146, 5
+}
+
+Sprite "KTAFT0", 807, 309
+{
+	Offset 165, 110
+	Patch "KTAFT", -144, -3
+}
+
+Sprite "KTAHA0", 537, 216
+{
+	Offset -85, 8
+	Patch "KTAHA", -5, 2
+}
+
+Sprite "KTAHB0", 537, 216
+{
+	Offset -94, 9
+	Patch "KTAHA", 0, 0
+}
+
+Sprite "KTAHC0", 537, 216
+{
+	Offset -114, 13
+	Patch "KTAHA", 0, 0
+}
+
+Sprite "KTAHD0", 499, 208
+{
+	Offset -98, 13
+	Patch "KTAHD", -11, 12
+}
+
+Sprite "KTAHE0", 506, 260
+{
+	XScale 1.100
+	YScale 1.100
+	Offset -94, 9
+	Patch "KTAHF", -30, 2
+}
+
+Sprite "KTAHF0", 465, 325
+{
+	XScale 1.200
+	YScale 1.200
+	Offset -13, 40
+	Patch "KTAHG", 12, 25
+}
+
+Sprite "K4THA0", 291, 270
+{
+	Offset -150, 84
+	Patch "KTSHTE1", 0, 0
+}
+
+Sprite "K4THB0", 390, 323
+{
+	Offset -73, 139
+	Patch "KTSHTE2", 7, 0
+}
+
+Sprite "K4THC0", 121, 385
+{
+	Offset -158, 175
+	Patch "KTSHTE3", 0, 0
+}
+
+Sprite "K4THD0", 262, 393
+{
+	Offset -130, 193
+	Patch "KTSHTE4", -75, 10
+}
+
+

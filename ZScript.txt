@@ -1,0 +1,68 @@
+version "4.5.0"
+
+#include "ZScript/PlayerPawn.zs"
+#include "ZScript/Items/Ammo.zs"
+#include "ZScript/Items/Keys.zs"
+#include "ZScript/Items/ARMOR.zs"
+#include "ZScript/Items/Health.zs"
+#include "ZScript/Items/Powerups.zs"
+#include "ZScript/Items/Spheres.zs"
+#include "ZScript/Weapons/ThrowableObjects.zs"
+#include "ZScript/Weapons/BaseWeapon.zs"
+#include "ZScript/Weapons/Katana.zs"
+#include "ZScript/Weapons/Pistol.zsc"
+#include "ZScript/Weapons/LeverShotty.zs"
+#include "ZScript/Weapons/PumpShotty.zs"
+#include "ZScript/Weapons/SSG.zs"
+#include "ZScript/Spawners.zs"
+#include "ZScript/Weapons/Rifle.zs"
+#include "ZScript/Weapons/Minigun.zs"
+#include "ZScript/Weapons/RocketLauncher.zs"
+#include "ZScript/Weapons/Plasma.zs"
+#include "ZScript/Weapons/Flamethrower.zs"
+#include "ZScript/Weapons/SMG.zs"
+#include "ZScript/weapons/bfg.zs"
+#include "ZScript/weapons/Deagle.zsc"
+//#include "ZScript/weapons/heavyrifle.zs" //This will be added later!
+#include "ZScript/weapons/Unmaker.zc"
+
+#include "zscript/NCHUD/nch_basehud.zsc"
+#include "zscript/NCHUD/nch_debug.zsc"
+#include "zscript/NCHUD/nch_handler.zsc"
+#include "zscript/NCHUD/nch_helper.zsc"
+
+
+
+//Effects
+#include "ZScript/Effects/Smoke.zs"
+#include "ZScript/Effects/Puff.zs"
+#include "ZScript/Effects/Fire.zs"
+#include "ZScript/Effects/Casings.zc"
+#include "ZScript/Effects/Thunder.zc"
+#include "ZScript/Effects/Shockwaves.zs"
+
+#include "ZScript/StepEventHandler.zc"
+
+
+Class BaseVisualSFX : Actor// From Particle Fire Enhancer Mod (v0.8) by Z86
+{
+	Default
+	{
+	  +NOGRAVITY;
+	  +NOINTERACTION;
+	  +NOBLOCKMAP;
+	  +NOTELEPORT;
+	  +ForceXYBillboard;
+	  +CLIENTSIDEONLY;
+	}
+}
+
+Class MO_ZSToken : Inventory 
+{
+	Default
+	{
+		Inventory.MaxAmount 1;
+		+INVENTORY.UNDROPPABLE;
+		-INVENTORY.INVBAR;
+	}
+}

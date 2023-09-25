@@ -1,0 +1,38 @@
+
+brightmap sprite PSTFA0 {map "Brightmaps/Weapons/Pistol/PSTFA0_BM.png"}
+brightmap sprite PSTFB0 {map "Brightmaps/Weapons/Pistol/PSTFB0_BM.png"}
+brightmap sprite PSTFC0 {map "Brightmaps/Weapons/Pistol/PSTFC0_BM.png"}
+brightmap sprite PSTFD0 {map "Brightmaps/Weapons/Pistol/PSTFD0_BM.png"}
+brightmap sprite PSTFE0 {map "Brightmaps/Weapons/Pistol/PSTFE0_BM.png"}
+
+brightmap sprite PSTGA0 {map "Brightmaps/Weapons/Pistol/PSTGA0_BM.png"}
+
+brightmap sprite PSTDA0 {map "Brightmaps/Weapons/Pistol/PSTDA0_BM.png"}
+brightmap sprite PSTDB0 {map "Brightmaps/Weapons/Pistol/PSTDB0_BM.png"}
+brightmap sprite PSTDC0 {map "Brightmaps/Weapons/Pistol/PSTDC0_BM.png"}
+brightmap sprite PSTDD0 {map "Brightmaps/Weapons/Pistol/PSTDD0_BM.png"}
+
+brightmap sprite PSR1A0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM01.png"}
+brightmap sprite PSR1B0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM02.png"}
+brightmap sprite PSR1C0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM03.png"}
+brightmap sprite PSR1D0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM04.png"}
+brightmap sprite PSR1E0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM05.png"}
+brightmap sprite PSR1F0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM06.png"}
+brightmap sprite PSR1G0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM07.png"}
+brightmap sprite PSR1H0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM07.png"}
+brightmap sprite PSR1I0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM07.png"}
+brightmap sprite PSR1J0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM07.png"}
+brightmap sprite PSR1K0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM07.png"}
+brightmap sprite PSR1L0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM08.png"}
+brightmap sprite PSR1M0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM09.png"}
+brightmap sprite PSR1N0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM10.png"}
+brightmap sprite PSR1O0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM11.png"}
+brightmap sprite PSR1P0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM12.png"}
+brightmap sprite PSR1Q0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM13.png"}
+brightmap sprite PSR1R0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM14.png"}
+brightmap sprite PSR1S0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM15.png"}
+brightmap sprite PSR1T0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM16.png"}
+brightmap sprite PSR1U0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM17.png"}
+brightmap sprite PSR1V0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM18.png"}
+brightmap sprite PSR1W0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM19.png"}
+brightmap sprite PSR1X0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM01.png"}

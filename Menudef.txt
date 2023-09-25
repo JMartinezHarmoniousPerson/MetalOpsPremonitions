@@ -1,0 +1,143 @@
+AddOptionMenu "OptionsMenu"
+{
+	Submenu "Mod Settings", "Modsettings"
+	StaticText ""
+}
+
+
+OptionMenu "Modsettings"
+{
+	Submenu "$NCH_OPTMNU_TITLE", "NCHUD"
+	StaticText ""
+	Option "SSG and Flak shells randomly replace Shotgun and 12G shell spawns", "mo_ssgrandomizer", "yesno"
+	StaticText "SSG and Flak shells would randomly replace Shotgun and 12G Shells"
+	StaticText "This option should only be used if you're playing Doom 1 or FreeDoom Phase 1", darkgrey
+	StaticText ""
+	Option "Bullet ricochet sounds", "mo_bulletsparksound", "OnOff"
+	StaticText "Play bullet ricochet sounds if bullets hit a wall."
+	StaticText ""
+	Option "Disable Gun Recoil", "mo_nogunrecoil", "yesno"
+	StaticText "Disables recoil on shootable weapons."
+}
+
+OptionValue "NCH_TallyDrawModes"
+{
+	0, "$OPTVAL_OFF"
+	1, "$NCH_OPTVAL_COUNTERS"
+	2, "$NCH_OPTVAL_COUNTERS_AND_PRC"
+}
+
+OptionValue "NCH_AmmoListDrawModes"
+{
+	0, "$OPTVAL_OFF"
+	1, "$NCH_OPTVAL_OWNEDWEAPONSONLY"
+	2, "$NCH_OPTVAL_ALL"
+}
+
+OptionValue "NCH_OverMaxBarModes"
+{
+	0, "$NCH_OPTVAL_OVERMAX"
+	1, "$NCH_OPTVAL_OVER100"
+}
+
+OptionValue "NCH_MonsterHPBarDrawModes"
+{
+	0, "$OPTVAL_OFF"
+	1, "$OPTVAL_ON"
+	2, "$NCH_OPTVAL_ALWAYS"
+}
+
+OptionValue "NCH_MonsterHPBarHPCounterDrawModes"
+{
+	0, "$OPTVAL_OFF"
+	1, "$NCH_OPTVAL_HPONLY"
+	2, "$NCH_OPTVAL_HP_AND_SPAWNHP"
+}
+
+OptionValue "NCH_BackgroundsColors"
+{
+	-1, "$OPTVAL_DEFAULT"
+	 0, "$C_BLACK"
+	 1, "$C_BLUE"
+	 2, "$C_GRAY"
+	 3, "$C_GREEN"
+	 4, "$NCH_OPTVAL_C_PINK"
+	 5, "$C_RED"
+	 6, "$C_YELLOW"
+}
+
+OptionValue "NCH_HighlightColors"
+{
+	-1, "$OPTVAL_DEFAULT"
+	 0, "$C_BLUE"
+	 1, "$C_GREEN"
+	 2, "$NCH_OPTVAL_C_PINK"
+	 3, "$C_RED"
+	 4, "$C_YELLOW"
+}
+
+OptionMenu "NCHUD"
+{
+	Title "$NCH_OPTMNU_TITLE"
+	Submenu "$NCH_OPTMNU_GENERAL", "NCH_GeneralOptions"
+	Submenu "$NCH_OPTMNU_AMMOLIST", "NCH_AmmoListOptions"
+	Submenu "$NCH_OPTMNU_OVERMAXBARMODE", "NCH_OvermaxBarModeOptions"
+	Submenu "$NCH_OPTMNU_BARSLOWSTATE", "NCH_BarsLowStateOptions"
+	Submenu "$NCH_OPTMNU_MONSHPBAR", "NCH_MonsterHealthBarOptions"
+	Submenu "$NCH_OPTMNU_COLOR", "NCH_ColorOptions"
+}
+
+OptionMenu "NCH_GeneralOptions"
+{
+	Title "$NCH_OPTMNU_GENERAL"
+	Option "$NCH_OPTION_STATS", "nchud_toggletally", "NCH_TallyDrawModes"
+	Option "$NCH_OPTION_RECDMG", "nchud_toggledamage", "OnOff"
+	Option "$NCH_OPTION_AIRBAR", "nchud_toggleair", "OnOff"
+	Option "$NCH_OPTION_APOWERUPS", "nchud_togglepowerups", "OnOff"
+}
+
+OptionMenu "NCH_AmmoListOptions"
+{
+	Title "$NCH_OPTMNU_AMMOLIST"
+	Option "$NCH_OPTION_DRAWMODE", "nchud_toggleammo", "NCH_AmmoListDrawModes"
+	Option "$NCH_OPTION_AMMOLISTOVERRIDE", "nchud_allowammolistoverride", "YesNo", "nchud_toggleammo"
+}
+
+OptionMenu "NCH_OvermaxBarModeOptions"
+{
+	Title "$NCH_OPTMNU_OVERMAXBARMODE"
+	StaticText "$NCH_OPTION_HEALTH", 1
+	Option "$NCH_OPTION_MODE", "nchud_hpovermaxbarmode", "NCH_OverMaxBarModes"
+	TextField "$NCH_OPTION_BARMAXOUT", "nchud_hpovermaxbarvalue", "nchud_hpovermaxbarmode"
+	StaticText " "
+	StaticText "$NCH_OPTION_ARMOR", 1
+	Option "$NCH_OPTION_MODE", "nchud_arovermaxbarmode", "NCH_OverMaxBarModes"
+	TextField "$NCH_OPTION_BARMAXOUT", "nchud_arovermaxbarvalue", "nchud_arovermaxbarmode"
+}
+
+OptionMenu "NCH_BarsLowStateOptions"
+{
+	Title "$NCH_OPTMNU_BARSLOWSTATE"
+	Slider "$NCH_OPTION_HEALTH", "nchud_hplowstate", 0, 50, 1, 0
+	Slider "$NCH_OPTION_ARMOR", "nchud_arlowstate", 0, 50, 1, 0
+	Slider "$NCH_OPTION_AMMO1", "nchud_am1lowstate", 0, 50, 1, 0
+	Slider "$NCH_OPTION_AMMO2", "nchud_am2lowstate", 0, 50, 1, 0
+	Slider "$NCH_OPTION_AIR", "nchud_airlowstate", 0, 50, 1, 0
+}
+
+OptionMenu "NCH_MonsterHealthBarOptions"
+{
+	Title "$NCH_OPTMNU_MONSHPBAR"
+	Option "$NCH_OPTION_DRAWMODE", "nchud_monsterhpbar", "NCH_MonsterHPBarDrawModes"
+	Option "$NCH_OPTION_NAMEISGENERIC", "nchud_monsterhpbar_genname", "YesNo", "nchud_monsterhpbar"
+	Option "$NCH_OPTION_INCFRIEND", "nchud_monsterhpbar_friend", "YesNo", "nchud_monsterhpbar"
+	Option "$NCH_OPTION_HPCOUNTER", "nchud_monsterhpbar_hpcounter", "NCH_MonsterHPBarHPCounterDrawModes", "nchud_monsterhpbar"
+	TextField "$NCH_OPTION_SPAWNHPTHRESHOLD", "nchud_monsterhpbar_threshold", "nchud_monsterhpbar"
+}
+
+OptionMenu "NCH_ColorOptions"
+{
+	Title "$NCH_OPTMNU_COLOR"
+	Option "$NCH_OPTION_BGCOLOR", "nchud_bgcolor", "NCH_BackgroundsColors"
+	Option "$NCH_OPTION_HICOLOR", "nchud_hicolor", "NCH_HighlightColors"
+}

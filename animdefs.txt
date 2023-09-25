@@ -1,0 +1,242 @@
+// ------------------------------------------------------------------------------------------------
+//
+//   Bar frames
+//
+// ------------------------------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------------------
+//
+//   Short
+//
+// --------------------------------------------------------------------------------------
+
+// Red glow -------------------------------------------------------------------
+
+TEXTURE H_BFGR1A
+	Pic H_BFGR1A Tics 0.45
+	Pic H_BFGR1B Tics 0.45
+	Pic H_BFGR1C Tics 0.45
+	Pic H_BFGR1D Tics 0.45
+	Pic H_BFGR1E Tics 0.45
+	Pic H_BFGR1F Tics 0.45
+	Pic H_BFGR1G Tics 0.45
+	Pic H_BFGR1H Tics 0.45
+	Pic H_BFGR1I Tics 0.45
+	Pic H_BFGR1J Tics 0.45
+	Pic H_BFGR1K Tics 0.45
+	Pic H_BFGR1L Tics 0.45
+	Pic H_BFGR1M Tics 0.45
+	Pic H_BFGR1L Tics 0.45
+	Pic H_BFGR1K Tics 0.45
+	Pic H_BFGR1J Tics 0.45
+	Pic H_BFGR1I Tics 0.45
+	Pic H_BFGR1H Tics 0.45
+	Pic H_BFGR1G Tics 0.45
+	Pic H_BFGR1F Tics 0.45
+	Pic H_BFGR1E Tics 0.45
+	Pic H_BFGR1D Tics 0.45
+	Pic H_BFGR1C Tics 0.45
+	Pic H_BFGR1B Tics 0.45
+
+// Yellow glow ----------------------------------------------------------------
+
+TEXTURE H_BFGY1A
+	Pic H_BFGY1A Tics 1.95
+	Pic H_BFGY1B Tics 1.95
+	Pic H_BFGY1C Tics 1.95
+	Pic H_BFGY1D Tics 1.95
+	Pic H_BFGY1E Tics 1.95
+	Pic H_BFGY1F Tics 1.95
+	Pic H_BFGY1G Tics 1.95
+	Pic H_BFGY1H Tics 1.95
+	Pic H_BFGY1I Tics 1.95
+	Pic H_BFGY1J Tics 1.95
+	Pic H_BFGY1K Tics 1.95
+	Pic H_BFGY1L Tics 1.95
+	Pic H_BFGY1M Tics 1.95
+	Pic H_BFGY1L Tics 1.95
+	Pic H_BFGY1K Tics 1.95
+	Pic H_BFGY1J Tics 1.95
+	Pic H_BFGY1I Tics 1.95
+	Pic H_BFGY1H Tics 1.95
+	Pic H_BFGY1G Tics 1.95
+	Pic H_BFGY1F Tics 1.95
+	Pic H_BFGY1E Tics 1.95
+	Pic H_BFGY1D Tics 1.95
+	Pic H_BFGY1C Tics 1.95
+	Pic H_BFGY1B Tics 1.95
+
+// --------------------------------------------------------------------------------------
+//
+//   Long
+//
+// --------------------------------------------------------------------------------------
+
+// Red glow -------------------------------------------------------------------
+
+TEXTURE H_BFGR2A
+	Pic H_BFGR2A Tics 0.45
+	Pic H_BFGR2B Tics 0.45
+	Pic H_BFGR2C Tics 0.45
+	Pic H_BFGR2D Tics 0.45
+	Pic H_BFGR2E Tics 0.45
+	Pic H_BFGR2F Tics 0.45
+	Pic H_BFGR2G Tics 0.45
+	Pic H_BFGR2H Tics 0.45
+	Pic H_BFGR2I Tics 0.45
+	Pic H_BFGR2J Tics 0.45
+	Pic H_BFGR2K Tics 0.45
+	Pic H_BFGR2L Tics 0.45
+	Pic H_BFGR2M Tics 0.45
+	Pic H_BFGR2L Tics 0.45
+	Pic H_BFGR2K Tics 0.45
+	Pic H_BFGR2J Tics 0.45
+	Pic H_BFGR2I Tics 0.45
+	Pic H_BFGR2H Tics 0.45
+	Pic H_BFGR2G Tics 0.45
+	Pic H_BFGR2F Tics 0.45
+	Pic H_BFGR2E Tics 0.45
+	Pic H_BFGR2D Tics 0.45
+	Pic H_BFGR2C Tics 0.45
+	Pic H_BFGR2B Tics 0.45
+
+// Yellow glow ----------------------------------------------------------------
+
+TEXTURE H_BFGY2A
+	Pic H_BFGY2A Tics 1.95
+	Pic H_BFGY2B Tics 1.95
+	Pic H_BFGY2C Tics 1.95
+	Pic H_BFGY2D Tics 1.95
+	Pic H_BFGY2E Tics 1.95
+	Pic H_BFGY2F Tics 1.95
+	Pic H_BFGY2G Tics 1.95
+	Pic H_BFGY2H Tics 1.95
+	Pic H_BFGY2I Tics 1.95
+	Pic H_BFGY2J Tics 1.95
+	Pic H_BFGY2K Tics 1.95
+	Pic H_BFGY2L Tics 1.95
+	Pic H_BFGY2M Tics 1.95
+	Pic H_BFGY2L Tics 1.95
+	Pic H_BFGY2K Tics 1.95
+	Pic H_BFGY2J Tics 1.95
+	Pic H_BFGY2I Tics 1.95
+	Pic H_BFGY2H Tics 1.95
+	Pic H_BFGY2G Tics 1.95
+	Pic H_BFGY2F Tics 1.95
+	Pic H_BFGY2E Tics 1.95
+	Pic H_BFGY2D Tics 1.95
+	Pic H_BFGY2C Tics 1.95
+	Pic H_BFGY2B Tics 1.95
+
+// --------------------------------------------------------------------------------------
+//
+//   Air supply
+//
+// --------------------------------------------------------------------------------------
+
+// Red glow -------------------------------------------------------------------
+
+TEXTURE H_BFGR3A
+	Pic H_BFGR3A Tics 0.45
+	Pic H_BFGR3B Tics 0.45
+	Pic H_BFGR3C Tics 0.45
+	Pic H_BFGR3D Tics 0.45
+	Pic H_BFGR3E Tics 0.45
+	Pic H_BFGR3F Tics 0.45
+	Pic H_BFGR3G Tics 0.45
+	Pic H_BFGR3H Tics 0.45
+	Pic H_BFGR3I Tics 0.45
+	Pic H_BFGR3J Tics 0.45
+	Pic H_BFGR3K Tics 0.45
+	Pic H_BFGR3L Tics 0.45
+	Pic H_BFGR3M Tics 0.45
+	Pic H_BFGR3L Tics 0.45
+	Pic H_BFGR3K Tics 0.45
+	Pic H_BFGR3J Tics 0.45
+	Pic H_BFGR3I Tics 0.45
+	Pic H_BFGR3H Tics 0.45
+	Pic H_BFGR3G Tics 0.45
+	Pic H_BFGR3F Tics 0.45
+	Pic H_BFGR3E Tics 0.45
+	Pic H_BFGR3D Tics 0.45
+	Pic H_BFGR3C Tics 0.45
+	Pic H_BFGR3B Tics 0.45
+
+// Yellow glow ----------------------------------------------------------------
+
+/* TEXTURE H_BFGY3A
+	Pic H_BFGY3A Tics 1.95
+	Pic H_BFGY3B Tics 1.95
+	Pic H_BFGY3C Tics 1.95
+	Pic H_BFGY3D Tics 1.95
+	Pic H_BFGY3E Tics 1.95
+	Pic H_BFGY3F Tics 1.95
+	Pic H_BFGY3G Tics 1.95
+	Pic H_BFGY3H Tics 1.95
+	Pic H_BFGY3I Tics 1.95
+	Pic H_BFGY3J Tics 1.95
+	Pic H_BFGY3K Tics 1.95
+	Pic H_BFGY3L Tics 1.95
+	Pic H_BFGY3M Tics 1.95
+	Pic H_BFGY3L Tics 1.95
+	Pic H_BFGY3K Tics 1.95
+	Pic H_BFGY3J Tics 1.95
+	Pic H_BFGY3I Tics 1.95
+	Pic H_BFGY3H Tics 1.95
+	Pic H_BFGY3G Tics 1.95
+	Pic H_BFGY3F Tics 1.95
+	Pic H_BFGY3E Tics 1.95
+	Pic H_BFGY3D Tics 1.95
+	Pic H_BFGY3C Tics 1.95
+	Pic H_BFGY3B Tics 1.95 */
+
+// ------------------------------------------------------------------------------------------------
+//
+//   Inventory arrows
+//
+// ------------------------------------------------------------------------------------------------
+
+// Blue
+TEXTURE H_INVAL1
+	Pic H_INVAL1 Tics 4
+	Pic H_INVAL2 Tics 4
+
+TEXTURE H_INVAR1
+	Pic H_INVAR1 Tics 4
+	Pic H_INVAR2 Tics 4
+
+// Green
+TEXTURE H_INVALG
+	Pic H_INVALG Tics 4
+	Pic H_INVAL2 Tics 4
+
+TEXTURE H_INVARG
+	Pic H_INVARG Tics 4
+	Pic H_INVAR2 Tics 4
+
+// Yellow
+TEXTURE H_INVALY
+	Pic H_INVALY Tics 4
+	Pic H_INVAL2 Tics 4
+
+TEXTURE H_INVARY
+	Pic H_INVARY Tics 4
+	Pic H_INVAR2 Tics 4
+
+// Red
+TEXTURE H_INVALR
+	Pic H_INVALR Tics 4
+	Pic H_INVAL2 Tics 4
+
+TEXTURE H_INVARR
+	Pic H_INVARR Tics 4
+	Pic H_INVAR2 Tics 4
+
+// Pink
+TEXTURE H_INVALP
+	Pic H_INVALP Tics 4
+	Pic H_INVAL2 Tics 4
+
+TEXTURE H_INVARP
+	Pic H_INVARP Tics 4
+	Pic H_INVAR2 Tics 4

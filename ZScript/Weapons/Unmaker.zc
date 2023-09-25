@@ -1,0 +1,205 @@
+//Unmaker
+
+class MO_Unmaker : JMWeapon
+{
+    Default
+    {
+        Weapon.AmmoGive 80;
+		Weapon.AmmoUse 6;
+        Weapon.AmmoType "MO_Cell";
+        Inventory.PickupMessage "$GOTUNMAKER";
+        Tag "$TAG_UNMAKER";
+        Inventory.PickupSound "weapons/unmaker/pick";
+    }
+
+    States
+    {
+		ContinueSelect:
+			TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();
+        Ready:
+        SelectAnimation:
+            TNT1 A 0 A_StartSound("weapons/unmaker/raise", CHAN_WEAPON);
+            UHSD ABCDEF 1;
+        ReadyToFire:
+            TNT1 A 0 A_StartSound("weapons/unmaker/idle", CHAN_6, CHANF_LOOPING);
+        ReadyLoop:
+            UNHG AAABBBCCCDDDEEE 1 JM_WeaponReady;
+            Loop;
+			
+		Fire:
+			TNT1 A 0 A_CheckReload();
+            TNT1 A 0 A_StopSound(chan_6);
+            UNHF ABCDE 1;
+        Hold:
+            TNT1 A 0 A_StartSOund("weapons/unmaker/fire", 7, CHANF_DEFAULT,1,ATTN_NORM, 0.7);
+            TNT1 A 0 A_FireProjectile("UnmakerProjectile",0,1,0,0,0,0);
+			TNT1 A 0 JM_CheckForQuadDamage();
+		//	TNT1 A 0 A_RailAttack(1, 0, 0, "", "red", RGF_NOPIERCING | RGF_SILENT | RGF_CENTERZ | RGF_FULLBRIGHT, 0, "", 0, 0, 9999, 1, 0.3);
+            UNHF F 1 BRIGHT A_WeaponOffset(0,32);
+            UNHF GH 1 BRIGHT
+			{
+				if(!GetCvar("mo_nogunrecoil"))
+				{
+				A_SetPitch(pitch-0.9,SPF_Interpolate);
+				A_SetAngle(angle+.09,SPF_INTERPOLATE);
+				}
+			}
+			UNHF IJ 1 BRIGHT;
+            UNHF K 1;
+			TNT1 A 0 A_CheckReload();
+			TNT1 A 0 A_JumpIf(PressingFire(), "Hold");
+			UNHF LM 1 BRIGHT;
+            UNHF EDCBA 1 A_WeaponOffset(0,32);
+            Goto ReadyToFire;
+			
+		AltFire:
+			TNT1 A 0 A_JumpIf(CountInv("MO_Cell") < 15, "ReadyToFire");
+            TNT1 A 0 A_StopSound(chan_6);
+            UNHF ABCDE 1;
+        AltHold:
+			TNT1 A 0 A_JumpIf(CountInv("MO_Cell") < 15, "ReadyToFire");
+            TNT1 A 0 A_StartSOund("weapons/unmaker/fire", 7, CHANF_DEFAULT,1,ATTN_NORM, 0.7);
+            TNT1 A 0 
+			{
+				A_FireProjectile("UnmakerProjectile",0,0,0,-4,0,0);
+				A_FireProjectile("UnmakerProjectile",-3,0,0,-4,0,0);
+				A_FireProjectile("UnmakerProjectile",3,0,0,-4,0,0);
+				JM_CheckForQuadDamage();
+			}
+//		TNT1 A 0 A_RailAttack(1, 0, 0, "", "red", RGF_NOPIERCING | RGF_SILENT | RGF_CENTERZ | RGF_FULLBRIGHT, 0, "", 0, 0, 9999, 1, 0.5);
+			TNT1 A 0 A_TakeInventory("MO_Cell",15);
+            UNHF F 1 BRIGHT A_WeaponOffset(0,32);
+            UNHF GH 1
+			 {
+				if(!GetCvar("mo_nogunrecoil"))
+				{
+				A_SetPitch(pitch-0.9,SPF_Interpolate);
+				A_SetAngle(angle+.09,SPF_INTERPOLATE);
+				}
+			 }
+			UNHF IJ 1 BRIGHT;
+            UNHF K 1 BRIGHT;
+			TNT1 A 0 A_JumpIf(PressingAltFire(), "AltHold");
+			UNHF LM 1 BRIGHT;
+            UNHF EDCBA 1 A_WeaponOffset(0,32);
+            Goto ReadyToFire;
+			
+        Select:
+			TNT1 A 0;
+			Goto ClearAudioAndResetOverlays;
+
+        Deselect:
+			TNT1 A 0 A_STOPSOUND(6);
+            UHSD FEDCBA 1;
+            TNT1 A 0 A_Lower(12);
+            Wait;
+
+        FlashKick:
+            UHSD FEDCBAAAAABCDEFF 1;
+            Goto ReadyToFire;
+        FlashAirKick:
+            UHSD FEDCBAAAAAABBCDEF 1;
+            Goto ReadyToFire;
+        
+		Spawn:
+			UNHD E -1;
+			STOP;
+    }
+
+}
+
+//Based from BD and PB
+Class UnmakerProjectile : FastProjectile
+{
+    Default
+    {
+	+RANDOMIZE;
+	+FORCEXYBILLBOARD;
+	+DONTSPLASH;
+	-BLOODSPLATTER;
+	damagefunction (random(80,100));
+	radius 1;
+	height 1;
+	speed 700;
+	renderstyle "add";
+	alpha 0.9;
+	scale .15;
+	decal "scorch";
+	+ZDOOMTRANS;
+	damagetype "Fire";
+	missiletype "UnmakerProjectileTrail";
+	}
+	states
+		{
+		Spawn:
+			PBAL HI 1 BRIGHT;
+			Loop;
+        Death:
+        XDeath:
+        TNT1 A 0;
+        TNT1 AA 0 A_SpawnItemEx ("FlareFromExplosion",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
+        TNT1 A 0 A_SpawnItemEx ("FlareFromExplosion",36,-36,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
+        TNT1 A 0 A_SpawnItemEx ("FlareFromExplosion",-36,36,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
+ //       EXPL A 0 A_SpawnItem("UnmakerPuff")
+   //     TNT1 AA 0 A_SpawnItemEx("BurningEmberParticlesFloating_Bigger", random(19,-19), random(19,-19), random(4,-4), 0, 0, 0, 0, 128, 0);
+        TNT1 AAA 0 A_SpawnItemEx("ObeliskTrailSpark", random(-8, 8), random(-8, 8), random(-2,2), 0, 0, 0, 0, 128, 0);
+        TNT1 A 1 A_explode(20, 80);
+        //TNT1 AAA 20 A_CustomMissile ("BigBlackSmoke", 0, 0, random (0, 360), 2, random (40, 160))
+        Stop;
+		}
+	}
+	
+	
+Class UnmakerProjectileTrail : Actor
+{
+    Default
+    {
+	+FORCEXYBILLBOARD;
+	+CLIENTSIDEONLY;
+	+NOBLOCKMAP;
+	+NOGRAVITY;
+	+SHADOW;
+	+NOTELEPORT;
+	+CANNOTPUSH;
+	+NODAMAGETHRUST;
+	renderstyle 'ADD';
+	+ZDOOMTRANS;
+	alpha 0.9;
+	scale .15;
+    }
+	states
+		{
+		Spawn:
+			LEYS R 0;
+			XFLR A 1 BRIGHT;
+			Stop;
+		}
+	}
+
+//From Russian Overkill by PillowBlaster
+Class ObeliskTrailSpark : Actor
+{ 
+    Default
+    {
+    RenderStyle "Add";
+    Scale 0.0125;
+    Alpha 0.95;
+    +NOINTERACTION;
+    +NOGRAVITY;
+	+ZDOOMTRANS;
+    +CLIENTSIDEONLY;
+    }
+    States
+    {
+    Spawn:
+	YAE4 A 0 NoDelay A_JumpIf(Scale.X <= 0, "NULL");
+	YAE4 A 0 A_SetScale(Scale.X-0.00075);
+    YAE4 A 3 bright A_ChangeVelocity (frandom(-0.8, 0.8), frandom(-0.8, 0.8), frandom(-0.8, 0.8), 0);
+    YAE4 A 1 bright A_FadeOut(0.05);
+    Loop;
+    Null:
+        TNT1 A 1;
+        Stop;
+    }
+}
+	

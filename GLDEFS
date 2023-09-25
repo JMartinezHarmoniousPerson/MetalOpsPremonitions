@@ -1,0 +1,231 @@
+#include "doomdefs.bm"
+
+flickerlight BulletHitLight
+{
+    color 0.5 0.5 0.0
+    size 3
+    secondarySize 5
+    chance 0.8
+}
+
+flickerlight BulletHitLightBig
+{
+	color 0.5 0.5 0.0
+    size 7
+    secondarySize 9
+    chance 0.8
+}
+
+object UpdatedBulletPuff
+{
+    frame BPUFA { light BulletHitLight }
+    frame BPUFB { light BulletHitLightBig }
+}
+
+pointlight PlasmaBallLight
+{
+	color 0.0 0.2 0.8
+	size 64
+}
+
+pointlight PlasmaBallLightSmall
+{
+	color 0.0 0.2 0.8
+	size 28
+}
+
+pointlight HeatedPlasmaBallLight
+{
+	color 1.0 0.2 0.0
+	size 64
+}
+
+pointlight HeatedPlasmaBallLightSmall
+{
+	color 1.0 0.2 0.0
+	size 28
+}
+
+object PlasmaExplosion
+{
+	frame PLXP {light PlasmaBallLightSmall}
+}
+
+object HeatedPlasmaExplosion
+{
+	frame PHXP {light HeatedPlasmaBallLightSmall}
+}
+
+pointlight FlamerFlames
+{
+	color 0.9 0.3 0.0
+	size 64
+}
+
+pulselight BFGBallLight
+{
+    color 0.2 1.0 0.3
+    size 72
+    secondarySize 88
+    interval 0.15
+    offset 0 0 0
+}
+
+flickerlight2 BFGX1
+{
+    color 0.2 1.0 0.2
+    size 88
+    secondarySize 104
+    interval 0.005
+    offset 0 0 0
+}
+
+flickerlight2 BFGX2
+{
+    color 0.3 1.0 0.3
+    size 104
+    secondarySize 112
+    interval 0.005
+    offset 0 0 0
+}
+
+flickerlight2 BFGX3
+{
+    color 0.4 1.0 0.4
+    size 112
+    secondarySize 128
+    interval 0.005
+    offset 0 0 0
+}
+
+flickerlight2 BFGX4
+{
+    color 0.2 0.6 0.2
+    size 72
+    secondarySize 76
+    interval 0.005
+    offset 0 0 0
+}
+
+flickerlight2 BFGX5
+{
+    color 0.1 0.3 0.1
+    size 64
+    secondarySize 72
+    interval 0.005
+    offset 0 0 0
+}
+
+flickerlight2 BFGXLight1
+{
+    color 0.05 0.25 0.05
+    size 32
+    secondarySize 40
+    interval 0.005
+    offset 0 0 0
+}
+
+flickerlight2 BFGXLight2
+{
+    color 0.05 0.25 0.05
+    size 48
+    secondarySize 52
+    interval 0.005
+    offset 0 0 0
+}
+
+Object BFGExplosion 
+{ 
+	frame BFGBA { light BFGX1 }
+	frame BFGBB { light BFGX2 }
+	frame BFGBC { light BFGX3 }
+	frame BFGBD { light BFGX4 }
+	frame BFGBE { light BFGX5 }
+}
+
+//Some sphere GLDefs code by scalliano
+PulseLight HasteSphereLight
+{
+Color 1.0 1.0 0.0
+Size 35
+SecondarySize 40
+Interval 5.0
+offset 0 16 0
+}
+
+Object MO_HasteSphere
+{
+Frame HAST { Light HasteSphereLight }
+}
+
+
+PulseLight MegaSphereLight
+{
+Color 1.0 0.9 0.7
+Size 35
+SecondarySize 40
+Interval 5.0
+offset 0 16 0
+}
+
+Object MO_MegaSphere
+{
+Frame MEGA { Light MegaSphereLight }
+}
+
+PulseLight SoulSphereLight
+{
+Color 0.0 0.0 1.0
+Size 35
+SecondarySize 40
+Interval 5.0
+offset 0 16 0
+}
+
+Object MO_SoulSphere
+{
+Frame SOUL { Light SoulSphereLight }
+}
+
+PulseLight lnvulLight
+{
+Color 0.0 1.0 0.0
+Size 35
+SecondarySize 40
+Interval 5.0
+offset 0 16 0
+}
+
+Object MO_Invulnerability
+{
+Frame PINV { Light lnvulLight }
+}
+
+PulseLight QuadDmgLight
+{
+Color 1.0 0.0 1.0
+Size 35
+SecondarySize 40
+Interval 5.0
+offset 0 16 0
+}
+
+Object MO_QuadDMGSphere
+{
+Frame QDAM { Light QuadDmgLight }
+}
+
+PulseLight PartialInvisLight
+{
+Color 1.0 0.0 0.5
+Size 35
+SecondarySize 40
+Interval 5.0
+offset 0 16 0
+}
+
+Object MO_BlurSphere
+{
+Frame PINS { Light PartialInvisLight }
+}
+

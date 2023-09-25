@@ -1,0 +1,178 @@
+Credits for sounds and weapons
+
+Pistol 
+Sprites - Sonik.o.fan (aka TSF)
+Sounds - Valve (L4D2 Pistol Draw, L4D1 Reload sounds), Code Renard (Firing sounds), CGEffex (Casings)
+Pickup sprite - YukesVonFaust, torridgristle, Slax
+Casings - Captain J
+Dry Fire Sound - Mike Koenig(from Soundbible.com)
+
+Lever Shotty: 
+LossForWords - sprites
+IDDQD_1337 - Bits of the M1887 add-on for BDv21 used
+AdianoTMO69 - Spin reload animation
+Navaro - Lever sounds
+Magmacow - Firing, shell loading
+joeytd for the 1887 lever, hamburghannes for the model and ellyklamsky for the xna conversion
+
+Katana:
+HavoX, Mike12, 3D Realms - sprites
+SectionSound (from Pixabay) - Sword unsheathe and draw
+Value - Swing sound
+Isolation Music - Katana hit sounds (https://www.youtube.com/watch?v=EgRvVq8mStE)
+Pickup sprite - Defeat, DaBlake, Werd (i think), Craneo
+
+Other credits
+- PA1NKI113R and all of the Project Brutality team - for supporting me through my time with y'all and inspiration
+to create this
+- Sergeant Mark IV - My other inspiration to create this mod and other resources,
+ and for Brutal Doom mentions
+- Matt - JustPressed, JustReleased and User input code
+- TiberiumSoul - Insanity's Requiem for being another inspiration for my mod 
+- PillowBlaster - Trailblazer styled fast attack for the Katana, and inspiration
+
+- Running With Scissors - Postal 2 Kicking sounds
+
+Pump Shotgun:
+Sprites - Sonik.o.fan (aka TSF), Sergeant Mark IV (shell frame for the pumping), 
+Potetobloke (portion of a hand used)
+Sounds - Magmacow (reload), Activision and Infinity Ward (pickup),  Bungie, 343 Industries and Microsoft 
+and Xbox Game Studios (firing)
+
+Shotgun shell casing sounds - Valve
+Shotgun shell and heavy brass casing sprites - Metalman
+
+Plasma Rifle:
+Sounds : Bethesda Game Studios/Softworks, Zenimax, 
+Obsidian Entertainment, ID Software, Splash Damage Ltd
+Sprites : TSF (Based on an abandoned plasma sprite he worked on)
+
+Super Shotgun
+Sprites: TSF, Metalman (shellbacks and shells used for reload)
+Sounds: Infinity Ward, Magmacow, Bethesda Softworks
+Smoke puff overlay : Emerald and Dox778
+
+Molotov Cocktail
+Originally an add-on for PB by Cacodemon345
+Sprites - TootsyBowl 
+
+Rocket Launcher:
+Sprites: TSF (main sprites), Soluna Software (Muzzle Flash)
+Sounds: Bethesda Softworks, ID Software
+Nuke effect sprites: Daniel, 3D Realms
+
+SMG:
+Sounds: Bethesda Softworks, Infinity Ward, Sledgehammer Games, Magamcow
+Sprites: TSF, Green Eyesman, bullet in mag sprite by Captain J
+
+BFG:
+Sprites by TSF
+Sounds by ID Software
+
+Unmaker:
+Sprites by Enchanter, Zaero, DeathStalker (base)
+Sounds: Soundbible (thecheeseman), People Can Fly, DreamCatcher Interactive (THQ Nordic)
+
+Desert Eagle:
+Sprites: TSF (main sprites), YukesVonFaust (grip for the reload frame) 
+Other credits for the YukesVonFaust's Deagle: Vashts1985, Flamshmizer, Poux, IIopn, Rimuto, Weiss Schnee
+Sounds: Firing sound by Valve and Hidden Path Entertainment, reload sounds by Magmacow. 
+Pickup and select sounds by Infinity Ward
+
+_______________
+Glass Bottle Break Sound Effect Sound is from Zapsplat.com
+https://www.zapsplat.com/
+___________________________
+
+Treyarch
+Valve Corporation
+
+Assault Rifle
+Sprites by DrPyspy, Thrashfanbert1994. Using the edited sprite by osjclatchford
+
+Flamethrower
+Sprites by VriskaSerket 
+Muzzle effect by Crytek
+Icethrower mode credits:
+
+Sounds: NetherRealm Studios, Warner Bros. Games, Warner Bros. Discovery
+Ice Firing loop sound by Stardust Vibes © Stardust Vibes, 2017. All rights reserved. 
+Muzzle flashes: Keeper, Warry aka freya304
+Ice Scorch effect by SchrödingCat, and other Cat's Frozen Add-on stuff used
+
+Bethesda, Obsidian Entertainment - Fallout New Vegas secret sound
+
+NC HUD - BlueShadow
+
+/////////////////////////////
+///			Items			///
+////////////////////////////
+
+Shotgun shell, rifle magazine pickups by Jekyll Grim Payne
+Pistol magazine pickup by DoomNukem
+Health Kits, bonuses, Keys, and Armors by TSF
+Armor pickup sound by Rare
+Radsuit pickup sound by ScottGames, Scott Cawthon, Steel Wool Studios, Illumix, sprite by TSF
+Night vision goggles sprites by TSF, sound by Infinity Ward
+Backpack sprite from old versions of PB 3.0, credit by PB Team (if anyone knows who made it DM Me)
+Backpack sound by ID Software
+Flak Shell Box pickup sprite by Ac!d
+Power up sphere sprites (Soulsphere, Megasphere, Invulnerability,
+Invisibility, Quad Damage and Haste) by Benjamin Zuriel.
+
+
+/////////////////////////////
+///			SFX				///
+////////////////////////////
+
+Global Footsteps:
+DenisBelmondo
+The Zombie Killer (original version)
+Valve Software (wood plank sounds), Turtle Rock Studios (the rest of the sounds)
+
+Bullet tracer effect and model by Sergeant Mark IV, code by Z86 (modeldef code by Sgt Mark IV)
+Some effects from Brutal Doom, Project Brutality and 
+from Particle Fire Enhancer Mod (v0.8) by Z86
+UTNT Flames and embers - SolarSnowFall
+Stronghold Torches - Stronghold Team (Keksdose did the flames IIRC)
+Nash Gore Effects - Nash
+Smooth Weapon animations - Perkristian
+A few extra animations and giblets - Beautiful Doom
+Alternate XDeaths - Zero Prophet's Zero Tolerance
+Alternate Deaths - ItsNatureToDie/David G
+Barrel remains - Xaser
+Splash sounds and definitions - Enjay
+Skulltag Hi-Res Items - Skulltag Team
+Smoke Effects - Unknown (gathered from Weapons Resource Wad)
+Most sounds - Id Software, Raven Software (Doom 3, Quake 4)
+Plasma and BFG Explosions - Wirehead Studios (Generations Arena) and some frames from jDRP
+Explosions, Special Effects sprites and Casings - from Aeons of Death (the "Half-Life" explosions, and the "Lightning Ball" explosion)
+
+Mod logo placeholder created on www.canva.com, this will be subjected to change.
+Soldier skull graphic from pngegg.com
+
+Other credits and license info:
+
+Halo 2 © Microsoft Corporation. 
+Metal Ops: Premonitions was created under Microsoft's "Game Content Usage Rules" 
+using assets from Halo 2, and it is not endorsed by or affiliated with Microsoft.  
+
+Nintendo - ice break sound effect from Legend of Zelda Ocarina of Time. Used under Fair Use.
+
+zrriontheinsect - Used his amazing tutorial on muzzle flashes: https://forum.zdoom.org/viewtopic.php?t=38940
+Certain muzzle flash effects from VideoCoPilot's Action Essentials 2, thanks matteus from Youtube for preserving this!
+Some muzzle flashes by Metalman, Adobe
+
+Tharn666 - Grenade cook warning icon
+Grenade cooking and indicator inspired by Call of Duty 3 by Activision and Treyarch
+Smoke trail for grenade inspired by Black Mesa by Crowbar Collective
+Megasphere sound from Doom 2016 by id Software, Soulsphere sound from Quake Champions by
+id Software
+Power up wear off and Invulnerability sounds from Quake by ID Software,  HQ sounds by SeanTheBermanator
+Night Vision goggles off sound from LiTDoom, mixed in the Night vision sound from Splinter Cell.
+Night Vision goggles warning sound by sweet_trip from freesound.com
+LiTDoom by GreyWolf, Splinter Cell by Ubisoft
+scalliano - GLDefs code for spheres, Haste sphere
+
+Yoo-toob-FX - Rad suit off sound
+Pixabay - Rad suit hiss sound

@@ -1,0 +1,23 @@
+version "3.2.5"
+
+// ------------------------------------------------------------------------------------------------
+//
+//   NC HUD - Strife Classic
+//
+// ------------------------------------------------------------------------------------------------
+
+class NCH_StrifeStatusBar : NCH_BaseHUD
+{
+	override void NCHF_Setup ()
+	{
+		nch_DrawMugShot = false;
+		nch_KeysUseSpawnState = true;
+	}
+
+	override void NCHF_AddStats ()
+	{
+		Super.NCHF_AddStats();
+
+		NCHF_AddSingleStat(NCHC_STATLABELTYPE_ICON, "I_COIN", NCHC_STATFORMAT_SINGLE, FormatNumber(GetAmount("Coin")));
+	}
+}

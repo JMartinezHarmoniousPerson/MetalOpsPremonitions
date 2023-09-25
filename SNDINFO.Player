@@ -1,0 +1,48 @@
+$random player/pain100 {pain100A pain100B}
+pain100A PLRPAIN1
+pain100B PLRPAIN2
+$playeralias    player  male    *pain100    player/pain100
+
+$random player/pain75 {pain75A pain75B}
+pain75A PLRPAIN3
+pain75B PLRPAIN4
+$playeralias    player  male    *pain75    player/pain75
+
+$random player/pain50 {pain50A pain50B}
+pain50A PLRPAIN5
+pain50B PLRPAIN6
+$playeralias    player  male    *pain50    player/pain50
+
+$random player/pain25 {pain25A pain25B pain25C pain25D}
+pain25A PLRPAIN5
+pain25B PLRPAIN6
+pain25C PLRPAIN7
+pain25D PLRPAIN8
+$playeralias    player  male    *pain25    player/pain25
+
+$random player/death {player/die1 player/die2}
+player/die1 plydth1
+player/die2 plydth2
+$playeralias		player	male 		*death		player/death
+
+$random player/deathhard {player/diehard1 player/diehard2}
+player/diehard1 pldiehi1
+player/diehard2 pldiehi2
+$playeralias		player	male	*xdeath	player/deathhard
+
+$pitchshift player/death 2
+$pitchshift player/deathhard 2
+
+NULLSND NULLSND
+
+$playeralias 	player 	male 	*usefail 		NULLSND
+
+player/landed PLYLAND
+
+$playeralias 	player 	male 	*land		player/landed
+$playeralias 	player 	male 	*grunt		player/landed
+
+player/jump PLYJUMP
+$playeralias 	player 	male 	*jump		player/jump
+
+

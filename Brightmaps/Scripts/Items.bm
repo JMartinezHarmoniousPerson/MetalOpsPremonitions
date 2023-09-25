@@ -1,0 +1,53 @@
+//Items
+brightmap sprite 5TIMA0 {map "Brightmaps/Items/5TIMA0_BM.png"}
+brightmap sprite MEDIA0 {map "Brightmaps/Items/MEDIA0_BM.png"}
+brightmap sprite PVISA0 {map "Brightmaps/Items/PVISA0_BM.png" DisableFullBright}
+brightmap sprite PVISB0 {map "Brightmaps/Items/PVISA0_BM.png" DisableFullBright}
+brightmap sprite PSTRA0 {map "Brightmaps/Items/MEDIA0_BM.png" DisableFullBright}
+
+//Keys
+brightmap sprite KEYRB0 {map "Brightmaps/Items/KEYRB0_BM.png" DisableFullBright}
+brightmap sprite KEYBB0 {map "Brightmaps/Items/KEYRB0_BM.png" DisableFullBright}
+brightmap sprite KEYYB0 {map "Brightmaps/Items/KEYRB0_BM.png" DisableFullBright}
+brightmap sprite SKLRB0 {map "Brightmaps/Items/SKLRB0_BM.png" DisableFullBright}
+brightmap sprite SKLYB0 {map "Brightmaps/Items/SKLRB0_BM.png" DisableFullBright}
+brightmap sprite SKLBB0 {map "Brightmaps/Items/SKLRB0_BM.png" DisableFullBright}
+
+//Allmap
+brightmap sprite PMAPA0 {map "Brightmaps/Items/PMAPA0_BM.png" DisableFullBright}
+brightmap sprite PMAPB0 {map "Brightmaps/Items/PMAPA0_BM.png" DisableFullBright}
+brightmap sprite PMAPC0 {map "Brightmaps/Items/PMAPA0_BM.png" DisableFullBright}
+brightmap sprite PMAPD0 {map "Brightmaps/Items/PMAPA0_BM.png" DisableFullBright}
+
+//HealthBonus
+brightmap sprite B0N1A0 {map "Brightmaps/Items/B0N1A0_BM.png" DisableFullBright}
+brightmap sprite B0N1B0 {map "Brightmaps/Items/B0N1A0_BM.png" DisableFullBright}
+brightmap sprite B0N1C0 {map "Brightmaps/Items/B0N1A0_BM.png" DisableFullBright}
+brightmap sprite B0N1D0 {map "Brightmaps/Items/B0N1A0_BM.png" DisableFullBright}
+
+//Stronger Health Bonus
+brightmap sprite 80N1A0 {map "Brightmaps/Items/80N1A0_BM.png" DisableFullBright}
+brightmap sprite 80N1B0 {map "Brightmaps/Items/80N1A0_BM.png" DisableFullBright}
+brightmap sprite 80N1C0 {map "Brightmaps/Items/80N1A0_BM.png" DisableFullBright}
+brightmap sprite 80N1D0 {map "Brightmaps/Items/80N1A0_BM.png" DisableFullBright}
+
+//Greater Health Bonus
+brightmap sprite 90N1A0 {map "Brightmaps/Items/90N1A0_BM.png" DisableFullBright}
+brightmap sprite 90N1B0 {map "Brightmaps/Items/90N1A0_BM.png" DisableFullBright}
+brightmap sprite 90N1C0 {map "Brightmaps/Items/90N1A0_BM.png" DisableFullBright}
+brightmap sprite 90N1D0 {map "Brightmaps/Items/90N1A0_BM.png" DisableFullBright}
+
+//Armor Bonus
+brightmap sprite B0N2B0 {map "Brightmaps/Items/Armor/B0N2A0_BM.png" DisableFullBright}
+brightmap sprite B0N2C0 {map "Brightmaps/Items/Armor/B0N2A0_BM.png" DisableFullBright}
+brightmap sprite B0N2D0 {map "Brightmaps/Items/Armor/B0N2A0_BM.png" DisableFullBright}
+
+//Geminus Armor Shard
+brightmap sprite 80N2B0 {map "Brightmaps/Items/Armor/80N2B0_BM.png" DisableFullBright}
+brightmap sprite 80N2C0 {map "Brightmaps/Items/Armor/80N2C0_BM.png" DisableFullBright}
+brightmap sprite 80N2D0 {map "Brightmaps/Items/Armor/80N2D0_BM.png" DisableFullBright}
+
+//Treble Armor Shard 
+brightmap sprite 90N2B0 {map "Brightmaps/Items/Armor/90N2B0_BM.png" DisableFullBright}
+brightmap sprite 90N2C0 {map "Brightmaps/Items/Armor/90N2C0_BM.png" DisableFullBright}
+brightmap sprite 90N2D0 {map "Brightmaps/Items/Armor/90N2C0_BM.png" DisableFullBright}

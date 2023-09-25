@@ -1,0 +1,988 @@
+
+Actor SHRedTorchFlare : BaseVisualSFX
+{
+  RenderStyle Add
+  Scale 0.55
+  Alpha 0.35
+  States
+  {
+  Spawn:
+    RFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor SHBlueTorchFlare : SHRedTorchFlare
+{
+  States
+  {
+  Spawn:
+    BFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor SHGreenTorchFlare : SHRedTorchFlare
+{
+  States
+  {
+  Spawn:
+    GFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor SHYellowTorchFlare : SHRedTorchFlare
+{
+  States
+  {
+  Spawn:
+    YFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor SHBloodTorchFlare : SHRedTorchFlare
+{
+  States
+  {
+  Spawn:
+    XFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor SHPurpleTorchFlare : SHRedTorchFlare
+{
+  States
+  {
+  Spawn:
+    XFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor SHWhiteTorchFlare : SHRedTorchFlare
+{
+  States
+  {
+  Spawn:
+    WFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor SHWhiteTorchFlareLarge : SHRedTorchFlare
+{
+  Scale 0.55
+  States
+  {
+  Spawn:
+    WFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor SHCyanTorchFlare : SHRedTorchFlare
+{
+  States
+  {
+  Spawn:
+    CFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor SHCyanTorchFlareLarge : SHRedTorchFlare
+{
+  Scale 0.55
+  States
+  {
+  Spawn:
+    CFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor SmallGreenFlare : SHRedTorchFlare
+{
+  Scale 0.2
+  States
+  {
+  Spawn:
+    GFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor SmallRedFlare : SHRedTorchFlare
+{
+  Scale 0.2
+  States
+  {
+  Spawn:
+    RFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor MediumRedFlare : SHRedTorchFlare
+{
+  Scale 0.35
+  States
+  {
+  Spawn:
+    RFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor SmallBlueFlare : SHRedTorchFlare
+{
+  Scale 0.2
+  States
+  {
+  Spawn:
+    BFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor SmallYellowFlare : SHRedTorchFlare
+{
+  Scale 0.2
+  States
+  {
+  Spawn:
+    YFLR A 2 Bright
+    Stop
+  }
+}
+
+Actor RedExplosionFlare : SHRedTorchFlare
+{
+  Scale 0.9
+  States
+  {
+  Spawn:
+    RFLR A 1 Bright A_FadeOut(0.01)
+    loop
+  }
+}
+Actor RedExplosionFlareSmall : SHRedTorchFlare
+{
+  Scale 0.5
+  States
+  {
+  Spawn:
+    RFLR A 1 Bright A_FadeOut(0.01)
+    loop
+  }
+}
+Actor RedExplosionFlareMedium : SHRedTorchFlare
+{
+  Scale 0.7
+  States
+  {
+  Spawn:
+    RFLR A 1 Bright A_FadeOut(0.01)
+    loop
+  }
+}
+Actor BlueExplosionFlare : SHRedTorchFlare
+{
+  Scale 0.5
+  States
+  {
+  Spawn:
+    BFLR A 1 Bright A_FadeOut(0.01)
+    loop
+  }
+}
+Actor GreenExplosionFlare : SHRedTorchFlare
+{
+  Scale 1.2
+  Alpha 0.42
+  States
+  {
+  Spawn:
+    GFLR A 1 Bright A_FadeOut(0.01)
+    loop
+  }
+}
+Actor GreenTeleportFlare : GreenExplosionFlare
+{
+	Scale 0.9
+	Alpha 0.3
+}
+Actor GreenExplosionFlareSmall : SHRedTorchFlare
+{
+  Scale 0.5
+  States
+  {
+  Spawn:
+    GFLR A 1 Bright A_FadeOut(0.01)
+    loop
+  }
+}
+Actor GreenExplosionFlareSmallFaded: GreenExplosionFlare
+{
+  Alpha 0.3
+}
+Actor BloodExplosionFlare : SHRedTorchFlare
+{
+  Scale 0.9
+  States
+  {
+  Spawn:
+    XFLR A 1 Bright A_FadeOut(0.007)
+    loop
+  }
+}
+
+Actor MO_MiniNukeFlare : SHRedTorchFlare
+{
+alpha 0.8
+yscale 4.3
+xscale 4.3
+states
+	{
+	Spawn:
+	    LEYS O 120 BRIGHT
+		LEYS ooooooooooooooooooooooooOOOOOOOOOOOOOOOOO 2 BRIGHT a_fADEouT(0.02)
+		Stop
+	}
+}
+
+Actor RedMuzzleFlare : SHRedTorchFlare
+{
+  Scale 0.45
+  States
+  {
+  Spawn:
+    RFLR A 1 Bright A_FadeOut(0.02)
+    loop
+  }
+}
+Actor BigRedMuzzleFlare : RedMuzzleFlare
+{
+  Scale 0.6
+}
+Actor HugeRedMuzzleFlare : RedMuzzleFlare
+{
+  Alpha 0.32
+  Scale 0.75
+}
+Actor YellowMuzzleFlare : SHRedTorchFlare
+{
+  Scale 0.45
+  States
+  {
+  Spawn:
+    YFLR A 1 Bright A_FadeOut(0.02)
+    loop
+  }
+}
+Actor BigYellowMuzzleFlare : YellowMuzzleFlare
+{
+  Scale 0.6
+}
+Actor GreenMuzzleFlare : SHRedTorchFlare
+{
+  Scale 0.55
+  States
+  {
+  Spawn:
+    GFLR A 1 Bright A_FadeOut(0.02)
+    loop
+  }
+}
+
+Actor SHYellowTorchFlareColumn : SHYellowTorchFlare
+{
+	XScale 0.75
+	YScale 0.45
+}
+
+Actor ArchvileHoldFlare : SHRedTorchFlare
+{
+  Scale 0.45
+  States
+  {
+  Spawn:
+    YFLR A 8 Bright
+    stop
+  }
+}
+
+Actor ArchvileAttackFlare : YellowMuzzleFlare
+{
+	Scale 0.85
+	Alpha 0.45
+	States
+  	{
+  	Spawn:
+    	YFLR A 1 Bright A_FadeOut(0.015)
+    	loop
+  	}
+}
+
+// Pickup Flares
+
+Actor GreenArmorFlare : SHGreenTorchFlare
+{
+	Scale 0.35
+}
+
+Actor BlueArmorFlare : SHBlueTorchFlare
+{
+	Scale 0.35
+}
+
+Actor RadSuitFlare : SHWhiteTorchFlare
+{
+	Scale 0.45
+}
+
+Actor BluePickupFlare : SHCyanTorchFlare
+{
+	Scale 0.4
+}
+
+Actor RedPickupFlare : SHBloodTorchFlare
+{
+	Alpha 0.32
+	Scale 0.4
+}
+
+Actor GreenPickupFlare : SHGreenTorchFlare
+{
+	Scale 0.4
+}
+
+Actor TanPickupFlare : SHRedTorchFlare
+{
+  Scale 0.4
+  States
+  {
+  Spawn:
+    TFLR A 2 Bright
+    Stop
+  }
+}
+
+// Key Flares
+
+Actor BlueKeyFlare : SHBlueTorchFlare
+{
+	Scale 0.35
+	Alpha 0.32
+}
+
+Actor RedKeyFlare : SHBloodTorchFlare
+{
+	Scale 0.35
+	Alpha 0.32
+}
+
+Actor YellowKeyFlare : SHYellowTorchFlare
+{
+	Scale 0.35
+	Alpha 0.3
+}
+
+//Health Bonus Flare
+
+Actor BlueBonusFlareA : SmallBlueFlare
+{
+  Scale 0.22
+  Alpha 0.15
+}
+
+Actor BlueBonusFlareB : SmallBlueFlare
+{
+  Scale 0.24
+  Alpha 0.2
+}
+
+Actor BlueBonusFlareC : SmallBlueFlare
+{
+  Scale 0.26
+  Alpha 0.25
+}
+
+Actor BlueBonusFlareD : SmallBlueFlare
+{
+  Scale 0.28
+  Alpha 0.3
+}
+
+//Flame actors
+
+Actor SHRedTorchFireSmall : BaseVisualSFX
+{
+  Radius 0
+  Height 0
+  RenderStyle Add
+  Scale 0.2
+  Alpha 0.5
+  States
+  {
+  /*Spawn:
+    FIR1 A 0
+    FIR1 A 0 A_Jump(128, "Spawn2")
+    FIR1 ABCDEFG 1 Bright
+    FIR1 HIJKL 1 Bright A_FadeOut(0.15)
+    Stop
+  Spawn2:
+    FIR2 ABCDEFG 1 Bright
+    FIR2 HIJKL 1 Bright A_FadeOut(0.15)
+    Stop*/
+  Spawn:
+    PFNM A 0
+    PFNM A 0 A_Jump(256, "Spawn1", "Spawn2")//, "Spawn3", "Spawn4")
+  Spawn1:
+    PFNM ABCDEFG 1 Bright
+    PFNM HIJKL 1 Bright A_FadeOut(0.075)
+    Stop
+  Spawn2:
+    PFNM MNOPQRS 1 Bright
+    PFNM TUVWX 1 Bright A_FadeOut(0.075)
+    Stop
+  Spawn3:
+    PFN2 ABCDEFG 1 Bright
+    PFN2 HIJKL 1 Bright A_FadeOut(0.075)
+    Stop
+  Spawn4:
+    PFN2 MNOPQRS 1 Bright
+    PFN2 TUVWX 1 Bright A_FadeOut(0.075)
+    Stop
+  }
+}
+
+Actor SHRedTorchFireLarge : SHRedTorchFireSmall
+{
+  Scale 0.3
+}
+
+Actor SHBlueTorchFireSmall : SHRedTorchFireSmall
+{
+  States
+  {
+  Spawn:
+    PFBL A 0
+    PFBL A 0 A_Jump(128, "Spawn2")
+    PFBL ABCDEFG 1 Bright
+    PFBL HIJKL 1 Bright A_FadeOut(0.075)
+    Stop
+  Spawn2:
+    PFBL MNOPQRS 1 Bright
+    PFBL TUVWX 1 Bright A_FadeOut(0.075)
+    Stop
+  }
+}
+
+Actor SHBlueTorchFireLarge : SHBlueTorchFireSmall
+{
+  Scale 0.3
+}
+
+Actor SHGreenTorchFireSmall : SHRedTorchFireSmall
+{
+  States
+  {
+  Spawn:
+    PFGR A 0
+    PFGR A 0 A_Jump(128, "Spawn2")
+    PFGR ABCDEFG 1 Bright
+    PFGR HIJKL 1 Bright A_FadeOut(0.075)
+    Stop
+  Spawn2:
+    PFGR MNOPQRS 1 Bright
+    PFGR TUVWX 1 Bright A_FadeOut(0.075)
+    Stop
+  }
+}
+
+Actor SHGreenTorchFireLarge : SHGreenTorchFireSmall
+{
+  Scale 0.3
+}
+
+Actor SHYellowTorchFireSmall : SHRedTorchFireSmall
+{
+  Alpha 0.4
+  States
+  {
+  Spawn:
+    PFYE A 0
+    PFYE A 0 A_Jump(128, "Spawn2")
+    PFYE ABCDEFG 1 Bright
+    PFYE HIJKL 1 Bright A_FadeOut(0.075)
+    Stop
+  Spawn2:
+    PFYE MNOPQRS 1 Bright
+    PFYE TUVWX 1 Bright A_FadeOut(0.075)
+    Stop
+  }
+}
+
+Actor SHYellowTorchFireLarge : SHYellowTorchFireSmall
+{
+  Scale 0.3
+}
+
+Actor SHBloodTorchFireSmall : SHRedTorchFireSmall
+{
+  Alpha 0.6
+  States
+  {
+  Spawn:
+    PFRE A 0
+    PFRE A 0 A_Jump(128, "Spawn2")
+    PFRE ABCDEFG 1 Bright
+    PFRE HIJKL 1 Bright A_FadeOut(0.075)
+    Stop
+  Spawn2:
+    PFRE MNOPQRS 1 Bright
+    PFRE TUVWX 1 Bright A_FadeOut(0.075)
+    Stop
+  }
+}
+
+Actor ArchFire : SHYellowTorchFireSmall
+{
+  Scale 0.4
+}
+
+Actor ArchResFire : SHBloodTorchFireSmall
+{
+  Scale 0.45
+}
+
+Actor SHBloodTorchFireLarge : SHBloodTorchFireSmall
+{
+  Scale 0.3
+}
+
+Actor SHPurpleTorchFireSmall : SHRedTorchFireSmall
+{
+  States
+  {
+  Spawn:
+    PFPP A 0
+    PFPP A 0 A_Jump(128, "Spawn2")
+    PFPP ABCDEFG 1 Bright
+    PFPP HIJKL 1 Bright A_FadeOut(0.075)
+    Stop
+  Spawn2:
+    PFPP MNOPQRS 1 Bright
+    PFPP TUVWX 1 Bright A_FadeOut(0.075)
+    Stop
+  }
+}
+
+Actor SHPurpleTorchFireLarge : SHPurpleTorchFireSmall
+{
+  Scale 0.3
+}
+
+Actor SHWhiteTorchFireSmall : SHRedTorchFireSmall
+{
+  States
+  {
+  Spawn:
+    FIW1 A 0
+    FIW1 A 0 A_Jump(128, "Spawn2")
+    FIW1 ABCDEFG 1 Bright
+    FIW1 HIJKL 1 Bright A_FadeOut(0.075)
+    Stop
+  Spawn2:
+    FIW2 ABCDEFG 1 Bright
+    FIW2 HIJKL 1 Bright A_FadeOut(0.075)
+    Stop
+  }
+}
+
+Actor SHWhiteTorchFireLarge : SHWhiteTorchFireSmall
+{
+  Scale 0.3
+}
+
+Actor SHCyanTorchFireSmall : SHRedTorchFireSmall
+{
+  States
+  {
+  Spawn:
+    FIC1 A 0
+    FIC1 A 0 A_Jump(128, "Spawn2")
+    FIC1 ABCDEFG 1 Bright
+    FIC1 HIJKL 1 Bright A_FadeOut(0.075)
+    Stop
+  Spawn2:
+    FIC2 ABCDEFG 1 Bright
+    FIC2 HIJKL 1 Bright A_FadeOut(0.075)
+    Stop
+  }
+}
+
+Actor SHCyanTorchFireLarge : SHCyanTorchFireSmall
+{
+  Scale 0.3
+}
+
+Actor RedFireTiny : SHRedTorchFireSmall
+{
+  Scale 0.1
+}
+
+Actor GreenFireTiny : SHGreenTorchFireSmall
+{
+  Scale 0.1
+}
+
+Actor BlueFireTiny : SHBlueTorchFireSmall
+{
+  Scale 0.1
+}
+
+Actor PurpleFireTiny : SHPurpleTorchFireSmall
+{
+  Scale 0.1
+}
+
+Actor YellowFireTiny : SHYellowTorchFireSmall
+{
+  Scale 0.1
+}
+
+Actor BloodFireTiny : SHBloodTorchFireSmall
+{
+  Scale 0.1
+}
+
+Actor YellowFireCandle : SHYellowTorchFireSmall
+{
+  Scale 0.035
+}
+
+Actor UTNTFireSmall : SHRedTorchFireSmall
+{
+  /*States
+  {
+  Spawn:
+    FLM1 A 0
+    FLM1 A 0 A_Jump(16, "Spawn2")
+	FLM1 A 0 A_Jump(32, "Spawn3")
+	FLM1 A 0 A_Jump(64, "Spawn4")
+	FLM1 A 0 A_Jump(96, "Spawn5")
+	FLM1 A 0 A_Jump(128, "Spawn6")
+    FLM1 ABCDEFG 1 Bright
+    FLM1 HIJKL 1 Bright A_FadeOut(0.15)
+    Stop
+  Spawn2:
+    FLM2 ABCDEFG 1 Bright
+    FLM2 HIJKL 1 Bright A_FadeOut(0.15)
+	stop
+  Spawn3:
+    FLM3 ABCDEFG 1 Bright
+    FLM3 HIJKL 1 Bright A_FadeOut(0.15)
+	stop
+  Spawn4:
+    FLM4 ABCDEFG 1 Bright
+    FLM4 HIJKL 1 Bright A_FadeOut(0.15)
+	stop
+  Spawn5:
+    FLM5 ABCDEFG 1 Bright
+    FLM5 HIJKL 1 Bright A_FadeOut(0.15)
+	stop
+  Spawn6:
+    FLM6 ABCDEFG 1 Bright
+    FLM6 HIJKL 1 Bright A_FadeOut(0.15)
+    Stop
+  }*/
+  Scale 0.25
+  States
+  {
+  Spawn:
+    PFOR A 0
+    PFOR A 0 A_Jump(256, "Spawn1", "Spawn2")//, "Spawn3", "Spawn4")
+  Spawn1:
+    PFOR ABCDEFG 1 Bright
+    PFOR HIJKL 1 Bright A_FadeOut(0.075)
+    Stop
+  Spawn2:
+    PFOR MNOPQRS 1 Bright
+    PFOR TUVWX 1 Bright A_FadeOut(0.075)
+    Stop
+  Spawn3:
+    PFO2 ABCDEFG 1 Bright
+    PFO2 HIJKL 1 Bright A_FadeOut(0.075)
+    Stop
+  Spawn4:
+    PFO2 MNOPQRS 1 Bright
+    PFO2 TUVWX 1 Bright A_FadeOut(0.075)
+    Stop
+  }
+}
+
+Actor UTNTFireLarge : UTNTFireSmall
+{
+  Scale 0.35
+}
+
+Actor UTNTFireMedium : UTNTFireSmall
+{
+  Scale 0.3
+}
+
+Actor UTNTFireTiny : UTNTFireSmall
+{
+  Scale 0.125
+}
+
+Actor UTNTLLFireSmall : SHRedTorchFireSmall
+{
+  Scale 0.4
+  Alpha 0.6
+  States
+  {
+  Spawn:
+    PFOR A 0
+    PFOR A 0 A_Jump(128, "Spawn2")
+    PFOR ABCDEFG 2 Bright
+    PFOR HIJKL 2 Bright A_FadeOut(0.075)
+    Stop
+  Spawn2:
+    PFOR MNOPQRS 2 Bright
+    PFOR TUVWX 2 Bright A_FadeOut(0.075)
+    Stop
+  }
+}
+
+Actor UTNTLLFireMedium : UTNTLLFireSmall
+{
+  Scale 0.5
+}
+
+Actor UTNTLLFireLarge : UTNTLLFireSmall
+{
+  Scale 0.65
+}
+
+Actor LLRedFireSmall : SHRedTorchFireSmall
+{
+  Scale 0.35
+  Alpha 0.5
+  States
+  {
+  Spawn:
+    PFNM A 0
+    PFNM A 0 A_Jump(128, "Spawn2")
+    PFNM ABCDEFG 2 Bright
+    PFNM HIJKL 2 Bright A_FadeOut(0.075)
+    Stop
+  Spawn2:
+    PFNM MNOPQRS 2 Bright
+    PFNM TUVWX 2 Bright A_FadeOut(0.075)
+    Stop
+  }
+}
+Actor LLRedFireMedium : LLRedFireSmall
+{
+  Scale 0.45
+}
+Actor LLRedFireLarge : LLRedFireSmall
+{
+  Scale 0.6
+}
+Actor LLGreenFireSmall : SHRedTorchFireSmall
+{
+  Scale 0.35
+  Alpha 0.5
+  States
+  {
+  Spawn:
+    PFGR A 0
+    PFGR A 0 A_Jump(128, "Spawn2")
+    PFGR ABCDEFG 2 Bright
+    PFGR HIJKL 2 Bright A_FadeOut(0.075)
+    Stop
+  Spawn2:
+    PFGR MNOPQRS 2 Bright
+    PFGR TUVWX 2 Bright A_FadeOut(0.075)
+    Stop
+  }
+}
+
+Actor LLGreenFireLarge : SHRedTorchFireSmall
+{
+  Scale 0.65
+  Alpha 0.55
+  States
+  {
+  Spawn:
+    PFGR A 0
+    PFGR A 0 A_Jump(128, "Spawn2")
+    PFGR ABCDEFG 3 Bright
+    PFGR HIJKL 3 Bright A_FadeOut(0.075)
+    Stop
+  Spawn2:
+    PFGR MNOPQRS 3 Bright
+    PFGR TUVWX 3 Bright A_FadeOut(0.075)
+    Stop
+  }
+}
+
+Actor LLBloodFireSmall : SHRedTorchFireSmall
+{
+  Scale 0.35
+  Alpha 0.5
+  States
+  {
+  Spawn:
+    PFRE A 0
+    PFRE A 0 A_Jump(128, "Spawn2")
+    PFRE ABCDEFG 2 Bright
+    PFRE HIJKL 2 Bright A_FadeOut(0.075)
+    Stop
+  Spawn2:
+    PFRE MNOPQRS 2 Bright
+    PFRE TUVWX 2 Bright A_FadeOut(0.075)
+    Stop
+  }
+}
+
+Actor LLBloodFireMedium : LLBloodFireSmall
+{
+  Scale 0.45
+}
+Actor LLBloodFireLarge : LLBloodFireSmall
+{
+  Scale 0.6
+}
+
+Actor XLLBloodFireHuge : SHRedTorchFireSmall
+{
+  Scale 0.75
+  Alpha 0.6
+  States
+  {
+  Spawn:
+    PFRE A 0
+    PFRE A 0 A_Jump(128, "Spawn2")
+    PFRE ABCDEFG 4 Bright
+    PFRE HIJKL 4 Bright A_FadeOut(0.075)
+    Stop
+  Spawn2:
+    PFRE MNOPQRS 4 Bright
+    PFRE TUVWX 4 Bright A_FadeOut(0.075)
+    Stop
+  }
+}
+
+//Embers
+
+Actor RedEmber : BaseVisualSFX
+{
+  +RANDOMIZE
+  Radius 0
+  Height 0
+  RenderStyle Add
+  Scale 0.165
+  States
+  {
+  Spawn:
+    FRED A 8 bright
+  Loopy:
+    FRED A 1 bright A_FadeOut(0.08)
+    Loop
+  }
+}
+
+Actor BlueEmber : RedEmber
+{
+  States
+  {
+  Spawn:
+    FBLU A 8 bright
+  Loopy:
+    FBLU A 1 bright A_FadeOut(0.08)
+    Loop
+  }
+}
+
+Actor GreenEmber : RedEmber
+{
+  States
+  {
+  Spawn:
+    FGRE A 8 bright
+  Loopy:
+    FGRE A 1 bright A_FadeOut(0.08)
+    Loop
+  }
+}
+
+Actor YellowEmber : RedEmber
+{
+  States
+  {
+  Spawn:
+    FRE2 A 8 bright
+  Loopy:
+    FRE2 A 1 bright A_FadeOut(0.08)
+    Loop
+  }
+}
+
+Actor BloodEmber : RedEmber
+{
+  States
+  {
+  Spawn:
+    FBLD A 8 bright
+  Loopy:
+    FBLD A 1 bright A_FadeOut(0.08)
+    Loop
+  }
+}
+
+Actor TanEmber : RedEmber
+{
+  States
+  {
+  Spawn:
+    FTAN A 8 bright
+  Loopy:
+    FTAN A 1 bright A_FadeOut(0.08)
+    Loop
+  }
+}
+
+Actor UTNTEmber : RedEmber
+{
+  States
+  {
+  Spawn:
+    EMBR A 8 bright
+  Loopy:
+    EMBR A 1 bright A_FadeOut(0.08)
+    Loop
+  }
+}
+
+Actor FlareFromExplosion : SHRedTorchFlare
+{
+XScale 2.0
+YScale 1.5
+Alpha 0.4
+states
+	{
+	Spawn:
+		TNT1 A 0
+		FLAR B 2 bright
+		FLAR BBBBBBBBBBBBBB 1 BRIGHT A_FadeOut(0.11)
+		stop
+	}
+}

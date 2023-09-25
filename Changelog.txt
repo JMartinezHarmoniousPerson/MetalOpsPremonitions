@@ -1,0 +1,38 @@
+Update v1.1 changes:
+Added Frag Grenades to the throwables (sprites from Powerslave/Exhumed, recolored. Credits: Lobotomy Software, Nightdive Studios, Running With Scissors (pin sounds), Infinity Ward and Activision for bounce and toss)
+The game will put a notice if your hud is not full screen and the ensure that Alternative HUD is disabled.
+Added Keybind to change between molotovs and grenades
+Flamethrower uses more gas and gasoline reserve decreased
+Plasma rifle projectiles buffed
+Pistol buffed, SMG nerfed
+Chex Quest Compatibility added
+All hitscan weapons do fixed damage
+BFG and Plasma Repeater do fixed damage
+Minigun fixes
+
+
+Update v1.5 changes:
+Rocket Launcher has a mini-nuke mode now. Be careful though, getting close or a bit far can still hurt or even kill you. Uses 30 rocket ammo, has a 15 second cooldown.
+SMG has an inspect animation inspired by the Shadow The Hedgehog intro where Shadow pumps has submachinegun.
+Action Special key for the mini nuke for rocket launcher added. Default bind is X.
+SSG recoil fixed
+Player sounds added
+New weapon: Unmaker, based on the older PB 3.0 sprites by Enchanter. It functions similar to the Doom 64 Unmaker, however, primary fire is one beam, while altfire is three beams.
+Plasma cells are animated now.
+
+
+Update v2 changes:
+- Fixed some sprite conflicts with Project Malice.
+- Updated Pistol casings to Metalman's casings from Project Brutality
+- Fixed Pump shotgun issue when reloading where the animation would loop if fire was held down
+- Weapons that are reloadable now have the ammo in when the magazine clicks on the guns, rather than at the end of the animation.
+- Some smoke effect sprites fixed rendering wise.
+- Plasma Ball has some mini lightning and blue smoke effects.
+- Katana swings are faster
+- Icethrower mode made for the flamethrower
+- SMG has a burst fire mode, Combat Rifle has a semi auto mode
+- Haste sphere, Quad Damage sphere added
+- Power up timer expiring is similar to Quake
+- You can now hold the toss grenade button to cook the grenade when grenades are selected.
+ An indicator will be on screen telling you when the grenade is about to explode, you have 3 seconds.
+ It's inspired by Call of Duty 3, while the smoke trail that spawns from the grenade is inspired by Black Mesa.

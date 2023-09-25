@@ -1,0 +1,5 @@
+#include "Actors/FlamerEffects.dec"
+#include "Actors/Tokens.dec"
+#include "Actors/Flares.dec"
+//#include "Health.dec"
+//Flare actors

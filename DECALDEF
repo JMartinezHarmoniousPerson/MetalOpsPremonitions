@@ -1,0 +1,77 @@
+//Bullet decals by Sergeant Mark IV
+
+decal JMBulletChip1
+{
+	pic CHIZ1
+	x-scale 0.75
+	y-scale 0.75
+	randomflipx
+}
+
+decal JMBulletChip2
+{
+	pic CHIZ2
+	x-scale 0.6
+	y-scale 0.6
+	randomflipx
+}
+
+decal JMBulletChip3
+{
+	pic CHIZ3
+	x-scale 0.6
+	y-scale 0.6
+	randomflipx
+}
+
+decal JMBulletChip4
+{
+	pic CHIZ4
+	x-scale 0.7
+	y-scale 0.7
+	randomflipx
+}
+
+
+decalgroup BulletChip
+{
+	JMBulletChip1	1
+	JMBulletChip2	1
+	JMBulletChip3	1
+	JMBulletChip4	1
+}
+
+fader FreezeScorchFader
+{
+	DecayStart 20.0
+	DecayTime 0.7
+}
+
+decal FreezeScorch
+{
+	pic SCORCH1
+	fullbright
+	shade "white"
+	x-scale 0.6
+	y-scale 0.6
+	randomflipx
+	randomflipy
+	animator FreezeScorchFader
+}
+
+decal SwordSlashMark
+{
+	pic SWRDSLSH
+	shade "00 00 00"
+	x-scale 1
+	y-scale 0.65
+}
+
+decal SwordSlashMarkFlipped
+{
+	pic SWRDSLSH
+	shade "00 00 00"
+	x-scale 1
+	y-scale 0.65
+	flipx
+}

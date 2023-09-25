@@ -1,0 +1,16 @@
+brightmap sprite MTOVD0 {map "Brightmaps/Weapons/Molotov/MTOVD0_BM.png"}
+brightmap sprite MTOVE0 {map "Brightmaps/Weapons/Molotov/MTOVE0_BM.png"}
+brightmap sprite MTOVF0 {map "Brightmaps/Weapons/Molotov/MTOVF0_BM.png"}
+brightmap sprite MTOVG0 {map "Brightmaps/Weapons/Molotov/MTOVG0_BM.png"}
+brightmap sprite MTOVH0 {map "Brightmaps/Weapons/Molotov/MTOVH0_BM.png"}
+brightmap sprite MTOVI0 {map "Brightmaps/Weapons/Molotov/MTOVI0_BM.png"}
+brightmap sprite MTOVJ0 {map "Brightmaps/Weapons/Molotov/MTOVJ0_BM.png"}
+brightmap sprite MTOVK0 {map "Brightmaps/Weapons/Molotov/MTOVK0_BM.png"}
+brightmap sprite MTOVL0 {map "Brightmaps/Weapons/Molotov/MTOVL0_BM.png"}
+brightmap sprite MTOVM0 {map "Brightmaps/Weapons/Molotov/MTOVM0_BM.png"}
+brightmap sprite MTOVN0 {map "Brightmaps/Weapons/Molotov/MTOVN0_BM.png"}
+brightmap sprite MTOVO0 {map "Brightmaps/Weapons/Molotov/MTOVO0_BM.png"}
+brightmap sprite MTOVP0 {map "Brightmaps/Weapons/Molotov/MTOVP0_BM.png"}
+brightmap sprite MTOVQ0 {map "Brightmaps/Weapons/Molotov/MTOVQ0_BM.png"}
+brightmap sprite MTOVR0 {map "Brightmaps/Weapons/Molotov/MTOVR0_BM.png"}
+brightmap sprite MTOVS0 {map "Brightmaps/Weapons/Molotov/MTOVS0_BM.png"}

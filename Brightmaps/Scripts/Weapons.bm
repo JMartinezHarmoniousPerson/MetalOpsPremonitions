@@ -1,0 +1,35 @@
+//Pump Action
+brightmap sprite PSGFA0 {map "Brightmaps/Weapons/PumpShotgun/PSGFA0_BM.png" DisableFullBright}
+brightmap sprite PSGFB0 {map "Brightmaps/Weapons/PumpShotgun/PSGFB0_BM.png" DisableFullBright}
+
+//Lever Action
+brightmap sprite W87FA0 {map "Brightmaps/Weapons/W87FA0_BM.png" DisableFullBright}
+brightmap sprite W87FB0 {map "Brightmaps/Weapons/W87FB0_BM.png" DisableFullBright}
+
+//Assault Rifle
+brightmap sprite AR1FA0 {map "Brightmaps/Weapons/AssaultRifle/AR1FA0_BM.png" DisableFullBright}
+brightmap sprite AR1FB0 {map "Brightmaps/Weapons/AssaultRifle/AR1FB0_BM.png" DisableFullBright}
+
+//Minigun
+brightmap sprite MGNFA0 {map "Brightmaps/Weapons/Minigun/MGNFA0_BM.png" DisableFullBright}
+brightmap sprite MGNFB0 {map "Brightmaps/Weapons/Minigun/MGNFB0_BM.png" DisableFullBright}
+brightmap sprite MGNFC0 {map "Brightmaps/Weapons/Minigun/MGNFC0_BM.png" DisableFullBright}
+brightmap sprite MGNFD0 {map "Brightmaps/Weapons/Minigun/MGNFD0_BM.png" DisableFullBright}
+brightmap sprite MGNFE0 {map "Brightmaps/Weapons/Minigun/MGNFE0_BM.png" DisableFullBright}
+brightmap sprite MGNFF0 {map "Brightmaps/Weapons/Minigun/MGNFF0_BM.png" DisableFullBright}
+brightmap sprite MGNFG0 {map "Brightmaps/Weapons/Minigun/MGNFG0_BM.png" DisableFullBright}
+brightmap sprite MGNFH0 {map "Brightmaps/Weapons/Minigun/MGNFH0_BM.png" DisableFullBright}
+
+//Flamethrower
+brightmap sprite FTF1A0 {map "Brightmaps/Weapons/Flamethrower/FTF1A0_BM.png" DisableFullBright}
+brightmap sprite FTF1B0 {map "Brightmaps/Weapons/Flamethrower/FTF1B0_BM.png" DisableFullBright}
+brightmap sprite FTF1C0 {map "Brightmaps/Weapons/Flamethrower/FTF1C0_BM.png" DisableFullBright}
+brightmap sprite FTF1D0 {map "Brightmaps/Weapons/Flamethrower/FTF1D0_BM.png" DisableFullBright}
+brightmap sprite FTF2A0 {map "Brightmaps/Weapons/Flamethrower/FTF2A0_BM.png" DisableFullBright}
+brightmap sprite FTF2B0 {map "Brightmaps/Weapons/Flamethrower/FTF2B0_BM.png" DisableFullBright}
+brightmap sprite FTF2C0 {map "Brightmaps/Weapons/Flamethrower/FTF2C0_BM.png" DisableFullBright}
+brightmap sprite FTF2D0 {map "Brightmaps/Weapons/Flamethrower/FTF2D0_BM.png" DisableFullBright}
+
+//Deagle
+brightmap sprite DGLFA0 {map "Brightmaps/Weapons/DGLFA0_BM.png" DisableFullBright}
+brightmap sprite DGLFB0 {map "Brightmaps/Weapons/DGLFB0_BM.png" DisableFullBright}

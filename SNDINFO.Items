@@ -1,0 +1,61 @@
+misc/keycard KEYPICK
+misc/skullkey SKULLPIK
+
+misc/armorup ARMORUP
+misc/armorbonus ARMRBON
+gemarmorbonus ARMRBON2
+trebarmorbonus ARMRBON3
+
+misc/healthbonus HEALTH
+doublehealth HEALTH2
+triplehealth HEALTH3
+misc/stim N_Health
+misc/medpack L_Health
+
+misc/shells SHELPCK
+misc/shellbox SBOXPCK
+
+misc/map MAPPICK
+misc/goggles NITEVIS
+misc/gogglesend NITEOFF
+misc/gogglesloop NITELOOP
+misc/goggleswarn NITEWARN
+misc/suit SUITON
+//hazsuiton2 SUITON2
+hazsuitwarn SUITWARN
+hazsuitended SUITOFF
+
+$random misc/ammopickup {ammo1 ammo2 ammo3}
+ammo1 AMMOPCK1
+ammo2 AMMOPCK2
+ammo3 AMMOPCK3
+misc/ammobox ABOXPICK
+misc/rocket RCKTPICK
+misc/rocketbox RCKTBOX
+
+misc/backpack BACKPCK
+
+misc/cell CELLPICK
+misc/cellpak CELL_PAK
+
+misc/zerkpak BSERKPCK
+
+powerupwearoff wearoff
+powerup/haste "sounds/items/powerups/Haste_Pickup.ogg"
+powerup/hastesphereloop "sounds/items/powerups/Haste_SphereLoop.ogg"
+powerup/hasteloop "sounds/items/powerups/Haste_ActiveLoop.ogg"
+powerup/hasteover "sounds/items/powerups/Haste_End.ogg"
+
+
+powerup/soulsphere SOULPCK
+powerup/megasphere MEGAPCK
+powerup/invul INVLPICK
+powerup/invis INVSPICK
+powerup/inviswear INVSWARN
+
+powerup/quadidle QDMGIDL
+powerup/quadpick QDMGPICK
+powerup/quadfiring QDMGFIRE
+powerup/quadexpire QDMGEXPR
+powerup/quadend QDMGOFF
+powerup/quadloop QDMGLOOP

@@ -1,0 +1,1969 @@
+// ------------------------------------------------------------------------------------------------
+//
+//   NC HUD - Base
+//
+// ------------------------------------------------------------------------------------------------
+
+class NCH_StatItem ui
+{
+	int labeltype;
+	string label;
+	int format;
+	string val;
+	int cur;
+	int total;
+	bool colorize;
+}
+
+class NCH_AmmoItem ui
+{
+	class<Ammo> type;
+	TextureID icon;
+	int amount;
+	int maxamount;
+}
+
+class NCH_BaseHUD : BaseStatusBar
+{
+	const NCHC_LOWSTATEUCAP = 50; // Bar low state upper cap.
+	const NCHC_DI_SCREEN_CENTER_TOP = DI_SCREEN_TOP | DI_SCREEN_HCENTER;
+
+	const NCHC_POWTIME_NONE = "";
+	const NCHC_POWTIME_INFINITE = "∞";
+
+	// The icons of depleted inventory items are drawn with this alpha value (used for the selected
+	// inventory and inventory bar).
+	const NCHC_DEPALPHA = 0.4;
+
+	const NCHC_RESW = 640;
+	const NCHC_RESH = 400;
+
+	enum NCHEBarStates
+	{
+		NCHC_BARSTATE_INVUL,
+		NCHC_BARSTATE_INFINITE,
+		NCHC_BARSTATE_LOW,
+		NCHC_BARSTATE_NORMAL,
+		NCHC_BARSTATE_OVER
+	}
+
+	enum NCHEStatLabelTypes
+	{
+		NCHC_STATLABELTYPE_TEXT,
+		NCHC_STATLABELTYPE_ICON
+	}
+
+	enum NCHEStatFormats
+	{
+		NCHC_STATFORMAT_SINGLE,
+		NCHC_STATFORMAT_RATIO
+	}
+
+	bool nch_init;
+	int nch_toggleammo;
+	HUDFont nch_sfont, nch_bfont;
+	InventoryBarState nch_diparms;
+	string nch_invbox;
+	name nch_curbgcolor, nch_curhicolor;
+
+	// Used to store the stats items.
+	Array<NCH_StatItem> nch_statslist;
+
+	// Used to store ammo items for the ammo list display.
+	Array<NCH_AmmoItem> nch_ammoslist;
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//   HUD properties
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	// If 'true', mughshot drawing is enabled.
+	bool nch_DrawMugShot;
+
+	// If 'true', mugshot's gibbing animation is enabled.
+	bool nch_XDeathFace;
+
+	// If 'true', the graphic which is drawn for keys is their spawn state sprite, otherwise it's their
+	// inventory icon.
+	bool nch_KeysUseSpawnState;
+
+	// The color used for the background graphics.
+	name nch_BackgroundColor;
+
+	// The color used for highlighting. It affects statistics, weapon slots, inventory items, ammo list
+	// and inventory bar's arrows and selection box.
+	name nch_HighlightColor;
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	override void Init()
+	{
+		Super.Init();
+
+		SetSize(32, 320, 200);
+
+		nch_init = false;
+
+		// HUD setup.
+		nch_DrawMugShot = true;
+		nch_XDeathFace = false;
+		nch_KeysUseSpawnState = false;
+		nch_BackgroundColor = 'blue';
+		nch_HighlightColor = 'NCHBlue';
+
+		// Call the setup function.
+		NCHF_Setup();
+
+		// Font creation.
+		Font fnt = "nchsmallfont";
+		nch_sfont = HUDFont.Create(fnt);
+		fnt = "nchbigfont";
+		nch_bfont = HUDFont.Create(fnt);
+
+		NCHF_ResolveBackgroundColor();
+		NCHF_ResolveHighlightColor();
+
+		nch_invbox = "H_INVBOX";
+
+		// Note: the graphics passed here are only used for data setup. What graphic that
+		// are drawn in the end are determined by the NCHF_DrawInventoryBar function.
+		nch_diparms = InventoryBarState.Create(nch_bfont, boxgfx : String.Format("graphics/backgrounds/blue/\%s.png", nch_invbox),
+			selgfx : "H_INVCUR", leftgfx : "H_INVAL1", rightgfx : "H_INVAR1");
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	// Called once, when the status bar is first initialized, which is upon the engine's launch and
+	// before getting into the game.
+	virtual void NCHF_Setup () {}
+
+	// Called once, upon the HUD's first draw.
+	virtual void NCHF_InGameSetup () {}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	override void Draw (int state, double TicFrac)
+	{
+		Super.Draw(state, TicFrac);
+
+		// One-time setup.
+		if (!nch_init)
+		{
+			NCHF_InGameSetup();
+			nch_init = true;
+		}
+
+		NCHF_UpdateElementsColor();
+
+		if(state == HUD_StatusBar)
+		{
+			BeginStatusBar();
+			DrawMainBar(TicFrac);
+		}
+		else if(state == HUD_Fullscreen)
+		{
+			BeginHUD(resW : NCHC_RESW, resH : NCHC_RESH);
+			DrawFullScreenStuff();
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	void NCHF_ResolveBackgroundColor ()
+	{
+		switch (nch_BackgroundColor)
+		{
+			// Only allow these colors.
+			case 'black':
+			case 'blue':
+			case 'gray':
+			case 'green':
+			case 'pink':
+			case 'red':
+			case 'yellow':
+				return;
+		}
+
+		// Default to blue if the specified color isn't one of the above.
+		nch_BackgroundColor = 'blue';
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	void NCHF_ResolveHighlightColor ()
+	{
+		switch (nch_HighlightColor)
+		{
+			// Only allow these colors.
+			case 'NCHBlue':
+			case 'NCHGreen':
+			case 'NCHYellow':
+			case 'NCHRed':
+			case 'NCHPink':
+				return;
+		}
+
+		// Default to blue if the specified color isn't one of the above.
+		nch_HighlightColor = 'NCHBlue';
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	void NCHF_UpdateElementsColor ()
+	{
+		int bgcolor = NCHF_GetCVar('nchud_bgcolor');
+		int hicolor = NCHF_GetCVar('nchud_hicolor');
+
+		switch (bgcolor)
+		{
+			default: nch_curbgcolor = nch_BackgroundColor; break;
+			case 0:  nch_curbgcolor = 'black';  break; //  8  8  8
+			case 1:  nch_curbgcolor = 'blue';   break; //  0 32 48
+			case 2:  nch_curbgcolor = 'gray';   break; // 18 24 24
+			case 3:  nch_curbgcolor = 'green';  break; //  0 36  0
+			case 4:  nch_curbgcolor = 'pink';   break; // 48  0 32
+			case 5:  nch_curbgcolor = 'red';    break; // 48  0  0
+			case 6:  nch_curbgcolor = 'yellow'; break; // 36 32  0
+		}
+
+		switch (hicolor)
+		{
+			default: nch_curhicolor = nch_HighlightColor; break;
+			case 0:  nch_curhicolor = 'NCHBlue';   break;
+			case 1:  nch_curhicolor = 'NCHGreen';  break;
+			case 2:  nch_curhicolor = 'NCHPink';   break;
+			case 3:  nch_curhicolor = 'NCHRed';    break;
+			case 4:  nch_curhicolor = 'NCHYellow'; break;
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	string NCHF_GetBackgroundGFX (string lumpname)
+	{
+		return String.Format("graphics/backgrounds/\%s/\%s.png", nch_curbgcolor, lumpname);
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	string, string, string NCHF_GetInventoryBarGFX ()
+	{
+		switch (nch_curhicolor)
+		{
+			case 'NCHGreen':  return "H_INVCRG", "H_INVALG", "H_INVARG";
+			case 'NCHYellow': return "H_INVCRY", "H_INVALY", "H_INVARY";
+			case 'NCHRed':    return "H_INVCRR", "H_INVALR", "H_INVARR";
+			case 'NCHPink':   return "H_INVCRP", "H_INVALP", "H_INVARP";
+		}
+
+		return "H_INVCUR", "H_INVAL1", "H_INVAR1"; // NCHBlue
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	override void DrawPowerups () {} // The HUD uses its own powerup-drawing function.
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	string NCHF_PowerupTimeFormatted (Powerup item)
+	{
+		int sec = Thinker.Tics2Seconds(item.EffectTics);
+		return String.Format("%02d:%02d", (sec % 3600) / 60, sec % 60);
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	virtual string NCHF_GetPowerupTimeAsString (Powerup item)
+	{
+		// In case it is given an icon.
+		if (item is 'PowerStrength')
+		{
+			return NCHC_POWTIME_INFINITE;
+		}
+
+		return NCHF_PowerupTimeFormatted(item);
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//   NCHF_AddSingleStat
+	//
+	//   Adds a single stat to the list of stats to be drawn by the NCHF_DrawLevelStats() function.
+	//
+	//   - labeltype: the type of the label:
+	//     * NCHC_STATLABELTYPE_TEXT - the label is drawn as a text.
+	//     * NCHC_STATLABELTYPE_ICON - instead of a text, an icon is drawn as the label.
+	//   - label: a string representing the label of the stat, be it a text or the name of an icon.
+	//   - format: the format the stat is drawn in:
+	//     * NCHC_STATFORMAT_SINGLE - single-value format. The stat is drawn as it is passed. This uses
+	//       the 'val' parameter. The 'cur' and 'total' parameters are ignored.
+	//     * NCHC_STATFORMAT_RATIO - "ratio" format. The stat is drawn as current/total and a percentage.
+	//       This uses both the 'cur' and 'total' parameters. The 'val' parameter is ignored.
+	//   - val: the stat to draw, as a string.
+	//   - cur: the "current" value in the current/total format.
+	//   - total: the "total" value in the current/total format.
+	//   - colorize: if 'true', the stat's text is drawn in blue, otherwise, if 'false', it is drawn
+	//     in lightgray. This is used to colorize the text if certain conditions are met.
+	//   - vis: if 'true', the stat is drawn, otherwise, if 'false', it is not. This is used to show/hide
+	//     the stat if certain conditions are met.
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	void NCHF_AddSingleStat (int labeltype = NCHC_STATLABELTYPE_TEXT, string label = "", int format = NCHC_STATFORMAT_SINGLE, string val = "", int cur = 0, int total = 0,
+		bool colorize = false, bool vis = true)
+	{
+		if (!vis)
+		{
+			return;
+		}
+
+		let stat = new("NCH_StatItem");
+
+		if (stat)
+		{
+			stat.labeltype = labeltype;
+			stat.label = label;
+			stat.format = format;
+			stat.val = val;
+			stat.cur = cur;
+			stat.total = total;
+			stat.colorize = colorize;
+
+			nch_statslist.Push(stat);
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	virtual void NCHF_AddStats ()
+	{
+		int curmonsters = level.killed_monsters;
+		int totmonsters = level.total_monsters;
+		int curitems = level.found_items;
+		int totitems = level.total_items;
+		int cursecrets = level.found_secrets;
+		int totsecrets = level.total_secrets;
+
+		NCHF_AddSingleStat(NCHC_STATLABELTYPE_TEXT, StringTable.Localize("$NCH_LABEL_TIME"), NCHC_STATFORMAT_SINGLE, level.TimeFormatted(), 0, 0, Thinker.Tics2Seconds(level.time) < level.partime);
+		NCHF_AddSingleStat(NCHC_STATLABELTYPE_TEXT, StringTable.Localize("$NCH_LABEL_KILLS"), NCHC_STATFORMAT_RATIO, "", curmonsters, totmonsters, curmonsters == totmonsters, totmonsters > 0);
+		NCHF_AddSingleStat(NCHC_STATLABELTYPE_TEXT, StringTable.Localize("$NCH_LABEL_ITEMS"), NCHC_STATFORMAT_RATIO, "", curitems, totitems, curitems == totitems, totitems > 0);
+		NCHF_AddSingleStat(NCHC_STATLABELTYPE_TEXT, StringTable.Localize("$NCH_LABEL_SECRETS"), NCHC_STATFORMAT_RATIO, "", cursecrets, totsecrets, cursecrets == totsecrets, totsecrets > 0);
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	void NCHF_PushAmmoItem (class<Ammo> type, bool iconSkip)
+	{
+		if (type)
+		{
+			let item = CPlayer.mo.FindInventory(type);
+			TextureID icon;
+			int amount;
+			int maxamount;
+
+			if (item)
+			{
+				if (item.bInvBar) return;
+				icon = item.AltHUDIcon;
+				if (!icon.IsValid()) icon = item.Icon;
+				if (!icon.IsValid())
+				{
+					if (iconSkip) return;
+					icon = TexMan.CheckForTexture("H_ICNMIS", TexMan.TYPE_MiscPatch);
+				}
+				amount = item.Amount;
+				maxamount = item.MaxAmount;
+			}
+			else
+			{
+				let itemdef = GetDefaultByType(type);
+
+				if (itemdef)
+				{
+					if (itemdef.bInvBar) return;
+					icon = itemdef.AltHUDIcon;
+					if (!icon.IsValid()) icon = itemdef.Icon;
+					if (!icon.IsValid())
+					{
+						if (iconSkip) return;
+						icon = TexMan.CheckForTexture("H_ICNMIS", TexMan.TYPE_MiscPatch);
+					}
+					amount = 0;
+					maxamount = itemdef.MaxAmount;
+				}
+			}
+
+			uint j = 0;
+
+			for (; j < nch_ammoslist.Size(); j++)
+			{
+				if (type == nch_ammoslist[j].type)
+				{
+					break;
+				}
+			}
+
+			if (j == nch_ammoslist.Size())
+			{
+				let ammo = new("NCH_AmmoItem");
+
+				if (ammo)
+				{
+					ammo.type = type;
+					ammo.icon = icon;
+					ammo.amount = amount;
+					ammo.maxamount = maxamount;
+
+					nch_ammoslist.Push(ammo);
+				}
+			}
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	void NCHF_AddWeaponAmmos (readonly<Weapon> weapdef)
+	{
+		class<Ammo> type = null;
+
+		for (int i = 0; i < 2; i++)
+		{
+			if (i == 0)
+			{
+				type = weapdef.AmmoType1;
+			}
+			else if (weapdef.AmmoType2 != weapdef.AmmoType1)
+			{
+				type = weapdef.AmmoType2;
+			}
+
+			NCHF_PushAmmoItem(type, true);
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	void NCHF_AddSingleAmmo (class<Ammo> type)
+	{
+		if (nch_toggleammo > 1)
+		{
+			NCHF_PushAmmoItem(type, false);
+		}
+		else
+		{
+			for (let inv = CPlayer.mo.Inv; inv != null; inv = inv.Inv)
+			{
+				let weap = Weapon(inv);
+
+				if (weap && (type == weap.AmmoType1 || type == weap.AmmoType2))
+				{
+					NCHF_PushAmmoItem(type, false);
+					return;
+				}
+			}
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	virtual void NCHF_AddAmmos () 
+	{
+			NCHF_AddSingleAmmo("Gasoline");
+			NCHF_AddSingleAmmo("LowCalClip");
+			NCHF_AddSingleAmmo("HighCalClip");
+			NCHF_AddSingleAmmo("MO_ShotShell");
+			NCHF_AddSingleAmmo("MO_FlakShell");
+			NCHF_AddSingleAmmo("MO_RocketAmmo");
+			NCHF_AddSingleAmmo("MO_Cell");
+			NCHF_AddSingleAmmo("MolotovAmmo");
+			NCHF_AddSingleAmmo("GrenadeAmmo");
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	void NCHF_DrawString (HUDFont fnt, String text, Vector2 pos, int flags = 0, name fontcolor = 'NCHLightGray', double alpha = 1.0)
+	{
+		DrawString(fnt, text, pos, flags | DI_NOSHADOW, Font.FindFontColor(fontcolor), alpha);
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	void NCHF_DrawBarLabel (string label, double ypos, int flags = DI_SCREEN_TOP)
+	{
+		Font sfont = nch_sfont.mFont;
+
+		if (sfont != null)
+		{
+			int labelwidth = sfont.StringWidth(label);
+			int halflabelwidth = labelwidth / 2;
+			flags |= DI_SCREEN_HCENTER;
+
+			// Preserve the active clipping rectangle.
+			int cx, cy, cw, ch;
+			[cx, cy, cw, ch] = Screen.GetClipRect();
+
+			SetClipRect(-halflabelwidth, ypos - 12, labelwidth, 24, flags);
+			DrawImage(NCHF_GetBackgroundGFX("H_BGMNM"), (0, ypos), flags | DI_ITEM_CENTER);
+
+			// Restore the previous clipping rectangle.
+			Screen.SetClipRect(cx, cy, cw, ch);
+
+			DrawImage(NCHF_GetBackgroundGFX("H_BGMNL"), (-halflabelwidth, ypos - 12), flags | DI_ITEM_RIGHT_TOP);
+			DrawImage(NCHF_GetBackgroundGFX("H_BGMNR"), (halflabelwidth + (labelwidth & 1), ypos - 12), flags | DI_ITEM_LEFT_TOP);
+			NCHF_DrawString(nch_sfont, label, (-1, ypos - 4), flags | DI_TEXT_ALIGN_CENTER);
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	int NCHF_GetCVar (name cvarname)
+	{
+		let nch_cvar = CVar.GetCVar(cvarname, CPlayer);
+
+		if(nch_cvar == null)
+		{
+			return 0;
+		}
+
+		return nch_cvar.GetInt();
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	int NCHF_GetLowState (name cvarname)
+	{
+		return Clamp(NCHF_GetCVar(cvarname), 0, NCHC_LOWSTATEUCAP);
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	int NCHF_GetOverMaxBarValue (name cvarname)
+	{
+		int val = NCHF_GetCVar(cvarname);
+		return val <= 100 ? 200 : val;
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	Inventory NCHF_FindInventoryType (class<Inventory> type)
+	{
+		return CPlayer.mo.FindInventory(type, true);
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//   A modified version of DrawBar() which adds a boolean to change the draw order of the
+	//   background and foreground. This is introduced to solve the occasional one-pixel misoffset of
+	//   the ammo bars.
+	//
+	//   Note that setting this boolean to 'true' implies reverse drawing, because it is the background
+	//   that is being clipped, not the foreground. This means that for bars which deplete from left to
+	//   right, like the ammo bars, SHADER_REVERSE should not be set, otherwise you get a double-reverse.
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	void NCHF_DrawBar (string ongfx, string offgfx, double curval, double maxval, vector2 position, int border, int vertical, int flags = 0, bool bgonfg = false)
+	{
+		let ontex = TexMan.CheckForTexture(ongfx, TexMan.TYPE_MiscPatch);
+		if (!ontex.IsValid()) return;
+
+		vector2 texsize = TexMan.GetScaledSize(ontex);
+		[position, flags] = AdjustPosition(position, flags, texsize.x, texsize.y);
+
+		double value = (maxval != 0) ? Clamp(curval / maxval, 0, 1) : 0;
+		if (border != 0 || bgonfg) value = 1.0 - value; // Invert since the new drawing method requires drawing the bg on the fg.
+
+		// {cx, cb, cr, cy}
+		double clip[4];
+		clip[0] = clip[1] = clip[2] = clip[3] = 0;
+
+		bool horizontal = !(vertical & SHADER_VERT);
+		bool reverse = !!(vertical & SHADER_REVERSE);
+		double sizeOfImage = (horizontal ? texsize.x - border * 2 : texsize.y - border * 2);
+
+		// [Blue Shadow] Only if 'curval' equals to 'maxval' should the bar appear full, and only if
+		// 'curval' is 0 should the bar appear empty.
+
+		double clipped = sizeOfImage * value;
+
+		if (int(clipped) == 0)
+		{
+			if (border != 0 || bgonfg)
+			{
+				if (curval < maxval) clipped = 1;
+			}
+			else
+			{
+				if (curval > 0) clipped = 1;
+			}
+		}
+
+		clip[(!horizontal) | ((!reverse) << 1)] = sizeOfImage - clipped;
+
+		// Preserve the active clipping rectangle.
+		int cx, cy, cw, ch;
+		[cx, cy, cw, ch] = Screen.GetClipRect();
+
+		if (border != 0 || bgonfg)
+		{
+			for(int i = 0; i < 4; i++) clip[i] += border;
+
+			// Draw the whole foreground.
+			DrawTexture(ontex, position, flags | DI_ITEM_LEFT_TOP);
+			SetClipRect(position.x + clip[0], position.y + clip[1], texsize.x - clip[0] - clip[2], texsize.y - clip[1] - clip[3], flags);
+		}
+
+		// [Blue Shadow] Passing TNT1A0 as the background graphic disables drawing of the bar background entirely.
+		if (!(offgfx ~== "TNT1A0"))
+		{
+			let offtex = TexMan.CheckForTexture(offgfx, TexMan.TYPE_MiscPatch);
+			if (offtex.IsValid() && TexMan.GetScaledSize(offtex) == texsize) DrawTexture(offtex, position, flags | DI_ITEM_LEFT_TOP);
+			else Fill(color(255, 0, 0, 0), position.x + clip[0], position.y + clip[1], texsize.x - clip[0] - clip[2], texsize.y - clip[1] - clip[3]);
+		}
+
+		if (border == 0 && !bgonfg)
+		{
+			SetClipRect(position.x + clip[0], position.y + clip[1], texsize.x - clip[0] - clip[2], texsize.y - clip[1] - clip[3], flags);
+			DrawTexture(ontex, position, flags | DI_ITEM_LEFT_TOP);
+		}
+
+		// Restore the previous clipping rectangle.
+		Screen.SetClipRect(cx, cy, cw, ch);
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//   A sligtly modified version of DrawInventoryBar.
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	void NCHF_DrawInventoryBar (InventoryBarState parms, Vector2 position, int numfields, int flags = 0, double bgalpha = 1.)
+	{
+		double width = (parms.boxsize.X + 3) * numfields;
+		[position, flags] = AdjustPosition(position, flags, width, parms.boxsize.Y);
+		
+		CPlayer.mo.InvFirst = ValidateInvFirst(numfields);
+
+		if(CPlayer.mo.InvFirst == null)
+		{
+			return; // Player has no listed inventory items.
+		}
+		
+		Vector2 boxsize = parms.boxsize;
+
+		// First draw all the boxes
+		for(int i = 0; i < numfields; i++)
+		{
+			DrawImage(NCHF_GetBackgroundGFX(nch_invbox), position + ((boxsize.X + 3) * i, 0), flags | DI_ITEM_LEFT_TOP, bgalpha);
+		}
+		
+		// Now the items and the rest.
+		
+		Vector2 itempos = position + boxsize / 2;
+		Vector2 textpos = position + boxsize - (9, 6 + parms.amountfont.mFont.GetHeight());
+
+		int i = 0;
+		Inventory item;
+		let infinv = sv_infiniteinventory;
+
+		string selbox, leftarrow, rightarrow;
+		[selbox, leftarrow, rightarrow] = NCHF_GetInventoryBarGFX();
+
+		for(item = CPlayer.mo.InvFirst; item != NULL && i < numfields; item = item.NextInv())
+		{
+			for(int j = 0; j < 2; j++)
+			{
+				if(j ^ !!(flags & DI_DRAWCURSORFIRST))
+				{
+					if(item == CPlayer.mo.InvSel)
+					{
+						double flashAlpha = bgalpha;
+
+						if(flags & DI_ARTIFLASH)
+						{
+							flashAlpha *= itemflashFade;
+						}
+
+						DrawImage(selbox, position + parms.selectofs + ((boxsize.X + 3) * i, 0), flags | DI_ITEM_LEFT_TOP, flashAlpha);
+					}
+				}
+				else
+				{
+					DrawInventoryIcon(item, itempos + ((boxsize.X + 3) * i, 0), flags | DI_ITEM_CENTER, item.Amount <= 0 ? NCHC_DEPALPHA : 1.0, boxsize : (60, 70), scale : (2, 2));
+				}
+			}
+			
+			if(parms.amountfont != null && (item.Amount > 1 || (infinv && item.Amount > 0) || (flags & DI_ALWAYSSHOWCOUNTERS)))
+			{
+				name fcolor = infinv ? 'NCHFiery' : item.Amount >= item.MaxAmount ? nch_curhicolor : 'NCHLightGray';
+				DrawString(parms.amountfont, infinv ? "∞" : FormatNumber(item.Amount, 0, 4), textpos + ((boxsize.X + 3) * i, 0), flags | DI_TEXT_ALIGN_RIGHT, Font.FindFontColor(fcolor), parms.itemalpha);
+			}
+
+			i++;
+		}
+
+		// Is there something to the left?
+		if(CPlayer.mo.FirstInv() != CPlayer.mo.InvFirst)
+		{
+			DrawImage(leftarrow, position + (-parms.arrowoffset.X - 3, parms.arrowoffset.Y), flags | DI_ITEM_RIGHT | DI_ITEM_VCENTER);
+		}
+
+		// Is there something to the right?
+		if(item != NULL)
+		{
+			DrawImage(rightarrow, position + parms.arrowoffset + (width, 0), flags | DI_ITEM_LEFT | DI_ITEM_VCENTER);
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	string NCHF_GetBarGFX (int row, int col)
+	{
+		static const string bargfx[] =
+		{
+			"H_BRFMX1", "H_BFGY1A", "H_BFGR1A", "H_BRBGB1", "H_BRFLB1", "H_BRFLG1", "H_BRFLY1", "H_BRFLR1", "H_BRFLF1",
+			"H_BRFMX2", "H_BFGY2A", "H_BFGR2A", "H_BRBGB2", "H_BRFLB2", "H_BRFLG2", "H_BRFLY2", "H_BRFLR2", "H_BRFLF2"
+		};
+
+		return bargfx[row * (bargfx.Size() / 2) + col];
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	string NCHF_GetTallyBg (int row, int col)
+	{
+		static const string tallybg[] =
+		{
+			"H_BGLVS1", "H_BGLVS2", "H_BGLVS3",
+			"H_BGLVS4", "H_BGLVS5", "H_BGLVS6"
+		};
+
+		return NCHF_GetBackgroundGFX(tallybg[row * (tallybg.Size() / 2) + col]);
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	virtual void NCHF_DrawKeys ()
+	{
+		DrawImage(NCHF_GetBackgroundGFX("H_BGKEYS"), (5, -31), DI_ITEM_LEFT_TOP); // Background.
+
+		textureid icon;
+		vector2 size;
+		bool scaleup;
+		vector2 pos = (18, -18);
+		int count = 0;
+
+		for(let i = CPlayer.mo.Inv; i != null; i = i.Inv)
+		{
+			if(i is "Key")
+			{
+				// Draw up to 10 keys.
+				if(count == 10)
+				{
+					break;
+				}
+
+				icon = i.AltHUDIcon;
+
+				if (!icon.IsValid())
+				{
+					if(nch_KeysUseSpawnState && i.SpawnState && i.SpawnState.sprite != 0)
+					{
+						icon = i.SpawnState.GetSpriteTexture(0);
+					}
+					else
+					{
+						icon = i.Icon;
+					}
+
+					if(!icon.IsValid())
+					{
+						continue;
+					}
+				}
+
+				// Exclude keys which use 'TNT1A0' as their icon.
+				if (TexMan.GetName(icon) ~== "TNT1A0")
+				{
+					continue;
+				}
+
+				// Scale the icon up if needed.
+				size = TexMan.GetScaledSize(icon);
+				scaleup = (size.x <= 11 && size.y <= 11);
+				DrawTexture(icon, pos, DI_ITEM_CENTER, box : (22, 22), scaleup ? (2, 2) : (1, 1));
+				pos.x += 26;
+				count++;
+			}
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	virtual void NCHF_DrawWeaponSlots ()
+	{
+		DrawImage(NCHF_GetBackgroundGFX("H_BGWSLT"), (-5, -31), DI_ITEM_RIGHT_TOP);
+
+		bool found = false;
+		int slot = 0;
+		let weap = CPlayer.ReadyWeapon;
+
+		if (weap)
+		{
+			[found, slot] = CPlayer.weapons.LocateWeapon(weap.GetClass());
+
+			// If the weapon doesn't have a slot assigned to it, it could be a powered weapon. So check its
+			// sister weapon.
+			if (!found && weap.bPowered_up && weap.SisterWeaponType)
+			{
+				[found, slot] = CPlayer.weapons.LocateWeapon(weap.SisterWeaponType);
+			}
+		}
+
+		name fcolor;
+		vector2 pos = (-248, -24);
+
+		for (int s, i = 1 ; i <= 10; i++)
+		{
+			s = i == 10 ? 0 : i;
+
+			if (found && slot == s)
+			{
+				fcolor = nch_curhicolor;
+			}
+			else if (CPlayer.HasWeaponsInSlot(s))
+			{
+				fcolor = 'NCHLightGray';
+			}
+			else
+			{
+				pos.x += 26;
+				continue;
+			}
+
+			NCHF_DrawString(nch_bfont, FormatNumber(s), pos, DI_TEXT_ALIGN_RIGHT, fcolor);
+			pos.x += 26;
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	virtual void NCHF_DrawHealthAndArmor ()
+	{
+		let harmor = HexenArmor(CPlayer.mo.FindInventory("HexenArmor"));
+		let barmor = BasicArmor(CPlayer.mo.FindInventory("BasicArmor"));
+		double ac = 0;
+		int armorpnts = 0;
+		int maxarmorpnts = 0;
+		bool armor = (harmor || barmor);
+
+		if(harmor)
+		{
+			ac = harmor.Slots[0] + harmor.Slots[1] + harmor.Slots[2] + harmor.Slots[3] /*+ harmor.Slots[4]*/;
+			armorpnts += int(ac);
+			maxarmorpnts += int(harmor.SlotsIncrement[0] + harmor.SlotsIncrement[1] + harmor.SlotsIncrement[2] + harmor.SlotsIncrement[3] /*+ harmor.Slots[4]*/);
+		}
+
+		if(barmor)
+		{
+			armorpnts += barmor.Amount;
+			maxarmorpnts += barmor.ActualSaveAmount;
+		}
+
+		// Background ----------------------------------------------------------------------------
+
+		DrawImage(NCHF_GetBackgroundGFX("H_BGLFT2"), (5, -108), DI_ITEM_LEFT_TOP);
+
+		// Mugshot -------------------------------------------------------------------------------
+
+		if(nch_DrawMugShot)
+		{
+			DrawTexture(GetMugShot(5, nch_XDeathFace ? MugShot.XDEATHFACE : MugShot.STANDARD), (11, -102), DI_ITEM_OFFSETS, scale : (2, 2));
+		}
+
+		// ---------------------------------------------------------------------------------------
+		//
+		//   Determine health and armor elements' state and position.
+		//
+		// ---------------------------------------------------------------------------------------
+
+		// Short or long bars?
+		int bv = nch_DrawMugShot ? 0 : 1;
+
+		int curpnts;
+		int maxpnts;
+		name lscvar;
+		name ombmode;
+		name ombval;
+		int barstate;
+		int barcur;
+		int barmax;
+		string barbg;
+		string barfg;
+		string barframe;
+		name valuecolor;
+		vector2 iconpos;
+		vector2 barframepos;
+		vector2 barpos;
+		vector2 valuepos;
+
+		for(int i = 0; i < 2; i++)
+		{
+			// Health.
+			if(i == 0)
+			{
+				curpnts = CPlayer.health <= 0 ? 0 : CPlayer.health;
+				maxpnts = CPlayer.mo.GetMaxHealth();
+				lscvar = 'nchud_hplowstate';
+				ombmode = 'nchud_hpovermaxbarmode';
+				ombval = 'nchud_hpovermaxbarvalue';
+
+				// Positions: assume both the mugshot and armor are present.
+				iconpos = (85, -85);
+				barframepos = (100, -92);
+				barpos = (103, -89);
+				valuepos = (213, -91);
+
+				if(nch_DrawMugShot)
+				{
+					// Mugshot but no armor.
+					if(!armor || armorpnts <= 0)
+					{
+						iconpos.y += 14;
+						barframepos.y += 14;
+						barpos.y += 14;
+						valuepos.y += 14;
+					}
+				}
+				else
+				{
+					// No mugshot, no armor.
+					if(!armor || armorpnts <= 0)
+					{
+						iconpos.x -= 45;
+						iconpos.y += 14;
+						barframepos.x -= 45;
+						barframepos.y += 14;
+						barpos.x -= 45;
+						barpos.y += 14;
+						valuepos.x -= 18;
+						valuepos.y += 14;
+					}
+
+					// No mugshot but armor is present.
+					else
+					{
+						iconpos.x -= 45;
+						barframepos.x -= 45;
+						barpos.x -= 45;
+						valuepos.x -= 18;
+					}
+				}
+			}
+
+			// Armor.
+			else
+			{
+				// Quit if there's no armor.
+				if(!armor || armorpnts <= 0)
+				{
+					break;
+				}
+
+				curpnts = armorpnts;
+				maxpnts = maxarmorpnts;
+				lscvar = 'nchud_arlowstate';
+				ombmode = 'nchud_arovermaxbarmode';
+				ombval = 'nchud_arovermaxbarvalue';
+
+				// Positions: assume the mugshot is present.
+				iconpos = (85, -57);
+				barframepos = (100, -64);
+				barpos = (103, -61);
+				valuepos = (213, -63);
+
+				if(!nch_DrawMugShot)
+				{
+					iconpos.x -= 45;
+					barframepos.x -= 45;
+					barpos.x -= 45;
+					valuepos.x -= 18;
+				}
+			}
+
+			// Over max mode: the overmax blue bar is only drawn if curpnts is greater than maxpnts, and up to
+			// double that of maxpnts.
+			if(!NCHF_GetCVar(ombmode))
+			{
+				// Determine the state.
+				if(i == 0 && isInvulnerable())
+				{
+					barstate = NCHC_BARSTATE_INVUL;
+				}
+				else if((curpnts * 100 / maxpnts) < NCHF_GetLowState(lscvar))
+				{
+					barstate = NCHC_BARSTATE_LOW;
+				}
+				else if(curpnts <= maxpnts)
+				{
+					barstate = NCHC_BARSTATE_NORMAL;
+				}
+				else
+				{
+					barstate = NCHC_BARSTATE_OVER;
+				}
+
+				// Calculate bar current and max.
+				if(barstate == NCHC_BARSTATE_OVER)
+				{
+					barcur = curpnts - maxpnts;
+				}
+				else
+				{
+					barcur = curpnts;
+				}
+
+				barmax = maxpnts;
+			}
+
+			// Over 100 mode: the overmax blue bar is drawn if curpnts is greater than 100.
+			else
+			{
+				// Determine the state.
+				if(i == 0 && isInvulnerable())
+				{
+					barstate = NCHC_BARSTATE_INVUL;
+				}
+				else if(curpnts < NCHF_GetLowState(lscvar))
+				{
+					barstate = NCHC_BARSTATE_LOW;
+				}
+				else if(curpnts <= 100)
+				{
+					barstate = NCHC_BARSTATE_NORMAL;
+				}
+				else
+				{
+					barstate = NCHC_BARSTATE_OVER;
+				}
+
+				// Calculate bar current and max.
+				if(barstate == NCHC_BARSTATE_OVER)
+				{
+					barcur = curpnts - 100;
+					barmax = NCHF_GetOverMaxBarValue(ombval) - 100;
+				}
+				else
+				{
+					barcur = curpnts;
+					barmax = 100;
+				}
+			}
+
+			// Bar frame: default to the normal version.
+			barframe = NCHF_GetBarGFX(bv, 0);
+
+			// The bar background is blue in all cases, except for the over-max bar.
+			barbg = NCHF_GetBarGFX(bv, 3);
+
+			switch(barstate)
+			{
+				case NCHC_BARSTATE_INVUL:
+					barfg = NCHF_GetBarGFX(bv, 8);
+					valuecolor = 'NCHFiery';
+					break;
+				case NCHC_BARSTATE_LOW:
+					// Armor's low state color is yellow.
+					barfg = i ? NCHF_GetBarGFX(bv, 6) : NCHF_GetBarGFX(bv, 7);
+					barframe = i ? NCHF_GetBarGFX(bv, 1) : NCHF_GetBarGFX(bv, 2);
+					valuecolor = i ? 'NCHYellow' : 'NCHRed';
+					break;
+				case NCHC_BARSTATE_NORMAL:
+					barfg = NCHF_GetBarGFX(bv, 5);
+					valuecolor = 'NCHGreen';
+					break;
+				case NCHC_BARSTATE_OVER:
+					barbg = NCHF_GetBarGFX(bv, 5);
+					barfg = NCHF_GetBarGFX(bv, 4);
+					valuecolor = 'NCHBlue';
+					break;
+			}
+
+			// ---------------------------------------------------------------------------------------
+			//
+			//   Drawing
+			//
+			// ---------------------------------------------------------------------------------------
+
+			if(i == 0)
+			{
+				// Health icon.
+				DrawImage(CPlayer.mo.FindInventory("PowerStrength") ? "H_ICNBSK" : "H_ICNHP", iconpos, DI_ITEM_CENTER, box : (18, 18));
+			}
+			else
+			{
+				// Armor icon.
+				if(harmor && ac)
+				{
+					// Hexen armor.
+					DrawImage("H_ICNARR", iconpos, DI_ITEM_CENTER, box : (18, 18));
+				}
+				else
+				{
+					// Basic armor.
+					DrawInventoryIcon(barmor, iconpos, DI_ITEM_CENTER, boxsize : (18, 18));
+				}
+			}
+
+			// Bar frame.
+			DrawImage(barframe, barframepos, DI_ITEM_LEFT_TOP);
+
+			// The bar itself.
+			NCHF_DrawBar(barfg, barbg, barcur, barmax, barpos, 0, SHADER_HORZ, DI_ITEM_LEFT_TOP);
+
+			// Counter.
+			NCHF_DrawString(nch_bfont, FormatNumber(curpnts, 0, 4), valuepos, DI_TEXT_ALIGN_LEFT, valuecolor);
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	virtual void NCHF_DrawWeaponAmmo ()
+	{
+		let invsel = CPlayer.mo.InvSel;
+		bool drawinv = !level.NoInventoryBar && invsel;
+
+		let wpn = CPlayer.ReadyWeapon;
+		let wpn_ammotype1 = wpn ? wpn.AmmoType1 : null;
+		let wpn_ammotype2 = wpn ? wpn.AmmoType2 : null;
+
+		// Background ----------------------------------------------------------------------------
+
+		vector2 rightbgpos = (-5, -108);
+
+		if(drawinv)
+		{
+			if(wpn_ammotype1 || wpn_ammotype2)
+			{
+				DrawImage(NCHF_GetBackgroundGFX("H_BGRIT"), rightbgpos, DI_ITEM_RIGHT_TOP);
+			}
+			else
+			{
+				DrawImage(NCHF_GetBackgroundGFX("H_BGRIT3"), rightbgpos, DI_ITEM_RIGHT_TOP);
+			}
+		}
+		else if(wpn_ammotype1 || wpn_ammotype2)
+		{
+			DrawImage(NCHF_GetBackgroundGFX("H_BGRIT2"), rightbgpos, DI_ITEM_RIGHT_TOP);
+		}
+
+		// Selected inventory --------------------------------------------------------------------
+
+		if(drawinv)
+		{
+			DrawInventoryIcon(invsel, (-37, -71), DI_ITEM_CENTER | DI_ALTICONFIRST | DI_SKIPSPAWN, invsel.Amount <= 0 ? NCHC_DEPALPHA : 1.0, boxsize : (60, 70), scale : (2, 2));
+
+			let infinv = sv_infiniteinventory;
+
+			if (invsel.Amount > 1 || (infinv && invsel.Amount > 0))
+			{
+				NCHF_DrawString(nch_bfont, infinv ? "∞" : FormatNumber(invsel.Amount, 0, 4), (-14, -54), DI_TEXT_ALIGN_RIGHT,
+					infinv ? 'NCHFiery' : invsel.Amount >= invsel.MaxAmount ? nch_curhicolor : 'NCHLightGray');
+			}
+		}
+
+		// ---------------------------------------------------------------------------------------
+		//
+		//   Determine ammo1 and ammo2 elements' state and position.
+		//
+		// ---------------------------------------------------------------------------------------
+
+		if(wpn && (wpn_ammotype1 || wpn_ammotype2))
+		{
+			int curpnts;
+			int maxpnts;
+			name lscvar;
+			int barstate;
+			Inventory icon;
+			string barbg;
+			string barfg;
+			string barframe;
+			name valuecolor;
+			vector2 iconpos;
+			vector2 barframepos;
+			vector2 barpos;
+			vector2 valuepos;
+
+			let wpn_ammo1 = wpn.Ammo1;
+			let wpn_ammo2 = wpn.Ammo2;
+			bool infiniteammo = (sv_infiniteammo || NCHF_FindInventoryType("PowerInfiniteAmmo"));
+			int bv = drawinv ? 0 : 1; // Short or long bars?
+
+			for(int i = 0; i < 2; i++)
+			{
+				if(i == 0)
+				{
+					if(wpn_ammotype1)
+					{
+						curpnts = wpn_ammo1 ? wpn_ammo1.Amount : 0;
+						maxpnts = wpn_ammo1 ? wpn_ammo1.MaxAmount : 0;
+						lscvar = 'nchud_am1lowstate';
+						icon = wpn_ammo1;
+					}
+					else
+					{
+						curpnts = wpn_ammo2 ? wpn_ammo2.Amount : 0;
+						maxpnts = wpn_ammo2 ? wpn_ammo2.MaxAmount : 0;
+						lscvar = 'nchud_am2lowstate';
+						icon = wpn_ammo2;
+					}
+
+					// Positions: assume the inventory and both ammo types are present.
+					iconpos = (-85, -85);
+					barframepos = (-100, -92);
+					barpos = (-103, -89);
+					valuepos = (-215, -91);
+
+					if(drawinv)
+					{
+						// Inventory, single ammo type or both ammo types are the same.
+						if((wpn_ammotype1 && !wpn_ammotype2) || (!wpn_ammotype1 && wpn_ammotype2) || (wpn_ammotype1 == wpn_ammotype2))
+						{
+							iconpos.y += 14;
+							barframepos.y += 14;
+							barpos.y += 14;
+							valuepos.y += 14;
+						}
+					}
+					else
+					{
+						// No inventory, single ammo type or both ammo types are the same.
+						if((wpn_ammotype1 && !wpn_ammotype2) || (!wpn_ammotype1 && wpn_ammotype2) || (wpn_ammotype1 == wpn_ammotype2))
+						{
+							iconpos.x += 45;
+							iconpos.y += 14;
+							barframepos.x += 45;
+							barframepos.y += 14;
+							barpos.x += 45;
+							barpos.y += 14;
+							valuepos.x += 18;
+							valuepos.y += 14;
+						}
+
+						// No inventory, both ammo types.
+						else
+						{
+							iconpos.x += 45;
+							barframepos.x += 45;
+							barpos.x += 45;
+							valuepos.x += 18;
+						}
+					}
+				}
+				else
+				{
+					// Quit if there's a single ammo type or both ammo types are the same.
+					if((wpn_ammotype1 && !wpn_ammotype2) || (!wpn_ammotype1 && wpn_ammotype2) || (wpn_ammotype1 == wpn_ammotype2))
+					{
+						break;
+					}
+
+					curpnts = wpn_ammo2 ? wpn_ammo2.Amount : 0;
+					maxpnts = wpn_ammo2 ? wpn_ammo2.MaxAmount : 0;
+					lscvar = 'nchud_am2lowstate';
+					icon = wpn_ammo2;
+
+					// Positions: assume the inventory is present.
+					iconpos = (-85, -57);
+					barframepos = (-100, -64);
+					barpos = (-103, -61);
+					valuepos = (-215, -63);
+
+					if(!drawinv)
+					{
+						iconpos.x += 45;
+						barframepos.x += 45;
+						barpos.x += 45;
+						valuepos.x += 18;
+					}
+				}
+
+				// Determine the state.
+				if (infiniteammo)
+				{
+					barstate = NCHC_BARSTATE_INFINITE;
+				}
+				else if ((curpnts * 100 / maxpnts) < NCHF_GetLowState(lscvar))
+				{
+					barstate = NCHC_BARSTATE_LOW;
+				}
+				else
+				{
+					barstate = NCHC_BARSTATE_NORMAL;
+				}
+
+				// Bar frame: default to the normal version.
+				barframe = NCHF_GetBarGFX(bv, 0);
+
+				// Bar background: default to the normal version.
+				barbg = NCHF_GetBarGFX(bv, 3);
+
+				switch (barstate)
+				{
+					case NCHC_BARSTATE_INFINITE:
+						barfg = NCHF_GetBarGFX(bv, 8);
+						valuecolor = 'NCHFiery';
+						break;
+					case NCHC_BARSTATE_LOW:
+						barfg = NCHF_GetBarGFX(bv, 6);
+						barframe = NCHF_GetBarGFX(bv, 1);
+						valuecolor = 'NCHYellow';
+						break;
+					case NCHC_BARSTATE_NORMAL:
+						barfg = NCHF_GetBarGFX(bv, 5);
+						valuecolor = 'NCHGreen';
+						break;
+				}
+
+				// ---------------------------------------------------------------------------------------
+				//
+				//   Drawing
+				//
+				// ---------------------------------------------------------------------------------------
+
+				// Icon.
+				DrawInventoryIcon(icon, iconpos, DI_ITEM_CENTER | DI_ALTICONFIRST | DI_SKIPSPAWN, boxsize : (18, 18));
+
+				// Bar frame.
+				DrawImage(barframe, barframepos, DI_ITEM_RIGHT_TOP);
+
+				// Bar and counter.
+				if (barstate == NCHC_BARSTATE_INFINITE)
+				{
+					DrawImage(barfg, barpos, DI_ITEM_RIGHT_TOP);
+					NCHF_DrawString(nch_bfont, "∞", valuepos, DI_TEXT_ALIGN_RIGHT, valuecolor);
+				}
+				else
+				{
+					NCHF_DrawBar(barfg, barbg, curpnts, maxpnts, barpos, 0, SHADER_HORZ, DI_ITEM_RIGHT_TOP, true);
+					NCHF_DrawString(nch_bfont, FormatNumber(curpnts, 0, 4), valuepos, DI_TEXT_ALIGN_RIGHT, valuecolor);
+				}
+			}
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	virtual void NCHF_DrawLevelStats ()
+	{
+		int toggletally = Clamp(NCHF_GetCVar('nchud_toggletally'), 0, 2);
+
+		if(toggletally >= 1)
+		{
+			nch_statslist.Clear();
+			NCHF_AddStats();
+			int listsize = nch_statslist.Size();
+
+			// There aren't any stats to draw, so quit.
+			if (listsize == 0)
+			{
+				return;
+			}
+
+			// -------------------------------------------------------------------------------------------------
+			//
+			//   Draw the stats.
+			//
+			// -------------------------------------------------------------------------------------------------
+
+			vector2 bgpos = (5, -133);
+			vector2 labelpos = (17, -126);
+			vector2 iconpos = (18, -122);
+			vector2 curpntspos = (69, -126);
+			vector2 slashpos = (81, -126);
+			vector2 maxpntspos = (115, -126);
+			vector2 prcpos = (150, -126);
+			vector2 psignpos = (162, -126);
+
+			for (int i = listsize - 1; i >= 0; i--)
+			{
+				int bg = 1; // In-between background.
+
+				if (i == 0)
+				{
+					// Top background.
+					bg = 0;
+				}
+				else if (i == listsize - 1)
+				{
+					// Bottom background.
+					bg = 2;
+				}
+
+				int format = nch_statslist[i].format;
+				bool extendedbg = toggletally == 2 && format == NCHC_STATFORMAT_RATIO;
+				name valcolor = nch_statslist[i].colorize ? nch_curhicolor : 'NCHLightGray';
+
+				// -------------------------------------------------------------------------------------------------
+				//
+				//   Drawing
+				//
+				// -------------------------------------------------------------------------------------------------
+
+				// Background
+				DrawImage(NCHF_GetTallyBg(extendedbg ? 1 : 0, bg), bgpos, DI_ITEM_LEFT_TOP);
+
+				// Label/Icon
+				if (nch_statslist[i].labeltype == NCHC_STATLABELTYPE_ICON)
+				{
+					let icon = TexMan.CheckForTexture(nch_statslist[i].label, TexMan.TYPE_MiscPatch);
+
+					if (!icon.IsValid())
+					{
+						icon = TexMan.CheckForTexture("H_ICNMIS", TexMan.TYPE_MiscPatch);
+					}
+
+					DrawTexture(icon, iconpos, DI_ITEM_CENTER, box : (18, 18));
+				}
+				else
+				{
+					NCHF_DrawString(nch_sfont, nch_statslist[i].label, labelpos, DI_TEXT_ALIGN_CENTER);
+				}
+
+				// Value
+				if (format == NCHC_STATFORMAT_SINGLE)
+				{
+					// Single-value type
+					NCHF_DrawString(nch_sfont, nch_statslist[i].val, maxpntspos, DI_TEXT_ALIGN_RIGHT, valcolor);
+				}
+				else
+				{
+					// Current/Total type
+					int cur = nch_statslist[i].cur;
+					int total = nch_statslist[i].total;
+					NCHF_DrawString(nch_sfont, FormatNumber(cur, 0, 4), curpntspos, DI_TEXT_ALIGN_RIGHT, valcolor);
+					NCHF_DrawString(nch_sfont, "/", slashpos, DI_TEXT_ALIGN_RIGHT);
+					NCHF_DrawString(nch_sfont, FormatNumber(total, 0, 4), maxpntspos, DI_TEXT_ALIGN_RIGHT, valcolor);
+
+					if (extendedbg)
+					{
+						NCHF_DrawString(nch_sfont, FormatNumber(total > 0 ? cur * 100 / total : 0, 0, 3), prcpos, DI_TEXT_ALIGN_RIGHT, valcolor);
+						NCHF_DrawString(nch_sfont, "%", psignpos, DI_TEXT_ALIGN_RIGHT, valcolor);
+					}
+				}
+
+				bgpos.y -= 23;
+				labelpos.y -= 23;
+				iconpos.y -= 23;
+				curpntspos.y -= 23;
+				slashpos.y -= 23;
+				maxpntspos.y -= 23;
+				prcpos.y -= 23;
+				psignpos.y -= 23;
+			}
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	virtual void NCHF_DrawAmmoList ()
+	{
+		nch_toggleammo = NCHF_GetCVar('nchud_toggleammo');
+
+		if (nch_toggleammo > 0)
+		{
+			nch_ammoslist.Clear();
+			NCHF_AddAmmos();
+
+			// Respect the user's choice if they don't want the list to be overridden.
+			if (!(nch_ammoslist.Size() != 0 && NCHF_GetCVar('nchud_allowammolistoverride')))
+			{
+				nch_ammoslist.Clear();
+
+				for (int i = 0; i < PlayerPawn.NUM_WEAPON_SLOTS; i++) 
+				{
+					int slotsize = CPlayer.weapons.SlotSize(i);
+
+					for (int j = 0; j < slotsize; j++)
+					{
+						let weap = CPlayer.weapons.GetWeapon(i, j);
+
+						if (weap)
+						{
+							if (nch_toggleammo > 1 || CPlayer.mo.FindInventory(weap))
+							{
+								NCHF_AddWeaponAmmos(GetDefaultByType(weap));
+							}
+						}
+					}
+				}
+
+				for (let inv = CPlayer.mo.Inv; inv != null; inv = inv.Inv)
+				{
+					let weap = Weapon(inv);
+
+					if (weap)
+					{
+						NCHF_AddWeaponAmmos(weap.default);
+					}
+				}
+			}
+
+			int lsize = nch_ammoslist.Size();
+			let rweap = CPlayer.ReadyWeapon;
+			vector2 bgpos = (-5, -133);
+			vector2 iconpos = (-18, -122);
+			vector2 curpntspos = (-85, -126);
+			vector2 slashpos = (-73, -126);
+			vector2 maxpntspos = (-39, -126);
+
+			for (int i = lsize - 1; i >= 0; i--)
+			{
+				string bg = "H_BGRAM2"; // In-between background.
+
+				if (i == 0)
+				{
+					bg = "H_BGRAM1"; // Top background.
+				}
+				else if (i == lsize - 1)
+				{
+					bg = "H_BGRAM3"; // Bottom background.
+				}
+
+				let ammo = nch_ammoslist[i];
+				name valuecolor = (rweap && ((ammo.type == rweap.AmmoType1) || (ammo.type == rweap.AmmoType2))) ? nch_curhicolor : 'NCHLightGray';
+
+				DrawImage(NCHF_GetBackgroundGFX(bg), bgpos, DI_ITEM_RIGHT_TOP);
+				DrawTexture(ammo.icon, iconpos, DI_ITEM_CENTER, box : (18, 18));
+				NCHF_DrawString(nch_sfont, FormatNumber(ammo.amount, 0, 4), curpntspos, DI_TEXT_ALIGN_RIGHT, valuecolor);
+				NCHF_DrawString(nch_sfont, "/", slashpos, DI_TEXT_ALIGN_RIGHT);
+				NCHF_DrawString(nch_sfont, FormatNumber(ammo.maxamount, 0, 4), maxpntspos, DI_TEXT_ALIGN_RIGHT, valuecolor);
+
+				bgpos.y -= 23;
+				iconpos.y -= 23;
+				curpntspos.y -= 23;
+				slashpos.y -= 23;
+				maxpntspos.y -= 23;
+			}
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	virtual void NCHF_DrawPowerups ()
+	{
+		if (!NCHF_GetCVar('nchud_togglepowerups'))
+		{
+			return;
+		}
+
+		vector2 bgpos = (-5, 5);
+		vector2 iconpos = (-29, 24);
+		vector2 ticspos = (-29, 46);
+		int count = 0;
+
+		for (let i = CPlayer.mo.Inv; i != null; i = i.Inv)
+		{
+			let item = Powerup(i);
+
+			if (item)
+			{
+				// Determine the icon.
+				let icon = item.AltHUDIcon;
+
+				if (!icon.IsValid())
+				{
+					icon = item.GetPowerupIcon();
+
+					if (!icon.IsValid())
+					{
+						continue;
+					}
+				}
+
+				// Exclude powerups which use 'TNT1A0' as their icon.
+				if (TexMan.GetName(icon) ~== "TNT1A0")
+				{
+					continue;
+				}
+
+				string ptime = NCHF_GetPowerupTimeAsString(item);
+				bool drawptime = (ptime.Length() > 0);
+
+				// Drawing.
+				DrawImage(drawptime ? NCHF_GetBackgroundGFX("H_BGPOW") : NCHF_GetBackgroundGFX("H_BGPOW2"), bgpos, DI_ITEM_RIGHT_TOP);
+
+				if (!item.IsBlinking())
+				{
+					DrawTexture(icon, iconpos, DI_ITEM_CENTER, box : (32, 32));
+				}
+
+				if (drawptime)
+				{
+					NCHF_DrawString(nch_sfont, ptime, ticspos, DI_TEXT_ALIGN_CENTER, 'NCHLightGray');
+				}
+
+				bgpos.x -= 48;
+				iconpos.x -= 48;
+				ticspos.x -= 48;
+
+				// Draw a maximum of 10 powerups, with 5 per row.
+				if (++count == 5)
+				{
+					bgpos.x = -5;
+					iconpos.x = -29;
+					ticspos.x = -29;
+
+					bgpos.y += 56;
+					iconpos.y += 56;
+					ticspos.y += 56;
+				}
+				else if (count == 10)
+				{
+					break;
+				}
+			}
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	virtual void NCHF_DrawAirSupply ()
+	{
+		if (NCHF_GetCVar('nchud_toggleair') &&
+			CPlayer.health > 0 &&
+			level.airsupply > 0 && CPlayer.mo.AirCapacity > 0 &&
+			(CPlayer.air_finished + 1 - level.maptime) < int(level.airsupply * CPlayer.mo.AirCapacity))
+		{
+			NCHF_DrawBarLabel(StringTable.Localize("$NCH_LABEL_AIR"), -99, DI_SCREEN_BOTTOM);
+			DrawImage(NCHF_GetBackgroundGFX("H_BGAIR"), (0, -71), DI_ITEM_CENTER | DI_SCREEN_CENTER_BOTTOM);
+
+			int curpnts = Max(CPlayer.air_finished - level.maptime, 0);
+			int maxpnts = int(level.airsupply * CPlayer.mo.AirCapacity);
+			string barframe = "H_BRFMX3";
+			string barfg = "H_BRFLG3";
+
+			// Low on air.
+			if((curpnts * 100 / maxpnts) < NCHF_GetLowState('nchud_airlowstate'))
+			{
+				barframe = "H_BFGR3A";
+				barfg = "H_BRFLR3";
+			}
+
+			DrawImage(barframe, (0, -71), DI_ITEM_CENTER | DI_SCREEN_CENTER_BOTTOM);
+			NCHF_DrawBar(barfg, "H_BRBGB3", curpnts, maxpnts, (0, -71), 0, SHADER_HORZ, DI_ITEM_CENTER | DI_SCREEN_CENTER_BOTTOM);
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	virtual void NCHF_DrawMonsterHealth ()
+	{
+		int monsterhpbar = NCHF_GetCVar('nchud_monsterhpbar');
+		let helper = NCH_Helper(CPlayer.mo.FindInventory("NCH_Helper"));
+
+		if(monsterhpbar > 0 && helper && helper.nch_linetarget)
+		{
+			Actor t = helper.nch_linetarget;
+			int monsterhp = t.health;
+			int monsterspawnhp = t.GetSpawnHealth();
+
+			// Consider anything with health or spawn health of 0 or less invalid.
+			if (monsterhp <= 0 || monsterspawnhp <= 0)
+			{
+				return;
+			}
+
+			double alpha = t.alpha;
+			int rs = t.GetRenderStyle();
+
+			if(t.bIsMonster && !t.bDormant &&
+				(!t.bFriendly || NCHF_GetCVar('nchud_monsterhpbar_friend')) &&
+				(monsterhpbar >= 2 ||
+					(!t.CountInv("NCH_NoHpBar") && (monsterspawnhp >= NCHF_GetCVar('nchud_monsterhpbar_threshold')) &&
+					(!t.bStealth || alpha > 0.5) && (rs != STYLE_Fuzzy) && (rs != STYLE_OptFuzzy || alpha > 0.5))))
+			{
+				// -------------------------------------------------------------------------------------------------
+				//
+				//   Name
+				//
+				// -------------------------------------------------------------------------------------------------
+
+				NCHF_DrawBarLabel(NCHF_GetCVar('nchud_monsterhpbar_genname') ? StringTable.Localize("$NCH_MONGENNAME") : t.GetTag(), 47);
+
+				// -------------------------------------------------------------------------------------------------
+				//
+				//   Health bar
+				//
+				// -------------------------------------------------------------------------------------------------
+
+				int monsterhpbar_hpcounter = NCHF_GetCVar('nchud_monsterhpbar_hpcounter');
+
+				DrawImage(monsterhpbar_hpcounter > 1 ? NCHF_GetBackgroundGFX("H_BGMHP2") :
+					monsterhpbar_hpcounter == 1 ? NCHF_GetBackgroundGFX("H_BGMHP1") :
+					NCHF_GetBackgroundGFX("H_BGMHP0"), (0, 83), DI_ITEM_CENTER | NCHC_DI_SCREEN_CENTER_TOP);
+				DrawImage("H_BRFMX3", (0, 75), DI_ITEM_CENTER | NCHC_DI_SCREEN_CENTER_TOP);
+
+				string barfg;
+				string barol;
+				name valcolor;
+
+				if(t.bFriendly)
+				{
+					barfg = "H_BRFLG3";
+					barol = "H_BROLG3";
+					valcolor = 'NCHGreen';
+				}
+				else
+				{
+					barfg = "H_BRFLP3";
+					barol = "H_BROLP3";
+					valcolor = 'NCHPink';
+				}
+
+				NCHF_DrawBar(barfg, "H_BRBGB3", monsterhp, monsterspawnhp, (0, 75), 0, SHADER_HORZ, DI_ITEM_CENTER | NCHC_DI_SCREEN_CENTER_TOP);
+
+				if (monsterhpbar_hpcounter == 1)
+				{
+					// Health only.
+					NCHF_DrawString(nch_bfont, FormatNumber(monsterhp, 0, 5), (-2, 85), DI_TEXT_ALIGN_CENTER | NCHC_DI_SCREEN_CENTER_TOP, valcolor);
+				}
+				else if (monsterhpbar_hpcounter > 1)
+				{
+					// Health and spawn health.
+					NCHF_DrawString(nch_bfont, FormatNumber(monsterhp, 0, 5), (-10, 85), DI_TEXT_ALIGN_RIGHT | NCHC_DI_SCREEN_CENTER_TOP, valcolor);
+					NCHF_DrawString(nch_bfont, "/", (-2, 85), DI_TEXT_ALIGN_CENTER | NCHC_DI_SCREEN_CENTER_TOP);
+					NCHF_DrawString(nch_bfont, FormatNumber(monsterspawnhp, 0, 5), (7, 85), DI_TEXT_ALIGN_LEFT | NCHC_DI_SCREEN_CENTER_TOP, valcolor);
+				}
+
+				// Armor bar.
+				let armor = BasicArmor(t.FindInventory("BasicArmor"));
+
+				if (armor && (armor.Amount > 0))
+				{
+					NCHF_DrawBar(barol, "TNT1A0", armor.Amount, armor.ActualSaveAmount, (0, 75), 0, SHADER_HORZ, DI_ITEM_CENTER | NCHC_DI_SCREEN_CENTER_TOP);
+				}
+			}
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	virtual void NCHF_DrawDamageReceived ()
+	{
+		if (NCHF_GetCVar('nchud_toggledamage'))
+		{
+			let helper = NCH_Helper(CPlayer.mo.FindInventory("NCH_Helper"));
+
+			if (helper)
+			{
+				int damageReceived = helper.nch_damageReceived;
+
+				if (damageReceived > 0)
+				{
+					vector2 pos = (Screen.GetWidth() * 0.1, Screen.GetHeight() * 0.2);
+					DrawImage(NCHF_GetBackgroundGFX("H_BGDMG"), pos, DI_ITEM_LEFT_TOP);
+					NCHF_DrawString(nch_bfont, FormatNumber(damageReceived, 0, 5), (pos.x + 32, pos.y + 8), DI_TEXT_ALIGN_CENTER, 'NCHPink');
+					NCHF_DrawString(nch_sfont, StringTable.Localize("$NCH_LABEL_DAMAGE"), (pos.x + 32, pos.y + 32), DI_TEXT_ALIGN_CENTER);
+				}
+			}
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	protected void DrawMainBar (double TicFrac)
+	{
+		int XWord = Cvar.FindCvar("xtext").GetInt();
+		int YWord = Cvar.FindCvar("ytext").GetInt(); 
+		int mAlign = DI_SCREEN_CENTER_BOTTOM|DI_TEXT_ALIGN_CENTER; //From HXRTC HUD by Hexereticdoom 
+		DrawImage(NCHF_GetBackgroundGFX("H_STBRBG"), (0, 168), DI_ITEM_OFFSETS);	
+		if(!automapactive)
+		{
+			NCHF_DrawString(nch_sfont, StringTable.Localize("$HUD_WARN1"), (160, 173), DI_TEXT_ALIGN_CENTER);
+			NCHF_DrawString(nch_sfont, StringTable.Localize("$HUD_WARN2"), (160, 185), DI_TEXT_ALIGN_CENTER);
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
+	protected void DrawFullScreenStuff ()
+	{
+		NCHF_DrawKeys();
+		NCHF_DrawWeaponSlots();
+		NCHF_DrawHealthAndArmor();
+		NCHF_DrawWeaponAmmo();
+
+		if(isInventoryBarVisible())
+		{
+			NCHF_DrawInventoryBar(nch_diparms, (0, 0), 5, DI_ITEM_CENTER | DI_SCREEN_CENTER | DI_DRAWCURSORFIRST | DI_ALTICONFIRST | DI_SKIPSPAWN);
+		}
+
+		NCHF_DrawLevelStats();
+		NCHF_DrawAmmoList();
+		NCHF_DrawPowerups();
+		NCHF_DrawAirSupply();
+		NCHF_DrawMonsterHealth();
+		NCHF_DrawDamageReceived();
+	}
+}
+
+// ------------------------------------------------------------------------------------------------
+//
+//
+//
+// ------------------------------------------------------------------------------------------------
+
+class NCH_NoHpBar : Inventory
+{
+	Default
+	{
+		+INVENTORY.UNDROPPABLE
+		+INVENTORY.UNTOSSABLE
+	}
+}

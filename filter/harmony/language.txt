@@ -1,0 +1,11 @@
+[enu default]
+
+FN_ZOMBIE = "Beastling";
+FN_SHOTGUN = "Follower";
+FN_HEAVY = "Mutant Soldier";
+FN_BARON = "Critter";
+FN_ARACH = "Phage";
+FN_REVEN = "Predator";
+FN_ARCH = "Fallen Follower";
+FN_SPIDER = "The Echidna";
+FN_CYBER = "Centaur";

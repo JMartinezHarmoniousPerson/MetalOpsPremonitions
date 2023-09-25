@@ -1,0 +1,398 @@
+
+Sprite "2RGGA0", 116, 66
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -54, -69
+	Patch "2RGGA", 0, 0
+}
+
+Sprite "2RGFA0", 174, 99
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -37, -37
+	Patch "2RGFA", 0, 0
+}
+
+Sprite "2RGFB0", 174, 99
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -37, -37
+	Patch "2RGFB", 0, 0
+}
+
+Sprite "2RGFC0", 174, 99
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -37, -38
+	Patch "2RGFC", 0, 0
+}
+
+Sprite "2RGFD0", 174, 99
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -37, -37
+	Patch "2RGFD", 0, 0
+}
+
+Sprite "3RGFA0", 174, 99
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -37, -37
+	Patch "3RGFA", 0, 0
+}
+
+Sprite "3RGFB0", 174, 99
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -37, -37
+	Patch "3RGFB", 0, 0
+}
+
+Sprite "3RGFC0", 174, 99
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -37, -38
+	Patch "2RGFC", 0, 0
+}
+
+Sprite "PRMZF0", 118, 79
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -70, -32
+	Patch "PRMZF", 0, 0
+}
+
+Sprite "PRMZG0", 118, 79
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -70, -32
+	Patch "PRMZG", 0, 0
+}
+
+Sprite "PRMZH0", 118, 79
+{
+	Offset -102, -55
+	Patch "PRMZH", 0, 0
+}
+
+Sprite "PRMZI0", 118, 79
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -70, -32
+	Patch "PRMZI", 0, 0
+}
+
+Sprite "PRMZJ0", 118, 79
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -70, -32
+	Patch "PRMZJ", 0, 0
+}
+
+Sprite "2RGNA0", 320, 168
+{
+	XScale 0.800
+	YScale 0.800
+	Offset 35, 32
+	Patch "2RGNA", 0, 0
+}
+
+Sprite "2RGNB0", 320, 168
+{
+	XScale 0.800
+	YScale 0.800
+	Offset 35, 32
+	Patch "2RGNB", 0, 0
+}
+
+Sprite "2RGNC0", 320, 168
+{
+	XScale 0.800
+	YScale 0.800
+	Offset 35, 32
+	Patch "2RGNC", 0, 0
+}
+
+Sprite "2RGND0", 320, 168
+{
+	XScale 0.800
+	YScale 0.800
+	Offset 35, 32
+	Patch "2RGND", 0, 0
+}
+
+Sprite "2RGNE0", 320, 168
+{
+	XScale 0.800
+	YScale 0.800
+	Offset 35, 32
+	Patch "2RGNE", 0, 0
+}
+
+Sprite "2RGNF0", 320, 168
+{
+	XScale 0.800
+	YScale 0.800
+	Offset 35, 32
+	Patch "2RGNF", 4, 0
+}
+
+Sprite "2RGNG0", 320, 168
+{
+	XScale 0.800
+	YScale 0.800
+	Offset 35, 32
+	Patch "2RGNG", 8, 0
+}
+
+Sprite "2RGNH0", 95, 100
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -4, -36
+	Patch "2RGNH", 0, 0
+}
+
+Sprite "2RGNI0", 95, 100
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -4, -36
+	Patch "2RGNI", 0, 0
+}
+
+Sprite "2RGNJ0", 95, 100
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -4, -36
+	Patch "2RGNJ", 0, 0
+}
+
+Sprite "2RGNK0", 95, 100
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -4, -36
+	Patch "2RGNK", 0, 0
+}
+
+Sprite "2RGNL0", 320, 168
+{
+	XScale 0.800
+	YScale 0.800
+	Offset 35, 32
+	Patch "2RGNL", 4, 0
+}
+
+Sprite "2RGNM0", 320, 168
+{
+	XScale 0.800
+	YScale 0.800
+	Offset 35, 32
+	Patch "2RGNM", 0, 0
+}
+
+Sprite "2RGNN0", 320, 168
+{
+	XScale 0.800
+	YScale 0.800
+	Offset 35, 32
+	Patch "2RGNN", 0, 0
+}
+
+Sprite "2RGNO0", 320, 168
+{
+	XScale 0.800
+	YScale 0.800
+	Offset 35, 32
+	Patch "2RGNO", 0, 0
+}
+
+Sprite "2RGNP0", 320, 168
+{
+	XScale 0.800
+	YScale 0.800
+	Offset 35, 32
+	Patch "2RGNP", 1, 0
+}
+
+Sprite "2RGNQ0", 320, 168
+{
+	XScale 0.800
+	YScale 0.800
+	Offset 35, 33
+	Patch "2RGNQ", 0, 0
+}
+
+Sprite "2RGAA0", 174, 99
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -38, -37
+	Patch "2RGAA", 0, 0
+}
+
+Sprite "2RGAB0", 174, 99
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -38, -37
+	Patch "2RGAB", 0, 0
+}
+
+Sprite "2RGAC0", 174, 99
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -38, -38
+	Patch "2RGAC", 0, 0
+}
+
+Sprite "2RGAD0", 174, 99
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -38, -38
+	Patch "2RGAD", 0, 0
+}
+
+Sprite "2RGAE0", 174, 99
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -38, -39
+	Patch "2RGAE", 0, 0
+}
+
+Sprite "2RGAF0", 174, 99
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -38, -40
+	Patch "2RGAF", 0, 0
+}
+
+Sprite "1RGWA0", 168, 80
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -38, -55
+	Patch "1RGWA", 0, 0
+}
+
+Sprite "1RGWB0", 168, 80
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -38, -55
+	Patch "1RGWB", 0, 0
+}
+
+Sprite "1RGWC0", 168, 80
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -38, -55
+	Patch "1RGWC", 0, 0
+}
+
+Sprite "1RGWD0", 168, 80
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -38, -55
+	Patch "1RGWD", 0, 0
+}
+
+Sprite "1RGWE0", 168, 80
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -38, -55
+	Patch "1RGWE", 0, 0
+}
+
+Sprite "1RGWF0", 168, 80
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -38, -55
+	Patch "1RGWF", 0, 0
+}
+
+Sprite "1RGWG0", 168, 80
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -38, -55
+	Patch "1RGWG", 0, 0
+}
+
+Sprite "1RGWH0", 168, 80
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -38, -55
+	Patch "1RGWH", 0, 0
+}
+
+Sprite "1RGWI0", 168, 80
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -38, -55
+	Patch "1RGWI", 0, 0
+}
+
+Sprite "1RGWJ0", 168, 80
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -38, -55
+	Patch "1RGWJ", 0, 0
+}
+
+Sprite "1RGWK0", 168, 80
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -38, -55
+	Patch "1RGWK", 0, 0
+}
+
+Sprite "1RGWL0", 168, 80
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -38, -55
+	Patch "1RGWL", 0, 0
+}
+
+Sprite "1RGWM0", 168, 80
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -38, -55
+	Patch "1RGWM", 0, 0
+}
+
+Sprite "1RGWN0", 168, 80
+{
+	XScale 0.800
+	YScale 0.800
+	Offset -38, -55
+	Patch "1RGWN", 0, 0
+}

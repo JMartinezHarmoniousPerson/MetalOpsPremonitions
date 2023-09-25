@@ -1,0 +1,3 @@
+[enu default]
+
+NCH_LABEL_KILLS = "Z"; // You're not killing the flemoids, so...

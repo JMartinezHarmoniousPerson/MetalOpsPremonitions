@@ -1,0 +1,70 @@
+brightmap sprite PRGGA0 {map "Brightmaps/Weapons/Plasma/PRGGA0_BM.png" disablefullbright}
+brightmap sprite PRGFA0 {map "Brightmaps/Weapons/Plasma/PRGFA0_BM.png" disablefullbright}
+brightmap sprite PRGFB0 {map "Brightmaps/Weapons/Plasma/PRGFB0_BM.png" disablefullbright}
+brightmap sprite PRGFC0 {map "Brightmaps/Weapons/Plasma/PRGFC0_BM.png" disablefullbright}
+brightmap sprite PLASA0 {map "Brightmaps/Weapons/Plasma/PLASA0_BM.png" disablefullbright}
+
+//Heated
+brightmap sprite 2RGGA0 {map "Brightmaps/Weapons/Plasma/PRGGA0_BM.png" disablefullbright}
+brightmap sprite 2RGFA0 {map "Brightmaps/Weapons/Plasma/PRGFA0_BM.png" disablefullbright}
+brightmap sprite 2RGFB0 {map "Brightmaps/Weapons/Plasma/PRGFB0_BM.png" disablefullbright}
+brightmap sprite 2RGFC0 {map "Brightmaps/Weapons/Plasma/PRGFC0_BM.png" disablefullbright}
+brightmap sprite 3RGFA0 {map "Brightmaps/Weapons/Plasma/PRGFA0_BM.png" disablefullbright}
+brightmap sprite 3RGFB0 {map "Brightmaps/Weapons/Plasma/PRGFB0_BM.png" disablefullbright}
+brightmap sprite 3RGFC0 {map "Brightmaps/Weapons/Plasma/PRGFC0_BM.png" disablefullbright}
+
+//Alt Fire
+Brightmap sprite PRGAA0 {map "Brightmaps/Weapons/Plasma/PRGAA_BM.png" disablefullbright}
+Brightmap sprite PRGAB0 {map "Brightmaps/Weapons/Plasma/PRGAB_BM.png" disablefullbright}
+Brightmap sprite PRGAC0 {map "Brightmaps/Weapons/Plasma/PRGAC_BM.png" disablefullbright}
+Brightmap sprite PRGAD0 {map "Brightmaps/Weapons/Plasma/PRGAD_BM.png" disablefullbright}
+Brightmap sprite PRGAE0 {map "Brightmaps/Weapons/Plasma/PRGAE_BM.png" disablefullbright}
+Brightmap sprite PRGAF0 {map "Brightmaps/Weapons/Plasma/PRGAF_BM.png" disablefullbright}
+
+// Heated Alt Fire
+Brightmap sprite 2RGAA0 {map "Brightmaps/Weapons/Plasma/PRGAA_BM.png" disablefullbright}
+Brightmap sprite 2RGAB0 {map "Brightmaps/Weapons/Plasma/PRGAB_BM.png" disablefullbright}
+Brightmap sprite 2RGAC0 {map "Brightmaps/Weapons/Plasma/PRGAC_BM.png" disablefullbright}
+Brightmap sprite 2RGAD0 {map "Brightmaps/Weapons/Plasma/PRGAD_BM.png" disablefullbright}
+Brightmap sprite 2RGAE0 {map "Brightmaps/Weapons/Plasma/PRGAE_BM.png" disablefullbright}
+Brightmap sprite 2RGAF0 {map "Brightmaps/Weapons/Plasma/PRGAF_BM.png" disablefullbright}
+
+//Cooldown
+//The brightmap files are in the Patches folder, because the animation was
+//made with TEXTURES. These are converted in TEXTURES too.
+brightmap sprite PRGNA0 {MAP "PRGNA_BM" disablefullbright}
+brightmap sprite PRGNB0 {MAP "PRGNB_BM" disablefullbright}
+brightmap sprite PRGNC0 {MAP "PRGNC_BM" disablefullbright}
+brightmap sprite PRGND0 {MAP "PRGND_BM" disablefullbright}
+brightmap sprite PRGNE0 {MAP "PRGNE_BM" disablefullbright}
+brightmap sprite PRGNF0 {MAP "PRGNF_BM" disablefullbright}
+brightmap sprite PRGNG0 {MAP "PRGNG_BM" disablefullbright}
+brightmap sprite PRGNH0 {MAP "PRGNH_BM" disablefullbright}
+brightmap sprite PRGNI0 {MAP "PRGNI_BM" disablefullbright}
+brightmap sprite PRGNJ0 {MAP "PRGNJ_BM" disablefullbright}
+brightmap sprite PRGNK0 {MAP "PRGNK_BM" disablefullbright}
+
+//Heated
+brightmap sprite 2RGNA0 {MAP "PRGNA_BM" disablefullbright}
+brightmap sprite 2RGNB0 {MAP "PRGNB_BM" disablefullbright}
+brightmap sprite 2RGNC0 {MAP "PRGNC_BM" disablefullbright}
+brightmap sprite 2RGND0 {MAP "PRGND_BM" disablefullbright}
+brightmap sprite 2RGNE0 {MAP "PRGNE_BM" disablefullbright}
+brightmap sprite 2RGNF0 {MAP "PRGNF_BM" disablefullbright}
+brightmap sprite 2RGNG0 {MAP "PRGNG_BM" disablefullbright}
+brightmap sprite 2RGNH0 {MAP "PRGNH_BM" disablefullbright}
+brightmap sprite 2RGNI0 {MAP "PRGNI_BM" disablefullbright}
+brightmap sprite 2RGNJ0 {MAP "PRGNJ_BM" disablefullbright}
+brightmap sprite 2RGNK0 {MAP "PRGNK_BM" disablefullbright}
+
+brightmap sprite CELLA0 {map "Brightmaps/Items/PlasmaCells/CELLA0_BM.png"}
+brightmap sprite CELLB0 {map "Brightmaps/Items/PlasmaCells/CELLB0_BM.png"}
+brightmap sprite CELLC0 {map "Brightmaps/Items/PlasmaCells/CELLC0_BM.png"}
+brightmap sprite CELLD0 {map "Brightmaps/Items/PlasmaCells/CELLD0_BM.png"}
+brightmap sprite CELLE0 {map "Brightmaps/Items/PlasmaCells/CELLE0_BM.png"}
+brightmap sprite CELLF0 {map "Brightmaps/Items/PlasmaCells/CELLF0_BM.png"}
+brightmap sprite CELPA0 {map "Brightmaps/Items/PlasmaCells/CELPA0_BM.png"}
+brightmap sprite CELPB0 {map "Brightmaps/Items/PlasmaCells/CELPB0_BM.png"}
+brightmap sprite CELPC0 {map "Brightmaps/Items/PlasmaCells/CELPC0_BM.png"}
+brightmap sprite CELPD0 {map "Brightmaps/Items/PlasmaCells/CELPD0_BM.png"}
+

@@ -1,0 +1,164 @@
+[enu default]
+
+/*
+*	The Ultimate Doom
+*/
+
+// f1_start
+	_STEP_FLOOR0_1  = "step/default";
+	_STEP_FLOOR0_3 = "step/default";
+	_STEP_FLOOR0_6 = "step/default";
+	_STEP_FLOOR1_1 = "step/carpet";
+	_STEP_FLOOR1_7 = "step/tin";
+	_STEP_FLOOR3_3 = "step/panel";
+	_STEP_FLOOR4_1 = "step/panel";
+	_STEP_FLOOR4_5 = "step/panel";
+	_STEP_FLOOR4_6 = "step/tile";
+	_STEP_FLOOR4_8 = "step/crete";
+	_STEP_FLOOR5_1 = "step/crete";
+	_STEP_FLOOR5_2 = "step/default";
+	_STEP_FLOOR5_3 = "step/default";
+	_STEP_FLOOR5_4 = "step/default";
+	_STEP_STEP1 = "step/tin";
+	_STEP_STEP2 = "step/tin";
+	_STEP_FLOOR6_1 = "step/dirt";
+	_STEP_FLOOR6_2 = "step/dirt";
+	_STEP_TLITE6_1 = "step/tile";
+	_STEP_TLITE6_4 = "step/tile";
+	_STEP_TLITE6_5 = "step/tile";
+	_STEP_TLITE6_6 = "step/tile";
+	_STEP_FLOOR7_1 = "step/default";
+	_STEP_FLOOR7_2 = "step/crete";
+	_STEP_MFLR8_1 = "step/default";
+	_STEP_DEM1_1 = "step/crete";
+	_STEP_DEM1_2 = "step/crete";
+	_STEP_DEM1_3 = "step/crete";
+	_STEP_DEM1_4 = "step/crete";
+	_STEP_CEIL3_1 = "step/default";
+	_STEP_CEIL3_2 = "step/default";
+	_STEP_CEIL3_5 = "step/default";
+	_STEP_CEIL4_2 = "step/tin";
+	_STEP_CEIL4_3 = "step/tin";
+	_STEP_CEIL5_1 = "step/crete";
+	_STEP_CEIL5_2 = "step/default";
+	_STEP_FLAT1 = "step/crete";
+	_STEP_FLAT2 = "step/tile";
+	_STEP_FLAT5 = "step/default";
+	_STEP_FLAT10 = "step/dirt";
+	_STEP_FLAT14 = "step/carpet";
+	_STEP_FLAT18 = "step/panel";
+	_STEP_FLAT20 = "step/tile";
+	_STEP_FLAT22 = "step/tin";
+	_STEP_FLAT23 = "step/tin";
+	_STEP_FLAT5_4 = "step/crete";
+	_STEP_FLAT5_5 = "step/carpet";
+	_STEP_CONS1_1 = "step/tin";
+	_STEP_CONS1_5 = "step/tin";
+	_STEP_CONS1_7 = "step/tin";
+	_STEP_NUKAGE1 = "step/slosh";
+	_STEP_NUKAGE2 = "step/slosh";
+	_STEP_NUKAGE3 = "step/slosh";
+// f1_end
+
+// f2_start
+	_STEP_SFLR6_1 = "step/gross";
+	_STEP_SFLR6_4 = "step/gross";
+	_STEP_SFLR7_1 = "step/gross";
+	_STEP_SFLR7_4 = "step/gross";
+	_STEP_FLOOR0_2 = "step/default";
+	_STEP_FLOOR0_5 = "step/default";
+	_STEP_FLOOR0_7 = "step/default";
+	_STEP_FLOOR1_6 = "step/tile";
+	_STEP_GATE1 = "step/default";
+	_STEP_GATE2 = "step/default";
+	_STEP_GATE3 = "step/default";
+	_STEP_GATE4 = "step/tin";
+	_STEP_FWATER1 = "step/slosh";
+	_STEP_FWATER2 = "step/slosh";
+	_STEP_FWATER3 = "step/slosh";
+	_STEP_FWATER4 = "step/slosh";
+	_STEP_LAVA1 = "step/hot";
+	_STEP_LAVA2 = "step/hot";
+	_STEP_LAVA3 = "step/hot";
+	_STEP_LAVA4 = "step/hot";
+	_STEP_DEM1_5 = "step/crete";
+	_STEP_DEM1_6 = "step/crete";
+	_STEP_MFLR8_2 = "step/dirt";
+	_STEP_MFLR8_3 = "step/gravel";
+	_STEP_MFLR8_4 = "step/dirt";
+	_STEP_CEIL1_1 = "step/wood";
+	_STEP_CEIL1_2 = "step/tin";
+	_STEP_CEIL1_3 = "step/tin";
+	_STEP_CEIL3_3 = "step/tile";
+	_STEP_CEIL3_4 = "step/tile";
+	_STEP_CEIL3_6 = "step/crete";
+	_STEP_CEIL4_1 = "step/crete";
+	_STEP_BLOOD1 = "step/slosh";
+	_STEP_BLOOD2 = "step/slosh";
+	_STEP_BLOOD3 = "step/slosh";
+	_STEP_FLAT1_1 = "step/default";
+	_STEP_FLAT1_2 = "step/default";
+	_STEP_FLAT1_3 = "step/tin";
+	_STEP_FLAT5_1 = "step/wood";
+	_STEP_FLAT5_2 = "step/plank";
+	_STEP_FLAT5_3 = "step/crete";
+	_STEP_FLAT5_6 = "step/crete";
+	_STEP_FLAT5_7 = "step/default";
+	_STEP_FLAT5_8 = "step/default";
+	_STEP_CRATOP1 = "step/crete";
+	_STEP_CRATOP2 = "step/crete";
+	_STEP_FLAT3 = "step/crete";
+	_STEP_FLAT4 = "step/tin";
+	_STEP_FLAT8 = "step/tile";
+	_STEP_FLAT9 = "step/crete";
+	_STEP_FLAT17 = "step/crete";
+	_STEP_FLAT19 = "step/panel";
+	_STEP_COMP01 = "step/panel";
+// f2_end
+
+/*
+*	Doom II
+*/
+
+// f3_start
+	_STEP_GRASS1 = "step/grass";
+	_STEP_GRASS2 = "step/grass";
+	_STEP_GRNLITE1 = "step/carpet";
+	_STEP_GRNROCK = "step/default";
+	_STEP_RROCK01 = "step/crete";
+	_STEP_RROCK02 = "step/crete";
+	_STEP_RROCK03 = "step/dirt";
+	_STEP_RROCK04 = "step/crete";
+	_STEP_RROCK05 = "step/crete";
+	_STEP_RROCK06 = "step/crete";
+	_STEP_RROCK07 = "step/crete";
+	_STEP_RROCK08 = "step/crete";
+	_STEP_RROCK09 = "step/dirt";
+	_STEP_RROCK10 = "step/default";
+	_STEP_RROCK11 = "step/crete";
+	_STEP_RROCK12 = "step/default";
+	_STEP_RROCK13 = "step/crete";
+	_STEP_RROCK14 = "step/default";
+	_STEP_RROCK15 = "step/crete";
+	_STEP_RROCK16 = "step/dirt";
+	_STEP_RROCK17 = "step/dirt";
+	_STEP_RROCK18 = "step/dirt";
+	_STEP_RROCK19 = "step/dirt";
+	_STEP_RROCK20 = "step/dirt";
+	_STEP_SLIME01 = "step/slosh";
+	_STEP_SLIME02 = "step/slosh";
+	_STEP_SLIME03 = "step/slosh";
+	_STEP_SLIME04 = "step/slosh";
+	_STEP_SLIME05 = "step/slosh";
+	_STEP_SLIME06 = "step/slosh";
+	_STEP_SLIME07 = "step/slosh";
+	_STEP_SLIME08 = "step/slosh";
+	_STEP_SLIME09 = "step/dirt";
+	_STEP_SLIME10 = "step/dirt";
+	_STEP_SLIME11 = "step/dirt";
+	_STEP_SLIME12 = "step/dirt";
+	_STEP_SLIME13 = "step/default";
+	_STEP_SLIME14 = "step/tin";
+	_STEP_SLIME15 = "step/tin";
+	_STEP_SLIME16 = "step/tin";
+// f3_end

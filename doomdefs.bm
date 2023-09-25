@@ -1,0 +1,10 @@
+#include "Brightmaps/Scripts/Pistol.bm"
+#include "Brightmaps/Scripts/Molotov.bm"
+#include "Brightmaps/Scripts/Weapons.bm"
+#include Brightmaps/Scripts/Plasma.bm
+#include Brightmaps/Scripts/Unmaker.bm
+#include Brightmaps/Scripts/RL.bm
+#include Brightmaps/Scripts/BFG.bm
+#include Brightmaps/Scripts/Items.bm
+#include Brightmaps/Scripts/SMG.bm
+#include Brightmaps/Scripts/SSG.txt

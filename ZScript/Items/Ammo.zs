@@ -1,0 +1,267 @@
+class LowCalClip : Ammo
+{
+	Default
+	{
+	  Inventory.PickupMessage "Picked up a low caliber magazine."; // "Picked up a clip."
+	  Inventory.Amount 10;
+	  Inventory.MaxAmount 150;
+	  Ammo.BackpackAmount 30;
+	  Ammo.BackpackMaxAmount 300;
+	  Inventory.Icon "CLIPB0";
+	  Inventory.PickUpSound "misc/ammopickup";
+	  Scale 0.55;
+	 }
+	  States
+	  {
+	  Spawn:
+		CLIP B -1;
+		Stop;
+	}
+ }
+ 
+class LowCalBox : LowCalClip// replaces Clipbox
+{
+	Default
+	{
+	  Inventory.PickupMessage "Picked up a box of low caliber bullets"; // "Picked up a box of bullets."
+	  Inventory.Amount 50;
+	  Scale 1.0;
+	  Inventory.PickUpSound "misc/ammobox";
+	}
+	  States
+	  {
+	  Spawn:
+		AMOK A -1;
+		Stop;
+	  }
+}
+ 
+ class HighCalClip : Ammo
+{
+	Default
+	{
+	  Inventory.PickupMessage "Picked up a high caliber magazine.";
+	  Inventory.Amount 10;
+	  Inventory.MaxAmount 200;
+	  Ammo.BackpackAmount 30;
+	  Ammo.BackpackMaxAmount 400;
+	  Inventory.Icon "CLIPA0";
+	  Scale 0.3;
+	  Inventory.PickUpSound "misc/ammopickup";
+	 }
+	  States
+	  {
+	  Spawn:
+		CLIP A -1;
+		Stop;
+	}
+ }
+ 
+ class HighCalBox : HighCalClip// replaces Clipbox
+ {
+	Default
+	{
+	  Inventory.PickupMessage "Picked up a box of high caliber bullets."; // "Picked up a box of bullets."
+	  Inventory.Amount 50;
+	  Scale 0.25;
+	  Inventory.PickUpSound "misc/ammobox";
+	}
+	  States
+	  {
+	  Spawn:
+		AMM0 A -1;
+		Stop;
+	  }
+}
+
+class Gasoline : Ammo
+{
+	Default
+	{
+	  Inventory.PickupMessage "Picked up a gasoline jerry can.";
+	  Inventory.Amount 35;
+	  Inventory.MaxAmount 300;
+	  Ammo.BackpackAmount 90;
+	  Ammo.BackpackMaxAmount 600;
+	  Inventory.Icon "GASLN0";
+	 }
+	  States
+	  {
+	  Spawn:
+		GASL N -1;
+		Stop;
+	}
+}
+
+class MO_ShotShell : Ammo 
+{
+	Default
+	{
+	  Inventory.PickupMessage "$GOTSHELLS";
+	  Inventory.Amount 4;
+	  Inventory.MaxAmount 50;
+	  Ammo.BackpackAmount 8;
+	  Ammo.BackpackMaxAmount 100;
+	  Inventory.Icon "SHELA0";
+	  Scale 0.25;
+	  Inventory.PickUpSound "misc/shells";
+	  }
+	  States
+	  {
+	  Spawn:
+		SHEL A -1;
+		Stop;
+	  }
+}
+ 	
+class MO_FlakShell : Ammo
+{
+	Default
+	{
+	  Inventory.PickupMessage "Picked up 4 flak shells.";
+	  Inventory.Amount 4;
+	  Inventory.MaxAmount 50;
+	  Ammo.BackpackAmount 8;
+	  Ammo.BackpackMaxAmount 100;
+	  Inventory.Icon "SHELC0";
+	  Scale 0.25;
+	  Inventory.PickUpSound "misc/shells";
+	  }
+	  States
+	  {
+	  Spawn:
+		SHEL C -1;
+		Stop;
+	  }
+}
+
+Class MO_ShellBox : MO_ShotShell
+{
+	Default
+	{
+	  Inventory.PickupMessage "$GOTSHELLBOX"; // "Picked up a box of shotgun shells."
+	  Inventory.Amount 20;
+	  Inventory.PickUpSound "misc/shellbox";
+	}
+  States
+  {
+  Spawn:
+    SBOX A -1;
+    Stop;
+  }
+}
+
+Class MO_FlakShellBox : MO_FlakShell
+{
+	Default
+	{
+	  Inventory.PickupMessage "Picked up a box of flak shotgun shells."; // "Picked up a box of shotgun shells."
+	  Inventory.Amount 20;
+	  Inventory.PickUpSound "misc/shellbox";
+	  Scale 1;
+	}
+  States
+  {
+  Spawn:
+    SBOX C -1;
+    Stop;
+  }
+}
+Class MO_RocketAmmo : Ammo replaces RocketAmmo
+{
+	Default
+	{
+	  Inventory.PickupMessage "$GOTROCKET"; // "Picked up a rocket."
+	  Inventory.Amount 1;
+	  Inventory.MaxAmount 50;
+	  Ammo.BackpackAmount 1;
+	  Ammo.BackpackMaxAmount 100;
+	  Inventory.Icon "R0CKA0";
+	  Inventory.PickUpSound "misc/rocket";
+	  Scale 0.45;
+	}
+	  States
+	  {
+	  Spawn:
+		R0CK A -1;
+		Stop;
+	  }
+}
+
+
+Class MO_RocketBox : MO_RocketAmmo replaces RocketBox
+{
+	Default
+	{
+	Inventory.PickupMessage "$GOTROCKBOX";
+	Inventory.Amount 6;
+	Inventory.PickUpSound "misc/rocketbox";
+	Scale 1;
+	}
+	States
+	{
+	  Spawn:
+		RBOX A -1;
+		Stop;
+	}
+}
+
+Class MO_Cell : Ammo replaces Cell
+{
+  Default
+  {
+  Inventory.PickupMessage "$GOTCELL";
+  Inventory.Amount 20;
+  Inventory.MaxAmount 300;
+  Ammo.BackpackAmount 20;
+  Ammo.BackpackMaxAmount 600;
+  Inventory.Icon "CELLA0";
+  inventory.pickupsound "misc/cell";
+  Scale 0.25;
+  }
+  States
+  {
+  Spawn:
+    CELL A 1;
+  SpawnLoop:
+	CELL BCDEF 3;
+    Loop;
+  }
+}
+
+Class MO_CellPack: MO_Cell replaces Cellpack
+{
+  Default
+  {
+  Inventory.PickupMessage "$GOTCELLBOX";
+  Inventory.Amount 100;
+  inventory.pickupsound "misc/cellpak";
+  Scale 0.25;
+  }
+  States
+  {
+  Spawn:
+    CELP ABCD 3;
+    Loop;
+  }
+}
+
+Class MO_DemonicAmmo : Ammo
+{
+	Default
+	{
+	  Inventory.Amount 40;
+	  Inventory.MaxAmount 400;
+	  Ammo.BackpackAmount 100;
+	  Ammo.BackpackMaxAmount 800;
+	  Inventory.Icon "CELLA0";
+	  inventory.pickupsound "misc/cell";
+	  Scale 0.25;
+	  }
+	  States
+	  {
+	  Spawn:
+		CELL A -1;
+		Stop;
+    }
+}

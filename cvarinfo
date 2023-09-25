@@ -1,0 +1,43 @@
+/*server noarchive int casingposX = 0;
+server noarchive int casingposY = 0;
+server noarchive int casingposZ = 0;
+server noarchive int casingvelX = 0;
+server noarchive int casingvelY = 0;
+server noarchive int casingvelZ = 0;*/
+
+server noarchive int xtext = 0;
+server noarchive int ytext = 0;
+
+user int nchud_toggletally;
+user bool nchud_toggledamage;
+user bool nchud_toggleair = true;
+user bool nchud_togglepowerups = true;
+
+user int nchud_toggleammo = 2;
+user bool nchud_allowammolistoverride = true;
+
+user bool nchud_hpovermaxbarmode;
+user int nchud_hpovermaxbarvalue = 200;
+user bool nchud_arovermaxbarmode;
+user int nchud_arovermaxbarvalue = 200;
+
+user int nchud_hplowstate = 35;
+user int nchud_arlowstate = 35;
+user int nchud_am1lowstate = 35;
+user int nchud_am2lowstate = 35;
+user int nchud_airlowstate = 35;
+
+user int nchud_monsterhpbar;
+user bool nchud_monsterhpbar_genname;
+user bool nchud_monsterhpbar_friend;
+user int nchud_monsterhpbar_hpcounter = 1;
+user int nchud_monsterhpbar_threshold;
+
+user int nchud_bgcolor = 0;
+user int nchud_hicolor = -1;
+
+
+//Metal Ops options
+server bool mo_ssgrandomizer = false;
+user bool mo_bulletsparksound = true;
+server bool mo_nogunrecoil = false;

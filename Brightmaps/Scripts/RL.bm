@@ -1,0 +1,40 @@
+//Rawket Lawnchair
+
+brightmap sprite RLAFA0 {map "brightmaps/weapons/rocketlauncher/RLAFA0_BM.png" disablefullbright}
+brightmap sprite RLAFB0 {map "brightmaps/weapons/rocketlauncher/RLAFB0_BM.png" disablefullbright}
+brightmap sprite RLAFC0 {map "brightmaps/weapons/rocketlauncher/RLAFC0_BM.png" disablefullbright}
+brightmap sprite RLAFD0 {map "brightmaps/weapons/rocketlauncher/RLAFD0_BM.png" disablefullbright}
+brightmap sprite RLAFJ0 {map "brightmaps/weapons/rocketlauncher/RLAFJ0_BM.png" disablefullbright}
+brightmap sprite RLAFK0 {map "brightmaps/weapons/rocketlauncher/RLAFK0_BM.png" disablefullbright}
+brightmap sprite RLAFL0 {map "brightmaps/weapons/rocketlauncher/RLAFL0_BM.png" disablefullbright}
+
+brightmap sprite RLAKA0 {map "brightmaps/weapons/rocketlauncher/RLAKA0_BM.png" disablefullbright}
+brightmap sprite RLAKB0 {map "brightmaps/weapons/rocketlauncher/RLAKB0_BM.png" disablefullbright}
+brightmap sprite RLAKC0 {map "brightmaps/weapons/rocketlauncher/RLAKC0_BM.png" disablefullbright}
+brightmap sprite RLAKD0 {map "brightmaps/weapons/rocketlauncher/RLAKD0_BM.png" disablefullbright}
+brightmap sprite RLAKE0 {map "brightmaps/weapons/rocketlauncher/RLAKE0_BM.png" disablefullbright}
+brightmap sprite RLAKF0 {map "brightmaps/weapons/rocketlauncher/RLAKF0_BM.png" disablefullbright}
+brightmap sprite RLAKG0 {map "brightmaps/weapons/rocketlauncher/RLAKF0_BM.png" disablefullbright}
+
+brightmap sprite RLASF0 {map "brightmaps/weapons/rocketlauncher/RLASF0_BM.png" disablefullbright}
+
+brightmap sprite LAUNA0 {map "brightmaps/weapons/rocketlauncher/LAUNA0_BM.png" disablefullbright}
+
+
+brightmap sprite RNAFA0 {map "brightmaps/weapons/rocketlauncher/RLAFA0_BM.png" disablefullbright}
+brightmap sprite RNAFB0 {map "brightmaps/weapons/rocketlauncher/RLAFB0_BM.png" disablefullbright}
+brightmap sprite RNAFC0 {map "brightmaps/weapons/rocketlauncher/RLAFC0_BM.png" disablefullbright}
+brightmap sprite RNAFD0 {map "brightmaps/weapons/rocketlauncher/RLAFD0_BM.png" disablefullbright}
+brightmap sprite RNAFJ0 {map "brightmaps/weapons/rocketlauncher/RLAFJ0_BM.png" disablefullbright}
+brightmap sprite RNAFK0 {map "brightmaps/weapons/rocketlauncher/RLAFK0_BM.png" disablefullbright}
+brightmap sprite RNAFL0 {map "brightmaps/weapons/rocketlauncher/RLAFL0_BM.png" disablefullbright}
+
+brightmap sprite RNAKA0 {map "brightmaps/weapons/rocketlauncher/RLAKA0_BM.png" disablefullbright}
+brightmap sprite RNAKB0 {map "brightmaps/weapons/rocketlauncher/RLAKB0_BM.png" disablefullbright}
+brightmap sprite RNAKC0 {map "brightmaps/weapons/rocketlauncher/RLAKC0_BM.png" disablefullbright}
+brightmap sprite RNAKD0 {map "brightmaps/weapons/rocketlauncher/RLAKD0_BM.png" disablefullbright}
+brightmap sprite RNAKE0 {map "brightmaps/weapons/rocketlauncher/RLAKE0_BM.png" disablefullbright}
+brightmap sprite RNAKF0 {map "brightmaps/weapons/rocketlauncher/RLAKF0_BM.png" disablefullbright}
+brightmap sprite RNAKG0 {map "brightmaps/weapons/rocketlauncher/RLAKF0_BM.png" disablefullbright}
+
+brightmap sprite RNASF0 {map "brightmaps/weapons/rocketlauncher/RLASF0_BM.png" disablefullbright}

@@ -1,0 +1,63 @@
+#library "GrenadeHUD"
+#include "zcommon.acs"
+
+int grenadecooktimer;
+
+//I'M NOT TRYING TO BE LIKE YANDEREDEV GOD DAMN IT
+// THE ELSE IFS ARE BECAUSE BETWEEN NUMBERS ARE A BITCH ON SWITCH CASE
+// AND DON'T WORK
+script 2098 (void) //Check for grenade timer]
+{
+	SetHudSize(640, 400,1);
+	grenadecooktimer = CheckInventory("GrenadeCookTimer");
+	
+	if(grenadecooktimer == 25 || grenadecooktimer <= 34)
+		{
+		setfont("GRNTIMR2");
+		HudMessage(s:"A"; HUDMSG_FADEOUT, 1, 0, 320.0, 160.0, 1.0);
+		}
+		
+		else if(grenadecooktimer == 35 || grenadecooktimer <= 49)
+		{
+		setfont("GRNTIMR3");
+		HudMessage(s:"A"; HUDMSG_FADEOUT, 1, 0, 320.0, 160.0, 1.0);
+		}
+		
+		else if(grenadecooktimer == 50 || grenadecooktimer <= 64)
+		{
+		setfont("GRNTIMR4");
+		HudMessage(s:"A"; HUDMSG_FADEOUT, 1, 0, 320.0, 160.0, 1.0);
+		}
+		
+		else if(grenadecooktimer == 65 || grenadecooktimer <= 80)
+		{
+		setfont("GRNTIMR5");
+		HudMessage(s:"A"; HUDMSG_FADEOUT, 1, 0, 320.0, 160.0, 1.0);
+		}
+		
+		else if(grenadecooktimer == 80 || grenadecooktimer <= 89)
+		{
+		setfont("GRNTIMR6");
+		HudMessage(s:"A"; HUDMSG_FADEOUT, 1, 0, 320.0, 160.0, 1.0);
+		}
+		
+		else if(grenadecooktimer == 90 || grenadecooktimer <= 99)
+		{
+		setfont("GRNTIMR7");
+		HudMessage(s:"A"; HUDMSG_FADEOUT, 1, 0, 320.0, 160.0, 1.0);
+		}
+		
+		else if(grenadecooktimer == 100 || grenadecooktimer <= 105)
+		{
+		setfont("GRNTIMR8");
+		HudMessage(s:"A"; HUDMSG_FADEOUT, 1, 0, 320.0, 160.0, 1.0);
+		}
+		
+		else
+		{
+		setfont("GRNTIMR1");
+		HudMessage(s:"A"; HUDMSG_FADEOUT, 1, 0, 320.0, 160.0, 1.0);
+		}
+	delay(1);
+	Restart;
+}
