@@ -18,6 +18,7 @@ class MO_MiniGun : JMWeapon
 		MGNG AAAAAAAAAAAAAAAAAA 0 A_Raise();
 	Ready:
 	SelectAnimation:
+		TNT1 A 0 SetInventory("MinigunSpin",0);
 		MGNG A 0 A_StartSound("weapons/minigun/pickup",0);
 		MGNS ABCDEFGH 1;
 	ReadyToFire:
@@ -30,6 +31,7 @@ class MO_MiniGun : JMWeapon
 		TNT1 A 0 A_StopSound(CHAN_WEAPON);
 		TNT1 A 0 A_StopSound(CHAN_AUTO);
 	ActuallySwitchWeapons:
+		TNT1 A 0 SetInventory("MinigunSpin",0);
 		MGNS HGFEDCBA 1;
 		MGNG A 0 A_Lower(12);
 		Wait;

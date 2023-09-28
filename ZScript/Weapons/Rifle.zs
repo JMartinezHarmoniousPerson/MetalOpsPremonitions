@@ -117,7 +117,7 @@ Class AssaultRifle : JMWeapon
 			AR10 A 0 A_StartSound("weapons/ar/magin", CHAN_AUTO);
 			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			AR10 RST 1 JM_WeaponReady(WRF_NOFIRE);
-			Goto ReloadLoop;
+			AR10 A 0 JM_ReloadGun("ARAmmo", "HighCalClip",30,1);
 		DoneReload:		
 			AR10 UV 1;
 			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,4);
@@ -126,17 +126,7 @@ Class AssaultRifle : JMWeapon
 			AR11 A 0 A_JumpIf(CountInv("GunIsEmpty") >= 1, "Chamber");
 			 AR1G A 1;
 			 Goto ReadyToFire;
-        ReloadLoop: //Chamber amimation will come later.
-            PISG A 0;
-            PISG A 0 A_JumpIfInventory("ARAmmo",30,"DoneReload");
-            TNT1 A 0 A_JumpIfInventory("HighCalClip",1,1);
-            PISG A 0 
-            {
-                A_TakeInventory("HighCalClip",1);
-                A_GiveInventory("ARAmmo",1);
-            }
-            Loop;
-		
+       
 		ActionSpecial:
 			"####" A 0 
 			{

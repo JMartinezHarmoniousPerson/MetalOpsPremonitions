@@ -220,6 +220,8 @@ weapons/plasma/overheat PLSHEAT
 plasma/heatlevel1 PLSLVL1
 plasma/heatlevel2 PLSLVL2
 plasma/heatlevel3 PLSLVL3
+plasma/beep PLSBEP
+plasma/special1 PLSSPC1
 
 weapons/plasma/pickup PLSPICK
 weapons/plasma/ballexp PLSXPL
