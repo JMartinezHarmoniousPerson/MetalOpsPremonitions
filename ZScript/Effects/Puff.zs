@@ -1,4 +1,4 @@
-Class UpdatedBulletPuff : BulletPuff replaces BulletPuff
+Class UpdatedBulletPuff : BulletPuff //Inherits from base BulletPuff to fix a sound glitch with the Revenant Tracer playing the riochet sound repeatedly
 {
 	Default
 	{
