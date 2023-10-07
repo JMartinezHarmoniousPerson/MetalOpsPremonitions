@@ -59,3 +59,5 @@ powerup/quadfiring QDMGFIRE
 powerup/quadexpire QDMGEXPR
 powerup/quadend QDMGOFF
 powerup/quadloop QDMGLOOP
+
+$limit powerup/quadfiring 5

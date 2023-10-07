@@ -155,8 +155,8 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		W87A C 1;
 		W87A D 1;// A_StartSound("weapons/levershotty/down", CHAN_AUTO);
 		W87A E 1;
-		TNT1 A 0 A_SpawnItemEx("GunSmoke",28,-37,23,-2,-1,0);
-		TNT1 A 0 A_SpawnItemEx("ShotgunCasing",28, -32, random(17,20), random(-5,0), random(-5,-2), random(5,8));
+		TNT1 A 0 A_SpawnItemEx("GunSmoke",28,-5,23,-2,-1,0);
+		TNT1 A 0 A_SpawnItemEx("ShotgunCasing",28, -3, random(17,20), random(-5,0), random(-5,-2), random(8,12));
 		W87A F 1 A_StartSound("weapons/levershotty/down", CHAN_AUTO);
 		W87A F 1 A_WeaponOffset(0,35);
 		W87A F 1 A_WeaponOffset(0,38);

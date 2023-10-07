@@ -25,7 +25,7 @@ object UpdatedBulletPuff
 pointlight PlasmaBallLight
 {
 	color 0.0 0.2 0.8
-	size 64
+	size 48
 }
 
 pointlight PlasmaBallLightSmall
@@ -43,7 +43,7 @@ pointlight HeatedPlasmaBallLight
 pointlight HeatedPlasmaBallLightSmall
 {
 	color 1.0 0.2 0.0
-	size 28
+	size 48
 }
 
 object PlasmaExplosion
