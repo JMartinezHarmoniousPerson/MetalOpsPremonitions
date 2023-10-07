@@ -37,7 +37,7 @@ Class AssaultRifle : JMWeapon
         Fire:
 			TNT1 A 0 JM_CheckMag("ARAmmo");
             AR1F A 1 BRIGHT {
-                A_FireBullets(5.6, 0, 1, 18, "BulletPuff",FBF_NORANDOM,0,"MO_BulletTracer",0);
+                A_FireBullets(5.6, 0, 1, 18, "UpdatedBulletPuff",FBF_NORANDOM,0,"MO_BulletTracer",0);
                 A_TakeInventory("ARAmmo", 1,TIF_NOTAKEINFINITE);
                 A_StartSound("weapons/ar/fire", 0);
 				A_SpawnItemEx("GunSmoke",15,0,34,2,0,0);

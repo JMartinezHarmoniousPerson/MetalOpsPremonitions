@@ -244,13 +244,12 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		PRGF A 1 
 		{
 			a_StartSound("weapons/plasma/fire", CHAN_AUTO,CHANF_DEFAULT,1,ATTN_NORM,1.2);
-			A_FireProjectile("JM_PlasmaBall", random(-4,4), FALSE, 0, random(3,5), 0, random(-3,3));
+			A_FireProjectile("JM_PlasmaBall", random(-4,4), FALSE, 0, random(3,7), 0, random(-4,5));
 			A_Overlay(-60, "MuzzleFlash");
 			A_TakeInventory("PlasmaAmmo",1);
 			A_GiveInventory("PlasmaRifleCooldownCount",1);
 			A_AlertMonsters();
 		}
-		TNT1 A 0 A_JumpIf(JustReleased(BT_ALTATTACK), "CheckForCooldown");
 		PRGF C 1
 		{
 			if(!GetCvar("mo_nogunrecoil"))

@@ -58,7 +58,7 @@ Class MO_SubMachineGun : JMWeapon
 			TNT1 A 0 JM_CheckMag("SMGAmmo");
 			TNT1 A 0 A_JumpIfInventory("SMGBurstMode",1,"FireBurst");
             SM5F A 1 BRIGHT {
-                A_FireBullets(5.6, 0, 1, 10, "BulletPuff",FBF_NORANDOM, 0,"MO_BulletTracer",0);
+                A_FireBullets(5.6, 0, 1, 10, "UpdatedBulletPuff",FBF_NORANDOM, 0,"MO_BulletTracer",0);
                 JM_UseAmmo("SMGAmmo", 1);
                 A_StartSound("weapons/smg/fire", 0);
 				A_SpawnItemEx("GunSmoke",15,0,34,2,0,0);

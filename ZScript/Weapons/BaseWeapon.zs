@@ -458,6 +458,7 @@ class JMWeapon : Weapon
 			GREP EFGII 1;
 			TNT1 A 0 A_StartSound("FragGrenade/Pin",0);
 			GREP K 1;
+			TNT1 A 0 A_TakeInventory("GrenadeAmmo", 1, TIF_NOTAKEINFINITE);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
 			GREP LMNOPQ 1;
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
@@ -472,11 +473,7 @@ class JMWeapon : Weapon
 			TNT1 A 0 A_SetInventory("GrenadeCookTimer",0);
 			TNT1 A 0 A_StartSound("FragGrenade/Throw",0,CHANF_DEFAULT,2.0);
 			GRE1 C 1;
-			MTOV A 0 
-			{
-				A_FireProjectile("GrenadeThrown",0,0,0,8,FPF_NOAUTOAIM,0);
-				A_TakeInventory("GrenadeAmmo", 1, TIF_NOTAKEINFINITE);
-			}
+			MTOV A 0 A_FireProjectile("GrenadeThrown",0,0,0,8,FPF_NOAUTOAIM,0);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			GRE1 DEFG 1;
 			TNT1 A 4

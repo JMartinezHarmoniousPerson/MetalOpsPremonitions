@@ -10,7 +10,6 @@ All hitscan weapons do fixed damage
 BFG and Plasma Repeater do fixed damage
 Minigun fixes
 
-
 Update v1.5 changes:
 Rocket Launcher has a mini-nuke mode now. Be careful though, getting close or a bit far can still hurt or even kill you. Uses 30 rocket ammo, has a 15 second cooldown.
 SMG has an inspect animation inspired by the Shadow The Hedgehog intro where Shadow pumps has submachinegun.
@@ -20,8 +19,7 @@ Player sounds added
 New weapon: Unmaker, based on the older PB 3.0 sprites by Enchanter. It functions similar to the Doom 64 Unmaker, however, primary fire is one beam, while altfire is three beams.
 Plasma cells are animated now.
 
-
-Update v2 changes:
+Version 2 changes:
 - Fixed some sprite conflicts with Project Malice.
 - Updated Pistol casings to Metalman's casings from Project Brutality
 - Fixed Pump shotgun issue when reloading where the animation would loop if fire was held down
@@ -31,8 +29,14 @@ Update v2 changes:
 - Katana swings are faster
 - Icethrower mode made for the flamethrower
 - SMG has a burst fire mode, Combat Rifle has a semi auto mode
-- Haste sphere, Quad Damage sphere added
 - Power up timer expiring is similar to Quake
 - You can now hold the toss grenade button to cook the grenade when grenades are selected.
- An indicator will be on screen telling you when the grenade is about to explode, you have 3 seconds.
- It's inspired by Call of Duty 3, while the smoke trail that spawns from the grenade is inspired by Black Mesa.
+An indicator will be on screen telling you when the grenade is about to explode, you have 3 seconds.
+It's inspired by Call of Duty 3, while the smoke trail that spawns from the grenade is inspired by Black Mesa.
+- Plasma Rifle has an alt fire, a very fast fire for normal, and a new alternate mode, heated plasma rounds. Heated Plasma Rounds alt fire is more inspired by the heat blast from Doom Eternal
+- Lever Action Shotgun has an altfire, fast firing aka cowboy action shooting style
+- Pump Action altfire added, double blast, inspired by Half Life.
+- New special modes, Burst mode for SMG (will likely move this to the pistol and SMG will have a 5 round burst), and semi-auto mode for the Combat Rifle)
+- New Powerups, Haste and Quad Damage. Haste will make your melee attacks and reload animations faster, and shotgun pumping/levering actions faster. Quad damage increases your damage by four times, like in Quake.
+- Powerup sphere sprites updated, sprites by Benjamin Zuriel, from unused powerup sprites that were going to be made for Project Brutality before being replaced.
+- Armor and Health Bonuses have variants now, either giving two or three armor.
