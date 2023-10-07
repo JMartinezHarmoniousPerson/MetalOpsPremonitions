@@ -224,7 +224,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 			if(CountInv("HeatBlastLevel") >= 1 && CountInv("HeatedRoundsReady") >=1)
 			{
 				JM_CheckForQuadDamage();
-				return ResolveState("FullBlast");
+				return ResolveState("HeatBlast");
 			}
 			else
 			{
@@ -239,6 +239,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 	CellDischarge:
 		PRGF A 0;
 		TNT1 A 0 A_JumpIfInventory("HeatedRoundsReady",1,"DoNothing");
+		TNT1 A 0 JM_CheckMag("PlasmaAmmo", "Cooldown");
 		TNT1 A 0 A_JumpIf(JustReleased(BT_ALTATTACK), "CheckForCooldown");
 		PRGF A 1 
 		{
@@ -302,7 +303,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		}
 		Goto ReadyToFire;
 			
-	FullBlast:
+	HeatBlast:
 		TNT1 A 0 A_JumpIfInventory("PlasmaAmmo",15,1);
 		Goto Reload;
 		3RGF A 1 
@@ -334,7 +335,15 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 			A_SetAngle(angle+.09,SPF_INTERPOLATE);
 			}
 		}
-		2RGA BCDEFF 1;
+		2RGA BCD 1
+		{
+			if(!GetCvar("mo_nogunrecoil"))
+			{
+			A_SetPitch(pitch-2.7,SPF_Interpolate);
+			A_SetAngle(angle+.09,SPF_INTERPOLATE);
+			}
+		}
+		2RGA EFF 1;
 		2RGA EDCBA 1;
 		Goto Cooldown;
 	Reload:
@@ -680,7 +689,7 @@ class JM_HeatBlastMissile : FastProjectile
 {
 	Default
 	{
-		Speed 35;
+		Speed 55;
 		DamageFunction (225);
 		DeathSound "NULLSND";
 		Radius 13;
@@ -711,6 +720,7 @@ class JM_HeatBlastMissile : FastProjectile
 				A_SpawnItemEx("RedLightningLarge");
 				A_SpawnItemEx("RedLightningSmall");
 				A_SpawnItemEx("RedLightningMedium");
+				A_RadiusThrust(1000, 110, 0);
 		}
 		TNT1 A 0 A_Quake(2,4,0,4,0);
 		TNT1 A 2;
@@ -719,8 +729,9 @@ class JM_HeatBlastMissile : FastProjectile
 				A_SpawnItemEx("RedLightningLarge");
 				A_SpawnItemEx("RedLightningSmall");
 				A_SpawnItemEx("RedLightningMedium");
+				A_RadiusThrust(1000, 110, 0);
 		}
-		TNT1 A 1;
+		TNT1 AAA 1;
 		Stop;
 		Death:
 			TNT1 A 0 
@@ -728,6 +739,7 @@ class JM_HeatBlastMissile : FastProjectile
 				A_SpawnItemEx("RedLightningLarge");
 				A_SpawnItemEx("RedLightningSmall");
 				A_SpawnItemEx("RedLightningMedium");
+				A_RadiusThrust(1000, 110, 0);
 			}
 			TNT1 A 1 A_Explode(10,40,0);
 			STOP;
@@ -741,9 +753,9 @@ Class HeatBlastWaveAttack : Actor
 		Spawn:
 		TNT1 A 1 A_Explode(45,110,0);
 		TNT1 A 1;
-		TNT1 A 1 A_Explode(45,150,0);
+		TNT1 A 1 A_Explode(45,110,0);
 		TNT1 A 1;
-		TNT1 A 1 A_Explode(45,150,0);
+		TNT1 A 1 A_Explode(45,110,0);
 		TNT1 A 1;
 		Stop;
 	}
@@ -765,6 +777,7 @@ class JM_SuperHeatBlastMissile : JM_HeatBlastMissile
 				A_SpawnItemEx("RedLightningLarge");
 				A_SpawnItemEx("RedLightningSmall");
 				A_SpawnItemEx("RedLightningMedium");
+				A_RadiusThrust(1000, 110, 0);
 		}
 		TNT1 A 2;
 		TNT1 A 0 
@@ -772,8 +785,9 @@ class JM_SuperHeatBlastMissile : JM_HeatBlastMissile
 				A_SpawnItemEx("RedLightningLarge",8,0,0);
 				A_SpawnItemEx("RedLightningSmall",8,0,0);
 				A_SpawnItemEx("RedLightningMedium",8,0,0);
+				A_RadiusThrust(1000, 110, 0);
 		}
-		TNT1 A 1;
+		TNT1 AAA 1;
 		Stop;
 	}
 }

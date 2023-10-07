@@ -85,7 +85,7 @@ class MO_Flamethrower : JMWeapon// replaces Chainsaw
 			if(CountInv("Gasoline") < 6) {return ResolveState("StopFire");}
 			return ResolveState(null);
 			}
-		TNT1 A 0 A_TakeInventory("Gasoline", 6);
+		TNT1 A 0 A_TakeInventory("Gasoline", 5);
         SAWG B 0 A_JumpIf(PressingFire(), "HoldingFire");
 	StopFire:
 		SAWG A 0 A_StopSound(1);
@@ -178,7 +178,7 @@ class MO_Flamethrower : JMWeapon// replaces Chainsaw
 			if(CountInv("Gasoline") < 6) {return ResolveState("StopFire");}
 			return ResolveState(null);
 			}
-		TNT1 A 0 A_TakeInventory("Gasoline", 6);
+		TNT1 A 0 A_TakeInventory("Gasoline", 5);
         SAWG B 0 A_JumpIf(PressingFire(), "HoldingFireIce");
 	StopFireIce:
 		SAWG A 0 A_StopSound(1);
@@ -213,7 +213,7 @@ class MO_Flamethrower : JMWeapon// replaces Chainsaw
 			}
 			else
 			{
-				A_StartSound("weapons/flamer/flamemodeactive",CHAN_AUTO);
+				A_StartSound("weapons/flamer/firemodeactive",CHAN_AUTO);
 				A_SetInventory("IceMode",0);
 				A_Print("Flame mode activated");
 			}

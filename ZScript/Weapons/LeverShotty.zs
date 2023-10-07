@@ -61,16 +61,16 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		{
 			if(!GetCvar("mo_nogunrecoil"))
 			{
-			A_SetPitch(pitch-1.2,SPF_Interpolate);
-			A_SetAngle(angle+.09,SPF_INTERPOLATE);
+			A_SetPitch(pitch-1.6,SPF_Interpolate);
+			A_SetAngle(angle+.13,SPF_INTERPOLATE);
 			}
 		 }
 		 W87F C 1 BRIGHT
 		{
 			if(!GetCvar("mo_nogunrecoil"))
 			{
-			A_SetPitch(pitch-1.2,SPF_Interpolate);
-			A_SetAngle(angle+.09,SPF_INTERPOLATE);
+			A_SetPitch(pitch-1.6,SPF_Interpolate);
+			A_SetAngle(angle+.13,SPF_INTERPOLATE);
 			}
 		 }
 		//possible recoil
@@ -100,7 +100,7 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		W87P FED 1 JM_WeaponReady(WRF_NOFIRE);
 		W87G A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 		W87P CBA 1 JM_WeaponReady(WRF_NOFIRE);
-		W87G A 1 A_ReFire("Fire");
+		W87G A 1 A_ReFire();
 		PSTG A 0 JM_CheckMag("LeverShottyAmmo", "Reload");
 		Goto ReadyToFire;
 	TerminatorLever: //From M1887 BDv21 add-on
@@ -125,6 +125,47 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 	   W87G A 0;
 	   PSTG A 0 JM_CheckMag("LeverShottyAmmo", "Reload");
 	   Goto ReadyToFire;
+	
+	AltFire:
+		PSTG A 0 JM_CheckMag("LeverShottyAmmo", "Reload");
+		W87F A 1 BRIGHT {
+			A_FireBullets (random(3, 6), frandom(2,6.7), 9, 12, "ShotgunShellPuff", FBF_NORANDOM,0,"MO_BulletTracer",0);
+			A_StartSound ("weapons/levershotty/fire", CHAN_WEAPON);
+			JM_UseAmmo("LeverShottyAmmo",1);
+			A_SpawnItemEx("ShotgunSmoke",20,0,34,2,0,0);
+			 JM_CheckForQuadDamage();
+		}
+		W87F B 1 BRIGHT
+		{
+			if(!GetCvar("mo_nogunrecoil"))
+			{
+			A_SetPitch(pitch-1.6,SPF_Interpolate);
+			A_SetAngle(angle+.13,SPF_INTERPOLATE);
+			}
+		 }
+		 W87A A 1
+		{
+			if(!GetCvar("mo_nogunrecoil"))
+			{
+			A_SetPitch(pitch-1.6,SPF_Interpolate);
+			A_SetAngle(angle+.13,SPF_INTERPOLATE);
+			}
+		 }
+		W87A B 1;
+		W87A C 1;
+		W87A D 1;// A_StartSound("weapons/levershotty/down", CHAN_AUTO);
+		W87A E 1;
+		TNT1 A 0 A_SpawnItemEx("GunSmoke",28,-37,23,-2,-1,0);
+		TNT1 A 0 A_SpawnItemEx("ShotgunCasing",28, -32, random(17,20), random(-5,0), random(-5,-2), random(5,8));
+		W87A F 1 A_StartSound("weapons/levershotty/down", CHAN_AUTO);
+		W87A F 1 A_WeaponOffset(0,35);
+		W87A F 1 A_WeaponOffset(0,38);
+		W87A F 1 A_WeaponOffset(0,40);
+		W87A F 1 A_WeaponOffset(0,37);
+		W87A FED 1 A_WeaponOffset(0,33);
+		W87A C 1 A_StartSound("weapons/levershotty/up", CHAN_AUTO);
+		W87A BA 1;
+		Goto ReadyToFire;
 	Reload:
 		PSTG A 0 A_JumpIfInventory("LeverShottyAmmo",7,"ReadyToFire");
 		PSTG A 0 A_JumpIfInventory("MO_ShotShell",1,1);
@@ -200,7 +241,7 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 			if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(8);}
 			return JM_WeaponReady();
 		}
-		PISG A 0 A_ReFire("Fire");
+		PISG A 0 A_ReFire();
 	ChamberLastShell:
 		W8R4 AB 1 JM_WeaponReady();
 		W8R4 C 1 {

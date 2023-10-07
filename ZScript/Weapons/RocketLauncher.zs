@@ -146,8 +146,6 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
                 A_StartSound("weapons/rocket/fire", 1);
                 A_Overlay(-5, "MuzzleFlash");
 				JM_CheckForQuadDamage();
-//                A_OverlayScale(-5, 0.9, 0.9);
-//				A_OverlayPivotAlign(-5, PSPA_CENTER, PSPA_CENTER);
             }
             RNAF B 1 BRIGHT
             {

@@ -247,6 +247,7 @@ weapons/flamer/icelooplayer FRZLYRLP
 weapons/flamer/icedraw FRZUP
 
 weapons/flamer/icemodeactive FRZACT
+weapons/flamer/firemodeactive FLMMODE
 weapons/flamer/special1 FLMSPC1
 weapons/flamer/special2 FLMSPC2
 

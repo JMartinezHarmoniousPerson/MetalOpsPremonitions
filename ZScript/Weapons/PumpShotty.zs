@@ -65,8 +65,8 @@ class PumpShotgun : JMWeapon
 			{
 				if(!GetCvar("mo_nogunrecoil"))
 				{
-				A_SetPitch(pitch-1.2,SPF_Interpolate);
-				A_SetAngle(angle+.09,SPF_INTERPOLATE);
+				A_SetPitch(pitch-1.6,SPF_Interpolate);
+				A_SetAngle(angle+.13,SPF_INTERPOLATE);
 				}
 		    }
             PSGF D 1;
@@ -102,12 +102,12 @@ class PumpShotgun : JMWeapon
 		AltFire:
 			PSTG A 0 A_JumpIf(CountInv("PumpShotgunAmmo") == 1, "Fire");
 			PSTG A 0 JM_CheckMag("PumpShotgunAmmo", "Reload");
-			TNT1 A 0 A_StartSound ("weapons/pumpshot/fire", CHAN_WEAPON);
+			TNT1 A 0 A_StartSound ("weapons/pumpshot/fire", CHAN_WEAPON, CHANF_DEFAULT, 0.85);
 			TNT1 A 0 A_StartSound("weapons/pumpshot/altfire",CHAN_7);
 			PSGF A 1 
             {
                 A_FireBullets (random(3, 6), frandom(2,6.7), 9, 11, "ShotgunShellPuff", FBF_NORANDOM,0,"MO_BulletTracer",0);
-				A_FireBullets (random(7, 11), frandom(7,10.7), 9, 11, "ShotgunShellPuff", FBF_NORANDOM,0,"MO_BulletTracer",0);
+				A_FireBullets (random(4, 8), frandom(4,8.7), 9, 11, "ShotgunShellPuff", FBF_NORANDOM,0,"MO_BulletTracer",0);
                 A_TakeInventory("PumpShotgunAmmo",2);
 				A_SpawnItemEx("ShotgunSmoke",15,0,34,2,0,0);
 				JM_CheckForQuadDamage();
@@ -116,16 +116,24 @@ class PumpShotgun : JMWeapon
 			{
 				if(!GetCvar("mo_nogunrecoil"))
 				{
-				A_SetPitch(pitch-1.2,SPF_Interpolate);
-				A_SetAngle(angle+.09,SPF_INTERPOLATE);
+				A_SetPitch(pitch-2.5,SPF_Interpolate);
+				A_SetAngle(angle+.13,SPF_INTERPOLATE);
 				}
 		    }
-			PSGF C 2 
+			PSGF C 1 
 			{
 				if(!GetCvar("mo_nogunrecoil"))
 				{
-				A_SetPitch(pitch-1.2,SPF_Interpolate);
-				A_SetAngle(angle+.09,SPF_INTERPOLATE);
+				A_SetPitch(pitch-1.8,SPF_Interpolate);
+				A_SetAngle(angle+.13,SPF_INTERPOLATE);
+				}
+		    }
+			PSGF C 1 
+			{
+				if(!GetCvar("mo_nogunrecoil"))
+				{
+				A_SetPitch(pitch-1.8,SPF_Interpolate);
+				A_SetAngle(angle+.13,SPF_INTERPOLATE);
 				}
 		    }
             PSGF D 3;
@@ -186,7 +194,7 @@ class PumpShotgun : JMWeapon
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
 			}
             PISG A 0;
-            PISG A 0 A_ReFire("Fire");
+            PISG A 0 A_ReFire();
             Loop;
         DoneReload:
             PSGR BA 1;
@@ -212,7 +220,7 @@ class PumpShotgun : JMWeapon
 			{
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(5);}
 			}
-			TNT1 A 0 A_ReFire("Fire");
+			TNT1 A 0 A_ReFire();
             Goto ShellLoop;
 		FlashKick:
 		PSGM ABCDEF 1;
