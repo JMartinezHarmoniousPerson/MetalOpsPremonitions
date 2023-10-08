@@ -246,9 +246,9 @@ class MO_MiniGun : JMWeapon
 		TNT1 A 0 A_JumpIf(CountInv("MinigunSpin") == 1, "StopAltFire");
 		TNT1 A 0 A_StartSound("weapons/minigun/start",0);
 		TNT1 A 0 A_SetInventory("MinigunSpin",1);
-		MGNG AAAABBBBCCCCDDDD 1;
-		MGNG EFGH 3;
-		MGNG AABBCCDD 1;
+		MGNG AAAABBBBCCCDDDD 1;
+		MGNG EEEFFFGGHH 1;
+		MGNG AABCD 1;
 		TNT1 A 0 A_StartSound("Weapons/Minigun/Loop",6, CHANF_LOOPING);
 		MGNG EFGH 1;
 	ReadyToFire2:

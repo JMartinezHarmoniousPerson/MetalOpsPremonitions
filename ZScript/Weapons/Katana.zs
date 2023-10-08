@@ -14,7 +14,6 @@ class Katana: JMWeapon replaces Fist
 	  }
 	  States
 	  {
-		
 	  Ready:
 	  ReadyToFire:
 		KTAG A 1 JM_WeaponReady();

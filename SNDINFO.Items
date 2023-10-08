@@ -50,6 +50,11 @@ powerup/hasteover "sounds/items/powerups/Haste_End.ogg"
 powerup/soulsphere SOULPCK
 powerup/megasphere MEGAPCK
 powerup/invul INVLPICK
+$random powerup/invul_loop {invul_loop1 invul_loop2}
+invul_loop1 INVLLOP1
+invul_loop2 INVLLOP2
+powerup/invul_looplayer INVLLOP3
+powerup/invul_end INVLEND
 powerup/invis INVSPICK
 powerup/inviswear INVSWARN
 

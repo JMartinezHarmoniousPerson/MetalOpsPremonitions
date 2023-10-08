@@ -163,10 +163,10 @@ class MO_Flamethrower : JMWeapon// replaces Chainsaw
         }
 		TNT1 A 0 A_StartSound("Weapons/flamer/fireicebegin", 7);
         TNT1 A 0 A_StartSound("weapons/flamer/iceloop", 1, CHANF_LOOPING);
-		TNT1 A 0 A_StartSound("weapons/flamer/icelooplayer", 6, CHANF_LOOPING, CHANF_DEFAULT,0.7);
+		TNT1 A 0 A_StartSound("weapons/flamer/icelooplayer", 6, CHANF_LOOPING, CHANF_DEFAULT,0.8);
 		FLMG A 0 JM_CheckForQuadDamage();
 	HoldingFireIce:
-		FLMG A 0 A_JumpIf(CountInv("Gasoline") < 6, "StopFire");
+		FLMG A 0 A_JumpIf(CountInv("Gasoline") < 6, "StopFireIce");
         FTF2 ABCD 1 {
             A_WeaponOffset(random(-3,3), random(32, 36));
             A_FireProjectile("IcethrowerAttack",0,0,0,4);
@@ -175,7 +175,7 @@ class MO_Flamethrower : JMWeapon// replaces Chainsaw
 				A_SetPitch(pitch-.4,SPF_Interpolate);
 				A_SetAngle(angle-0,SPF_INTERPOLATE);
 			}
-			if(CountInv("Gasoline") < 6) {return ResolveState("StopFire");}
+			if(CountInv("Gasoline") < 6) {return ResolveState("StopFireIce");}
 			return ResolveState(null);
 			}
 		TNT1 A 0 A_TakeInventory("Gasoline", 5);

@@ -156,6 +156,8 @@ Class MO_PowerInvul : PowerInvulnerable
 		
 		ExpireSoundTics = playTimer;
 		Owner.A_AttachLight("lnvulLight", DynamicLight.PointLight,"Green", 56, 64);
+		Owner.A_StartSound("powerup/invul_loop",50,CHANF_LOOPING|CHANF_OVERLAP);
+		Owner.A_StartSound("powerup/invul_looplayer",51,CHANF_LOOPING|CHANF_OVERLAP, 0.28);		
 		PowerWarning("Invulnerability", "", "powerupwearoff", "Green", "d");
 	}
 	
@@ -163,9 +165,10 @@ Class MO_PowerInvul : PowerInvulnerable
 	{
 		Super.EndEffect();
 		if(!owner) return;
-//		Owner.A_StartSound("powerup/hasteover", 41);
 		Owner.A_RemoveLight("lnvulLight");
-		Owner.A_StopSound(40);
+		Owner.A_StopSound(50);
+		Owner.A_StopSound(51);
+		Owner.A_StartSound("powerup/invul_end",50, CHANF_DEFAULT, 0.8);
 	}
 		
 	Default
