@@ -274,11 +274,11 @@ Sprite "KCK2N0", 500, 200
 	Patch "KICK13", 14, 166
 }
 
-Sprite "FLAMB0", 150, 40
+Sprite "F1MCB0", 150, 40
 {
 	XScale 1.300
 	YScale 1.300
-	Patch "FLAMA0", 0, 0
+	Patch "F1MCA0", 0, 0
 }
 
 Sprite "GRE1A0", 269, 198
