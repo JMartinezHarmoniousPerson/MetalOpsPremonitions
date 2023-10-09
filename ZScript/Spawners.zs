@@ -145,7 +145,7 @@ class FlamethrowerSpawner : CustomInventory replaces Chainsaw
 	{
 		Spawn:
 			TNT1 A 0;
-			FLAM A -1;
+			F1MC A -1;
 			Stop;
 		Pickup:
 			TNT1 A 0 A_JumpIfInventory("MO_Flamethrower",1,"PickupGas");

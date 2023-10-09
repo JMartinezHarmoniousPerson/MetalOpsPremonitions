@@ -235,7 +235,7 @@ class MO_Flamethrower : JMWeapon// replaces Chainsaw
 		Goto ReadyToFire;
 		
     Spawn:
-        FLAM A -1;
+        F1MC A -1;
         Stop;
 	FlashKick:
 		"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,"FlashKickFast");
