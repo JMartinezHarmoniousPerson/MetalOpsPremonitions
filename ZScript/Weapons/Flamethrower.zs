@@ -319,9 +319,10 @@ Class IceThrowerAttack : Actor
 		+BLOODLESSIMPACT;
 		-BLOODSPLATTER;
 		DamageType "Ice";
-		Translation "Ice";
+		Translation "CryoBlue"; //New Translation to fix an issue with Legion of Bones' custom PLAYPAL palette, see TRNSLATE
 		Decal "FreezeScorch";
 		RenderStyle "Add";
+		Alpha 0.8;
 		Scale 0.1;
 		Gravity 0;
 	}

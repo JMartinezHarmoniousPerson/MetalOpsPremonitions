@@ -208,5 +208,5 @@ STOP
 
 Actor IceThrowerAttackExplosion : FlamerAttackExplosion
 {
-	Translation "Ice"
+	Translation "CryoBlue"
 }
