@@ -74,10 +74,10 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		Goto Ready;
 		
 	Ready:
-		1RL1 A 0; //Initialize the sprite name into memory
-		1RL2 A 0; //Initialize the sprite name into memory
+		1RL1 ABCDEFGHIJKLMNOPQRSTUVWXYZ 0; //Initialize the sprite name into memory
+		1RL2 ABCDEFGHIJKLMNOPQRSTUVWXYZ 0; //Initialize the sprite name into memory
 		1RL3 A 0; //Initialize the sprite name into memory
-		1RGS A 0;
+		1RGS ABCD 0;
 	SelectAnimation:
 		TNT1 A 0 A_StartSound("weapons/plasma/equip",1);
 		PRGS ABCD 1
@@ -226,11 +226,11 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 				JM_CheckForQuadDamage();
 				return ResolveState("HeatBlast");
 			}
-			else
+/*			else
 			{
 				JM_CheckForQuadDamage();
 				return ResolveState("CellDischarge");
-			}
+			}*/
 			return ResolveState(null);
 		}
 		TNT1 A 0;
