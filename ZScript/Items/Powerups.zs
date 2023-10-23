@@ -87,6 +87,8 @@ Class MO_NightVision : PowerLightAmp
 		Shader.SetEnabled(Owner.Player,"NiteVis",true);
 		Shader.SetUniform1f(Owner.Player, "NiteVis","exposure",2);
 		Shader.SetUniform1i(Owner.Player, "NiteVis","u_resfactor",resfactor);
+		Shader.SetUniform1i(Owner.Player, "NiteVis","u_hscan",resfactor);
+		Shader.SetUniform1f(Owner.Player, "NiteVis","u_scanstrength",scanstrength);
 		Shader.SetUniform1i(Owner.Player,"NiteVis","u_posterize",posterize);
 		Shader.SetUniform3f(Owner.Player,"NiteVis","u_posfilter",posfilter);
 		Shader.SetUniform1f(Owner.Player,"NiteVis","u_whiteclip",whiteclip);
@@ -116,8 +118,8 @@ extend class MO_NightVision
 {
 	transient CVar NVGStyle;
 	int style;
-	int resfactor,posterize;
-	double whiteclip,desat;
+	int resfactor,scanfactor,hscan,vscan,posterize;
+	double scanstrength,whiteclip,desat;
 	vector3 posfilter,negfilter;
 
 	void SetNVGStyle() {
@@ -126,9 +128,9 @@ extend class MO_NightVision
 		switch (style) {
 			default:
 			case 0: // Green Phosphor
-				resfactor=1;/*hscan=1;vscan=0;scanfactor=8;scanstrength=0.1;*/posterize=24;posfilter=(0,1,0);whiteclip=0.25;desat=0.0;break;
+				resfactor=1;hscan=1;vscan=0;scanfactor=8;scanstrength=0.1;posterize=24;posfilter=(0,1,0);whiteclip=0.25;desat=0.0;break;
 			case 1: // White Phosphor
-				resfactor=2;/*hscan=1;vscan=0;scanfactor=2;scanstrength=0.1;*/posterize=256;posfilter=(0.0,1.0,0.75);whiteclip=0.8;desat=0.0;break;
+				resfactor=2;hscan=1;vscan=0;scanfactor=2;scanstrength=0.1;posterize=256;posfilter=(0.0,1.0,0.75);whiteclip=0.8;desat=0.0;break;
 		}
 	}
 }

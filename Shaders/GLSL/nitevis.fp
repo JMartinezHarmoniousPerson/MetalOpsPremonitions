@@ -19,7 +19,7 @@
 int resfactor = 4;
 
 // Enable horizontal and/or vertical scanlines
-bool hscan = true;
+bool hscan = bool(u_hscan);
 bool vscan = false;
 float scanstrength = resfactor / 2.0;
 

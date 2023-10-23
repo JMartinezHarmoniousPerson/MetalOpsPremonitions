@@ -23,8 +23,8 @@ Class UpdatedBulletPuff : BulletPuff //Inherits from base BulletPuff to fix a so
 		NULL A 0;
 		NULL A 0 A_SpawnItemEX("BulletImpactSmoke");
 		TNT1 AAA 0 A_SpawnProjectile("EnhancedHitSpark1", 2, 0, frandom(0,1)*frandom (-180, 180),  flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: pitch - frandom(0,1)*frandom (30, 360));
-		TNT1 AAA 0 A_SpawnProjectile("EnhancedHitSpark2", 2, 0, frandom(0,1)*frandom (-180, 180), flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: pitch - frandom(0,1)*frandom (30, 360));
-		TNT1 AAA 0 A_SpawnProjectile("EnhancedHitSpark3", 2, 0, frandom(0,1)*frandom (-180, 180), flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: pitch - frandom(0,1)*frandom (30, 360));
+		TNT1 AA 0 A_SpawnProjectile("EnhancedHitSpark2", 2, 0, frandom(0,1)*frandom (-180, 180), flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: pitch - frandom(0,1)*frandom (30, 360));
+		TNT1 A 0 A_SpawnProjectile("EnhancedHitSpark3", 2, 0, frandom(0,1)*frandom (-180, 180), flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: pitch - frandom(0,1)*frandom (30, 360));
 		TNT1 A 0
 		{
 			if(CVar.FindCVar("mo_bulletsparksound").GetBool() == False)
