@@ -257,3 +257,71 @@ Object MO_BlurSphere
 Frame PINS { Light PartialInvisLight }
 }
 
+PulseLight MegaBersLight
+{
+Color 1.0 0.0 0.0
+Size 35
+SecondarySize 40
+Interval 5.0
+offset 0 16 0
+}
+
+//Added key lights
+// Blue Keys
+pulselight BlueKeyLight
+{
+    color 0.0 0.0 1.0
+    size 16
+    secondarySize 18
+    interval 2.0
+}
+
+Object MO_BlueCard
+{
+	frame KEYB {light BlueKeyLight}
+}
+
+Object MO_BlueSkull
+{
+	frame SKLB {light BlueKeyLight}
+}
+
+// Yellow Keys
+pulselight YellowKeyLight
+{
+    color 1 1 0.0
+    size 16
+    secondarySize 18
+    interval 2.0
+}
+
+Object MO_YellowCard
+{
+	frame KEYY {light YellowKeyLight}
+}
+
+Object MO_YellowSkull
+{
+	frame SKLY {light YellowKeyLight}
+}
+
+
+// Red Keys
+pulselight RedKeyLight
+{
+    color 1.0 0.0 0.0
+    size 16
+    secondarySize 18
+    interval 2.0
+}
+
+Object MO_RedCard
+{
+	frame KEYR {light RedKeyLight}
+}
+
+Object MO_RedSkull
+{
+	frame SKLR {light RedKeyLight}
+}
+

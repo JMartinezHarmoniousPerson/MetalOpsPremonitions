@@ -115,8 +115,17 @@ class JMWeapon : Weapon
 	{
 		A_TakeInventory(ammotype, count, TIF_NOTAKEINFINITE);
 	}
-//	action bool JM_Recoil(float 
 
+	action void JM_GunRecoil(float gunPitch, float gunAngle)
+	{
+		CVar checkRecoil = CVar.FindCVar("mo_nogunrecoil");
+		bool noRecoil = checkRecoil.GetBool();
+		if(!noRecoil)
+		{
+			A_SetPitch(pitch+gunPitch, SPF_INTERPOLATE);
+			A_SetAngle(angle+gunAngle, SPF_INTERPOLATE);
+		}
+	}
 	
     Default
     {
