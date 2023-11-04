@@ -30,6 +30,12 @@ class JMWeapon : Weapon
 		}
 	}
 	
+	action void JM_SetWeaponSprite(string s)
+	{
+		 let psp = Invoker.Owner.player.FindPSprite(PSP_WEAPON);
+		 psp.sprite = GetSpriteIndex(s);
+	}
+	
 	action bool PressingFire(){return player.cmd.buttons & BT_ATTACK;}
     action bool PressingAltfire(){return player.cmd.buttons & BT_ALTATTACK;}
 	

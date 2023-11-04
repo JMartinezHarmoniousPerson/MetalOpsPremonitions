@@ -55,7 +55,12 @@ class MO_AllMap : AllMap replaces AllMap
 
 Class MO_Goggles : Infrared replaces Infrared
 {
-	Default
+	override bool Use(bool pickup)
+	{
+		owner.A_SetBlend("Black", .8,20);
+		return Super.Use(pickup);
+	}
+   Default
    {
 	  +COUNTITEM;
 	  +INVENTORY.AUTOACTIVATE;
@@ -201,8 +206,6 @@ Class MO_SuitPower : PowerIronFeet
 	}
 }
 
-//Future Mega Berserk powerup
-/*
 Class MO_MegaBerserk : Inventory
 {
 	Default
@@ -283,4 +286,3 @@ Class MO_PowerMegaBers : PowerDamage
 		DamageFactor "normal",4;
 	}
 }
-*/
