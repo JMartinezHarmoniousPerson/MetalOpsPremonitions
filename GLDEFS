@@ -23,16 +23,16 @@ HardwareShader PostProcess scene
 flickerlight BulletHitLight
 {
     color 0.5 0.5 0.0
-    size 3
-    secondarySize 5
+    size 7
+    secondarySize 9
     chance 0.8
 }
 
 flickerlight BulletHitLightBig
 {
 	color 0.5 0.5 0.0
-    size 7
-    secondarySize 9
+    size 10
+    secondarySize 13
     chance 0.8
 }
 
