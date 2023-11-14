@@ -12,15 +12,47 @@ class Katana: JMWeapon replaces Fist
 	  +WEAPON.NOALERT;
 	  Inventory.AltHudIcon "KATAN0";
 	  }
+		
+	  action bool PlayerHasBerserk()
+	  {
+		return CheckInventory("MO_PowerStrength",1);
+	  }
+	
+	  action void JM_KatanaAttack()
+	  {
+			int dmg; 
+			Class<Actor> puff;
+			bool leftSwing = FindInventory("LeftKatanaAttack");
+			
+			if(PlayerHasBerserk()) {
+				if(health < 30) 
+				{dmg = 60;}
+				else {dmg = 30;}
+				}
+			else {dmg = 5;}
+			
+			if(leftSwing) {puff = "KatanaPuff2";}
+			else {puff = "KatanaPuff";}
+			A_CustomPunch(dmg * random(1,8), TRUE, CPF_NOTURN, puff, 96, 0, 0, "none", "weapons/katana/hit");
+	  }
+
+	 action void JM_KatanaAltFire()
+	 {
+			int dmg; 
+			if(PlayerHasBerserk()) {
+				if(health < 30) 
+				{dmg = 100;}
+				else {dmg = 60;}
+				}
+			else {dmg = 15;}
+			A_CustomPunch(dmg * random(1,6), TRUE, CPF_NOTURN, "KatanaPuff", 96, 0, 0, "none", "weapons/katana/hit");
+	}
+
 	  States
 	  {
 	  Ready:
 	  ReadyToFire:
-		KTAG A 1 JM_WeaponReady();/* {
-		if(FindInventory("MO_PowerMegaBers"))
-		{return JM_WeaponReady(WRF_DISABLESWITCH);}
-		return JM_WeaponReady();
-		}*/
+		KTAG A 1 JM_WeaponReady();
 		Loop;
 	  Deselect:
 		TNT1 A 0 A_STARTSOUND("weapons/katana/sheathe", CHAN_AUTO, CHANF_DEFAULT,0.7);
@@ -43,6 +75,7 @@ class Katana: JMWeapon replaces Fist
 		TNT1 A 0 A_STARTSOUND("weapons/katana/swing", 7,CHANF_DEFAULT, 0.45);
 		TNT1 A 0
 		{
+			A_SetInventory("LeftKatanaAttack",0);
 			if(health <= 30 || CountInv("MO_PowerSpeed") == 1)
 			return ResolveState(1);
 			return resolveState(null);
@@ -57,14 +90,7 @@ class Katana: JMWeapon replaces Fist
 		KTAF G 1;
 		KTAF H 1 {
 			 JM_CheckForQuadDamage();
-			if(CountInv("PowerStrength") == 1)
-			{
-				A_CustomPunch(120, TRUE, CPF_NOTURN, "KatanaPuff", 96, 0, 0, "none", "weapons/katana/hit");
-			}
-			else
-			{
-				A_CustomPunch(36, TRUE, CPF_NOTURN, "KatanaPuff", 96, 0, 0, "none", "weapons/katana/hit");
-			}
+			 JM_KatanaAttack();
 		}
 		KTAF IJ 1;
 		TNT1 A 0
@@ -75,9 +101,10 @@ class Katana: JMWeapon replaces Fist
 		}
 		TNT1 AAA 1;
 		TNT1 A 0 A_JumpIf(PressingFire(), "Swing2");
-		Goto Ready;
+		Goto ReturnToAction;
 	Swing2:
 		TNT1 A 0 A_STARTSOUND("weapons/katana/swing", 6);
+		TNT1 A 0 A_SetInventory("LeftKatanaAttack",1);
 		KTAF LM 1;
 		TNT1 A 0
 		{
@@ -88,19 +115,7 @@ class Katana: JMWeapon replaces Fist
 		KTAF NO 1;
 		KTAF Q 1 {
 			 JM_CheckForQuadDamage();
-			if(CountInv("PowerStrength") == 1)
-			{
-				if(health <= 30)
-				{
-				A_CustomPunch(260, TRUE, CPF_NOTURN, "KatanaPuff2", 96, 0, 0, "none", "weapons/katana/hit");
-				}
-				else
-				{A_CustomPunch(130, TRUE, CPF_NOTURN, "KatanaPuff2", 96, 0, 0, null, "weapons/katana/hit");}
-			}
-			else
-			{
-				A_CustomPunch(36, TRUE, CPF_NOTURN, "KatanaPuff2", 96, 0, 0, null, "weapons/katana/hit");
-			}
+			 JM_KatanaAttack();
 		}
 		TNT1 A 0
 		{
@@ -149,19 +164,7 @@ class Katana: JMWeapon replaces Fist
 		KTAH G 1;
 		KTAF H 1 {
 			JM_CheckForQuadDamage();
-			if(CountInv("PowerStrength") == 1)
-			{
-				if(health <= 30)
-				{
-				A_CustomPunch(280, TRUE, CPF_NOTURN, "KatanaPuff", 96, 0, 0, "none", "weapons/katana/hit");
-				}
-				else
-				{A_CustomPunch(170, TRUE, CPF_NOTURN, "KatanaPuff", 96, 0, 0, "none", "weapons/katana/hit");}
-			}
-			else
-			{
-				A_CustomPunch(45, TRUE, CPF_NOTURN, "KatanaPuff", 96, 0, 0, "none", "weapons/katana/hit");
-			}
+			JM_KatanaAltFire();
 		}
 		TNT1 A 0
 		{
@@ -182,6 +185,7 @@ class Katana: JMWeapon replaces Fist
 		KTAK FE 1;
 		TNT1 A 0
 		{
+			A_SetInventory("LeftKatanaAttack",0);
 			if(health <= 30 || CountInv("MO_PowerSpeed") == 1)
 			return ResolveState(2);
 			return resolveState(null);

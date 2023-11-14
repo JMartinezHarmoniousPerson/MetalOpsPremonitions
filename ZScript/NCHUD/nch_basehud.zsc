@@ -321,7 +321,7 @@ class NCH_BaseHUD : BaseStatusBar
 	virtual string NCHF_GetPowerupTimeAsString (Powerup item)
 	{
 		// In case it is given an icon.
-		if (item is 'PowerStrength')
+		if (item is 'MO_PowerStrength')
 		{
 			return NCHC_POWTIME_INFINITE;
 		}
@@ -1207,7 +1207,7 @@ class NCH_BaseHUD : BaseStatusBar
 			if(i == 0)
 			{
 				// Health icon.
-				DrawImage(CPlayer.mo.FindInventory("PowerStrength") ? "H_ICNBSK" : "H_ICNHP", iconpos, DI_ITEM_CENTER, box : (18, 18));
+				DrawImage(CPlayer.mo.FindInventory("MO_PowerStrength") ? "H_ICNBSK" : "H_ICNHP", iconpos, DI_ITEM_CENTER, box : (18, 18));
 			}
 			else
 			{

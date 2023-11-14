@@ -5,7 +5,7 @@ class MO_HealthBonus : HealthBonus// replaces HealthBonus
 	{
 	  +COUNTITEM;
 	  +INVENTORY.ALWAYSPICKUP;
-	  Inventory.Amount 2;
+	  Inventory.Amount 1;
 	  Inventory.MaxAmount 300;
 	  Inventory.PickupMessage "$GOTHTHBONUS"; // "Picked up a health bonus."
 	  Inventory.PickupSound "misc/healthbonus";
@@ -23,10 +23,10 @@ class MO_DoubleHealthBonus : MO_HealthBonus
 {
 	Default
 	{
-	  Inventory.Amount 4;
-	  Inventory.PickupMessage "Picked up a stronger health bonus. (+4 health)"; // "Picked up a health bonus."
+	  Inventory.Amount 2;
+	  Inventory.PickupMessage "Picked up a stronger health bonus."; // "Picked up a health bonus."
 	  Inventory.PickupSound "doublehealth";
-	  Health.LowMessage 25, "Picked up a stronger health bonus. Not much but you needed it.";
+	  Health.LowMessage 25, "Picked up a stronger health bonus. Not much but was necessary.";
 	}
 	States
 	{
@@ -40,8 +40,8 @@ class MO_TripleHealthBonus : MO_HealthBonus
 {
 	Default
 	{
-	  Inventory.Amount 6;
-	  Inventory.PickupMessage "Picked up a greater health bonus. (+6 health)"; // "Picked up a health bonus."
+	  Inventory.Amount 3;
+	  Inventory.PickupMessage "Picked up a greater health bonus."; // "Picked up a health bonus."
 	  Inventory.PickupSound "triplehealth";
 	  Health.LowMessage 25, "Picked up a greater health bonus. You needed it, despite it not being enough.";
 	}
@@ -104,8 +104,12 @@ Class MO_Berserk : CustomInventory// replaces Berserk
 		Stop;
 		
 		Pickup:	
-		TNT1 A 0 A_GiveInventory("PowerStrength");
+		TNT1 A 0 A_GiveInventory("MO_PowerStrength");
 		TNT1 A 0 HealThing(100, 0);
+		TNT1 A 0 A_SetBlend("Red", .9, 50);
 		Stop;
 	}
 }
+
+Class MO_PowerStrength : PowerStrength
+{Default{PowerUp.Color "000000", 0;}}
