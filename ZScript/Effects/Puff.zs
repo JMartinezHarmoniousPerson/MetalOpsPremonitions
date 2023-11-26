@@ -22,6 +22,7 @@ Class UpdatedBulletPuff : BulletPuff //Inherits from base BulletPuff to fix a so
 		Spawn:
 		NULL A 0;
 		NULL A 0 A_SpawnItemEX("BulletImpactSmoke");
+		SPRK AAA 0 A_SpawnProjectile("MO_RocketSmokeTrail", 2, 0, random(0, 360), flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: random(0, 360));
 		SPRK A 0 A_SpawnItemEx("SparkSpray", 2, 0, 0, 0, 0, 0, 0);
 		SPRK A 0 A_SpawnItemEx("GunsmokeSpray", -2, random(-2, 2), random(-2, 2), 0, 1.5+random(0,10)*0.1, random(-5,5)*0.1, 0);
 		TNT1 AAA 0 A_SpawnProjectile("EnhancedHitSpark1", 2, 0, frandom(0,1)*frandom (-180, 180),  flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: pitch - frandom(0,1)*frandom (30, 360));
@@ -101,6 +102,7 @@ class ShotgunPuff20GA : ShotgunShellPuff
 		NULL A 0;
 		NULL A 0 A_SpawnItemEX("BulletImpactSmoke");
 		SPRK A 0 A_SpawnItemEx("SparkSpray", 2, 0, 0, 0, 0, 0, 0);
+		SPRK AAA 0 A_SpawnProjectile("MO_RocketSmokeTrail", 2, 0, random(0, 360), flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: random(0, 360));
 		SPRK A 0 A_SpawnItemEx("LittleGunsmokeSpray", -2, random(-2, 2), random(-2, 2), 0, 1.5+random(0,10)*0.1, random(-5,5)*0.1, 0);
 		TNT1 AAA 0 A_SpawnProjectile("EnhancedHitSpark1", 2, 0, frandom(0,1)*frandom (-180, 180),  flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: pitch - frandom(0,1)*frandom (30, 360));
 		TNT1 AA 0 A_SpawnProjectile("EnhancedHitSpark2", 2, 0, frandom(0,1)*frandom (-180, 180), flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: pitch - frandom(0,1)*frandom (30, 360));

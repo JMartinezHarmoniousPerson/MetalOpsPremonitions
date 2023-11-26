@@ -10,6 +10,14 @@ weapons/pistol/magin PISTIN
 weapons/pistol/magout PISTOUT
 weapons/pistol/magclick PISTCLK
 weapons/pistol/pickup PISPICK
+weapons/pistol/chamberback PISCLKBK
+weapons/pistol/chamberforward PISCLKFW
+weapons/pistol/silencerattach1 SILATCH1
+weapons/pistol/silencerattach2 SILATCH2
+weapons/pistol/silencerfoley SILFOLEY 
+weapons/pistol/inspectfoley PISINSP
+weapons/pistol/silencerremove1 SILRMV1
+weapons/pistol/silencerremove2 SILRMV2
 
 $volume weapons/pistol/fire 0.75
 

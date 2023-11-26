@@ -8,7 +8,7 @@ class MO_ArmorBonus : BasicArmorBonus// replaces ArmorBonus
 	  Inventory.PickupMessage "$GOTARMBONUS";
 	  Inventory.Icon "ARM1A0";
 	  Armor.SavePercent 33.335;
-	  Armor.SaveAmount 2;
+	  Armor.SaveAmount 1;
 	  Armor.MaxSaveAmount 300; // 300 so that it doesn't break item count
 	  +COUNTITEM;
 	  inventory.pickupsound "misc/armorbonus";
@@ -27,7 +27,7 @@ class MO_GeminusBonus : MO_ArmorBonus
 	Default
 	{
 		Inventory.PickupMessage "Picked up a Gemnius Armor Shard.";
-		Armor.SaveAmount 4;
+		Armor.SaveAmount 2;
 		inventory.pickupsound "gemarmorbonus";
 	}
 	States
@@ -43,7 +43,7 @@ class MO_TrebleBonus : MO_ArmorBonus
 	Default
 	{
 		Inventory.PickupMessage "Picked up a Treble Armor Shard.";
-		Armor.SaveAmount 6;
+		Armor.SaveAmount 3;
 		inventory.pickupsound "trebarmorbonus";
 	}
 	States

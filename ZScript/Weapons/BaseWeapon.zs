@@ -26,7 +26,7 @@ class JMWeapon : Weapon
 	{
 		If(CheckInventory("MO_PowerQuadDmg",1))
 		{
-			A_StartSound("powerup/quadfiring",70, CHANF_OVERLAP,3.0,ATTN_NONE);
+			A_StartSound("powerup/quadfiring",70, CHANF_DEFAULT,3.0,ATTN_NONE);
 		}
 	}
 	
@@ -59,7 +59,14 @@ class JMWeapon : Weapon
 		return invoker.isFirstTime;
 	}
 	
-	action state JM_WeaponReady(int flags = WRF_ALLOWUSER1|WRF_ALLOWUSER3|WRF_ALLOWUSER4)
+	enum ButtonPresses
+	{
+		WRF_USERBTNS = WRF_ALLOWUSER1|WRF_ALLOWUSER4,
+	}
+
+// Don't complain if this is an action state rather than an action void
+// I found it easier an action state in terms of returning to state labels.
+	action state JM_WeaponReady(int flags = WRF_USERBTNS)
 	{	
 		A_WeaponReady(flags);
 		if(JustPressed(BT_USER1))
@@ -129,7 +136,7 @@ class JMWeapon : Weapon
 			A_SetAngle(angle+gunAngle, SPF_INTERPOLATE);
 		}
 	}
-	
+
     Default
     {
         Weapon.BobStyle "InverseSmooth";

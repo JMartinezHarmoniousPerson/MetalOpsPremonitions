@@ -120,7 +120,7 @@ class KickSmoke : ShotgunSmoke
 {
 	Default
 	{
-		Scale .2;
+		Scale .31;
 		Alpha 0.4;
 	}
 }

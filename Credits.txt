@@ -6,6 +6,7 @@ Sounds - Valve (L4D2 Pistol Draw, L4D1 Reload sounds), Code Renard (Firing sound
 Pickup sprite - YukesVonFaust, torridgristle, Slax
 Casings - Captain J
 Dry Fire Sound - Mike Koenig(from Soundbible.com)
+Silencer sprites: Center frames (JoeyTD), reload silencer 1 (Dox778?, PB Team?), reload silencer 2 (
 
 Lever Shotty: 
 LossForWords - sprites
@@ -28,8 +29,9 @@ to create this
 - Sergeant Mark IV - My other inspiration to create this mod and other resources,
  and for Brutal Doom mentions
 - Matt - JustPressed, JustReleased and User input code
-- TiberiumSoul - Insanity's Requiem for being another inspiration for my mod 
+- TiberiumSoul - Insanity's Requiem for being another inspiration for my mod, along with resources.
 - PillowBlaster - Trailblazer styled fast attack for the Katana, and inspiration
+- Endie aka Moa Dixon - Some resources from Hellrider and Slayer's Rampage used.
 
 - Running With Scissors - Postal 2 Kicking sounds
 

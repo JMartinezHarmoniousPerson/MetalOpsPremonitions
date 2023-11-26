@@ -60,6 +60,8 @@ invul_loop1 INVLLOP1
 invul_loop2 INVLLOP2
 powerup/invul_looplayer INVLLOP3
 powerup/invul_end INVLEND
+powerup/invul_damage INVLDMG
+
 powerup/invis INVSPICK
 powerup/inviswear INVSWARN
 

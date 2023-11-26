@@ -51,7 +51,7 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 	Fire:
 		PSTG A 0 JM_CheckMag("LeverShottyAmmo", "Reload");
 		W87F A 1 BRIGHT {
-			A_FireBullets (random(3, 6), frandom(2,6.7), 9, 12, "ShotgunShellPuff", FBF_NORANDOM,0,"MO_BulletTracer",0);
+			A_FireBullets (random(3, 6), frandom(2,5), 9, 12, "ShotgunShellPuff", FBF_NORANDOM,0,"MO_BulletTracer",0);
 			A_StartSound ("weapons/levershotty/fire", CHAN_WEAPON);
 			JM_UseAmmo("LeverShottyAmmo",1);
 			A_SpawnItemEx("ShotgunSmoke",20,0,34,2,0,0);
@@ -167,7 +167,7 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		W87A BA 1;
 		Goto ReadyToFire;
 	Reload:
-		PSTG A 0 A_JumpIfInventory("LeverShottyAmmo",7,"ReadyToFire");
+		PSTG A 0 A_JumpIfInventory("LeverShottyAmmo",6,"ReadyToFire");
 		PSTG A 0 A_JumpIfInventory("MO_ShotShell",1,1);
 		goto ReadyToFire;
 		W8R1 A 1 JM_WeaponReady(WRF_NOFIRE);

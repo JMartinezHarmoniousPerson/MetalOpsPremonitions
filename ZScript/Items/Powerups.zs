@@ -208,6 +208,7 @@ Class MO_SuitPower : PowerIronFeet
 
 Class MO_MegaBerserk : Inventory
 {
+	Weapon PrevWeapon;
 	Default
 	{
 		+COUNTITEM;

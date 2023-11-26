@@ -2,6 +2,10 @@
 //   Katana    //
 ////////////////
 
+class KatanaBeamMode : MO_ZSToken{}
+
+class LeftKatanaAttack : MO_ZSToken{} //For the JM_KatanaAttack function
+
 class Katana: JMWeapon replaces Fist
 {
 	  Default 
