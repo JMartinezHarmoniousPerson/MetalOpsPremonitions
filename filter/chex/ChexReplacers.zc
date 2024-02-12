@@ -1,0 +1,67 @@
+class ChexReplacementHandler : EventHandler
+{
+    override void CheckReplacement(replaceEvent e)
+    {
+        let cls = e.Replacee.GetClassName();
+		PlayerInfo p = players[consoleplayer];
+        switch (cls)
+        {
+		//Chex Ammo
+        case 'MiniZorchRecharge':	e.Replacement = "Clip";	break;
+        case 'MiniZorchPack':	e.Replacement = "Clipbox";	break;
+        case 'LargeZorchRecharge':	e.Replacement = "Shell";	break;
+		case 'LargeZorchPack':	e.Replacement = "Shellbox";	 break;
+		case 'PropulsorZorch': e.Replacement = "RocketAmmo";  break;
+		case 'PropulsorZorchPack':  e.Replacement = "RocketBox";	break;
+		case 'PhasingZorch': e.Replacement = "Cell"; break;
+		case 'PhasingZorchPack': e.Replacement = "Cellpack";	break;
+		
+		 //Weapons
+		case 'SuperBootspork': e.Replacement = "Chainsaw"; break;
+		case 'MiniZorcher':	
+			if(p.mo is "JMPlayerDeagleStart")
+			e.Replacement = "MO_Deagle";
+			else
+			e.Replacement = "EnforcerPistol";
+			break;
+		case 'LargeZorcher': e.Replacement = "Shotgun"; break;
+		case 'SuperLargeZorcher': e.Replacement = "SuperShotgun"; break;
+		case 'RapidZorcher': e.Replacement = "Chaingun"; break;
+		case 'ZorchPropulsor': e.Replacement = "RocketLauncher";	break;
+		case 'PhasingZorcher': e.Replacement = "PlasmaRifle"; break;
+		case 'LAZDevice': e.Replacement = "BFG9000";	break;
+			
+		//Powerups
+		case 'ComputerAreaMap':	e.Replacement = "Allmap";	break;
+		case 'SlimeProofSuit': e.Replacement = "Radsuit"; break;
+		case 'UltraGoggles': e.Replacement = "Infrared"; break;
+		case 'SuperchargeBreakfast': e.Replacement = "Soulsphere";	break;
+		case 'Zorchpack': 
+		{
+			int c = random[c](0,5);
+			switch(c)
+			{
+				case 4:
+				case 5:
+				e.Replacement = "Berserk"; 
+				break;
+				
+				default:
+				e.Replacement = "BackPack";
+				break;
+			}
+		}
+		break;
+		
+		//Health
+		case 'GlassOfWater': e.Replacement = "HealthBonus"; break;
+		case 'BowlOfFruit': e.Replacement = "Stimpack"; break;
+		case 'BowlOfVegetables': e.Replacement = "Medikit"; break;
+		
+		//Armor
+		case 'SlimeRepellent': e.Replacement = "ArmorBonus"; break;
+		case 'ChexArmor': e.Replacement = "GreenArmor"; break;
+		case 'SuperChexArmor': e.Replacement = "BlueArmor"; break;
+        }
+    }
+}
