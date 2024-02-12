@@ -93,6 +93,12 @@ Class AssaultRifle : JMWeapon
 			TNT1 A 0 A_JumpIfInventory("ARAmmo",30,"ReadyToFire");
 			TNT1 A 0 A_JumpIfInventory("HighCalClip",1,1);
 			Goto ReadyToFire;
+			TNT1 AAA 0;
+			AR10 A 0 
+			{
+				if(CountInv("ARAmmo") < 1) {return A_Jump(128, "MagFlipReload");}
+				return ResolveState(Null);
+			}
 			AR10 ABC 1 JM_WeaponReady(WRF_NOFIRE);
 			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			AR10 DEF 1 JM_WeaponReady(WRF_NOFIRE);
@@ -102,7 +108,7 @@ Class AssaultRifle : JMWeapon
 				JM_WeaponReady(WRF_NOFIRE);
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(4);}
 				}
-			AR12 A 0 A_JumpIf(CountInv("ARAmmo") < 1, 2);
+			A612 A 0 A_JumpIf(CountInv("ARAmmo") < 1, 2);
 			AR10 A 0;
 			"####" J 1 A_StartSound("weapons/ar/magout", CHAN_AUTO);
 			"####" KLM 1 JM_WeaponReady(WRF_NOFIRE);
@@ -122,11 +128,61 @@ Class AssaultRifle : JMWeapon
 			AR10 UV 1;
 			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,4);
 			AR10 WWWWXYZ 1; //JM_WeaponReady(WRF_NOFIRE);
-			AR11 ABC 1;// JM_WeaponReady(WRF_NOFIRE);
+			AR11 AB 1 JM_WeaponReady(WRF_NOFIRE);
+			AR11 J 0 A_StartSound("weapons/ar/ReloadEnd",1);
 			AR11 A 0 A_JumpIf(CountInv("GunIsEmpty") >= 1, "Chamber");
+			AR11 C 1 JM_WeaponReady(WRF_NOFIRE);
 			 AR1G A 1;
 			 Goto ReadyToFire;
-       
+       MagFlipReload:
+			AR1G A 0 A_StartSound("weapons/ar/arflipstart", 0);
+			AR12 ABC 1 JM_WeaponReady(WRF_NOFIRE);
+			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			AR12 DEF 1 JM_WeaponReady(WRF_NOFIRE);
+			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			AR12 GH 1 JM_WeaponReady(WRF_NOFIRE);
+			AR11 J 0 A_StartSound("weapons/ar/magflipsound",0);
+			AR12 I 11 {
+				JM_WeaponReady(WRF_NOFIRE);
+				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(6);}
+				}
+			AR12 J 1 JM_WeaponReady(WRF_NOFIRE);	
+			AR12 K 1 A_StartSound("weapons/ar/arflipend", 0);
+			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
+			AR12 L 1 JM_WeaponReady(WRF_NOFIRE);
+			AR10 A 0 A_SpawnItemEx('ARMagazine', 28, 7, 29, random(-1,2), random(-8,-4), random(2,3));
+			AR12 MNO 1 JM_WeaponReady(WRF_NOFIRE);
+			AR12 P 5 {
+				JM_WeaponReady(WRF_NOFIRE);
+				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(3);}
+				}
+			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			AR12 QRS 1 JM_WeaponReady(WRF_NOFIRE);
+			AR10 A 0 A_StartSound("weapons/ar/magin", CHAN_AUTO);
+			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			AR12 TUV 1 JM_WeaponReady(WRF_NOFIRE);
+			AR10 A 0 JM_ReloadGun("ARAmmo", "HighCalClip",30,1);
+			AR12 W 5 {
+				JM_WeaponReady(WRF_NOFIRE);
+				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(3);}
+				}
+			AR12 A 0 A_SetInventory("GunIsEmpty",0);
+			AR12 XYZ 1;
+			AR13 AB 1 JM_WeaponReady(WRF_NOFIRE);
+			AR11 J 0 A_StartSound("weapons/ar/chamberbck",1);
+			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			AR13 CCDE 1  JM_WeaponReady(WRF_NOFIRE);
+			AR13 F 1;
+			AR11 J 0 A_StartSound("weapons/ar/chamberfwd",1);
+			AR13 G 1;
+			AR13 H 7
+			{
+				JM_WeaponReady(WRF_NOFIRE);
+				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(4);}
+			}
+			AR11 J 0 A_StartSound("weapons/ar/ReloadEnd",1);
+			AR13 IJKL 1;
+			Goto ReadyToFire;
 		ActionSpecial:
 			"####" A 0 
 			{
@@ -149,14 +205,13 @@ Class AssaultRifle : JMWeapon
 
 		Chamber:
 			TNT1 A 0 A_SetInventory("GunIsEmpty",0);
-			AR1G A 1 A_StartSound("weapons/ar/select",0);
-			AR11 DEFGHIJ 1;
+			AR1G A 0 A_StartSound("weapons/ar/select",0);
+			AR11 D 1;
+			AR11 EF 2;
 			AR11 J 0 A_StartSound("weapons/ar/chamberbck",1);
-			AR11 JK 1;// A_StartSound("weapons/ar/chamberbck",1);
-			AR11 LMM 1;
+			AR11 GH 2;
 			AR11 N 0 A_StartSound("weapons/ar/chamberfwd",2);
-			AR11 NOPQQQQQ 1;
-			AR11 GFED 1;
+			AR11 IJKLMNO 1;
 			GOTO ReadyToFire;
 		
 		FlashKick:

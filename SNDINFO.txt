@@ -126,6 +126,7 @@ $random weapons/ar/fire {arfire1 arfire2}
 arfire1 arfire1
 arfire2 arfire2
 
+//Combat Rifle
 weapons/ar/select ARSELCT
 weapons/ar/pickup ARPICK
 
@@ -133,10 +134,15 @@ weapons/pistol/dryfire PISTDRY
 weapons/ar/dryfire ARDRYFIR
 weapons/ar/magout ARMAGOU
 weapons/ar/magin ARMAGIN
+weapons/ar/ReloadEnd AREND
+weapons/ar/arflipstart "Sounds/Weapons/AssaultRifle/AR_Reload_Empty_Rotate.ogg"
+weapons/ar/arflipend "Sounds/Weapons/AssaultRifle/AR_Reload_Empty_Rotate_End.ogg"
+weapons/ar/magflipsound "Sounds/Weapons/AssaultRifle/AR_Empty_Mag_Flip.ogg"
 
 weapons/ar/chamberbck ARCHMBK
 weapons/ar/chamberfwd ARCHMFW
 
+//Minigun
 weapons/minigun/fire DSMINIGF
 
 weapons/minigun/startfire MNGNSHOT
