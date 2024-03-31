@@ -10,6 +10,11 @@ actor GrenadeTimer : Inventory {Inventory.MaxAmount 50}
 
 actor GrenadeCookTimer : Inventory {Inventory.MaxAmount 105}
 
+actor Timer: Inventory {Inventory.MaxAmount 9999}
+
 actor GrenadeThrownTimer : GrenadeCookTimer{}
 
 actor GunIsEmpty : MO_Token{}
+
+actor SergeantClass : MO_Token 
+{}

@@ -181,21 +181,28 @@ rocket/flyloop "Sounds/Weapons/RocketLauncher/RocketFlyLoop.ogg"
 
 $attenuation rocket/nukeexplosion 0.3
 
-$random casings/largemag {lgdrop1 lgdrop2 lgdrop3 lgdrop4}
-lgdrop1 DSAOUNC1
-lgdrop2 DSAOUNC2
-lgdrop3 DSAOUNC3
-lgdrop4 DSAOUNC4
+$random casings/largemag  { largedrop1 largedrop2 largedrop3 largedrop4 largedrop5 largedrop6 }
+largedrop1		"Sounds/SFX/Casings/LargeMag/LargeMagBounce1.ogg"
+largedrop2		"Sounds/SFX/Casings/LargeMag/LargeMagBounce2.ogg"
+largedrop3		"Sounds/SFX/Casings/LargeMag/LargeMagBounce3.ogg"
+largedrop4		"Sounds/SFX/Casings/LargeMag/LargeMagBounce4.ogg"
+largedrop5		"Sounds/SFX/Casings/LargeMag/LargeMagBounce5.ogg"
+largedrop6		"Sounds/SFX/Casings/LargeMag/LargeMagBounce6.ogg"
+$volume casings/largemag 0.8
 
 $random casings/shell {shell1 shell2 shell3}
 shell1 dsshell1
 shell2 dsshell2
 shell3 dsshell3
 
-$random casings/heavybrass {hvybrass1 hvybrass2 hvybrass3}
-hvybrass1 dscasin1
-hvybrass2 dscasin2
-hvybrass3 dscasin3
+$random casings/heavybrass  { hvybrass1 hvybrass2 hvybrass3 hvybrass4 hvybrass5 hvybrass6 hvybrass7 } 
+hvybrass1	dscasin1
+hvybrass2	dscasin2
+hvybrass3	dscasin3
+hvybrass4	dscasin4
+hvybrass5	dscasin5
+hvybrass6	dscasin6
+hvybrass7	dscasin7
 
 $random casings/lightbrass {litebrass1 litebrass2 litebrass3 litebrass4 litebrass5}
 litebrass1 "Sounds/SFX/Casings/LightBrass/Light_Brass1.ogg"
@@ -281,6 +288,7 @@ weapons/bfg/chargelayer B7GCHAFF
 weapons/bfg/fire B7GFIRE
 weapons/bfg/ballfly b7gfly
 weapons/bfg/explosion B7GEXPLO
+$attenuation weapons/bfg/explosion 0.3
 
 //Unmaker
 weapons/unmaker/raise UNMUP
@@ -288,6 +296,7 @@ weapons/unmaker/idle UNMIDL
 $random weapons/unmaker/fire {UNMFIR1 UNMFIR2}
 UNMFIR1 UNMFIR1
 UNMFIR2 UNMFIR2
+weapons/unmaker/afire UNMFIRE
 
 weapons/unmaker/pick UNMPICK
 
@@ -306,10 +315,8 @@ weapons/deag/slideforward DEGCHFWD
 
 FragGrenade/pin FRAGPIN
 FragGrenade/Throw FRGTOSS
-$random FragGrenade/Bounce {grnbounce1 grnbounce2 grnbounce3 grnbounce4 grnbounce5}
+$random FragGrenade/Bounce {grnbounce1 grnbounce2 grnbounce3}
 grnbounce1 FRGBNC1
 grnbounce2 FRGBNC2
 grnbounce3 FRGBNC3
-grnbounce4 FRGBNC4
-grnbounce5 FRGBNC5
 FragGrenade/Pickup FRAGPKUP

@@ -2,10 +2,21 @@ class JMWeapon : Weapon
 {
 	bool isFirstTime;
 	property firstTime: isFirstTime;
-	
 	bool pressedKick;
 	property pressedKick: pressedKick;
-	
+
+	//weapons should ALWAYS bob, fucking fight me -popguy
+	override void DoEffect()
+	{
+		super.DoEffect();
+		let player = owner.player;
+		Cvar Bobbing = Cvar.GetCvar("MTOps_AlwaysBob",player);
+		if (player && player.readyweapon)
+		{
+			player.WeaponState |= WF_WEAPONBOBBING;
+		}
+	}
+
 	 //Credits: Matt
     action bool JustPressed(int which) // "which" being any BT_* value, mentioned above or not
     {
@@ -38,7 +49,7 @@ class JMWeapon : Weapon
 	
 	action bool PressingFire(){return player.cmd.buttons & BT_ATTACK;}
     action bool PressingAltfire(){return player.cmd.buttons & BT_ALTATTACK;}
-	
+
 	action state JM_CheckMag(name type, statelabel st = "Reload")
 	{
 		if(CountInv(type) <= 0)
@@ -47,7 +58,7 @@ class JMWeapon : Weapon
 		}
 		return ResolveState(Null);
 	}
-	
+
 	//Based on the Set and Check functions from Project Brutality
 	action void JM_SetInspect(bool type)
 	{
@@ -462,8 +473,8 @@ class JMWeapon : Weapon
 			TNT1 A 0 A_TakeInventory("GrenadeAmmo", 1, TIF_NOTAKEINFINITE);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
 			GREP LMNOPQ 1;
-			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
 			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "CookingGrenade");
+			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
 //			MOLO FG 2 A_SpawnItemEx ("FlameTrails",cos(pitch)*1,0,0-(sin(pitch))*-10,cos(pitch)*20,0,-sin(pitch)*20,0,SXF_NOCHECKPOSITION);
 			TNT1 AAAAA 1;
 			//HND1 I 2

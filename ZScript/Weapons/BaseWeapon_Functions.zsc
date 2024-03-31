@@ -1,0 +1,133 @@
+extend class JMWeapon
+{
+	 //Credits: Matt
+    action bool JustPressed(int which) // "which" being any BT_* value, mentioned above or not
+    {
+        return player.cmd.buttons & which && !(player.oldbuttons & which);
+    }
+    action bool JustReleased(int which)
+    {
+        return !(player.cmd.buttons & which) && player.oldbuttons & which;
+    }
+
+    //Based on IsPressingInput from Project Brutality
+    action bool PressingWhichInput(int which)
+    {
+        return player.cmd.buttons & which;
+    }
+	
+	action void JM_CheckForQuadDamage()
+	{
+		If(CheckInventory("MO_PowerQuadDmg",1))
+		{
+			A_StartSound("powerup/quadfiring",70, CHANF_DEFAULT,3.0,ATTN_NONE);
+		}
+	}
+	
+	action void JM_SetWeaponSprite(string s)
+	{
+		 let psp = Invoker.Owner.player.FindPSprite(PSP_WEAPON);
+		 psp.sprite = GetSpriteIndex(s);
+	}
+	
+	action bool PressingFire(){return player.cmd.buttons & BT_ATTACK;}
+    action bool PressingAltfire(){return player.cmd.buttons & BT_ALTATTACK;}
+	
+	action state JM_CheckMag(name type, statelabel st = "Reload")
+	{
+		if(CountInv(type) <= 0)
+		{
+			return ResolveState(st);
+		}
+		return ResolveState(Null);
+	}
+	
+	//Based on the Set and Check functions from Project Brutality
+	action void JM_SetInspect(bool type)
+	{
+		invoker.isFirstTime = type;
+	}
+	
+	action bool JM_CheckInspect()
+	{
+		return invoker.isFirstTime;
+	}
+	
+	enum ButtonPresses
+	{
+		WRF_USERBTNS = WRF_ALLOWUSER1|WRF_ALLOWUSER4,
+	}
+
+// Don't complain if this is an action state rather than an action void
+// I found it easier an action state in terms of returning to state labels.
+	action state JM_WeaponReady(int flags = WRF_USERBTNS)
+	{	
+		A_WeaponReady(flags);
+		if(JustPressed(BT_USER1))
+		{
+			if(CheckIfInReady())
+			return ResolveState("TossThrowable");
+		}
+		if(JustPressed(BT_USER4))
+		{
+			State ActionSpecial = invoker.owner.player.ReadyWeapon.FindState("ActionSpecial");
+			if(ActionSpecial != NULL && CheckIfInReady())
+				return ResolveState('ActionSpecial');
+			else	
+			return null;		
+		}	
+		return null;
+	}
+	
+	action void JM_PressedKick (bool type)
+	{
+		invoker.pressedKick = type;
+	}
+	
+	action bool JM_CheckIfKicked()
+	{
+		return invoker.pressedKick;
+	}
+	
+	action bool CheckIfInReady()
+	{
+		if ( (InStateSequence(invoker.owner.player.GetPSprite(PSP_WEAPON).Curstate,invoker.ResolveState("Ready")) || 
+			  InStateSequence(invoker.owner.player.GetPSprite(PSP_WEAPON).Curstate,invoker.ResolveState("ReadyToFire"))||
+			  InStateSequence(invoker.owner.player.GetPSprite(PSP_WEAPON).Curstate,invoker.ResolveState("ReadyToFire2"))||
+			   InStateSequence(invoker.owner.player.GetPSprite(PSP_WEAPON).Curstate,invoker.ResolveState("ReadyLoop"))
+			 ) )
+		{		
+			return true;
+		}
+		return false;
+	}
+	
+	action void JM_ReloadGun(name magammo, name reserve, int magMax, int reserveTake)
+	{
+		for(int i = 0; i < magMax; i++)
+		{
+			if(CountInv(reserve) < 1 || CountInv(magammo) == magMax) 
+			return;
+			
+			A_GiveInventory(magammo, 1);
+			A_TakeInventory(reserve, reserveTake, TIF_NOTAKEINFINITE);
+		}
+	}
+	
+//Basically A_TakeInventory but with the TIF_NOTAKEINIFNITE Flag built in, for the ammo
+	action void JM_UseAmmo(name ammotype, int count)
+	{
+		A_TakeInventory(ammotype, count, TIF_NOTAKEINFINITE);
+	}
+
+	action void JM_GunRecoil(float gunPitch, float gunAngle)
+	{
+		CVar checkRecoil = CVar.FindCVar("mo_nogunrecoil");
+		bool noRecoil = checkRecoil.GetBool();
+		if(!noRecoil)
+		{
+			A_SetPitch(pitch+gunPitch, SPF_INTERPOLATE);
+			A_SetAngle(angle+gunAngle, SPF_INTERPOLATE);
+		}
+	}
+}

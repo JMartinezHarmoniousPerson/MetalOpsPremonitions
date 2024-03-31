@@ -7,7 +7,7 @@ class MO_Unmaker : JMWeapon
         Weapon.AmmoGive 80;
 		Weapon.AmmoUse 6;
         Weapon.AmmoType "MO_Cell";
-        Inventory.PickupMessage "$GOTUNMAKER";
+        Inventory.PickupMessage "";
         Tag "$TAG_UNMAKER";
         Inventory.PickupSound "weapons/unmaker/pick";
     }
@@ -32,6 +32,7 @@ class MO_Unmaker : JMWeapon
             UNHF ABCDE 1;
         Hold:
             TNT1 A 0 A_StartSOund("weapons/unmaker/fire", 7, CHANF_DEFAULT,1,ATTN_NORM, 0.7);
+			TNT1 A 0 A_StartSOund("weapons/unmaker/afire", 2);
             TNT1 A 0 A_FireProjectile("UnmakerProjectile",0,1,0,0,0,0);
 			TNT1 A 0 JM_CheckForQuadDamage();
 		//	TNT1 A 0 A_RailAttack(1, 0, 0, "", "red", RGF_NOPIERCING | RGF_SILENT | RGF_CENTERZ | RGF_FULLBRIGHT, 0, "", 0, 0, 9999, 1, 0.3);
@@ -59,6 +60,7 @@ class MO_Unmaker : JMWeapon
         AltHold:
 			TNT1 A 0 A_JumpIf(CountInv("MO_Cell") < 15, "ReadyToFire");
             TNT1 A 0 A_StartSOund("weapons/unmaker/fire", 7, CHANF_DEFAULT,1,ATTN_NORM, 0.7);
+			TNT1 A 0 A_StartSOund("weapons/unmaker/afire", 2);
             TNT1 A 0 
 			{
 				A_FireProjectile("UnmakerProjectile",0,0,0,-4,0,0);
@@ -106,6 +108,35 @@ class MO_Unmaker : JMWeapon
 			STOP;
     }
 
+}
+
+class UnmakerPickup : CustomInventory
+{
+	override bool TryPickup(in out Actor toucher)
+	{
+		int msgtype = random(1,4);
+		switch(msgtype)
+		{
+			default:
+				toucher.A_Log("$GOTUNMAKER");
+				break;
+			case 4:
+				toucher.A_Log("$GOTUNMAKER2");
+				break;
+		}
+		GoAwayAndDie();
+		return Super.TryPickup(toucher);
+	}
+	Default {+DONTGIB Inventory.PickupMessage("");}
+	States
+	{
+		Spawn:
+			UNHD E -1;
+			Stop;
+		Pickup:
+			TNT1 A 1 A_GiveInventory("MO_Unmaker");
+			Stop;
+	}
 }
 
 //Based from BD and PB

@@ -1,4 +1,3 @@
-
 class PumpShotgun : JMWeapon
 {
     Default
@@ -69,8 +68,7 @@ class PumpShotgun : JMWeapon
 				A_SetAngle(angle+.13,SPF_INTERPOLATE);
 				}
 		    }
-            PSGF D 1;
-            PSGF E 1;
+            PSGF DE 1 JM_GunRecoil(0.3,.13);
             PSGG A 4
 			{
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}

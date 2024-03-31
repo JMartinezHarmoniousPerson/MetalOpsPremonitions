@@ -117,6 +117,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 			{
 				A_StartSound("weapons/plasma/fire", CHAN_AUTO,CHANF_DEFAULT,1,ATTN_NORM,1.2);
 				A_FireProjectile("JM_PlasmaBall", 0, FALSE, 0, 5, 0);
+				A_SpawnItemEx("PlasmaWepLightSpawner",0,0,0,0,0,0);
 				A_Overlay(-60, "MuzzleFlash");
 			}
 			A_TakeInventory("PlasmaAmmo",1);
@@ -226,49 +227,46 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 				JM_CheckForQuadDamage();
 				return ResolveState("HeatBlast");
 			}
-/*			else
-			{
-				JM_CheckForQuadDamage();
-				return ResolveState("CellDischarge");
-			}*/
 			return ResolveState(null);
 		}
 		TNT1 A 0;
-		Goto ReadyToFire;
-	
-	CellDischarge:
+		Goto FireBeam;
+
+	FireBeam:
 		PRGF A 0;
-		TNT1 A 0 A_JumpIfInventory("HeatedRoundsReady",1,"DoNothing");
-		TNT1 A 0 JM_CheckMag("PlasmaAmmo", "Cooldown");
+		PRGG AAA 2 A_WeaponOffset(0,3,WOF_ADD);
 		TNT1 A 0 A_JumpIf(JustReleased(BT_ALTATTACK), "CheckForCooldown");
+	HoldBeam:
+		TNT1 A 0 JM_CheckMag("PlasmaAmmo", "Cooldown");
 		PRGF A 1 
 		{
-			a_StartSound("weapons/plasma/fire", CHAN_AUTO,CHANF_DEFAULT,1,ATTN_NORM,1.2);
-			A_FireProjectile("JM_PlasmaBall", random(-4,4), FALSE, 0, random(3,7), 0, random(-4,5));
+			JM_CheckForQuadDamage();
+			A_WeaponOffset(random(-3,3), random(32, 36));
+			A_Railattack(8,0,0,"none","none",RGF_SILENT|RGF_FULLBRIGHT|RGF_NOPIERCING,1,"BulletPuff",0,0,8192,0,3,0,"PlasmaBeamTrail");
 			A_Overlay(-60, "MuzzleFlash");
-			A_TakeInventory("PlasmaAmmo",1);
-			A_GiveInventory("PlasmaRifleCooldownCount",1);
 			A_AlertMonsters();
 		}
-		PRGF C 1
+		PRGG A 0
 		{
 			if(!GetCvar("mo_nogunrecoil"))
 			{
-			A_SetPitch(pitch-0.7,SPF_Interpolate);
+			A_SetPitch(pitch-1.7,SPF_Interpolate);
 			A_SetAngle(angle+.09,SPF_INTERPOLATE);
 			}
 		}
-		TNT1 A 0 A_JumpIf(PressingAltFire(), "CellDischarge");
-		Goto CheckForCooldown;
+		PRGF B 1
+		{
+			JM_CheckForQuadDamage();
+			A_WeaponOffset(random(-3,3), random(32, 36));
+			A_Railattack(8,0,0,"none","none",RGF_SILENT|RGF_FULLBRIGHT|RGF_NOPIERCING,1,"BulletPuff",0,0,8192,0,3,0,"PlasmaBeamTrail");
+			A_AlertMonsters();
+			A_TakeInventory("PlasmaAmmo",1);
+		}
+		TNT1 A 0 A_JumpIf(PressingAltFire(), "HoldBeam");
+		Goto Cooldown;
 	
 	DoNothing:
 		TNT1 A 0;
-		Goto ReadyToFire;
-		
-	CheckForCooldown:
-		TNT1 A 0;
-		TNT1 A 0 A_JumpIfInventory("PlasmaRifleCooldownCount",5, "Cooldown");
-		TNT1 A 0 A_SetInventory("PlasmaRifleCooldownCount",0);
 		Goto ReadyToFire;
 		
 	
@@ -794,6 +792,45 @@ class JM_SuperHeatBlastMissile : JM_HeatBlastMissile
 		}
 		TNT1 AAA 1;
 		Stop;
+	}
+}
+
+Class PlasmaBeamTrail : Actor
+{
+	Default
+	{
+	+FORCEXYBILLBOARD
+	+THRUACTORS
+	+NOGRAVITY
+	+RANDOMIZE
+	+Missile
+	Renderstyle "add";
+	Alpha 0.6;
+	scale 0.3;
+	}
+	States
+	{
+	Spawn:
+		PAR2 A 4 Bright;
+		Stop;
+	}
+}
+
+class PlasmaWepLightSpawner : Actor
+{
+	Default
+	{
+		+THRUACTORS;
+		+NONSHOOTABLE;
+		+NOGRAVITY;
+	}
+	States
+	{
+		Spawn:
+			TNT1 A 3;
+		Death:
+			TNT1 A 0;
+			Stop;
 	}
 }
 

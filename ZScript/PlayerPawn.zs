@@ -13,6 +13,17 @@ class JMPlayerPawn : DoomPlayer
 		}
 	}
 
+	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
+	{
+		PlayerInfo plyr = Self.Player;
+		if(!plyr || plyr.mo != Self) return 0;
+		if(plyr.mo.CountInv("MO_PowerInvul") == 1)
+		{
+			A_StartSound("powerup/invul_damage",3);
+		}
+		return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
+	}
+
     Default
     {
         Player.StartItem "EnforcerPistol";
@@ -56,7 +67,7 @@ class JMPlayerDeagleStart : DoomPlayer
 
 	Default
     {
-		Player.StartItem "SergeantClassToken";
+//		Player.StartItem "SergeantClassToken";
         Player.StartItem "MO_Deagle";
 		Player.DisplayName "Sergeant (Deagle Start)";
 		Player.CrouchSprite "PLYC";
@@ -67,6 +78,7 @@ class JMPlayerDeagleStart : DoomPlayer
 		Player.WeaponSlot 5, "MO_RocketLauncher";
 		Player.WeaponSlot 6, "JM_PlasmaRifle";
 		Player.WeaponSlot 7, "MO_BFG9000", "MO_Unmaker";
+		Player.StartItem "SergeantClass", 1;
 		Player.StartItem "MODeagleAmmo",7;
 		Player.StartItem "Gasoline", 200;
 		Player.StartItem "LowCalClip",50;

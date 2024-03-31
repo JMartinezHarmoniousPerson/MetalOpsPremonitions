@@ -6,9 +6,9 @@ class JM_SSG : JMWeapon replaces SuperShotgun
     {
         Weapon.AmmoUse 0;
         Weapon.AmmoGive 8;
-        Weapon.AmmoType1 "MO_FlakShell";
+        Weapon.AmmoType1 "MO_ShotShell";
 		Weapon.AmmoType2 "SSGAmmo";
-        Inventory.PickupMessage "You got the Double Barrel Flak Shotgun!";
+        Inventory.PickupMessage "You got the Double Barrel Flak Shotgun! (Slot 3)";
         Obituary "$OB_MPSSHOTGUN";
         Tag "Double Barrel Flak Shotgun";
 		Inventory.PickupSound "weap/ssg/pickup";
@@ -75,7 +75,7 @@ class JM_SSG : JMWeapon replaces SuperShotgun
             SG2F DEFGHIJ 1;
             SG2S D 3;
 			SG2S A 0 JM_WeaponReady(WRF_NOFIRE);
-            SG2S A 0 A_JumpIfInventory("MO_FlakShell", 1, "Reload");
+            SG2S A 0 A_JumpIfInventory("MO_ShotShell", 1, "Reload");
             Goto ReadyToFire;
         AltFire:
             SG2S A 0 JM_CheckMag("SSGAmmo");
@@ -154,7 +154,7 @@ class JM_SSG : JMWeapon replaces SuperShotgun
 
         Reload:
             PISG A 0 A_JumpIf(CountInv("SSGAmmo") == 2, "ReadyToFire");
-            TNT1 A 0 A_JumpIfInventory("MO_FlakShell",1,1);
+            TNT1 A 0 A_JumpIfInventory("MO_ShotShell",1,1);
             Goto ReadyToFire;
             SGR1 ABCD 1;
             SGR1 E 1 A_StartSound("weapons/ssg/opengun", 6);
@@ -175,12 +175,12 @@ class JM_SSG : JMWeapon replaces SuperShotgun
             TNT1 A 0 A_SpawnItemEx("FlakShotgunCasing", 19, -17, 33, -3, random(-5,-3), random(3,4));
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
             SGR1 KKKK 1; 
-			TNT1 A 0 A_JumpIf(CountInv("MO_FlakShell") == 1, "ReloadLastShell");
+			TNT1 A 0 A_JumpIf(CountInv("MO_ShotShell") == 1, "ReloadLastShell");
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
             SGR1 LMNO 1;// JM_WeaponReady(WRF_NOFIRE);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			SGR1 PQRS 1;// JM_WeaponReady(WRF_NOFIRE);
-			SGR1 A 0 JM_LoadSSG("SSGAmmo","MO_FlakShell",2,1);
+			SGR1 A 0 JM_LoadSSG("SSGAmmo",MO_ShotShell,2,1);
             SGR1 T 1 
 			{
 				A_StartSound("weapons/ssg/fullinsert", 0);
@@ -213,13 +213,13 @@ class JM_SSG : JMWeapon replaces SuperShotgun
             SGR7 EEF 1 JM_WeaponReady(WRF_NOFIRE);
 		ReloadLastShell:
 			TNT1 A 0;
-			SGR8 A 0 A_JumpIf(CountInv("MO_FlakShell") == 1,2);
+			SGR8 A 0 A_JumpIf(CountInv("MO_ShotShell") == 1,2);
 			SGR7 A 0;
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
             "####" GHIJK 1 JM_WeaponReady(WRF_NOFIRE);
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			"####" KLMN 1 JM_WeaponReady(WRF_NOFIRE);
-			"####" A 0 JM_LoadSSG("SSGAmmo","MO_FlakShell",1);
+			"####" A 0 JM_LoadSSG("SSGAmmo","MO_ShotShell",1);
             "####" T 0 A_StartSound("weapons/ssg/singleinsert", 0);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
             SGR7 OO 1 JM_WeaponReady(WRF_NOFIRE);
@@ -234,7 +234,7 @@ class JM_SSG : JMWeapon replaces SuperShotgun
             Stop;
         
 		ReloadAnimation:
-			  TNT1 A 0 A_JumpIfInventory("MO_FlakShell",1,1);
+			  TNT1 A 0 A_JumpIfInventory("MO_ShotShell",1,1);
 			  Goto JustSelectTheSSG;
 			  SGR1 F 1 A_WeaponOffset(-33, 65);
 			  SGR1 F 1 A_WeaponOffset(-22, 54);
@@ -274,7 +274,7 @@ class JM_SSG : JMWeapon replaces SuperShotgun
 
     //This is so that the shell loading of the inventory give and take is in one function.
 	//Original made for the Lever and Pump shotguns but modified for the SSG
-	action void JM_LoadSSG(name type, name reserve, int c, int ca = 1)
+	action void JM_LoadSSG(name type, Class<Ammo> reserve, int c, int ca = 1)
 	{
 		if(CountInv(reserve) >= 2)
 		{

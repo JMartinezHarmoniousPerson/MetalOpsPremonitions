@@ -42,6 +42,18 @@ object UpdatedBulletPuff
     frame BPUFB { light BulletHitLightBig }
 }
 
+pointlight PlasmaWepLight
+{
+	color 0.0 0.2 0.8
+	size 80
+	offset 0 0 0
+}
+
+object PlasmaWepLightSpawner
+{
+	Frame TNT1A  { light PlasmaWepLight }
+}
+
 pointlight PlasmaBallLight
 {
 	color 0.0 0.2 0.8

@@ -9,11 +9,18 @@ mixin class MO_PowerUpWarning
 	void PowerWarning(name pwrname, string b4pwrname, string expiresnd, string blend, string txtcolor, string wearmsg = "is wearing off")
 	{
 		string str = b4pwrname.." \c"..txtcolor..pwrname.."\c- "..wearmsg;
-		if (Owner && EffectTics > 0 && EffectTics == ExpireSoundTics || EffectTics == 70 || EffectTics == 35)
+		if (Owner && EffectTics > 0)
 		{
+			switch(EffectTics)
+			{
+			case 105:
+			case 70:
+			case 35:
 			Owner.A_StartSound(expiresnd, 40, CHANF_OVERLAP, 1.0, ATTN_NONE);
 			Owner.A_Print(str, 1);
 			Owner.A_SetBlend(blend, .6, 10);
+			break;
+			}
 		}
 	}
 }
@@ -82,7 +89,6 @@ Class MO_Goggles : Infrared replaces Infrared
 
 Class MO_NightVision : PowerLightAmp
 {
-	mixin PowerUpExpiringBase;
 	mixin MO_PowerUpWarning;
 	override void DoEffect ()
     {
@@ -97,8 +103,7 @@ Class MO_NightVision : PowerLightAmp
 		Shader.SetUniform3f(Owner.Player,"NiteVis","u_posfilter",posfilter);
 		Shader.SetUniform1f(Owner.Player,"NiteVis","u_whiteclip",whiteclip);
 		Shader.SetUniform1f(Owner.Player,"NiteVis","u_desat",desat);
-		ExpireSoundTics = playTimer;
-		PowerWarning("Night Vision Goggles'", "The", "misc/goggleswarn", "00 aa 00", "d", "battery is running low");
+		PowerWarning("Night Vision Goggles'", "The", "powerupwearoff", "00 aa 00", "d", "battery is running low");
 	}
 	
 	override void EndEffect()
@@ -107,6 +112,7 @@ Class MO_NightVision : PowerLightAmp
 		if(!owner) return;
 		Owner.A_StartSound("misc/gogglesend", 41);
 		Owner.A_StopSound(40);
+		owner.A_SetBlend("Black", .8,20);
 		Shader.SetEnabled(Owner.Player,"nitevis",false);
 	}
 		
@@ -179,16 +185,26 @@ Class MO_RadSuit : RadSuit replaces Radsuit
 
 Class MO_SuitPower : PowerIronFeet
 {
-	mixin PowerUpExpiringBase;
 	mixin MO_PowerUpWarning;
 	
 	override void DoEffect ()
     {
 		if(!owner) return;
         Super.DoEffect();
-		
-		ExpireSoundTics = playTimer;
 		PowerWarning("Hazardous Environment Suit", "The", "hazsuitwarn", "Green", "d", "is expiring");
+	}
+	
+	override void AbsorbDamage (int damage, Name damageType, out int newdamage, Actor inflictor, Actor source, int flags)
+	{
+		if (damageType == 'Slime' || damageType == 'Disintegrate') //No More Leaky Suit
+		{
+			newdamage = 0;
+		}
+		else if (damageType == 'Ice' || damageType == 'Fire' || damageType == 'Burn' || damageType == 'Flames' ||
+		damageType == 'Frost' || damageType == 'Freeze')
+		{
+			newdamage = damage / 2;
+		}
 	}
 	
 	override void EndEffect()
@@ -203,6 +219,7 @@ Class MO_SuitPower : PowerIronFeet
 	{
 		Inventory.AltHudIcon "SUITA0";
 		+INVENTORY.NOSCREENBLINK;
+		Powerup.Mode "Full";
 	}
 }
 
@@ -253,7 +270,6 @@ Class MO_MegaBersGiver : PowerupGiver
 
 Class MO_PowerMegaBers : PowerDamage
 {
-	mixin PowerUpExpiringBase;
 	mixin MO_PowerUpWarning;
 	//I'll likely redo the expire warning effect later on...
 	
@@ -261,8 +277,6 @@ Class MO_PowerMegaBers : PowerDamage
     {
 		if(!owner) return;
         Super.DoEffect();
-		
-		ExpireSoundTics = playTimer;
 		Owner.A_AttachLight("MegaBersLight", DynamicLight.PointLight,"Red", 56, 64);
 //		Owner.A_StartSound("powerup/quadloop",50,CHANF_LOOPING|CHANF_OVERLAP, 0.5);
 		

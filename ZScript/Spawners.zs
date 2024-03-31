@@ -37,51 +37,13 @@ class SSGRandomizer : actor
 	}
 }
 
-class FlakShellRandomizer : actor
-{
-	States
-	{
-		Spawn:
-			TNT1 A 0;
-			TNT1 A 1
-			{
-				if(CVar.FindCVar("mo_ssgrandomizer").GetBool() == False)
-				{return resolvestate("12GShells");}
-				return A_Jump(256, "FlakShells");
-			}
-		FlakShells:
-			TNT1 A 0;
-			TNT1 A 1 A_Jump(96, "12GShells");
-			TNT1 A 0 A_SpawnItemEx("MO_FlakShell");
-			Stop;
-		12GShells:
-			TNT1 A 0 A_SpawnItemEx("MO_ShotShell");
-			Stop;
-	}
-}
-
-class FlakBoxRandomizer : FlakShellRandomizer
-{
-	States
-	{
-		FlakShells:
-			TNT1 A 0;
-			TNT1 A 1 A_Jump(96, "12GShells");
-			TNT1 A 0 A_SpawnItemEx("MO_FlakShellBox");
-			Stop;
-		12GShells:
-			TNT1 A 0 A_SpawnItemEx("MO_ShellBox");
-			Stop;
-	}
-}
-
 class ChaingunSpawner : RandomSpawner replaces Chaingun
 {
 	Default
     {
-		DropItem "MO_MiniGun", 255, 3;
+		DropItem "MO_MiniGun", 255, 4;
 		DropItem "AssaultRifle", 255, 2;
-		DropItem "MO_SubMachinegun",255, 2;
+		DropItem "MO_SubMachinegun",255, 1;
 	}
 }
 
@@ -108,7 +70,6 @@ class ShellSpawner : RandomSpawner replaces Shell
 	Default
 	{
 		DropItem "MO_ShotShell";
-		DropItem "FlakShellRandomizer";
 	}
 }
 
@@ -117,7 +78,6 @@ class ShellboxSpawner : RandomSpawner replaces ShellBox
 	Default
 	{
 		DropItem "MO_ShellBox";
-		DropItem "FlakBoxRandomizer";
 	}
 }
 
@@ -172,7 +132,7 @@ Class BerserkPackSpawner: RandomSpawner replaces Berserk
 	Default
 	{
 		DropItem "MO_Berserk",255,3;
-		DropItem "MO_HasteSphere",255,2;
+		DropItem "MO_HasteSphere",255,1;
 	}
 }
 

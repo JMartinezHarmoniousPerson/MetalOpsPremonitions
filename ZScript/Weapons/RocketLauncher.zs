@@ -29,6 +29,11 @@ class MiniNukeCoolerGiver : PowerupGiver
 
 class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 {
+	
+/*	action void MO_LaserPointer(class<Actor> laseractor)
+	{
+		LineAttack(angle,8192,pitch,0,'None', "LaserGuide", LAF_NORANDOMPUFFZ|LAF_NOINTERACT,t);
+*/
     Default
 	{
 		Weapon.AmmoUse 1;
@@ -71,7 +76,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			Wait;
         Fire:
 			RLAS A 0 A_CheckReload();
-			RLAS A 0 A_JumpIfInventory("MiniNukeMode",1,"FireNuke");
+//			RLAS A 0 A_JumpIfInventory("MiniNukeMode",1,"FireNuke");
             RLAF A 1 BRIGHT
             {
                 A_FireProjectile("MO_Rocket",0,true,0,7,0);
@@ -321,24 +326,17 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			TNT1 A 1;
 			MUZR ABCD 1 BRIGHT;
 			Stop;
-		
+/*		
 		ActionSpecial:
 			TNT1 A 0 A_JumpIfInventory("MiniNukeMode",1,"ActionBackToNormal");
-			RLAS F 1 A_StartSound("weapons/rocket/special1",0);
+			RLAS F 1;// A_StartSound("weapons/rocket/special1",0);
 			RLAK ABCDEFG 1;
 			RLAK G 5;
-			RLAS F 0 A_StartSound("weapons/rocket/special2",0);
+//			RLAS F 0 A_StartSound("weapons/rocket/special2",0);
 			RLAK G 1 A_WeaponOffset(-2,34);
 			RLAK G 1 A_WeaponOffset(-4,36);
 			RLAK G 1 A_WeaponOffset(-2,34);
 			RLAK G 18 A_WeaponOffset(1,32);
-			RLAS F 0 A_StartSound("weapons/rocket/special3",0);
-			RLAK G 1 A_WeaponOffset(-3,36);
-			RLAK G 1 A_WeaponOffset(-6,40);
-			RLAK G 1 A_WeaponOffset(-9,44);
-			RLAK G 1 A_WeaponOffset(-12,48);
-			RLAK G 3 A_WeaponOffset(-15,52);
-			RLAK G 1 A_WeaponOffset(-12,48);
 			RNAK G 1 A_WeaponOffset(-9,44);
 			RNAK G 1 A_WeaponOffset(-5,40);
 			RNAK G 8 A_WeaponOffset(0,32);
@@ -347,8 +345,8 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			TNT1 A 0
 			{
 					A_SetInventory("MiniNukeMode",1);
-					A_Print("Warning: Mini nuke rockets selected");
-					A_StartSound("weapons/rocket/nukemodeact",0);
+//					A_Print("Laser Guided/Homing rockets selected");
+//					A_StartSound("weapons/rocket/nukemodeact",0);
 			}
 			Goto ReadyToFire;
 			
@@ -378,7 +376,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 					A_SetInventory("MiniNukeMode",0);
 					A_Print("Rockets selected");
 			}
-			Goto ReadyTofire;
+			Goto ReadyTofire;*/
 		NukeOverlayIdle:
 			RNUK A 1;
 			Stop;
@@ -594,4 +592,31 @@ Class NukeExplosionFX : Actor
 		Stop;
 	}
 }
-		
+/*
+Class LaserGuide : Actor
+{ 
+	Default
+	{
+		Mass 0;
+		Scale 0.17;
+		Radius 1;
+		Height 1;
+		+NOBLOCKMAP
+		+NOGRAVITY
+		+BLOODLESSIMPACT
+		+ALWAYSPUFF
+		+PUFFONACTORS
+		+DONTSPLASH
+		+NOINTERACTION
+		RenderStyle "Add";
+		Alpha 0.8;
+	}
+    States
+    {
+    Spawn:
+      LASR A 0;
+	  LASR A 0 ACS_NamedExecute("getLaserCoords",0,pos.x,pos.y,pos.z);
+      LSRR A 1 BRIGHT;
+      Stop;
+    }
+}*/

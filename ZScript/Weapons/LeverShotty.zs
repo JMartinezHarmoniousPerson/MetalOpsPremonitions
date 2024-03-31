@@ -74,8 +74,8 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 			}
 		 }
 		//possible recoil
-		W87F D 1;
-		W87F E 1;
+		W87F D 1 JM_GunRecoil(0.3,.13);
+		W87F E 1 JM_GunRecoil(0.3,.13);
 		W87G A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 		W87F FFF 1;
         Goto Lever;

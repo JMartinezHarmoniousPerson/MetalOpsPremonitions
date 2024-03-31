@@ -4,6 +4,7 @@ class MOps_KeysHandler : EventHandler
     {
         PlayerInfo plyr = players[consoleplayer];
     }
+	
     override void NetworkProcess(ConsoleEvent e)
     {
         let pl = players[e.Player].mo;
@@ -49,4 +50,19 @@ class MOps_KeysHandler : EventHandler
             }
         }*/
     }
+}
+
+class PistolReplacerHandler : EventHandler
+{
+	override void CheckReplacement(replaceEvent e)
+	{
+		PlayerInfo p = players[consoleplayer];
+		if(e.Replacee == "Pistol")
+		{
+			if(p.mo is "JMPlayerDeagleStart")
+			e.Replacement = "MO_Deagle";
+			else
+			e.Replacement = "EnforcerPistol";
+		}
+	}
 }
