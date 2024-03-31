@@ -180,7 +180,7 @@ class JM_SSG : JMWeapon replaces SuperShotgun
             SGR1 LMNO 1;// JM_WeaponReady(WRF_NOFIRE);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			SGR1 PQRS 1;// JM_WeaponReady(WRF_NOFIRE);
-			SGR1 A 0 JM_LoadSSG("SSGAmmo",MO_ShotShell,2,1);
+			SGR1 A 0 JM_LoadSSG("SSGAmmo","MO_ShotShell",2,1);
             SGR1 T 1 
 			{
 				A_StartSound("weapons/ssg/fullinsert", 0);
