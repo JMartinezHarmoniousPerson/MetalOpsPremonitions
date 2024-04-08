@@ -230,7 +230,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 			return ResolveState(null);
 		}
 		TNT1 A 0;
-		Goto Ready3;
+		Goto ReadyToFire;
 
 	FireBeam:
 		PRGF A 0;
