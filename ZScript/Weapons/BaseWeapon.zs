@@ -17,6 +17,11 @@ class JMWeapon : Weapon
 		}
 	}
 
+	bool OwnerHasSpeed()
+	{
+		return (owner.CountInv("MO_PowerSpeed") >= 1);
+	}
+
 	 //Credits: Matt
     action bool JustPressed(int which) // "which" being any BT_* value, mentioned above or not
     {
@@ -172,7 +177,7 @@ class JMWeapon : Weapon
 				A_StopSound(CHAN_6);
 				A_STOPSOUND(CHAN_7);
 				SetPlayerProperty(0,0,0);
-				A_Overlay(-99, "KickHandler");
+//				A_Overlay(-99, "KickHandler");
 				A_ClearOverlays(-8,8);
 				JM_PressedKick(false);
 				}
@@ -180,18 +185,6 @@ class JMWeapon : Weapon
 			Loop;
 		Deselect:
 			TNT1 A 1 A_Lower();
-			Loop;
-		
-		KickHandler:
-			TNT1 A 1
-			{
-				if(JustPressed(BT_USER2) && !JM_CheckIfKicked() && health >= 1)
-				{
-					JM_PressedKick(true);
-					A_OverlayOffset(-999,0,32);
-					A_Overlay(-999, "Kick");
-				}
-			}
 			Loop;
 			
 		Ready:
@@ -202,24 +195,22 @@ class JMWeapon : Weapon
 			"####" AAAA 1 A_Jump(256, "readytofire");
 			Loop;
 		BackToWeapon:
-			TNT1 A 1 A_Jump(256, "SelectAnimation");
-			Loop;
+			TNT1 A 1 
+			{
+				State SelectAnim = player.readyweapon.FindState("SelectAnimation");
+				if(SelectAnim != NULL)
+					{return ResolveState("SelectAnimation");}
+				return ResolveState(Null);
+			}
+			Goto ReallyReady;
 			
-		Kick:
+		Kick: //16 frames
 			"####" A 0 A_ZoomFactor(1.0);
 			"####" A 0 A_StopSound(CHAN_VOICE);
 			"####" A 0 A_JumpIf (vel.Z != 0, "AirKick");
-			"####" A 0
-			{	
-				if(CheckIfInReady())
-				{
-					A_Overlay(PSP_WEAPON, "FlashKick");
-					A_OverlayOffset(PSP_WEAPON, 0, 32);
-				}
-			}
-			"####" A 0;// A_OverlayFlags(PSP_WEAPON,PSPF_PLAYERTRANSLATED,TRUE);
+			"####" A 0;
 			"####" A 0 SetPlayerProperty(0,1,0);
-			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,"KickFaster");
+			"####" A 0 A_JumpIf(invoker.OwnerHasSpeed(),"KickFaster");
 			KCK1 ABC 1;
 			"####" A 0 A_StartSound("playerkick",0);
 			KCK1 DEF 1;
@@ -266,20 +257,12 @@ class JMWeapon : Weapon
 			TNT1 A 0 JM_PressedKick(false);// A_OverlayFlags(PSP_WEAPON,PSPF_PLAYERTRANSLATED,FALSE);
 			TNT1 A 0 SetPlayerProperty(0,0,0);
 			Stop;
-		AirKick:
+		AirKick: //17 frames
 			"####" A 0 ThrustThing(angle * 256 / 360, 3, 0, 0);
-			"####" A 0
-			{	
-				if(CheckIfInReady())
-				{
-					A_Overlay(PSP_WEAPON, "FlashAirKick");
-					A_OverlayOffset(PSP_WEAPON, 0, 32);
-				}
-			}
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,"AirKickFaster");
-			KCK2 AABC 1;
+			KCK2 ABC 1;
 			"####" A 0 A_StartSound("playerkick",0);
-			KCK2 DEE 1;
+			KCK2 DDEE 1;
 			KCK2 F 1 
 			{
 				if(CountInv("PowerStrength") == 1)
@@ -294,7 +277,7 @@ class JMWeapon : Weapon
 					A_CustomPunch(30, TRUE, CPF_NOTURN, "KickingPuff", 80, 0, 0, "none", "playerkick/hit");
 				}
 			}
-			KCK2 GGHHI 1;
+			KCK2 GGHI 1;
 			KCK2 JKLMN 1;
 			TNT1 A 0 JM_PressedKick(false);
 			Stop;
@@ -321,58 +304,19 @@ class JMWeapon : Weapon
 			KCK2 JKLN 1;
 			TNT1 A 0 JM_PressedKick(false);
 			Stop;
-			
-/*		KickNoFlash:
-			"####" A 0
-			{	
-				A_OverlayOffset(PSP_WEAPON,0,32);
-				A_OverlayOffset(-999, 0, 32);
-			}
-			"####" A 0 A_ZoomFactor(1.0);
-			"####" A 0 A_StopSound(6);
-			"####" A 0 A_StopSound(CHAN_VOICE);
-			"####" A 0 A_JumpIf (vel.Z != 0, "AirKickNoFlash");
-			TNT1 A 0;// A_OverlayFlags(PSP_WEAPON,PSPF_PLAYERTRANSLATED,TRUE);
-			TNT1 A 0 SetPlayerProperty(0,1,0);
-			KCK1 ABC 1;
-			"####" A 0 A_StartSound("playerkick",0);
-			KCK1 DEF 1;
-			KCK1 G 1
-			{
-				if(CountInv("PowerStrength") == 1)
-				{
-					A_CustomPunch(random(35,40) * 2, TRUE, CPF_NOTURN, "BerserkKickPuff", 80, 0, 0, "none", "playerkick/hit");
-				}
-				else
-				{
-					A_CustomPunch(random(25,30), TRUE, CPF_NOTURN, "KickingPuff", 80, 0, 0, "none", "playerkick/hit");
-				}
-			}
-			KCK1 GHG 1;
-			KCK1 FEDCBA 1;
-			TNT1 A 0;// A_OverlayFlags(PSP_WEAPON,PSPF_PLAYERTRANSLATED,FALSE);
-			TNT1 A 0 SetPlayerProperty(0,0,0);
-			Goto Ready;
+				
+		FlashKick:
+				TNT1 A 0 A_JumpIf(invoker.OwnerHasSpeed(), "FlashKickFast");
+				TNT1 A 16;
+				Goto ReallyReady;
 		
-		AirKickNoFlash:
-			TNT1 A 0 ThrustThing(angle * 256 / 360, 6, 0, 0);
-			KCK2 AABC 1;
-			"####" A 0 A_StartSound("playerkick",0);
-			KCK2 DEE 1;
-			KCK2 F 1 
-			{
-				if(CountInv("PowerStrength") == 1)
-				{
-					A_CustomPunch(random(35,40) * 2, TRUE, CPF_NOTURN, "BerserkKickPuff", 80, 0, 0, "none", "playerkick/hit");
-				}
-				else
-				{
-					A_CustomPunch(random(25,30), TRUE, CPF_NOTURN, "KickingPuff", 80, 0, 0, "none", "playerkick/hit");
-				}
-			}
-			KCK2 GGHI 1;
-			KCK2 JKLMN 1;
-			Goto ReallyReady;*/
+		FlashAirKick:
+			TNT1 A 18;
+			Goto ReallyReady;
+
+		FlashKickFast:
+				TNT1 A 14;
+				Goto ReallyReady;
 		
 		//From the PB Add-on	
 		TossThrowable:

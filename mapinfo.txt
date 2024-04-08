@@ -7,5 +7,5 @@
 gameinfo
 {
 	AddEventHandlers = "NCH_Handler"
-	addEventHandlers = "StepEventHandler", "MOps_KeysHandler", "PistolReplacerHandler"
+	addEventHandlers = "StepEventHandler", "MOps_Handler", "PistolReplacerHandler"
 }

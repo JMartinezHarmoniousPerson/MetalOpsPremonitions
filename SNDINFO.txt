@@ -247,6 +247,9 @@ plasma/heatlevel2 PLSLVL2
 plasma/heatlevel3 PLSLVL3
 plasma/beep PLSBEP
 plasma/special1 PLSSPC1
+plasma/laser/fire PLLSR //The main firing loop sound
+plasma/laser/fireloop PLLSRLP //The layered loop sound
+plasma/laser/loopstop PLLSRST //Stop sound
 
 weapons/plasma/pickup PLSPICK
 weapons/plasma/ballexp PLSXPL
