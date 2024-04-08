@@ -230,39 +230,37 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 			return ResolveState(null);
 		}
 		TNT1 A 0;
-		Goto FireBeam;
+		Goto Ready3;
 
 	FireBeam:
 		PRGF A 0;
+		PRGG A 0 A_StartSound("plasma/laser/fire",1, CHANF_LOOP);
 		PRGG AAA 2 A_WeaponOffset(0,3,WOF_ADD);
 		TNT1 A 0 A_JumpIf(JustReleased(BT_ALTATTACK), "CheckForCooldown");
 	HoldBeam:
-		TNT1 A 0 JM_CheckMag("PlasmaAmmo", "Cooldown");
+		TNT1 A 0 JM_CheckMag("PlasmaAmmo", "StopBeam");
+		PRGG A 0 A_StartSound("plasma/laser/fireloop",4);
 		PRGF A 1 
 		{
 			JM_CheckForQuadDamage();
 			A_WeaponOffset(random(-3,3), random(32, 36));
-			A_Railattack(8,0,0,"none","none",RGF_SILENT|RGF_FULLBRIGHT|RGF_NOPIERCING,1,"BulletPuff",0,0,8192,0,3,0,"PlasmaBeamTrail");
+			A_Railattack(8,0,0,"","",RGF_SILENT|RGF_FULLBRIGHT|RGF_NOPIERCING,1,"BulletPuff",0,0,8192,0,3,0,"PlasmaBeamTrail");
 			A_Overlay(-60, "MuzzleFlash");
 			A_AlertMonsters();
 		}
-		PRGG A 0
-		{
-			if(!GetCvar("mo_nogunrecoil"))
-			{
-			A_SetPitch(pitch-1.7,SPF_Interpolate);
-			A_SetAngle(angle+.09,SPF_INTERPOLATE);
-			}
-		}
+		PRGG A 0 JM_GunRecoil(-0.9, .09);//JM)
 		PRGF B 1
 		{
 			JM_CheckForQuadDamage();
 			A_WeaponOffset(random(-3,3), random(32, 36));
-			A_Railattack(8,0,0,"none","none",RGF_SILENT|RGF_FULLBRIGHT|RGF_NOPIERCING,1,"BulletPuff",0,0,8192,0,3,0,"PlasmaBeamTrail");
+			A_Railattack(8,0,0,"Blue","Blue",RGF_SILENT|RGF_FULLBRIGHT|RGF_NOPIERCING,1,"BulletPuff",0,0,8192,0,3,0,"PlasmaBeamTrail");
 			A_AlertMonsters();
 			A_TakeInventory("PlasmaAmmo",1);
 		}
 		TNT1 A 0 A_JumpIf(PressingAltFire(), "HoldBeam");
+		StopBeam:
+		TNT1 A 0 A_StopSound(4);
+		TNT1 A 0 A_StartSound("plasma/laser/loopstop",1);		
 		Goto Cooldown;
 	
 	DoNothing:
