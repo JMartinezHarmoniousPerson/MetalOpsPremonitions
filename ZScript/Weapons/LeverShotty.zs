@@ -40,6 +40,8 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		W87S ABCDEF 1;
     ReadyToFire:
 		W87G A 1 JM_WeaponReady(WRF_ALLOWRELOAD);
+		W87G A 0 A_JumpIf(PressingFire(), "Fire");
+		W87G A 0 A_JumpIf(PressingAltFire(), "AltFire");
 		Loop;
 	Deselect:
 		W87S FEDCBA 1;
@@ -193,20 +195,20 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		TNT1 A 0 A_JumpIfInventory("LeverShottyAmmo",5,"ExtraShell");
 		TNT1 A 0 A_JumpIfInventory("MO_ShotShell",1,1);
 		Goto DoneReload;
-		W8R2 AB 1 JM_WeaponReady();
+		W8R2 AB 1 JM_WeaponReady(WRF_NOFIRE);
 		W8R2 C 1 {
 			A_StartSound("weapons/levershotty/load", 1);
-			JM_WeaponReady();
+			JM_WeaponReady(WRF_NOFIRE);
 			}
 		PISG A 0 JM_LoadShell("LeverShottyAmmo","MO_ShotShell",1);
-		W8R2 DEFGHI 1 JM_WeaponReady();
+		W8R2 DEFGHI 1 JM_WeaponReady(WRF_NOFIRE);
 		W8R2 I 12
 		{
 			if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(8);}
-			return JM_WeaponReady();
+			return JM_WeaponReady(WRF_NOFIRE);
 		}
 		PISG A 0;
-		PISG A 0 A_ReFire("DoneReload");
+		PISG A 0 A_ReFire();
 		Loop;
 	DoneReload:
 		W8R1 QR 1;

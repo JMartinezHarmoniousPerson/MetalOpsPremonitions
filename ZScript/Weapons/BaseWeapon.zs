@@ -257,12 +257,12 @@ class JMWeapon : Weapon
 			TNT1 A 0 JM_PressedKick(false);// A_OverlayFlags(PSP_WEAPON,PSPF_PLAYERTRANSLATED,FALSE);
 			TNT1 A 0 SetPlayerProperty(0,0,0);
 			Stop;
-		AirKick: //17 frames
+		AirKick: //16 frames
 			"####" A 0 ThrustThing(angle * 256 / 360, 3, 0, 0);
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,"AirKickFaster");
 			KCK2 ABC 1;
 			"####" A 0 A_StartSound("playerkick",0);
-			KCK2 DDEE 1;
+			KCK2 DE 1;
 			KCK2 F 1 
 			{
 				if(CountInv("PowerStrength") == 1)
@@ -277,7 +277,7 @@ class JMWeapon : Weapon
 					A_CustomPunch(30, TRUE, CPF_NOTURN, "KickingPuff", 80, 0, 0, "none", "playerkick/hit");
 				}
 			}
-			KCK2 GGHI 1;
+			KCK2 GGHHI 1;
 			KCK2 JKLMN 1;
 			TNT1 A 0 JM_PressedKick(false);
 			Stop;
