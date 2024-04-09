@@ -65,14 +65,6 @@ Sprite "KCK1H0", 500, 200
 	Patch "KICK4", 186, 36
 }
 
-Sprite "KCK2A0", 500, 200
-{
-	XScale 1.300
-	YScale 1.300
-	Offset -4, -19
-	Patch "KICK12", 194, 142
-}
-
 Sprite "KCK2B0", 500, 200
 {
 	XScale 1.300

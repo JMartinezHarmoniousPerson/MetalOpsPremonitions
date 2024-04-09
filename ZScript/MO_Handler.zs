@@ -1,8 +1,8 @@
 class MOps_Handler : EventHandler
 {
 	int kicktimer;
-	const kickcooldown = 20;
-	const fastkickcooldown = 16;
+	const kickcooldown = 18;
+	const fastkickcooldown = 15;
     override void WorldTick()
     {
         PlayerInfo plyr = players[consoleplayer];
@@ -81,9 +81,6 @@ class MOps_Handler : EventHandler
 						pl.player.SetPSprite(-999, wp.FindState("Kick"));
 						if((players[e.Player].weaponstate & WF_WEAPONREADY) || (mo_wep && mo_wep.CheckIfInReady()))
 						{
-//								if(pl.Vel.Z != 0)
-//								pl.player.SetPSprite(PSP_Weapon, wp.FindState("FlashAirKick"));
-	//							else
 								pl.player.SetPSprite(PSP_Weapon, wp.FindState("FlashKick"));
 						}
 					}
