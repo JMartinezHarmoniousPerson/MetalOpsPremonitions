@@ -31,20 +31,18 @@ Version 2 changes:
 - SMG has a burst fire mode, Combat Rifle has a semi auto mode
 - Power up timer expiring is similar to Quake
 - You can now hold the toss grenade button to cook the grenade when grenades are selected.
-An indicator will be on screen telling you when the grenade is about to explode, you have 3 seconds.
-It's inspired by Call of Duty 3, while the smoke trail that spawns from the grenade is inspired by Black Mesa.
-- Plasma Rifle has an alt fire, a very fast fire for normal, and a new alternate mode, heated plasma rounds. Heated Plasma Rounds alt fire is more inspired by the heat blast from Doom Eternal
+- An indicator will be on screen telling you when the grenade is about to explode, you have 3 seconds.
+- It's inspired by Call of Duty 3, while the smoke trail that spawns from the grenade is inspired by Black Mesa.
+- Plasma Rifle Heated Plasma Rounds has an alt fire, basically inspired by the heat blast from Doom Eternal
 - Lever Action Shotgun has an altfire, fast firing aka cowboy action shooting style
 - Pump Action altfire added, double blast, inspired by Half Life.
 - New special modes, Burst mode for SMG (will likely move this to the pistol and SMG will have a 5 round burst), and semi-auto mode for the Combat Rifle)
 - New Powerups, Haste and Quad Damage. Haste will make your melee attacks and reload animations faster, and shotgun pumping/levering actions faster. Quad damage increases your damage by four times, like in Quake.
 - Powerup sphere sprites updated, sprites by Benjamin Zuriel, from unused powerup sprites that were going to be made for Project Brutality before being replaced.
 - Armor and Health Bonuses have variants now, either giving two or three armor.
-
-
-Version 3 changes:
 - SMG burst fire is now an alt fire and shoots five bullets.
 - Pistol alt fire is 3 shot burst fire
+- Pistol weapon special is silencer (sprites maybe unfinished).
 - Night vision now has a shader based on Hideous Destructor's Night vision shader, mod by Matt.
 - Pump Shotgun is now a 20 gauge shotgun, shoots 20 pellets but does less damage than the lever action.
 - Bullet sparks are now enhanced, based on Cacodemon's Enhanced Puffs for BDv21 and Hellrider by Moa Dixon
@@ -53,4 +51,13 @@ Version 3 changes:
 - Fixed cryothrower translation
 - Fixed monster conflicts, such as with Legion of Bones.
 - Fixed sprite conflicts
-- Mini nuke mode cooldown increase, will likely scrap it.
+- Mini nuke mode scrapped, implmentation of it was terrible. Will replace with a Laser Guided/Homing mode.
+- Air kick animation slightly overhauled, two frames decreased.
+- Kicking has been overhauled, no longer is an overlay handler and uses a event handler to do it.
+(you might need to rebind your kick key.)
+- Rifle has an alt empty reload animation, inspired by the FN-SCAR's reload animation from COD: MW2019, but with
+a bit of AK style bolt recharge animation.
+- Rifle rechambering animation changed
+- Kick sprites translate to player color now.
+- Flak shell ammo pool is no more. It was more common to find normal shell ammo and the SSG lost it's purpose
+from that. SSG still shoots flak but uses normal shell ammo pool.

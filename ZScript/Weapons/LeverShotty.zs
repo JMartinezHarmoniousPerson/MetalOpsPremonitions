@@ -14,11 +14,11 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		Tag "$TAG_LVRSHOT";
 		Inventory.PickupSound "weapons/levershotty/pickup";
 		Inventory.AltHUDIcon "W87CA0";
+		JMWeapon.inspectToken "NeverUsedLAS";
 	}
 	States
 	{
 	Inspect:
-		TNT1 A 0 JM_SetInspect(true);
 		W87I AB 1 JM_WeaponReady();
 		W87A A 0 A_StartSound("weapons/levershotty/down", CHAN_AUTO);
 		W87I CD 1 JM_WeaponReady();
@@ -34,7 +34,7 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 	ContinueSelect:
 		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();
 	Ready:
-		TNT1 A 0 A_JumpIf(!JM_CheckInspect(), "Inspect");
+		TNT1 A 0 JM_CheckInspectIfDone;
 	SelectAnimation:
 		TNT1 A 0 A_StartSound("weapons/levershotty/select",1);
 		W87S ABCDEF 1;
@@ -45,8 +45,14 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		Loop;
 	Deselect:
 		W87S FEDCBA 1;
+	DeselectFast:
 		TNT1 A 0 A_Lower(12);
 		Wait;
+	
+	DeselectToPSG:
+		TNT1 A 1 A_SelectWeapon("PumpShotgun");
+		Goto DeselectFast;
+	
 	Select:
 		TNT1 A 0;
 		Goto ClearAudioAndResetOverlays;
@@ -76,8 +82,8 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 			}
 		 }
 		//possible recoil
-		W87F D 1 JM_GunRecoil(0.3,.13);
-		W87F E 1 JM_GunRecoil(0.3,.13);
+		W87F D 1 JM_GunRecoil(0.6,.13);
+		W87F E 1 JM_GunRecoil(0.6,.13);
 		W87G A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 		W87F FFF 1;
         Goto Lever;

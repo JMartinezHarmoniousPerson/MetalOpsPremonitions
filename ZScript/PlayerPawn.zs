@@ -50,6 +50,11 @@ class JMPlayerPawn : DoomPlayer
 		Player.StartItem "MOLOTOVAMMO",4;
 		Player.StartItem "GrenadeAmmo", 4;
 		Player.StartItem "FragSelected",1;
+
+		//Never used tokens
+		Player.StartItem "NeverUsedLAS";
+		Player.StartItem "NeverUsedPSG";
+		Player.StartItem "NeverUsedSMG";
     }
 }
 
@@ -63,6 +68,17 @@ class JMPlayerDeagleStart : DoomPlayer
 		{
 			Shader.SetEnabled(Player,"NiteVis",false);
 		}
+	}
+	
+	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
+	{
+		PlayerInfo plyr = Self.Player;
+		if(!plyr || plyr.mo != Self) return 0;
+		if(plyr.mo.CountInv("MO_PowerInvul") == 1)
+		{
+			A_StartSound("powerup/invul_damage",3);
+		}
+		return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
 	}
 
 	Default
@@ -93,5 +109,10 @@ class JMPlayerDeagleStart : DoomPlayer
 		Player.StartItem "MOLOTOVAMMO",4;
 		Player.StartItem "GrenadeAmmo", 4;
 		Player.StartItem "FragSelected",1;
+
+		//Never used tokens
+		Player.StartItem "NeverUsedLAS";
+		Player.StartItem "NeverUsedPSG";
+		Player.StartItem "NeverUsedSMG";
     }
 }
