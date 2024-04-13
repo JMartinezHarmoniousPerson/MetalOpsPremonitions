@@ -1,8 +1,14 @@
-class MOps_KeysHandler : EventHandler
+class MOps_Handler : EventHandler
 {
+	int kicktimer;
+	const kickcooldown = 18;
+	const fastkickcooldown = 15;
     override void WorldTick()
     {
         PlayerInfo plyr = players[consoleplayer];
+
+		if(kicktimer > 0)
+			kicktimer--;
     }
 	
     override void NetworkProcess(ConsoleEvent e)
@@ -11,7 +17,7 @@ class MOps_KeysHandler : EventHandler
         if(!pl)
          return;
 
-        if (e.Name == "PrevThrowable")
+        if (e.Name ~== "PrevThrowable")
         {
             let moweap = JMWeapon(pl.player.readyweapon);
 
@@ -33,7 +39,7 @@ class MOps_KeysHandler : EventHandler
         }
 		
 		/*
-		if (e.Name == "NextThrowable")
+		if (e.Name ~== "NextThrowable")
         {
             let moweap = JMWeapon(pl.player.readyweapon);
 
@@ -49,7 +55,39 @@ class MOps_KeysHandler : EventHandler
                     break;
             }
         }*/
-    }
+
+		if (e.Name ~== "KickEm")
+		{	
+			if(kicktimer == 0)
+			{
+				
+				//If the Player is alive, do the kick attack. If dead, do nothing.
+				if((players[e.Player].playerstate == PST_LIVE))
+				{
+					let mo_wep = JMWeapon(pl.player.readyweapon);
+					if(!mo_wep)
+					return;
+	
+					//set the cooldown
+					if(mo_wep && mo_wep.OwnerHasSpeed())
+					kicktimer = fastkickcooldown;
+					else
+					kicktimer = kickcooldown;
+					
+					let wp = pl.player.readyweapon;
+					State Kick = wp.FindState("Kick");
+					if(Kick != Null)
+					{
+						pl.player.SetPSprite(-999, wp.FindState("Kick"));
+						if((players[e.Player].weaponstate & WF_WEAPONREADY) || (mo_wep && mo_wep.CheckIfInReady()))
+						{
+								pl.player.SetPSprite(PSP_Weapon, wp.FindState("FlashKick"));
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 class PistolReplacerHandler : EventHandler

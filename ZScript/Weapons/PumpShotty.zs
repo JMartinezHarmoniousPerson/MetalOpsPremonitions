@@ -9,11 +9,11 @@ class PumpShotgun : JMWeapon
         Obituary "%o was blasted away by %k's Pump Shotgun.";
         Tag "Pump Shotgun";
 		Inventory.PickupSound "weapons/pumpshot/pump";
+		JMWeapon.inspectToken "NeverUsedPSG";
     }
     States
     {
 		Inspect:
-			TNT1 A 0 JM_SetInspect(true);
 			PSGS E 7 JM_WeaponReady();
 			PSGM ABCDEF 1 JM_WeaponReady();
 			PGR2 A 0 A_StartSound("weapons/pumpshot/pumpBACK", 0);
@@ -36,7 +36,7 @@ class PumpShotgun : JMWeapon
 		SelectAnimation:
             PSGS A 0 A_StartSound("weapons/pumpshot/draw", CHAN_AUTO);
             PSGS ABCDE 1;
-			TNT1 A 0 A_JumpIf(!JM_CheckInspect(), "Inspect");
+			TNT1 A 0 JM_CheckInspectIfDone;
         ReadyToFire:
             PSGG A 1 JM_WeaponReady(WRF_ALLOWRELOAD);
             Loop;
@@ -220,7 +220,7 @@ class PumpShotgun : JMWeapon
 			TNT1 A 0 A_ReFire();
             Goto ShellLoop;
 		FlashKick:
-		PSGM ABCDEF 1;
+		PSGM ABCDEF 1 JM_WeaponReady();
 		PSGM F 4;
 		PSGM EEDCBA 1;
 		Goto ReadyToFire;
