@@ -15,6 +15,7 @@ Class MO_SubMachineGun : JMWeapon
         Obituary "%o was killed by %k's Sub Machine Gun.";
         Tag "Sub Machinegun";
 		Inventory.PickupSound "weapons/smg/pickup";
+		JMWeapon.InspectToken "NeverUsedSMG";
     }
 
     States
@@ -24,7 +25,6 @@ Class MO_SubMachineGun : JMWeapon
 		Goto Ready;
 		
 		Inspect:
-			TNT1 A 0 JM_SetInspect(true);
 			TNT1 A 0 A_StartSound("weapons/smg/inspect1",0);
 			SM5I ABCDEFGHI 1 JM_WeaponReady();
 			SM5I KMNPRSTVW 1 JM_WeaponReady();
@@ -43,8 +43,8 @@ Class MO_SubMachineGun : JMWeapon
             SUBM A -1;
             STOP;
         Ready:
+			TNT1 A 0 JM_CheckInspectIfDone;
 		SelectAnimation:
-			TNT1 A 0 A_JumpIf(!JM_CheckInspect(), "Inspect");
 			TNT1 A 0 A_StartSound("weapons/smg/select",0);
             SM5S ABCD 1;
         ReadyToFire:
@@ -133,10 +133,11 @@ Class MO_SubMachineGun : JMWeapon
 				JM_WeaponReady(WRF_NOFIRE);
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(3);}
 			}
-	//		AR12 A 0 A_JumpIf(CountInv("SMGAmmo") < 1, 2);
+			SMR2 A 0 A_JumpIf(CountInv("SMGAmmo") < 1, 2);
 			SMR1 A 0;
 			"####" J 1 A_StartSound("weapons/smg/magout", CHAN_AUTO);
-			"####" KLMN 1 JM_WeaponReady(WRF_NOFIRE);
+			"####" JKLM 1 JM_WeaponReady(WRF_NOFIRE);
+			SMR1 N 1 JM_WeaponReady(WRF_NOFIRE);
 			SMR1 A 0 A_JumpIf(CountInv("SMGAmmo") >= 1, 2);
 			SMR1 A 0; //A_SpawnItemEx('SMGMagazine', 25, 7, 29, random(-1,2), random(-6,-4), random(2,5));
 			SMR1 N 5 

@@ -14,11 +14,11 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		Tag "$TAG_LVRSHOT";
 		Inventory.PickupSound "weapons/levershotty/pickup";
 		Inventory.AltHUDIcon "W87CA0";
+		JMWeapon.inspectToken "NeverUsedLAS";
 	}
 	States
 	{
 	Inspect:
-		TNT1 A 0 JM_SetInspect(true);
 		W87I AB 1 JM_WeaponReady();
 		W87A A 0 A_StartSound("weapons/levershotty/down", CHAN_AUTO);
 		W87I CD 1 JM_WeaponReady();
@@ -34,17 +34,25 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 	ContinueSelect:
 		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();
 	Ready:
-		TNT1 A 0 A_JumpIf(!JM_CheckInspect(), "Inspect");
+		TNT1 A 0 JM_CheckInspectIfDone;
 	SelectAnimation:
 		TNT1 A 0 A_StartSound("weapons/levershotty/select",1);
 		W87S ABCDEF 1;
     ReadyToFire:
 		W87G A 1 JM_WeaponReady(WRF_ALLOWRELOAD);
+		W87G A 0 A_JumpIf(PressingFire(), "Fire");
+		W87G A 0 A_JumpIf(PressingAltFire(), "AltFire");
 		Loop;
 	Deselect:
 		W87S FEDCBA 1;
+	DeselectFast:
 		TNT1 A 0 A_Lower(12);
 		Wait;
+	
+	DeselectToPSG:
+		TNT1 A 1 A_SelectWeapon("PumpShotgun");
+		Goto DeselectFast;
+	
 	Select:
 		TNT1 A 0;
 		Goto ClearAudioAndResetOverlays;
@@ -74,8 +82,8 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 			}
 		 }
 		//possible recoil
-		W87F D 1 JM_GunRecoil(0.3,.13);
-		W87F E 1 JM_GunRecoil(0.3,.13);
+		W87F D 1 JM_GunRecoil(0.6,.13);
+		W87F E 1 JM_GunRecoil(0.6,.13);
 		W87G A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 		W87F FFF 1;
         Goto Lever;
@@ -193,20 +201,20 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		TNT1 A 0 A_JumpIfInventory("LeverShottyAmmo",5,"ExtraShell");
 		TNT1 A 0 A_JumpIfInventory("MO_ShotShell",1,1);
 		Goto DoneReload;
-		W8R2 AB 1 JM_WeaponReady();
+		W8R2 AB 1 JM_WeaponReady(WRF_NOFIRE);
 		W8R2 C 1 {
 			A_StartSound("weapons/levershotty/load", 1);
-			JM_WeaponReady();
+			JM_WeaponReady(WRF_NOFIRE);
 			}
 		PISG A 0 JM_LoadShell("LeverShottyAmmo","MO_ShotShell",1);
-		W8R2 DEFGHI 1 JM_WeaponReady();
+		W8R2 DEFGHI 1 JM_WeaponReady(WRF_NOFIRE);
 		W8R2 I 12
 		{
 			if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(8);}
-			return JM_WeaponReady();
+			return JM_WeaponReady(WRF_NOFIRE);
 		}
 		PISG A 0;
-		PISG A 0 A_ReFire("DoneReload");
+		PISG A 0 A_ReFire();
 		Loop;
 	DoneReload:
 		W8R1 QR 1;

@@ -73,10 +73,9 @@ Class AssaultRifle : JMWeapon
 				if(PressingFire())
 				{
 					if(CheckInventory("ARSemiAuto",1))
-					{return ResolveState("FireFinished");}
-					else{return ResolveState("Fire");}
+					{SetWeaponState("FireFinished");}
+					else{SetWeaponState("Fire");}
 				}
-				return ResolveState(null);
 			}
             Goto ReadyToFire;
         Deselect:
