@@ -45,7 +45,7 @@ Shotgun shell casing sounds - Valve
 Shotgun shell and heavy brass casing sprites - Metalman
 
 Plasma Rifle:
-Sounds : Bethesda Game Studios/Softworks, Zenimax, 
+Sounds : Bethesda Game Studios/Softworks, Zenimax, Gameloft
 Obsidian Entertainment, ID Software, Splash Damage Ltd
 Sprites : TSF (Based on an abandoned plasma sprite he worked on)
 
@@ -180,10 +180,3 @@ scalliano - GLDefs code for spheres, Haste sphere
 
 Yoo-toob-FX - Rad suit off sound
 Pixabay - Rad suit hiss sound
-
-Mega Berserk:
-Sarge945 - Previous Weapon Used Button add-on used for Mega Berserk
-Fourth sound of Horror Voice Flashbacks used for Mega Berserk end: Sound Effect from Pixabay (https://pixabay.com/sound-effects/horror-voice-flashbacks-14469/)
-Bethesda - Doom 2016 berserk end, pickup sounds and doom 3 berserk loop
-People Can Fly - Mega Berserk loop layer
-New Blood Interactive - Mega Berserk loop ambience
