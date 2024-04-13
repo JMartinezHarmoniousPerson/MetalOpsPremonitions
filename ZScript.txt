@@ -1,6 +1,7 @@
 version "4.5.0"
 
 #include "ZScript/PlayerPawn.zs"
+#include "ZScript/MO_Tokens.zs"
 #include "ZScript/Items/Ammo.zs"
 #include "ZScript/Items/Keys.zs"
 #include "ZScript/Items/ARMOR.zs"
@@ -45,7 +46,6 @@ version "4.5.0"
 #include "ZScript/StepEventHandler.zc"
 #include "ZScript/MO_Handler.zs"
 
-
 Class BaseVisualSFX : Actor// From Particle Fire Enhancer Mod (v0.8) by Z86
 {
 	Default
@@ -56,16 +56,6 @@ Class BaseVisualSFX : Actor// From Particle Fire Enhancer Mod (v0.8) by Z86
 	  +NOTELEPORT;
 	  +ForceXYBillboard;
 	  +CLIENTSIDEONLY;
-	}
-}
-
-Class MO_ZSToken : Inventory 
-{
-	Default
-	{
-		Inventory.MaxAmount 1;
-		+INVENTORY.UNDROPPABLE;
-		-INVENTORY.INVBAR;
 	}
 }
 
@@ -80,3 +70,4 @@ Class ThrowableType : Inventory
 }
 
 Class GoActionSpecial : MO_ZSToken{}
+
