@@ -201,16 +201,28 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		TNT1 A 0 A_JumpIfInventory("LeverShottyAmmo",5,"ExtraShell");
 		TNT1 A 0 A_JumpIfInventory("MO_ShotShell",1,1);
 		Goto DoneReload;
-		W8R2 AB 1 JM_WeaponReady(WRF_NOFIRE);
+		W8R2 AB 1 {
+			if(JustPressed(BT_ATTACK)) {SetWeaponState("Fire");}
+			if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
+			return JM_WeaponReady(WRF_NOFIRE);
+			}
 		W8R2 C 1 {
 			A_StartSound("weapons/levershotty/load", 1);
-			JM_WeaponReady(WRF_NOFIRE);
+			if(JustPressed(BT_ATTACK)) {SetWeaponState("Fire");}
+			if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
+			return JM_WeaponReady(WRF_NOFIRE);
 			}
 		PISG A 0 JM_LoadShell("LeverShottyAmmo","MO_ShotShell",1);
-		W8R2 DEFGHI 1 JM_WeaponReady(WRF_NOFIRE);
-		W8R2 I 12
+		W8R2 DEFGHI 1 {
+			if(JustPressed(BT_ATTACK)) {SetWeaponState("Fire");}
+			if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
+			return JM_WeaponReady(WRF_NOFIRE);
+			}
+		W8R2 III 4
 		{
-			if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(8);}
+			if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(3);}
+			if(JustPressed(BT_ATTACK)) {SetWeaponState("Fire");}
+			if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
 			return JM_WeaponReady(WRF_NOFIRE);
 		}
 		PISG A 0;

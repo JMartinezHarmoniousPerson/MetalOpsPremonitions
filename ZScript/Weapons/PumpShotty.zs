@@ -181,14 +181,32 @@ class PumpShotgun : JMWeapon
             PSTG A 0 A_JumpIfInventory("PumpShotgunAmmo",6,"DoneReload");           
 			TNT1 A 0 A_JumpIfInventory("MO_ShotShell",1,1);
 			Goto DoneReload;
-            PGR1 AB 1 JM_WeaponReady(WRF_NOFIRE);
-            PGR1 C 1 A_StartSound("weapons/pumpshot/load", 1);
+            PGR1 AB 1
+			{
+				if(JustPressed(BT_ATTACK)) {SetWeaponState("Fire");}
+				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
+				return JM_WeaponReady(WRF_NOFIRE);
+			}
+            PGR1 C 1 
+			{
+				A_StartSound("weapons/pumpshot/load", 1);
+				if(JustPressed(BT_ATTACK)) {SetWeaponState("Fire");}
+				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
+				return JM_WeaponReady(WRF_NOFIRE);
+			}
             PISG A 0 JM_LoadShell("PumpShotgunAmmo","MO_ShotShell",1);
 			PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
-            PGR1 DEFGHI 1 JM_WeaponReady(WRF_NOFIRE);
+            PGR1 DEFGHI 1 
+			{
+				if(JustPressed(BT_ATTACK)) {SetWeaponState("Fire");}
+				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
+				return JM_WeaponReady(WRF_NOFIRE);
+			}
             PGR1 I 6 {
-				JM_WeaponReady(WRF_NOFIRE);
-				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
+				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(3);}
+				if(JustPressed(BT_ATTACK)) {SetWeaponState("Fire");}
+				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
+				return JM_WeaponReady(WRF_NOFIRE);
 			}
             PISG A 0;
             PISG A 0 A_ReFire();
