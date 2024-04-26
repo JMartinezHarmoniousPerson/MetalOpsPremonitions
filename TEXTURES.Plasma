@@ -61,32 +61,8 @@ Sprite "PRGAC0", 174, 99
 {
 	XScale 0.800
 	YScale 0.800
-	Offset -38, -38
+	Offset -38, -36
 	Patch "PRGAC", 0, 0
-}
-
-Sprite "PRGAD0", 174, 99
-{
-	XScale 0.800
-	YScale 0.800
-	Offset -38, -38
-	Patch "PRGAD", 0, 0
-}
-
-Sprite "PRGAE0", 174, 99
-{
-	XScale 0.800
-	YScale 0.800
-	Offset -38, -39
-	Patch "PRGAE", 0, 0
-}
-
-Sprite "PRGAF0", 174, 99
-{
-	XScale 0.800
-	YScale 0.800
-	Offset -38, -40
-	Patch "PRGAF", 0, 0
 }
 
 Sprite "PRMZA0", 118, 79

@@ -2,7 +2,7 @@ Class PistolBurstCounter : Inventory {Default{Inventory.MaxAmount 3;}}
 
 Class PistolSilencer : MO_ZSToken{}
 
-class EnforcerPistol : JMWeapon replaces Pistol
+class EnforcerPistol : JMWeapon// replaces Pistol
 {
  	Default
 	{
@@ -16,8 +16,8 @@ class EnforcerPistol : JMWeapon replaces Pistol
 		Tag "Enforcer Sidearm";
 		Scale .55;
 		Inventory.PickupSound "weapons/pistol/pickup";
-		Inventory.ForbiddenTo "JMPlayerDeagleStart";
-		Inventory.RestrictedTo "JMPlayerPawn";
+		Inventory.ForbiddenTo "MO_SergeantPlayer";
+		Inventory.RestrictedTo "MO_OfficerPlayer";
 		+WEAPON.NOALERT;
 	}
 	States

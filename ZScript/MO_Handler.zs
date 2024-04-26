@@ -97,7 +97,7 @@ class PistolReplacerHandler : EventHandler
 		PlayerInfo p = players[consoleplayer];
 		if(e.Replacee == "Pistol")
 		{
-			if(p.mo is "JMPlayerDeagleStart")
+			if(p.mo is "MO_SergeantPlayer")
 			e.Replacement = "MO_Deagle";
 			else
 			e.Replacement = "EnforcerPistol";

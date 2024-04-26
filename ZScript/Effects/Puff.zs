@@ -160,6 +160,28 @@ Class BerserkKickPuff : KickingPuff
 	} 
 }
 
+Class PlasmaBeamPuff : UpdatedBulletPuff
+{
+	Default
+	{
+		Decal "none";
+		Scale 0.07;
+		DamageType "Plasma";
+	}
+	States
+	{
+	Spawn:
+		TNT1 AAA 0 A_SpawnItemEx("BlueLightningMini", Random(-4, 4), Random(-4, 4), Random(-4, 4), 0, 0, 0, 0, 0, 64);
+		TNT1 AA 0 A_SpawnItemEx("BlueLightningTiny", Random(-4, 4), Random(-4, 4), Random(-4, 4), 0, 0, 0, 0, 0, 128);
+		TNT1 A 0 A_SpawnItemEx("BlueLightningSmall", Random(-4, 4), Random(-4, 4), Random(-4, 4), 0, 0, 0, 0, 0, 192);
+		TNT1 AAA 0 A_SpawnProjectile("EnhancedPlasmaSpark1", 2, 0, frandom(0,1)*frandom (-180, 180),  flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: pitch - frandom(0,1)*frandom (30, 360));
+		TNT1 AA 0 A_SpawnProjectile("EnhancedPlasmaSpark2", 2, 0, frandom(0,1)*frandom (-180, 180), flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: pitch - frandom(0,1)*frandom (30, 360));
+		TNT1 AA 0 A_SpawnProjectile("EnhancedPlasmaSpark3", 2, 0, frandom(0,1)*frandom (-180, 180), flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: pitch - frandom(0,1)*frandom (30, 360));
+		TNT1 AAAA 1 LIGHT("PlasmaBallLight");
+		Stop;
+	}
+}
+
 Class Sparky : Actor
 {
   Default

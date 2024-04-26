@@ -121,9 +121,9 @@ class MolotovThrown : Actor
 	}
 }
 
-Class GrenadeThrown : Actor
+Class MO_ThrownGrenade : Actor
 {
-//	int timer;
+	int timer;
 	bool grenExploded; //To fix a weird issue of the rested grenade sprite still being on screen after exploding.
 	Default
 	{
@@ -131,14 +131,14 @@ Class GrenadeThrown : Actor
 	Height 4;
 	Projectile;
 	Speed 36;
-    Damage (1);
+    DamageFunction (1);
     Gravity 0.7;
 	Scale 0.25;
 	Projectile;
 	+MISSILE;
     -NOGRAVITY;
     -BLOODSPLATTER;
-	-EXTREMEDEATH;
+	+EXTREMEDEATH;
 	+EXPLODEONWATER;
 	+SKYEXPLODE;
 	+BOUNCEONFLOORS;
@@ -154,56 +154,56 @@ Class GrenadeThrown : Actor
 	DeathSound "none";
 	Obituary "%o got blown away by %k's frag grenade.";
 	}
+
 	States
 	{
 	Spawn:
-		TNT1 A 0 {grenExploded = False;}
+		TNT1 A 0 NoDelay
+		{
+			let player = MO_PlayerBase(target);
+			let nade = MO_ThrownGrenade(self);
+			nade.timer = player.CountInv("GrenadeCookTimer");
+		}
 	SpawnLoop:
-		HGRN AABBCCDDEEFF 1 {
-			A_GiveToTarget("GrenadeThrownTimer",1);
-			if(waterlevel < 1) {
+		HGRN AABBCCDDEEFF 1 
+		{	
+			timer++;
+			if(waterlevel < 1) 
+			{
 					A_SpawnItemEx("MO_GrenadeSmokeTrail",-3,0,0,-1,0,0);
-				}
 			}
-		TNT1 A 0;
-		TNT1 A 0 A_JumpIf(CountInv("GrenadeThrownTimer", AAPTR_TARGET) == 105, "Explode");
+			if(timer >= 105) {Return ResolveState("Explode");}
+			return ResolveState(Null);
+		}
 		Loop;
 	Death:
-		TNT1 A 0;
-		TNT1 A 0 A_JumpIf(grenExploded == TRUE, "Disappear");
-		TNT1 A 0 A_Jump(256, "Rest1", "rest2");
-	Rest1:
-		TNT1 A 0 A_JumpIf(grenExploded == TRUE, "Disappear");
-	    HGRN G 1
-		{
-			A_GiveToTarget("GrenadeThrownTimer",1);
-			if(waterlevel < 1) {
-					A_SpawnItemEx("MO_GrenadeSmokeTrail");
-				}
+	    HGRN H 0 A_Jump(128, 2);
+	    HGRN G 0;
+	RestLoop:
+	    HGRN "#" 1
+		{	
+			timer++;
+			A_LogInt(timer);
+			if(waterlevel < 1) 
+			{
+					A_SpawnItemEx("MO_GrenadeSmokeTrail",-3,0,0,-1,0,0);
+			}
+			if(timer >= 105) {Return ResolveState("Explode");}
+			return ResolveState(Null);
 		}
-		TNT1 A 0 A_JumpIf(CountInv("GrenadeThrownTimer", AAPTR_TARGET) == 105, "Explode");
+		TNT1 "#" 0 A_JumpIf(timer >= 105, "Explode");
 		Loop;
-	Rest2:
-		TNT1 A 0 A_JumpIf(grenExploded == TRUE, "Disappear");
-	    HGRN H 1
-		{
-			A_GiveToTarget("GrenadeThrownTimer",1);
-			if(waterlevel < 1) {
-					A_SpawnItemEx("MO_GrenadeSmokeTrail");
-				}
-		}
-		TNT1 A 0 A_JumpIf(CountInv("GrenadeThrownTimer", AAPTR_TARGET) == 105, "Explode");
-		Loop;
+
+	XDeath:
 	Explode:
-		TNT1 A 0 {grenExploded = TRUE;}
+		TNT1 A 0;
 		TNT1 A 0 A_Explode(125, 220);
 		TNT1 A 0 A_NoBlocking;
 		TNT1 A 0 A_AlertMonsters(200);
 		TNT1 A 0 A_StartSound("rocket/explosion", 6);
 		TNT1 A 0 A_SpawnItemEx("RocketExplosionFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
-		TNT1 A 0 A_SetInventory("GrenadeThrownTimer",0);
-	//	TNT1 A 0 A_SpawnItem("FragGrenadeExplosion");
-		TNT1 AA 1;
+		TNT1 A 1;
+		TNT1 A 0 Destroy();
 		Stop;
 	Disappear:
 		TNT1 A -1;

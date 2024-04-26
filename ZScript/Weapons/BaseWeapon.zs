@@ -103,10 +103,10 @@ class JMWeapon : Weapon
 
 // Don't complain if this is an action state rather than an action void
 // I found it easier an action state in terms of returning to state labels.
-	action state JM_WeaponReady(int flags = WRF_USERBTNS)
+	action state JM_WeaponReady(int wpflags = 0)
 	{	
-		A_WeaponReady(flags);
-		if(JustPressed(BT_USER1))
+		A_WeaponReady(wpflags);
+		if(player.cmd.buttons & BT_USER1)
 		{
 			if(CheckIfInReady())
 			return ResolveState("TossThrowable");
@@ -329,6 +329,14 @@ class JMWeapon : Weapon
 			"####" A 0 A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, false);
 			Stop;
 				
+		FlashKick:
+				TNT1 A 0 A_JumpIf(invoker.OwnerHasSpeed(), "FlashKickFast");
+				TNT1 A 16;
+				Goto ReallyReady;
+
+		FlashKickFast:
+				TNT1 A 14;
+				Goto ReallyReady;
 		
 		//From the PB Add-on	
 		TossThrowable:
@@ -437,16 +445,14 @@ class JMWeapon : Weapon
 		TossTheGrenade:
 			TNT1 A 0 ACS_Terminate(2098,0);
 			GRE1 AB 1;
-			TNT1 A 0 A_SetInventory("GrenadeThrownTimer", CountInv("GrenadeCookTimer"));
-			TNT1 A 0 A_SetInventory("GrenadeCookTimer",0);
 			TNT1 A 0 A_StartSound("FragGrenade/Throw",0,CHANF_DEFAULT,2.0);
 			GRE1 C 1;
-			MTOV A 0 A_FireProjectile("GrenadeThrown",0,0,0,8,FPF_NOAUTOAIM,0);
+			MTOV A 0 A_FireProjectile("MO_ThrownGrenade",0,0,0,8,FPF_NOAUTOAIM,0);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			GRE1 DEFG 1;
+			TNT1 A 0 A_SetInventory("GrenadeCookTimer",0);
 			TNT1 A 4
 			{
-				A_StartSound("Molotov/Lit",1);
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
 			}
 			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ThrowGrenade");

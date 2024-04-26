@@ -1490,4 +1490,15 @@ Sprite "QDAMZ0", 29, 29
 	Patch "QDAMD0", -12, -16
 }
 
+Graphic "MOLOICO", 41, 61
+{
+	Patch "MOLOV0", -6, 0
+}
+
+Graphic "GRENICO", 56, 39
+{
+	Patch "HGRNC0", 1, -4
+}
+
+
 // End of texture definitions

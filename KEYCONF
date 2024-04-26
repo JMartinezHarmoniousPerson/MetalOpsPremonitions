@@ -1,6 +1,6 @@
 clearplayerclasses
-addplayerclass JMPlayerPawn
-addplayerclass JMPlayerDeagleStart
+addplayerclass MO_OfficerPlayer
+addplayerclass MO_SergeantPlayer
 
 addkeysection "Metal Ops Keybinds" MOBinds
 addmenukey "Toss Throwable" +user1

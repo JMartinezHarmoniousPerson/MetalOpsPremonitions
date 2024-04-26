@@ -24,12 +24,80 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 			}
 	}
 	
-	action void JM_SetModeSprite(string s)
-	{
-		 let psp = Invoker.Owner.player.FindPSprite(PSP_WEAPON);
-		 psp.sprite = GetSpriteIndex(s);
-	}
+//From PB.
+//Rails / Beams things
+//all this is done this way cause ideally, every weapon should have its own specific functions, though a generic version of this could be made for addons use or simple "laser" like things
 	
+	//////////////////////////////////////////////////////////
+	//Plasma Rifle Beam
+	//////////////////////////////////////////////////////////
+	
+	//temporal thing for the bfg alt fire, move this to the bfg when/if it gets rewritten in zscript
+	const bfgpartstep = 15;
+	action void MO_FirePlasmaBeam()
+	{
+		//the first option is a lineattack cuz linetrace acts weird in some tipes of geometry (try one with the kinsie test map, in the elevator or the pool)
+		//Actor p = LineAttack(angle,8000,pitch,20,'Disintegrate',"BFGBeamPuff",LAF_NOIMPACTDECAL|LAF_NORANDOMPUFFZ);
+		//nvm just needed to substract hitdir to hitlocation, so it doesnt spawn in the wall
+		vector3 destpos;
+		FLineTraceData t;
+		bool hit = linetrace(angle,8000,pitch,0,height * 0.5 - floorclip + player.mo.AttackZOffset*player.crouchFactor,data:t);
+		
+		destpos = t.hitlocation;
+		destpos -= (t.hitdir * 2);
+		
+		vector3 dif = levellocals.vec3diff((pos.XY,pos.z + height * 0.5),destpos);
+		vector3 dir = dif.unit();
+		double dis = dif.length();
+		
+		int q = int(dis / bfgpartstep) + 1; //bfgpartstep is an arbitrary value representing the distance between particles, basically get the divide the total distance / steps between particles to get the number of particles
+			
+		vector3 actpos = (pos.XY,pos.z + height * 0.5);
+		for(int i = 1; i <= q; i++)
+		{
+			actpos += (dir * bfgpartstep);
+			MO_DrawBeamrailparticle(actpos);
+		}
+		
+		//damage victim (if any)
+		if(t.hitactor)
+		{
+			actor v = t.hitactor;
+			int dmg = 6 * random(1,4); //so this is why it feels weaker, the original projectile deals 20 * random(1,8) damage, and damagemobj doesnt add randomization, so a little randomization may help here
+			if(v && v.bismonster && v.health > 0 && !isfriend(v))
+				v.damagemobj(self,self,dmg,'Disintegrate');
+		}
+		
+		//spawn puff if hit anything
+		if(hit)
+		{
+			actor p = Spawn("PlasmaBeamPuff",destpos);
+			if(p)
+				p.target = self;
+			
+		}
+	}
+
+	action void MO_DrawBeamrailparticle(vector3 where)
+	{
+		FSpawnParticleParams beamrail;
+//		int fm = random(1,5);
+		beamrail.Texture = TexMan.CheckForTexture ("PAR2A0");
+		beamrail.Color1 = "FFFFFF";
+		beamrail.Style = STYLE_Add;
+		beamrail.Flags = SPF_ROLL|SPF_FULLBRIGHT|SPF_NOTIMEFREEZE;
+		beamrail.Vel = (random(-1,1),random(-1,1),random(-1,1)); 
+		beamrail.Startroll = random(0,360);
+		beamrail.RollVel = 0;
+		beamrail.StartAlpha = 1.0;
+		beamrail.FadeStep = -0.05;
+		beamrail.Size = random(32,42);
+		beamrail.SizeStep = -12;
+		beamrail.Lifetime = random (2,3); 
+		beamrail.Pos = where;
+		Level.SpawnParticle(beamrail);
+	}
+
 	Default
 	{
 		Weapon.AmmoUse 0;
@@ -49,7 +117,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		PRGG A 0 
 		{
 			if(CountInv("HeatedRoundsReady") == 1)
-			{JM_SetModeSprite("2RGG");}
+			{JM_SetWeaponSprite("2RGG");}
 		}
 	ReadyLoop:
 		"####" A 1 JM_WeaponReady(WRF_ALLOWRELOAD);
@@ -59,7 +127,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-				JM_SetModeSprite("1RGS");
+				JM_SetWeaponSprite("1RGS");
 			}
 		} 
 		PRGS A 0 A_Lower(12);
@@ -84,7 +152,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-				JM_SetModeSprite("1RGS");
+				JM_SetWeaponSprite("1RGS");
 			}
 		}
 		Goto ReadyToFire;
@@ -99,7 +167,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-				JM_SetModeSprite("3RGF");
+				JM_SetWeaponSprite("3RGF");
 			}
 		}
 		"####" A 1 
@@ -152,7 +220,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-				JM_SetModeSprite("2RGN");
+				JM_SetWeaponSprite("2RGN");
 			}
 		}
 		"####" A 0 A_SetInventory("PlasmaRifleCooldownCount",0);
@@ -230,30 +298,33 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 			return ResolveState(null);
 		}
 		TNT1 A 0;
-		Goto ReadyToFire;
+		Goto FireBeam;
 
 	FireBeam:
 		PRGF A 0;
 		PRGG A 0 A_StartSound("plasma/laser/fire",1, CHANF_LOOP);
-		PRGG AAA 2 A_WeaponOffset(0,3,WOF_ADD);
+		PRGG A 3 A_WeaponOffset(0,34);
+		PRGA A 3;
 		TNT1 A 0 A_JumpIf(JustReleased(BT_ALTATTACK), "CheckForCooldown");
 	HoldBeam:
 		TNT1 A 0 JM_CheckMag("PlasmaAmmo", "StopBeam");
 		PRGG A 0 A_StartSound("plasma/laser/fireloop",4);
-		PRGF A 1 
+		PRGG A 0 A_Overlay(-60, "MuzzleFlash");
+		PRGA BB 1 
 		{
 			JM_CheckForQuadDamage();
-			A_WeaponOffset(random(-3,3), random(32, 36));
-			A_Railattack(8,0,0,"","",RGF_SILENT|RGF_FULLBRIGHT|RGF_NOPIERCING,1,"BulletPuff",0,0,8192,0,3,0,"PlasmaBeamTrail");
-			A_Overlay(-60, "MuzzleFlash");
+			A_WeaponOffset(random(-1,1), random(32, 34));
+			MO_FirePlasmaBeam();
+			A_OverlayOffset(-60, 0, 18);
 			A_AlertMonsters();
 		}
-		PRGG A 0 JM_GunRecoil(-0.9, .09);//JM)
-		PRGF B 1
+		PRGG A 0 JM_GunRecoil(-0.9, .09);
+		PRGG A 0 A_Overlay(-60, "MuzzleFlash");
+		PRGA CC 1
 		{
 			JM_CheckForQuadDamage();
-			A_WeaponOffset(random(-3,3), random(32, 36));
-			A_Railattack(8,0,0,"Blue","Blue",RGF_SILENT|RGF_FULLBRIGHT|RGF_NOPIERCING,1,"BulletPuff",0,0,8192,0,3,0,"PlasmaBeamTrail");
+			A_WeaponOffset(random(-1,1), random(32, 34));
+			MO_FirePlasmaBeam();
 			A_AlertMonsters();
 			A_TakeInventory("PlasmaAmmo",1);
 		}
@@ -261,6 +332,9 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		StopBeam:
 		TNT1 A 0 A_StopSound(4);
 		TNT1 A 0 A_StartSound("plasma/laser/loopstop",1);		
+		PRGA B 1;
+		PRGA A 1 A_WeaponOffset(0,32);
+		PRGG A 1;
 		Goto Cooldown;
 	
 	DoNothing:
@@ -275,7 +349,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-				JM_SetModeSprite("1RGW");
+				JM_SetWeaponSprite("1RGW");
 			}
 		}
 //		TNT1 A 0 A_JumpIfInventory("HeatedPlasmaMode", "SwitchToNormal")
@@ -351,7 +425,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 			JM_WeaponReady(WRF_NOFIRE);
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-			JM_SetModeSprite("1RL1");
+			JM_SetWeaponSprite("1RL1");
 			}
 		}
 		PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
@@ -360,14 +434,14 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 			JM_WeaponReady(WRF_NOFIRE);
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-			JM_SetModeSprite("1RL1");
+			JM_SetWeaponSprite("1RL1");
 			}
 		}
 		PRL3 A 0
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-			JM_SetModeSprite("1RL3");
+			JM_SetWeaponSprite("1RL3");
 			}
 		}
 		"####" AB 1 JM_WeaponReady(WRF_NOFIRE);
@@ -400,7 +474,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-			JM_SetModeSprite("1RL1");
+			JM_SetWeaponSprite("1RL1");
 			}
 		}
 		"####" STUVWX 1 JM_WeaponReady(WRF_NOFIRE);
@@ -412,7 +486,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 			JM_WeaponReady(WRF_NOFIRE);
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-			JM_SetModeSprite("1RL2");
+			JM_SetWeaponSprite("1RL2");
 			}
 		}
 		Goto ReadyToFire;
@@ -423,21 +497,21 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-			JM_SetModeSprite("1RL1");
+			JM_SetWeaponSprite("1RL1");
 			}
 		}
 		PRL3 ABCCBA 1
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-			JM_SetModeSprite("1RL3");
+			JM_SetWeaponSprite("1RL3");
 			}
 		}
 		PRL1 EDCBA 1
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-			JM_SetModeSprite("1RL1");
+			JM_SetWeaponSprite("1RL1");
 			}
 		}
 		Goto ReadyToFire;
@@ -447,21 +521,21 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-			JM_SetModeSprite("1RL1");
+			JM_SetWeaponSprite("1RL1");
 			}
 		}
 		PRL3 ABCCCCBA 1
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-			JM_SetModeSprite("1RL3");
+			JM_SetWeaponSprite("1RL3");
 			}
 		}
 		PRL1 EDCBA 1
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-			JM_SetModeSprite("1RL1");
+			JM_SetWeaponSprite("1RL1");
 			}
 		}
 		Goto ReadyToFire;
@@ -471,21 +545,21 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-			JM_SetModeSprite("1RL1");
+			JM_SetWeaponSprite("1RL1");
 			}
 		}
 		PRL3 ABCBA 1
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-			JM_SetModeSprite("1RL3");
+			JM_SetWeaponSprite("1RL3");
 			}
 		}
 		PRL1 DCBA 1
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-			JM_SetModeSprite("1RL1");
+			JM_SetWeaponSprite("1RL1");
 			}
 		}
 		Goto ReadyToFire;
@@ -495,21 +569,21 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-			JM_SetModeSprite("1RL1");
+			JM_SetWeaponSprite("1RL1");
 			}
 		}
 		PRL3 ABCCBA 1
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-			JM_SetModeSprite("1RL3");
+			JM_SetWeaponSprite("1RL3");
 			}
 		}
 		PRL1 EDCBA 1
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
-			JM_SetModeSprite("1RL1");
+			JM_SetWeaponSprite("1RL1");
 			}
 		}
 		Goto ReadyToFire;
@@ -587,8 +661,7 @@ class JM_PlasmaBall : FastProjectile replaces PlasmaBall
 		Radius 13;
 		Height 8;
 		Speed 70;
- //		Damage 30;
-		DamageFunction 25;
+		DamageFunction 30;
 		Scale 0.4;
 		Projectile;
 		+RANDOMIZE

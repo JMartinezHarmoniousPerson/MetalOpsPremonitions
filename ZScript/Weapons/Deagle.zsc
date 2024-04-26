@@ -13,8 +13,8 @@ class MO_Deagle : JMWeapon// replaces Pistol
 		Tag "Desert Eagle";
 		Scale .75;
 		Inventory.PickupSound "weapons/deag/draw";
-		Inventory.ForbiddenTo "JMPlayerPawn";
-		VisibleToPlayerClass "JMPlayerDeagleStart";
+		Inventory.ForbiddenTo "MO_OfficerPlayer";
+		VisibleToPlayerClass "MO_SergeantPlayer";
 	}
 	States
 	{
