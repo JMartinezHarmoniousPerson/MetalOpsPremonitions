@@ -290,15 +290,18 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		TNT1 A 0;
 		TNT1 A 0 JM_CheckMag("PlasmaAmmo", "Reload");
 		TNT1 A 0 {
-			if(CountInv("HeatBlastLevel") >= 1 && CountInv("HeatedRoundsReady") >=1)
+			if(CountInv("HeatedRoundsReady") >=1 && CountInv("HeatBlastLevel") >= 1)
 			{
 				JM_CheckForQuadDamage();
 				return ResolveState("HeatBlast");
 			}
-			return ResolveState(null);
+			if(CountInv("HeatedRoundsREady") < 1)
+			{
+				return ResolveState("FireBeam");
+			}
+			return ResolveState(Null);
 		}
-		TNT1 A 0;
-		Goto FireBeam;
+		Goto ReadyToFire;
 
 	FireBeam:
 		PRGF A 0;
@@ -420,23 +423,16 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		PSTG A 0 A_JumpIfInventory("PlasmaAmmo",60,"ReadyToFire");
 		PSTG A 0 A_JumpIfInventory("MO_Cell",1,1);
 		goto ReadyToFire;
-		PRL1 AB 1 
+		PRL1 A 0
 		{
-			JM_WeaponReady(WRF_NOFIRE);
 			if(CheckInventory("HeatedRoundsReady",1))
 			{
 			JM_SetWeaponSprite("1RL1");
 			}
 		}
-		PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-		PRL1 CDE 1 
-		{
-			JM_WeaponReady(WRF_NOFIRE);
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-			JM_SetWeaponSprite("1RL1");
-			}
-		}
+		"####" AB 1;
+		"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+		"####" CDE 1; 
 		PRL3 A 0
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
@@ -451,9 +447,12 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		"####" F 1 JM_WeaponReady(WRF_NOFIRE);
 		"####" G 1 JM_WeaponReady(WRF_NOFIRE);
 		"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
-		"####" HHHI 1 JM_WeaponReady(WRF_NOFIRE);
+		"####" HH 1 JM_WeaponReady(WRF_NOFIRE);
+		"####" AA 0;
 		"####" A 0 A_StartSound("weapons/plasma/cellout",2);
-		"####" JKLM 1 JM_WeaponReady(WRF_NOFIRE);
+		"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
+		"####" H 1;
+		"####" IJKLM 1 JM_WeaponReady(WRF_NOFIRE);
 		PRL3 N 1 JM_WeaponReady(WRF_NOFIRE);
 		PRGN A 0 A_JumpIf(CountInv("PlasmaAmmo") >= 1, 2);
 		PRGN A 0 A_SpawnItemEx("EmptyCell",46, -2, 15, random(-1,3), random(3,6), random(3,5));
@@ -462,10 +461,11 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
 		PRL1 GGGGGH 1 JM_WeaponReady(WRF_NOFIRE);
 		PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-		PRL1 IJKL 1 JM_WeaponReady(WRF_NOFIRE);
-		PRL1 M 1 A_StartSound("weapons/plasma/cellin", 0);
+		PRL1 IJ 1 JM_WeaponReady(WRF_NOFIRE);
+		PSTF A 0 A_StartSound("weapons/plasma/cellin", 0);
+		PRL1 KLM 1;
 		PRL1 N 1 JM_WeaponReady(WRF_NOFIRE);
-		PRL1 O 1	A_StartSound("weapons/plasma/goingtoturnon", 0);
+		PRL1 O 1;
 		PSTG A 0 JM_ReloadGun("PlasmaAmmo", "MO_Cell",60,1);
 	DoneReload:
 		PRL1 PQ 1 JM_WeaponReady(WRF_NOFIRE);
