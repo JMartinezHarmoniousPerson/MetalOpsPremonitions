@@ -313,6 +313,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		TNT1 A 0 JM_CheckMag("PlasmaAmmo", "StopBeam");
 		PRGG A 0 A_StartSound("plasma/laser/fireloop",4);
 		PRGG A 0 A_Overlay(-60, "MuzzleFlash");
+		TNT1 A 0 A_SpawnItemEx("PlasmaWepLightSpawner",0,0,0,0,0,0);
 		PRGA BB 1 
 		{
 			JM_CheckForQuadDamage();
@@ -323,11 +324,13 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		}
 		PRGG A 0 JM_GunRecoil(-0.9, .09);
 		PRGG A 0 A_Overlay(-60, "MuzzleFlash");
+		TNT1 A 0 A_SpawnItemEx("PlasmaWepLightSpawner",0,0,0,0,0,0);
 		PRGA CC 1
 		{
 			JM_CheckForQuadDamage();
 			A_WeaponOffset(random(-1,1), random(32, 34));
 			MO_FirePlasmaBeam();
+			A_OverlayOffset(-60, 0, 18);
 			A_AlertMonsters();
 			A_TakeInventory("PlasmaAmmo",1);
 		}
@@ -432,7 +435,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		}
 		"####" AB 1;
 		"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-		"####" CDE 1; 
+		"####" DE 1; 
 		PRL3 A 0
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
@@ -442,7 +445,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		}
 		"####" AB 1 JM_WeaponReady(WRF_NOFIRE);
 		"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,5);
-		"####" CCCCDE 1 JM_WeaponReady(WRF_NOFIRE);
+		"####" CDE 1 JM_WeaponReady(WRF_NOFIRE);
 		"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 		"####" F 1 JM_WeaponReady(WRF_NOFIRE);
 		"####" G 1 JM_WeaponReady(WRF_NOFIRE);

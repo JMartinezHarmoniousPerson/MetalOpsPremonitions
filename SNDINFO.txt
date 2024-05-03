@@ -280,7 +280,11 @@ weapons/flamer/firemodeactive FLMMODE
 weapons/flamer/special1 FLMSPC1
 weapons/flamer/special2 FLMSPC2
 
-DSBOTTLE ICEBRK1A
+$random misc/icebreak {iceshatter1 iceshatter2}
+iceshatter1	ICESHT1
+iceshatter2	ICESHT2
+DSBOTTLE FreezeShatter
+
 
 //BFG
 weapons/bfg/draw B7GDRAW
