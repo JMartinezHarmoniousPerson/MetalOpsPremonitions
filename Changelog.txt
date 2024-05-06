@@ -61,6 +61,10 @@ a bit of AK style bolt recharge animation.
 - Kick sprites translate to player color now.
 - Flak shell ammo pool is no more. It was more common to find normal shell ammo and the SSG lost it's purpose
 from that. SSG still shoots flak but uses normal shell ammo pool.
+
+Version 2.1:
 - Player classes separated with a base class to be more clean.
+- Ice Break sound changed
+- Unmaker Tracers or more visible
 - Plasma Rifle normal alt fire is a plasma beam.
 - Grenade renamed, timer is now handled through it's own int that's passed from the player's inventory timer

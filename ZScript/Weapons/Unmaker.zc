@@ -2,12 +2,22 @@
 
 class MO_Unmaker : JMWeapon
 {
+	override string PickupMessage()
+	{
+		int msgtype = random(1,4);
+		string msg2 = "$GOTUNMAKER2";
+		if(msgtype == 4)
+		return String.Format("%s", StringTable.Localize(msg2));
+		else
+		return String.Format("%s", StringTable.Localize(pickupMsg));
+	}
+
     Default
     {
         Weapon.AmmoGive 80;
 		Weapon.AmmoUse 6;
         Weapon.AmmoType "MO_Cell";
-        Inventory.PickupMessage "";
+        Inventory.PickupMessage "$GOTUNMAKER";
         Tag "$TAG_UNMAKER";
         Inventory.PickupSound "weapons/unmaker/pick";
     }
@@ -33,7 +43,7 @@ class MO_Unmaker : JMWeapon
         Hold:
             TNT1 A 0 A_StartSOund("weapons/unmaker/fire", 7, CHANF_DEFAULT,1,ATTN_NORM, 0.85);
 			TNT1 A 0 A_StartSOund("weapons/unmaker/afire", 2);
-            TNT1 A 0 A_FireProjectile("UnmakerProjectile",0,1,0,0,0,0);
+            TNT1 A 0 A_FireProjectile("UnmakerProjectile",0,0,0,5,0,0);
 			TNT1 A 0 JM_CheckForQuadDamage();
 		//	TNT1 A 0 A_RailAttack(1, 0, 0, "", "red", RGF_NOPIERCING | RGF_SILENT | RGF_CENTERZ | RGF_FULLBRIGHT, 0, "", 0, 0, 9999, 1, 0.3);
             UNHF F 1 BRIGHT A_WeaponOffset(0,32);
@@ -63,9 +73,9 @@ class MO_Unmaker : JMWeapon
 			TNT1 A 0 A_StartSOund("weapons/unmaker/afire", 2);
             TNT1 A 0 
 			{
-				A_FireProjectile("UnmakerProjectile",0,0,0,-4,0,0);
-				A_FireProjectile("UnmakerProjectile",-3,0,0,-4,0,0);
-				A_FireProjectile("UnmakerProjectile",3,0,0,-4,0,0);
+				A_FireProjectile("UnmakerProjectile",0,0,0,5,0,0);
+				A_FireProjectile("UnmakerProjectile",-3,0,0,5,0,0);
+				A_FireProjectile("UnmakerProjectile",3,0,0,5,0,0);
 				JM_CheckForQuadDamage();
 			}
 //		TNT1 A 0 A_RailAttack(1, 0, 0, "", "red", RGF_NOPIERCING | RGF_SILENT | RGF_CENTERZ | RGF_FULLBRIGHT, 0, "", 0, 0, 9999, 1, 0.5);
@@ -112,22 +122,16 @@ class MO_Unmaker : JMWeapon
 
 class UnmakerPickup : CustomInventory
 {
-	override bool TryPickup(in out Actor toucher)
+	override string PickupMessage()
 	{
 		int msgtype = random(1,4);
-		switch(msgtype)
-		{
-			default:
-				toucher.A_Log("$GOTUNMAKER");
-				break;
-			case 4:
-				toucher.A_Log("$GOTUNMAKER2");
-				break;
-		}
-		GoAwayAndDie();
-		return Super.TryPickup(toucher);
+		string msg2 = "$GOTUNMAKER2";
+		if(msgtype == 4)
+		return String.Format("%s", StringTable.Localize(msg2), amount);
+		else
+		return String.Format("%s", StringTable.Localize(pickupMsg), amount);
 	}
-	Default {+DONTGIB Inventory.PickupMessage("");}
+	Default {+DONTGIB; Inventory.PickupMessage("$GOTUNMAKER");}
 	States
 	{
 		Spawn:
@@ -151,10 +155,10 @@ Class UnmakerProjectile : FastProjectile
 	damagefunction (random(80,100));
 	radius 1;
 	height 1;
-	speed 500;
+	speed 380;
 	renderstyle "add";
 	alpha 0.9;
-	scale .15;
+	scale .25;
 	decal "scorch";
 	+ZDOOMTRANS;
 	damagetype "Fire";
@@ -163,16 +167,18 @@ Class UnmakerProjectile : FastProjectile
 	states
 		{
 		Spawn:
-			PBAL HI 1 BRIGHT;
+			PBAL I 1 BRIGHT;
 			Loop;
         Death:
         XDeath:
         TNT1 A 0;
-        TNT1 AA 0 A_SpawnItemEx ("FlareFromExplosion",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
+        TNT1 A 0 A_SpawnItemEx ("FlareFromExplosion",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
         TNT1 A 0 A_SpawnItemEx ("FlareFromExplosion",36,-36,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
         TNT1 A 0 A_SpawnItemEx ("FlareFromExplosion",-36,36,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
- //       EXPL A 0 A_SpawnItem("UnmakerPuff")
-   //     TNT1 AA 0 A_SpawnItemEx("BurningEmberParticlesFloating_Bigger", random(19,-19), random(19,-19), random(4,-4), 0, 0, 0, 0, 128, 0);
+		SPRK AAA 0 A_SpawnProjectile("MO_RocketSmokeTrail", 2, 0, random(0, 360), flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: random(0, 360));
+		TNT1 AAAA 0 A_SpawnProjectile("EnhancedHitSpark1", 2, 0, frandom(0,1)*frandom (-180, 180),  flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: pitch - frandom(0,1)*frandom (30, 360));
+		TNT1 AAA 0 A_SpawnProjectile("EnhancedHitSpark2", 2, 0, frandom(0,1)*frandom (-180, 180), flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: pitch - frandom(0,1)*frandom (30, 360));
+		TNT1 AA 0 A_SpawnProjectile("EnhancedHitSpark3", 2, 0, frandom(0,1)*frandom (-180, 180), flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: pitch - frandom(0,1)*frandom (30, 360));	
         TNT1 AAA 0 A_SpawnItemEx("ObeliskTrailSpark", random(-8, 8), random(-8, 8), random(-2,2), 0, 0, 0, 0, 128, 0);
         TNT1 A 1 A_explode(20, 80);
         //TNT1 AAA 20 A_CustomMissile ("BigBlackSmoke", 0, 0, random (0, 360), 2, random (40, 160))
@@ -194,15 +200,16 @@ Class UnmakerProjectileTrail : Actor
 	+CANNOTPUSH;
 	+NODAMAGETHRUST;
 	renderstyle 'ADD';
-	+ZDOOMTRANS;
+//	+ZDOOMTRANS;
 	alpha 0.9;
-	scale .15;
+	scale .25;
+	speed 360;
     }
 	states
 		{
 		Spawn:
 			LEYS R 0;
-			XFLR A 1 BRIGHT;
+			PBAL I 1 BRIGHT; //A_SetPitch (sin(vel.z)/cos(vel.x));
 			Stop;
 		}
 	}
