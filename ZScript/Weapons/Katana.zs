@@ -61,7 +61,7 @@ class Katana: JMWeapon replaces Fist
 	  Deselect:
 		TNT1 A 0 A_STARTSOUND("weapons/katana/sheathe", CHAN_AUTO, CHANF_DEFAULT,0.7);
 		DesLoop:
-		KTAG A 1 A_Lower;
+		KTAG A 1 A_Lower(12);
 		Loop;
 	  Select:
 	  TNT1 A 0;
@@ -71,7 +71,7 @@ class Katana: JMWeapon replaces Fist
 	  TNT1 A 0 A_StartSound("weapons/katana/draw",CHAN_AUTO);
 	AnimLoop:
 	SelectAnimation:
-		KTAG A 1 A_Raise;
+		KTAG A 1 A_Raise(12);
 		Loop;
 	  Fire:
 		KTAF ABCD 1;
