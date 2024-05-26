@@ -82,8 +82,6 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
                 A_FireProjectile("MO_Rocket",0,true,0,7,0);
                 A_StartSound("weapons/rocket/fire", 1);
                 A_Overlay(-5, "MuzzleFlash");
-//                A_OverlayScale(-5, 0.9, 0.9);
-//				A_OverlayPivotAlign(-5, PSPA_CENTER, PSPA_CENTER);
 				JM_CheckForQuadDamage();
             }
             RLAF B 1 BRIGHT
@@ -115,24 +113,32 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			TNT1 AAA 0;
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
             RLAF E 1;
-			RLAF FG 1;
+			RLAF FFG 1;
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-			RLAF H 1 A_WeaponOffset(0,33);
-			RLAF H 1 A_WeaponOffset(0,35);
-			RLAF H 1 A_WeaponOffset(0,37);
-			RLAF H 1 A_WeaponOffset(0,39);
+			RLAF G 1;
+			RLAF H 2 
+			{
+				A_WeaponOffset(2,36);
+				A_OverlayPivot(PSP_WEAPON, 0.3, flags: WOF_KEEPY);
+				A_OverlayScale(PSP_WEAPON, 1.06, 0);
+				A_OverlayPivotAlign(PSP_WEAPON, PSPA_CENTER, PSPA_BOTTOM);
+			}
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-			RLAF H 1 A_WeaponOffset(0,42);
-			RLAF H 1 A_WeaponOffset(0,44);
-			RLAF H 1 A_WeaponOffset(0,47);
+			RLAF HHHH 1{
+				A_WeaponOffset(1,36);
+				A_OverlayScale(PSP_WEAPON, 1.03, 0);
+			}
+			RLAF H 0
+			{
+				A_WeaponOffset(0,34);
+				A_OverlayScale(PSP_WEAPON, 1, 0);
+			}
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-			RLAF H 1 A_WeaponOffset(0,50);
-			RLAF H 1 A_WeaponOffset(0,46);
-			RLAF H 1 A_WeaponOffset(0,41);
-			RLAF I 1 A_WeaponOffset(0,39);
+			RLAF HHH 1 A_WeaponOffset(0,32);
+			RLAF II 1;
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-			RLAF IJ 1 A_WeaponOffset(0,36);
-			RLAF KL 1 A_WeaponOffset(0,33);
+			RLAF EJ 1 A_WeaponOffset(0,32);
+			RLAF K 1;
             RLAS F 6 {
 			if(CountInv("MO_powerspeed") == 1)
 			{A_SetTics(3);}
@@ -176,25 +182,25 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			    A_SetAngle(angle+.75,SPF_INTERPOLATE);
 				}
             }
-            RLAF EE 1;
-			RLAF FFGG 1;
-			RLAF H 2 A_WeaponOffset(0,33);
+            TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
+            RLAF E 1;
+			RLAF FFG 1;
+			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
+			RLAF G 1;
 			RLAF H 2 A_WeaponOffset(0,35);
-			RLAF H 2 A_WeaponOffset(0,37);
-			RLAF H 2 A_WeaponOffset(0,39);
-			RLAF H 2 A_WeaponOffset(0,42);
-			RLAF H 2 A_WeaponOffset(0,44);
-			RNAF A 0 A_StartSound("weapons/rocket/loading",6);
-			RLAF H 2 A_WeaponOffset(0,47);
-			RLAF A 0 A_GiveInventory("MiniNukeCoolerGiver",1);
-			RLAF H 1 A_WeaponOffset(0,50);
-			RLAF H 1 A_WeaponOffset(0,46);
-			RLAF H 1 A_WeaponOffset(0,41);
-			RLAF I 1 A_WeaponOffset(0,39);
-			RLAF I 1 A_WeaponOffset(0,36);
-			RNAF J 1 A_WeaponOffset(0,36);
-			RNAF KL 1 A_WeaponOffset(0,33);
-            RNAS F 6;
+			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			RLAF HHH 1 A_WeaponOffset(0,37);
+			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
+			RLAF HH 1 A_WeaponOffset(0,34);
+			RLAF II 1 A_WeaponOffset(0,32);
+			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			RLAF EEJ 1 A_WeaponOffset(0,36);
+			RLAF K 1 A_WeaponOffset(0,33);
+            RLAS F 6 {
+			if(CountInv("MO_powerspeed") == 1)
+			{A_SetTics(3);}
+			}
+			TNT1 A 0 A_ReFire;
             Goto REadyToFire;
 		OnCooldown:
 			TNT1 A 0 A_Print("Mini nuke on cooldown");
@@ -289,24 +295,32 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			RLAF A 0 A_StartSound("weapons/rocket/loading",6);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
             RLAF E 1;
-			RLAF FG 1;
+			RLAF FFG 1;
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-			RLAF H 1 A_WeaponOffset(0,33);
-			RLAF H 1 A_WeaponOffset(0,35);
-			RLAF H 1 A_WeaponOffset(0,37);
-			RLAF H 1 A_WeaponOffset(0,39);
-			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-			RLAF H 1 A_WeaponOffset(0,42);
-			RLAF H 1 A_WeaponOffset(0,44);
-			RLAF H 1 A_WeaponOffset(0,47);
+			RLAF G 1;
+			RLAF H 2 
+			{
+				A_WeaponOffset(2,36);
+				A_OverlayPivot(PSP_WEAPON, 0.3, flags: WOF_KEEPY);
+				A_OverlayScale(PSP_WEAPON, 1.06, 0);
+				A_OverlayPivotAlign(PSP_WEAPON, PSPA_CENTER, PSPA_BOTTOM);
+			}
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-			RLAF H 1 A_WeaponOffset(0,50);
-			RLAF H 1 A_WeaponOffset(0,46);
-			RLAF H 1 A_WeaponOffset(0,41);
-			RLAF I 1 A_WeaponOffset(0,39);
+			RLAF HHHH 1{
+				A_WeaponOffset(1,36);
+				A_OverlayScale(PSP_WEAPON, 1.03, 0);
+			}
+			RLAF H 0
+			{
+				A_WeaponOffset(0,34);
+				A_OverlayScale(PSP_WEAPON, 1, 0);
+			}
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-			RLAF IJ 1 A_WeaponOffset(0,36);
-			RLAF KL 1 A_WeaponOffset(0,33);
+			RLAF HHH 1 A_WeaponOffset(0,32);
+			RLAF II 1;
+			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			RLAF EJ 1 A_WeaponOffset(0,32);
+			RLAF K 1;
             RLAS F 6 {
 			if(CountInv("MO_powerspeed") == 1)
 			{A_SetTics(3);}
