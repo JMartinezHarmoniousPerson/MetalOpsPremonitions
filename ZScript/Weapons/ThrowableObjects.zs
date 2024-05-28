@@ -183,7 +183,6 @@ Class MO_ThrownGrenade : Actor
 	    HGRN "#" 1
 		{	
 			timer++;
-			A_LogInt(timer);
 			if(waterlevel < 1) 
 			{
 					A_SpawnItemEx("MO_GrenadeSmokeTrail",-3,0,0,-1,0,0);
