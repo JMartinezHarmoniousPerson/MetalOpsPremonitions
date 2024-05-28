@@ -34,9 +34,6 @@ $pitchshift player/death 2
 $pitchshift player/deathhard 2
 
 NULLSND NULLSND
-
-$playeralias 	player 	male 	*usefail 		NULLSND
-
 player/landed PLYLAND
 
 $playeralias 	player 	male 	*land		player/landed
