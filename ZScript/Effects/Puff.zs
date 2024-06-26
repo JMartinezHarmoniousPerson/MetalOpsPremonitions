@@ -162,6 +162,7 @@ Class BerserkKickPuff : KickingPuff
 	{
 		DamageType "ExtremePunches"; //For Brutal Doom Monsters only compatiblity
 		-ALLOWPARTICLES
+		ProjectileKickback 800;
 	} 
 }
 
