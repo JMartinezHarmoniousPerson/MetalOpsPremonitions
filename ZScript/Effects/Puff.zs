@@ -135,14 +135,19 @@ class KickingPuff : UpdatedBulletPuff
 	{
 		DamageType "Kick";
 		+NODECAL;
+		-ALLOWPARTICLES;
+		ProjectileKickback 500;
 	} 
 	States
 	{
 		Spawn:
-		Melee:
+//		Melee:
 		TNT1 CD 4;
 		Stop;
-		
+
+		Melee:
+			TNT1 A 1 A_RadiusThrust(3, -1, RTF_NOTMISSILE);
+			Stop;
 		Crash:
 			TNT1 A 0 A_SpawnItemEx("KickSmoke");
 			TNT1 A 1 A_StartSound("playerkick/footwall", 3);
