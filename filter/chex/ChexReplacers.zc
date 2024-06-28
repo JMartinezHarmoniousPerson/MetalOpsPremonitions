@@ -19,7 +19,7 @@ class ChexReplacementHandler : EventHandler
 		 //Weapons
 		case 'SuperBootspork': e.Replacement = "Chainsaw"; break;
 		case 'MiniZorcher':	
-			if(p.mo is "JMPlayerDeagleStart")
+			if(p.mo is "MO_SergeantPlayer")
 			e.Replacement = "MO_Deagle";
 			else
 			e.Replacement = "EnforcerPistol";
