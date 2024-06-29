@@ -273,6 +273,13 @@ class MO_MiniGun : JMWeapon
 		Stop;
 		
 	MuzzleFlash:
+		TNT1 A 0
+		{
+			A_OverlayFlags(-5, PSPF_FORCEALPHA, true);
+			A_OverlayScale(-5, 0.85);
+			A_OverlayOffset(-5,7,10);
+			A_OverlayAlpha(-5, 0.85);
+		}
 		TNT1 A 0 A_Jump(256, "M1", "M2", "M3", "M4");
 		Stop;
 	M1:
