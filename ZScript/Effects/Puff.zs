@@ -136,7 +136,7 @@ class KickingPuff : UpdatedBulletPuff
 		DamageType "Kick";
 		+NODECAL;
 		-ALLOWPARTICLES;
-		ProjectileKickback 500;
+		ProjectileKickback 300;
 	} 
 	States
 	{
