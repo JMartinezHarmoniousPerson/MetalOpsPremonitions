@@ -2,8 +2,6 @@
 
 Class SMGBurstMode : MO_ZSToken{}
 
-Class SMGBurstCounter : Inventory {Default{Inventory.MaxAmount 5;}}
-
 Class MO_SubMachineGun : JMWeapon
 {
     Default
@@ -52,7 +50,6 @@ Class MO_SubMachineGun : JMWeapon
             SM5G A 1 
 			{
 				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
-				A_TakeInventory("SMGBurstCounter",999);
 				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
 			}
             Loop;
@@ -64,7 +61,6 @@ Class MO_SubMachineGun : JMWeapon
         Fire:
 			TNT1 A 0 JM_CheckMag("SMGAmmo");
 			TNT1 A 0 A_JumpIf(invoker.isZoomed, "Fire2");
-			TNT1 A 0 A_JumpIfInventory("SMGBurstMode",1,"BurstFire");
             SM5F A 1 BRIGHT {
                 A_FireBullets(5.6, 0, 1, 10, "UpdatedBulletPuff",FBF_NORANDOM, 0,"MO_BulletTracer",0);
                 JM_UseAmmo("SMGAmmo", 1);
