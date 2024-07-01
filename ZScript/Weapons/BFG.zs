@@ -62,7 +62,7 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
 		{
 				if(!GetCvar("mo_nogunrecoil"))
 				{
-                A_SetPitch(pitch-7.0,SPF_Interpolate);
+                A_SetPitch(pitch-5.0,SPF_Interpolate);
 			    A_SetAngle(angle+1.75,SPF_INTERPOLATE);
 				}
 		}		
@@ -71,7 +71,7 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
 		{
 				if(!GetCvar("mo_nogunrecoil"))
 				{
-                A_SetPitch(pitch-6.0,SPF_Interpolate);
+                A_SetPitch(pitch-3.3,SPF_Interpolate);
 			    A_SetAngle(angle+1.25,SPF_INTERPOLATE);
 				}
 		}
@@ -79,17 +79,19 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
 		{
 			if(!GetCvar("mo_nogunrecoil"))
 			{
-                A_SetPitch(pitch-4.0,SPF_Interpolate);
+                A_SetPitch(pitch-2.0,SPF_Interpolate);
 			    A_SetAngle(angle-1,SPF_INTERPOLATE);
 			}
+			A_ZoomFactor(0.97);
 		}
 		B7GF O 1
 		{
 			if(!GetCvar("mo_nogunrecoil"))
 			{
-                A_SetPitch(pitch-2.0,SPF_Interpolate);
+                A_SetPitch(pitch-1.0,SPF_Interpolate);
 			    A_SetAngle(angle-.75,SPF_INTERPOLATE);
 			}
+			A_ZoomFactor(1.0);
 		}
 		B7GF PQQQRRRR 1;
         B7GF SSTTU 1;

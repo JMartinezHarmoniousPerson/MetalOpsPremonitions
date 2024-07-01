@@ -48,14 +48,23 @@ Class MO_SubMachineGun : JMWeapon
 			TNT1 A 0 A_StartSound("weapons/smg/select",0);
             SM5S ABCD 1;
         ReadyToFire:
-			SM5A A 0 A_SetInventory("SMGBurstCounter",0);
-            SM5G A 1 JM_WeaponReady(WRF_ALLOWRELOAD);
+			SMGG A 0 {if(invoker.isZoomed) {SetWeaponState("Ready2");}}
+            SM5G A 1 
+			{
+				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
+				A_TakeInventory("SMGBurstCounter",999);
+				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
+			}
             Loop;
         Select:
 			TNT1 A 0;
+			TNT1 A 0 {invoker.isZoomed = False;}
+			SMGR A 0 A_ZoomFactor(1.0);
 			Goto ClearAudioAndResetOverlays;
         Fire:
 			TNT1 A 0 JM_CheckMag("SMGAmmo");
+			TNT1 A 0 A_JumpIf(invoker.isZoomed, "Fire2");
+			TNT1 A 0 A_JumpIfInventory("SMGBurstMode",1,"BurstFire");
             SM5F A 1 BRIGHT {
                 A_FireBullets(5.6, 0, 1, 10, "UpdatedBulletPuff",FBF_NORANDOM, 0,"MO_BulletTracer",0);
                 JM_UseAmmo("SMGAmmo", 1);
@@ -63,16 +72,9 @@ Class MO_SubMachineGun : JMWeapon
 				A_SpawnItemEx("GunSmoke",15,0,34,2,0,0);
 				JM_CheckForQuadDamage();
             }
-			PSTG A 0 
-			{
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-				A_SetPitch(pitch-1.5,SPF_Interpolate);
-				A_SetAngle(angle+.09,SPF_INTERPOLATE);
-				}
-			}
             SM5F B 1 BRIGHT 
 			{
+				JM_GunRecoil(-0.895, .09);
 				JM_WeaponReady(WRF_NOFIRE);
 				A_SpawnItemEx("PistolCasing",29, 4, 38, random(-2,2), random(3,5), random(3,5));
 			}
@@ -80,41 +82,50 @@ Class MO_SubMachineGun : JMWeapon
             AR1F A 0 A_JumpIf(PressingWhichInput(BT_ATTACK), "Fire");
 			TNT1 A 0 JM_CheckMag("SMGAmmo");
             Goto ReadyToFire;
-	
-		AltFire:
-			TNT1 A 0 JM_CheckMag("SMGAmmo");
-            SM5F A 1 BRIGHT {
+
+		Fire2:
+			  SM5Z E 1 BRIGHT {
                 A_FireBullets(5.6, 0, 1, 10, "UpdatedBulletPuff",FBF_NORANDOM, 0,"MO_BulletTracer",0);
                 JM_UseAmmo("SMGAmmo", 1);
                 A_StartSound("weapons/smg/fire", 0);
 				A_SpawnItemEx("GunSmoke",15,0,34,2,0,0);
 				JM_CheckForQuadDamage();
             }
-			PSTG A 0 
+            SM5Z F 1 BRIGHT 
 			{
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-				A_SetPitch(pitch-1.5,SPF_Interpolate);
-				A_SetAngle(angle+.09,SPF_INTERPOLATE);
-				}
-			}
-            SM5F B 1 BRIGHT 
-			{
+				JM_GunRecoil(-0.85, .06);
 				JM_WeaponReady(WRF_NOFIRE);
 				A_SpawnItemEx("PistolCasing",29, 4, 38, random(-2,2), random(3,5), random(3,5));
 			}
-			AR1F A 0 A_GiveInventory("SMGBurstCounter",1);
-			AR1F A 0 A_JumpIfInventory("SMGBurstCounter",5,"BurstFireFinished");
-            AR1F A 0 A_JumpIf(PressingAltFire(), "AltFire");
+            SM5Z G 1 JM_WeaponReady(WRF_NOFIRE);
+            AR1F A 0 A_JumpIf(PressingWhichInput(BT_ATTACK), "Fire");
 			TNT1 A 0 JM_CheckMag("SMGAmmo");
-            Goto ReadyToFire;
-		
-		BurstFireFinished:
-			SM5G A 1 JM_WeaponReady(WRF_NoFire);
-			AR1F A 0 A_JumpIf(!PressingAltFire(), "ReadyToFire");
+            Goto Ready2;
+	
+		AltFire:
+			TNT1 A 0 A_JumpIf(invoker.isZoomed, "UnZoom");
+			TNT1 A 0 {invoker.isZoomed = true;}
+			SMGR A 0 A_ZoomFactor(1.3);
+			SM5Z ABC 1 JM_WeaponReady(WRF_NOFIRE);
+			SM5Z D 2 JM_WeaponReady(WRF_NOFIRE);
+		Ready2:
+			SM5Z D 1 
+			{
+				JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
+				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("UnZoom");}
+			}
 			Loop;
+
+		UnZoom:
+			TNT1 A 0 {invoker.isZoomed = False;}
+			SMGR A 0 A_ZoomFactor(1.0);
+			SM5Z CBA 1 JM_WeaponReady(WRF_NOFIRE);
+			SM5G A 1 JM_WeaponReady(WRF_NOFIRE);
+			Goto ReadyToFire;
 			
         Deselect:
+			TNT1 A 0 {invoker.isZoomed = False;}
+			SMGR A 0 A_ZoomFactor(1.0);
             SM5S DCBA 1;
             TNT1 A 0 A_Lower(12);
             Wait;
@@ -123,6 +134,13 @@ Class MO_SubMachineGun : JMWeapon
 			TNT1 A 0 A_JumpIfInventory("SMGAmmo",40,"ReadyToFire");
 			TNT1 A 0 A_JumpIfInventory("LowCalClip",1,1);
 			Goto ReadyToFire;
+			TNT1 AAA 0;
+			TNT1 A 0 A_JumpIf(Invoker.isZoomed, "ReloadZoomed");
+			TNT1 A 0 
+			{
+				invoker.isZoomed = false;
+				A_ZoomFactor(1.0);
+			}
 			SMR1 AB 1 JM_WeaponReady(WRF_NOFIRE);
 			SM5G A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			SMR1 CDE 1 JM_WeaponReady(WRF_NOFIRE);
@@ -149,7 +167,7 @@ Class MO_SubMachineGun : JMWeapon
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			SMR1 QR 1 JM_WeaponReady(WRF_NOFIRE);
 			SMR1 A 0 A_StartSound("weapons/SMG/magin", CHAN_AUTO, CHANF_DEFAULT);
-			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			SMR1 S 1 JM_WeaponReady(WRF_NOFIRE);
 			SMR1 TU 1 JM_WeaponReady(WRF_NOFIRE);
 			TNT1 A 0 JM_ReloadGun("SMGAmmo","LowCalClip",40,1);
@@ -165,7 +183,55 @@ Class MO_SubMachineGun : JMWeapon
 			SM5G A 1;
             Goto ReadyToFire;
 
-//Burst mode is a now the alt fire. This will likely be replaced with something else.		
+	ReloadZoomed:
+			TNT1 AAA 0;
+			TNT1 A 0 
+			{
+				A_ZoomFactor(1.2);
+			}
+			SMRZ AB 1 JM_WeaponReady(WRF_NOFIRE);
+			SM5G A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			SMRZ CDE 1 JM_WeaponReady(WRF_NOFIRE);
+			SM5G A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
+			SMRZ FGG 1 JM_WeaponReady(WRF_NOFIRE);
+			SMRZ G 7 
+			{
+				JM_WeaponReady(WRF_NOFIRE);
+				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(3);}
+			}
+			SMRZ H 1 A_StartSound("weapons/smg/magout", CHAN_AUTO);
+			SMRZ IIJJ 1 JM_WeaponReady(WRF_NOFIRE);
+			SMRZ J 1 JM_WeaponReady(WRF_NOFIRE);
+			SMR1 A 0 A_JumpIf(CountInv("SMGAmmo") >= 1, 2);
+			SMR1 A 0; //A_SpawnItemEx('SMGMagazine', 25, 7, 29, random(-1,2), random(-6,-4), random(2,5));
+			SMRZ J 4 
+			 {
+				JM_WeaponReady(WRF_NOFIRE);
+				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
+			}
+			SMRZ IHG 1 JM_WeaponReady(WRF_NOFIRE);
+			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
+			SMRZ K 1 JM_WeaponReady(WRF_NOFIRE);
+			SMR1 A 0 A_StartSound("weapons/SMG/magin", CHAN_AUTO, CHANF_DEFAULT);
+			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			SMRZ LL 1 JM_WeaponReady(WRF_NOFIRE);
+			SMRZ MN 1 JM_WeaponReady(WRF_NOFIRE);
+			TNT1 A 0 JM_ReloadGun("SMGAmmo","LowCalClip",40,1);
+	DoneReloadZoomed:
+			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
+			SMRZ OONML 1;
+			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,5);
+			SMRZ KKKKKKP 1 JM_WeaponReady(WRF_NOFIRE);
+			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+            SMRZ QR 1 JM_WeaponReady(WRF_NOFIRE);
+			SMRZ A 0 A_ZoomFactor(1.3);
+			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
+            SMRZ S 1 JM_WeaponReady(WRF_NOFIRE);
+			SMRZ A 1 A_OverlayOffset(PSP_WEAPON , 0,39); 
+			SMRZ A 1 A_OverlayOffset(PSP_WEAPON ,0,35);
+			SMRZ A 1 A_OverlayOffset(PSP_WEAPON ,0,32);
+            Goto ReadyToFire;
+
 	/*	ActionSpecial:
 			"####" A 0 
 			{

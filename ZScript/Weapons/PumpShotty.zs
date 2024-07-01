@@ -269,5 +269,6 @@ class PumpShotgunAmmo : Ammo
 		Ammo.BackpackAmount 0;
 		Ammo.BackpackMaxAmount 6;
 		Inventory.Icon "PSGCA0";
+		+INVENTORY.IGNORESKILL;
 	}
 }

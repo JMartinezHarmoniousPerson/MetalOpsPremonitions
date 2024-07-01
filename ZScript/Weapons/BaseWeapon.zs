@@ -8,6 +8,8 @@ class JMWeapon : Weapon
 	string inspectToken;
 	property InspectToken: inspectToken;
 
+	bool isZoomed;
+
 	//weapons should ALWAYS bob, fucking fight me -popguy
 	override void DoEffect()
 	{
@@ -453,6 +455,7 @@ class JMWeapon : Weapon
 			TNT1 A 0 A_SetInventory("GrenadeCookTimer",0);
 			TNT1 A 4
 			{
+				A_StartSound("Molotov/Lit",1);
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
 			}
 			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ThrowGrenade");

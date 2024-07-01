@@ -69,4 +69,12 @@ Version 2.1:
 - Grenade renamed, timer is now handled through it's own int that's passed from the player's inventory timer
 - Kicks now stumble larger enemies as like a go away mechanic, along with the enemies being kicked back a bit
 - Minigun muzzle flash size and opacity slightly reduced for better visibility.
-- 
+- Changes to SMG:
+	- Recoil reduced
+	- Burst alt fire replaced with ADS mode.
+	- ADS Reload and firing animations added.
+- BFG Recoil reduced
+- Deagle Recoil reduced, and you can fire it faster.	
+- Chex Quest Compatibility fixed
+- Pressing use on a wall emits a no way sound now. (Sound from Slayer's Rampage by Moa Dixon/Endie and Insanity's Brutality by Doomguy5th)
+- Shotguns have ignore skill for nightmare and ITYTD

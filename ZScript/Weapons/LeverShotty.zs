@@ -334,5 +334,6 @@ class LeverShottyAmmo : Ammo
 		Ammo.BackpackAmount 0;
 		Ammo.BackpackMaxAmount 7;
 		Inventory.Icon "W87CA0";
+		+INVENTORY.IGNORESKILL;
 	}
 }
