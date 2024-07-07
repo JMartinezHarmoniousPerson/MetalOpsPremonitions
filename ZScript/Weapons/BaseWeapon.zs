@@ -98,11 +98,6 @@ class JMWeapon : Weapon
         if(player) player.setpsprite(layer,invoker.findstate(st));
     }
 
-	enum ButtonPresses
-	{
-		WRF_USERBTNS = WRF_ALLOWUSER1|WRF_ALLOWUSER4,
-	}
-
 // Don't complain if this is an action state rather than an action void
 // I found it easier an action state in terms of returning to state labels.
 	action state JM_WeaponReady(int wpflags = 0)
@@ -231,11 +226,16 @@ class JMWeapon : Weapon
 		Kick: //16 frames
 			"####" A 0 A_ZoomFactor(1.0);
 			"####" A 0 A_StopSound(CHAN_VOICE);
+			"####" A 0 {invoker.isZoomed = False;}
 			"####" A 0 A_JumpIf (vel.Z != 0, "AirKick");
 			"####" A 0;
-			"####" A 0 SetPlayerProperty(0,1,0);
-			"####" A 0 A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, TRUE);
-			"####" A 0 A_JumpIf(invoker.OwnerHasSpeed(),"KickFaster");
+			"####" A 0 
+			{
+				SetPlayerProperty(0,1,0);
+				A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, TRUE);
+				If(invoker.OwnerHasSpeed()) {return ResolveState("KickFaster");}
+				{return ResolveState(Null);}
+			}
 			KCK1 ABC 1;
 			"####" A 0 A_StartSound("playerkick",0);
 			KCK1 DEF 1;
