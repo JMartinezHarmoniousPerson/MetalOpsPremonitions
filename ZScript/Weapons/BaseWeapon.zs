@@ -4,9 +4,12 @@ class JMWeapon : Weapon
 	property firstTime: isFirstTime;
 	bool pressedKick;
 	property pressedKick: pressedKick;
-
+//	sound dryFireSound;
+//	property DryFireSound : dryFireSound;
+	int adsMode;
 	string inspectToken;
 	property InspectToken: inspectToken;
+
 
 	bool isZoomed;
 
@@ -15,6 +18,7 @@ class JMWeapon : Weapon
 	{
 		super.DoEffect();
 		let player = owner.player;
+		adsMode =  Cvar.GetCvar("mo_aimmode",player).GetInt();
 		Cvar Bobbing = Cvar.GetCvar("MTOps_AlwaysBob",player);
 		if (player && player.readyweapon)
 		{
@@ -49,6 +53,22 @@ class JMWeapon : Weapon
 		{
 			A_StartSound("powerup/quadfiring",70, CHANF_DEFAULT,3.0,ATTN_NONE);
 		}
+	}
+
+//Holy shit I can't believe I got this working
+	int SetXHair(int w)
+	{
+		static const string weaponPrefix[] =
+		{
+			"Pistol", "Deagle", "SMG", "LAS", "PSG", "SSG", "Rifle", "Chain", 
+			"RL", "RLGuided", "Plasma", "Rail", "BFG", "MP40", "Unmaker",
+			"Flamer"
+		};
+		string weaponCVar = "mo_xhair".. String.Format("%s", weaponPrefix[w]);
+		if(owner.GetCvar("mo_customxhairs"))
+		return owner.GetCvar(weaponCvar);
+		else
+		return 0;
 	}
 	
 	action void JM_SetWeaponSprite(string s)
@@ -97,7 +117,6 @@ class JMWeapon : Weapon
     {
         if(player) player.setpsprite(layer,invoker.findstate(st));
     }
-
 // Don't complain if this is an action state rather than an action void
 // I found it easier an action state in terms of returning to state labels.
 	action state JM_WeaponReady(int wpflags = 0)
@@ -195,7 +214,7 @@ class JMWeapon : Weapon
 				A_StopSound(CHAN_6);
 				A_STOPSOUND(CHAN_7);
 				SetPlayerProperty(0,0,0);
-//				A_Overlay(-99, "KickHandler");
+				A_SetCrosshair(0);
 				A_ClearOverlays(-8,8);
 				A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, FALSE);
 				JM_PressedKick(false);

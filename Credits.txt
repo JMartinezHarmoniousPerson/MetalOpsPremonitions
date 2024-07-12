@@ -6,7 +6,8 @@ Sounds - Valve (L4D2 Pistol Draw, L4D1 Reload sounds), Code Renard (Firing sound
 Pickup sprite - YukesVonFaust, torridgristle, Slax
 Casings - Captain J
 Dry Fire Sound - Mike Koenig(from Soundbible.com)
-Silencer sprites: Center frames (JoeyTD), reload silencer 1 (Dox778?, PB Team?), reload silencer 2 (
+Silencer sprites: Center frames (JoeyTD), reload silencer 1 (Dox778?, PB Team?), reload silencer 2 (Skellegant)
+Silencer attach sounds - Criterion Games, EA
 
 Lever Shotty: 
 LossForWords - sprites
@@ -65,7 +66,7 @@ Nuke effect sprites: Daniel, 3D Realms
 
 SMG:
 Sounds: Bethesda Softworks, Infinity Ward, Sledgehammer Games, Magamcow
-Sprites: TSF, Green Eyesman, bullet in mag sprite by Captain J
+Sprites: TSF, Green Eyesman, bullet in mag sprite by Captain J. ADS Sprites from BDv22
 
 BFG:
 Sprites by TSF
@@ -91,6 +92,7 @@ Valve Corporation
 
 Assault Rifle
 Sprites by DrPyspy, Thrashfanbert1994. Using the edited sprite by osjclatchford
+Some sounds by Infinity Ward, ADS sprite base by Mike12
 
 Flamethrower
 Sprites by VriskaSerket 
@@ -159,7 +161,7 @@ Halo 2 © Microsoft Corporation.
 Metal Ops: Premonitions was created under Microsoft's "Game Content Usage Rules" 
 using assets from Halo 2, and it is not endorsed by or affiliated with Microsoft.  
 
-Nintendo - ice break sound effect from Legend of Zelda Ocarina of Time. Used under Fair Use.
+Netherrealm Studios - ice break sound effect from Mortal Kombat X. Used under Fair Use.
 
 Ice break sounds: NetherRealm Studios
 zrriontheinsect - Used his amazing tutorial on muzzle flashes: https://forum.zdoom.org/viewtopic.php?t=38940
@@ -180,3 +182,10 @@ scalliano - GLDefs code for spheres, Haste sphere
 
 Yoo-toob-FX - Rad suit off sound
 Pixabay - Rad suit hiss sound
+
+Mega Berserk:
+Sarge945 - Previous Weapon Used Button add-on used for Mega Berserk
+Fourth sound of Horror Voice Flashbacks used for Mega Berserk end: Sound Effect from Pixabay (https://pixabay.com/sound-effects/horror-voice-flashbacks-14469/)
+Bethesda - Doom 2016 berserk end, pickup sounds and doom 3 berserk loop
+People Can Fly - Mega Berserk loop layer
+New Blood Interactive - Mega Berserk loop ambience

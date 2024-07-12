@@ -201,51 +201,40 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		TNT1 A 0 A_JumpIfInventory("LeverShottyAmmo",5,"ExtraShell");
 		TNT1 A 0 A_JumpIfInventory("MO_ShotShell",1,1);
 		Goto DoneReload;
-		W8R2 AB 1 {
-			if(JustPressed(BT_ATTACK)) {SetWeaponState("Fire");}
-			if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
-			return JM_WeaponReady(WRF_NOFIRE);
-			}
+		W8R2 AB 1 JM_WeaponReady(WRF_NOFIRE);
 		W8R2 C 1 {
 			A_StartSound("weapons/levershotty/load", 1);
-			if(JustPressed(BT_ATTACK)) {SetWeaponState("Fire");}
-			if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
 			return JM_WeaponReady(WRF_NOFIRE);
 			}
 		PISG A 0 JM_LoadShell("LeverShottyAmmo","MO_ShotShell",1);
-		W8R2 DEFGHI 1 {
-			if(JustPressed(BT_ATTACK)) {SetWeaponState("Fire");}
-			if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
-			return JM_WeaponReady(WRF_NOFIRE);
-			}
-		W8R2 III 4
+		W8R2 DEFGHI 1 JM_WeaponReady(WRF_NOFIRE);
+		W8R2 I 9
 		{
-			if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(3);}
-			if(JustPressed(BT_ATTACK)) {SetWeaponState("Fire");}
-			if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
+			if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(6);}
+			if(PressingFire() || PressingAltFire()) {SetWeaponState("DoneReload");}
 			return JM_WeaponReady(WRF_NOFIRE);
 		}
 		PISG A 0;
-		PISG A 0 A_ReFire();
+		PISG A 0 A_JumpIf(PressingFire() || PressingAltFire(), "DoneReload");
 		Loop;
 	DoneReload:
-		W8R1 QR 1;
+		W8R1 QR 1 JM_WeaponReady(WRF_NOFIRE);
 		W8R1 S 1 A_StartSound("weapons/levershotty/up", CHAN_WEAPON);
-		W8R1 TUV 1;
+		W8R1 TUV 1 JM_WeaponReady(WRF_NOFIRE);
 		W8R1 V 6 
 		{
 			if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(3);}
-			return JM_WeaponReady();
+			return JM_WeaponReady(WRF_NOFIRE);
 		}
 		W8R1 W 1 A_StartSound("weapons/levershotty/down", CHAN_6);
 		W87G A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-		W8R1 XX 1;
+		W8R1 XX 1 JM_WeaponReady(WRF_NOFIRE);
 		W87G A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-		W8R1 YY 1;
+		W8R1 YY 1 JM_WeaponReady(WRF_NOFIRE);
 		W87G A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-		W8R1 ZZZ 1 ;
+		W8R1 ZZZ 1 JM_WeaponReady(WRF_NOFIRE);
 		W821 A 1 A_StartSound("weapons/levershotty/up", CHAN_7);
-		W821 BCDEFG 1;
+		W821 BCDEFG 1 JM_WeaponReady(WRF_NOFIRE);
 		goto ReadyToFire;
 	ExtraShell:
 		W87G A 0 A_JumpIfInventory("LeverShottyAmmo",6,"ChamberLastShell");
@@ -315,7 +304,7 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 	//This is so that the shell loading of the inventory give and take is in one function for the Shotgun
 	action void JM_LoadShell(name type, name reserve, int c)
 	{
-		TakeInventory(reserve, c);
+		TakeInventory(reserve, c, notakeinfinite: TRUE);
 		GiveInventory(type, c);
 	}
 }

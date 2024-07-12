@@ -9,12 +9,14 @@ OptionMenu "Modsettings"
 {
 	Submenu "$NCH_OPTMNU_TITLE", "NCHUD"
 	StaticText ""
-	Option "SSG and Flak shells randomly replace Shotgun and 12G shell spawns", "mo_ssgrandomizer", "yesno"
-	StaticText "SSG and Flak shells would randomly replace Shotgun and 12G Shells"
+	Option "SSG randomly replaces Shotgun spawn", "mo_ssgrandomizer", "yesno"
+	StaticText "The SSG would randomly replace the Shotgun."
 	StaticText "This option should only be used if you're playing Doom 1 or FreeDoom Phase 1", darkgrey
 	StaticText ""
 	Option "Bullet ricochet sounds", "mo_bulletsparksound", "OnOff"
 	StaticText "Play bullet ricochet sounds if bullets hit a wall."
+	StaticText ""
+	Option "$MO_ADSOPT", "mo_aimmode", "ADSControl"
 	StaticText ""
 	Option "Disable Gun Recoil", "mo_nogunrecoil", "yesno"
 	StaticText "Disables recoil on shootable weapons."
@@ -29,6 +31,12 @@ OptionValue "MO_NightVisionColors"
 {
 	0, "$MO_NVISGREN"
 	1, "$MO_NVISWHT"
+}
+
+OptionValue "ADSControl"
+{
+	0, "$MO_ADSTOGGLE"
+	1, "$MO_ADSHOLD"
 }
 
 OptionValue "NCH_TallyDrawModes"

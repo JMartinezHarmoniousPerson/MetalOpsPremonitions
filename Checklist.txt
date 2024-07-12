@@ -3,6 +3,7 @@ What to do:
 SMG:
 - Add chamber animation after reloading from a empty magazine
 - Add an inspect animation inspired by the Submachinegun in Shadow The Hedgehog? *
+- Secret reload animation
 
 Unmaker:
 - Brightmaps *
@@ -14,6 +15,22 @@ Rocket Launcher:
 - Replace Mini Nukes with Laser Guiding/Homing
 
 - Making the Heavy Combat Rifle
+HCR:
+- Firing animations and reloads *
+- Grenade Launcher mode
+
+Auto Shotgun:
+- Find sprites
+- Animations
+
+MP40:
+- Find sprites
+- Animations
+- Replacement Wolfenstein enemies that spawn it as a mutator
+
+Wolfenstein Chaingun secret:
+- Sprites
+- Animations
 
 Misc:
 - Player Mugshot

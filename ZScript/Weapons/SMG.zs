@@ -44,14 +44,11 @@ Class MO_SubMachineGun : JMWeapon
 			TNT1 A 0 JM_CheckInspectIfDone;
 		SelectAnimation:
 			TNT1 A 0 A_StartSound("weapons/smg/select",0);
+			SMGR A 0 A_SetCrosshair(0);
             SM5S ABCD 1;
         ReadyToFire:
 			SMGG A 0 {if(invoker.isZoomed) {SetWeaponState("Ready2");}}
-            SM5G A 1 
-			{
-				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
-				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
-			}
+            SM5G A 1 JM_WeaponReady(WRF_ALLOWRELOAD);
             Loop;
         Select:
 			TNT1 A 0;
@@ -63,7 +60,7 @@ Class MO_SubMachineGun : JMWeapon
 			TNT1 A 0 A_JumpIf(invoker.isZoomed, "Fire2");
             SM5F A 1 BRIGHT {
                 A_FireBullets(5.6, 0, 1, 10, "UpdatedBulletPuff",FBF_NORANDOM, 0,"MO_BulletTracer",0);
-                JM_UseAmmo("SMGAmmo", 1);
+                A_TakeInventory("SMGAmmo", 1, TIF_NOTAKEINFINITE);
                 A_StartSound("weapons/smg/fire", 0);
 				A_SpawnItemEx("GunSmoke",15,0,34,2,0,0);
 				JM_CheckForQuadDamage();
@@ -82,7 +79,7 @@ Class MO_SubMachineGun : JMWeapon
 		Fire2:
 			  SM5Z E 1 BRIGHT {
                 A_FireBullets(5.6, 0, 1, 10, "UpdatedBulletPuff",FBF_NORANDOM, 0,"MO_BulletTracer",0);
-                JM_UseAmmo("SMGAmmo", 1);
+                A_TakeInventory("SMGAmmo", 1, TIF_NOTAKEINFINITE);
                 A_StartSound("weapons/smg/fire", 0);
 				A_SpawnItemEx("GunSmoke",15,0,34,2,0,0);
 				JM_CheckForQuadDamage();
@@ -101,20 +98,33 @@ Class MO_SubMachineGun : JMWeapon
 		AltFire:
 			TNT1 A 0 A_JumpIf(invoker.isZoomed, "UnZoom");
 			TNT1 A 0 {invoker.isZoomed = true;}
+			SMGR A 0 A_StartSound("weapon/adsup",0);
 			SMGR A 0 A_ZoomFactor(1.3);
+			SMGR A 0 A_SetCrosshair(5);
 			SM5Z ABC 1 JM_WeaponReady(WRF_NOFIRE);
 			SM5Z D 2 JM_WeaponReady(WRF_NOFIRE);
 		Ready2:
 			SM5Z D 1 
 			{
+				if(invoker.ADSMode == 1) {SetWeaponState("ADSHold");}
 				JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
 				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("UnZoom");}
 			}
 			Loop;
 
+		ADSHold:
+			SM5Z D 1 
+			{
+				JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
+				if(!PressingAltFire()) {SetWeaponState("UnZoom");}
+			}
+			Loop;
+
 		UnZoom:
 			TNT1 A 0 {invoker.isZoomed = False;}
+			SMGR A 0 A_StartSound("weapon/adsdown",0);
 			SMGR A 0 A_ZoomFactor(1.0);
+			SMGR A 0 A_SetCrosshair(0);
 			SM5Z CBA 1 JM_WeaponReady(WRF_NOFIRE);
 			SM5G A 1 JM_WeaponReady(WRF_NOFIRE);
 			Goto ReadyToFire;
@@ -122,6 +132,7 @@ Class MO_SubMachineGun : JMWeapon
         Deselect:
 			TNT1 A 0 {invoker.isZoomed = False;}
 			SMGR A 0 A_ZoomFactor(1.0);
+			SMGR A 0 A_SetCrosshair(0);
             SM5S DCBA 1;
             TNT1 A 0 A_Lower(12);
             Wait;
@@ -295,6 +306,5 @@ Class SMGAmmo : Ammo
 	Ammo.BackpackAmount 0;
 	Ammo.BackpackMaxAmount 40;
 	Inventory.Icon "SUBMA0";
-	+INVENTORY.IGNORESKILL;
 	}
 }

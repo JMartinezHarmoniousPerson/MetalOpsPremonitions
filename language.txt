@@ -77,10 +77,12 @@ HUD_WARN1 = "Press = to switch the HUD to fullscreen.";
 HUD_WARN2 = "Make sure alternative HUD is disabled!";
 GOTUNMAKER = "You got the Unmaker! Unleash the power of Hell itself on your foes! (Slot 7)";
 TAG_UNMAKER = "The Unmaker";
-OB_UNMAKER = "%o got decimated by %k's Unmaker.";
+OB_UNMAKER = "%o was decimated by %k's Unmaker.";
 GOTUNMAKER2 = "What The Fuck is this?! (Slot 7)";
 MO_NVISOPTN = "Night Vision Shader Color";
 MO_NVISGREN = "Green Phosphor";
 MO_NVISGREN2 = "Digital Green Phosphor";
 MO_NVISWHT = "White Phosphor";
-
+MO_ADSOPT = "ADS Control Type";
+MO_ADSTOGGLE = "Toggle";
+MO_ADSHOLD = "Hold";

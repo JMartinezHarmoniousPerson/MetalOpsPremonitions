@@ -103,7 +103,7 @@ Class MO_NightVision : PowerLightAmp
 		Shader.SetUniform3f(Owner.Player,"NiteVis","u_posfilter",posfilter);
 		Shader.SetUniform1f(Owner.Player,"NiteVis","u_whiteclip",whiteclip);
 		Shader.SetUniform1f(Owner.Player,"NiteVis","u_desat",desat);
-		PowerWarning("Night Vision Goggles'", "The", "powerupwearoff", "00 aa 00", "d", "battery is running low");
+		PowerWarning("Night Vision Goggles'", "The", "misc/goggleswarn", "00 aa 00", "d", "battery is running low");
 	}
 	
 	override void EndEffect()

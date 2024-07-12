@@ -29,16 +29,23 @@ Class AssaultRifle : JMWeapon
 			TNT1 A 0 A_StartSound("weapons/ar/select",0);
             AR1S ABCD 1;
         ReadyToFire:
-            AR1G A 1 JM_WeaponReady(WRF_ALLOWRELOAD);
+			SMGG A 0 {if(invoker.isZoomed) {SetWeaponState("Ready2");}}
+            AR1G A 1 
+			{
+				return JM_WeaponReady(WRF_ALLOWRELOAD);
+			}
             Loop;
         Select:
 			TNT1 A 0;
+			TNT1 A 0 {invoker.isZoomed = False;}
+			SMGR A 0 A_ZoomFactor(1.0);
 			Goto ClearAudioAndResetOverlays;
         Fire:
 			TNT1 A 0 JM_CheckMag("ARAmmo");
+			TNT1 A 0 A_JumpIf(invoker.isZoomed, "Fire2");
             AR1F A 1 BRIGHT {
                 A_FireBullets(5.6, 0, 1, 18, "UpdatedBulletPuff",FBF_NORANDOM,0,"MO_BulletTracer",0);
-                A_TakeInventory("ARAmmo", 1,TIF_NOTAKEINFINITE);
+                A_TakeInventory("ARAmmo", 1, TIF_NOTAKEINFINITE);
                 A_StartSound("weapons/ar/fire", 0);
 				A_SpawnItemEx("GunSmoke",15,0,34,2,0,0);
 				JM_CheckForQuadDamage();
@@ -46,21 +53,13 @@ Class AssaultRifle : JMWeapon
             AR1F B 1 BRIGHT 
 			{
 				JM_WeaponReady(WRF_NOFIRE);
-				A_SpawnItemEx("EmptyRifleBrass",36, 9, 22, random(-2,2), random(3,6), random(3,5));
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-					A_SetPitch(pitch-0.8,SPF_Interpolate);
-					A_SetAngle(angle+.04,SPF_INTERPOLATE);
-				}
+				A_SpawnItemEx("EmptyRifleBrass",42, 9, 28, random(-2,2), random(3,6), random(3,5));
+				JM_GunRecoil(-0.8, .04);
 			}
             AR1F C 1 
 			{
 				JM_WeaponReady(WRF_NOFIRE);
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-					A_SetPitch(pitch-0.7,SPF_Interpolate);
-					A_SetAngle(angle+.04,SPF_INTERPOLATE);
-				}
+				JM_GunRecoil(-0.7, .04);
 			}
 			AR1F D 1 JM_WeaponReady(WRF_NOFIRE);
 			AR1F A 0 {
@@ -78,14 +77,75 @@ Class AssaultRifle : JMWeapon
 				}
 			}
             Goto ReadyToFire;
+
+		AltFire:
+			TNT1 A 0 A_JumpIf(invoker.isZoomed, "UnZoom");
+			TNT1 A 0 {invoker.isZoomed = true;}
+			SMGR A 0 A_ZoomFactor(1.4);
+			SMGR A 0 A_SetCrosshair(5);
+			AR1Z ABCD 1 JM_WeaponReady(WRF_NOFIRE);
+			AR1Z E 1 JM_WeaponReady(WRF_NOFIRE);
+		Ready2:
+			AR1Z E 1
+			{
+				if(invoker.ADSMode == 1) {SetWeaponState("ADSHold");}
+				JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
+				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("UnZoom");}
+			}
+			Loop;
+
+		ADSHold:
+			AR1Z E 1 
+			{
+				JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
+				if(!PressingAltFire()) {SetWeaponState("UnZoom");}
+			}
+			Loop;
+
+		Unzoom:
+			TNT1 A 0 {invoker.isZoomed = false;}
+			SMGR A 0 A_ZoomFactor(1);
+			SMGR A 0 A_SetCrosshair(0);
+			AR1Z EDCBA 1 JM_WeaponReady(WRF_NOFIRE);
+			Goto ReadyToFire;
+
+		Fire2:
+			  AR1Z F 1 BRIGHT {
+                 A_FireBullets(5.6, 0, 1, 18, "UpdatedBulletPuff",FBF_NORANDOM,0,"MO_BulletTracer",0);
+                A_TakeInventory("ARAmmo", 1, TIF_NOTAKEINFINITE);
+                A_StartSound("weapons/ar/fire", 0);
+				A_SpawnItemEx("GunSmoke",15,0,34,2,0,0);
+				JM_CheckForQuadDamage();
+            }
+            AR1Z G 1 BRIGHT 
+			{
+				JM_GunRecoil(-0.7, .04);
+				JM_WeaponReady(WRF_NOFIRE);
+				A_SpawnItemEx("EmptyRifleBrass",35, 4, 32, random(-2,2), random(3,5), random(3,5));
+			}
+			AR1Z H 1 
+			{
+				JM_WeaponReady(WRF_NOFIRE);
+				JM_GunRecoil(-0.58, .04);
+			}
+            AR1Z I 1 JM_WeaponReady(WRF_NOFIRE);
+			AR1F A 0 {
+				if(CountInv("ARAmmo") < 1)
+					{A_SetInventory("GunIsEmpty",1);}
+			}
+            AR1F A 0 A_JumpIf(PressingWhichInput(BT_ATTACK), "Fire");
+			TNT1 A 0 JM_CheckMag("ARAmmo");
+            Goto Ready2;
+
         Deselect:
+			TNT1 A 0 A_ZoomFactor(1);
             AR1S DCBA 1;
             TNT1 A 0 A_Lower(12);
             Wait;
 		
 		FireFinished:
 			AR1G A 1 JM_WeaponReady(WRF_NoFire);
-			AR1F A 0 A_JumpIf(JustReleased(BT_ATTACK), "ReadyToFire");
+			AR1F A 0 A_JumpIf(!PressingFire(), "ReadyToFire");
 			Loop;
         
         Reload:
@@ -93,8 +153,13 @@ Class AssaultRifle : JMWeapon
 			TNT1 A 0 A_JumpIfInventory("HighCalClip",1,1);
 			Goto ReadyToFire;
 			TNT1 AAA 0;
+			AR10 A 0 {
+				if(Invoker.isZoomed) {SetWeaponState("ReloadZoomed");}
+			}
 			AR10 A 0 
 			{
+				invoker.isZoomed = false;
+				A_ZoomFactor(1.0);
 				if(CountInv("ARAmmo") < 1) {return A_Jump(128, "MagFlipReload");}
 				return ResolveState(Null);
 			}
@@ -122,14 +187,15 @@ Class AssaultRifle : JMWeapon
 			AR10 A 0 A_StartSound("weapons/ar/magin", CHAN_AUTO);
 			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			AR10 RST 1 JM_WeaponReady(WRF_NOFIRE);
-			AR10 A 0 JM_ReloadGun("ARAmmo", "HighCalClip",30,1);
 		DoneReload:		
 			AR10 UV 1;
 			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,4);
 			AR10 WWWWXYZ 1; //JM_WeaponReady(WRF_NOFIRE);
+			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			AR11 AB 1 JM_WeaponReady(WRF_NOFIRE);
 			AR11 J 0 A_StartSound("weapons/ar/ReloadEnd",1);
 			AR11 A 0 A_JumpIf(CountInv("GunIsEmpty") >= 1, "Chamber");
+			AR10 A 0 JM_ReloadGun("ARAmmo", "HighCalClip",30,1);
 			AR11 C 1 JM_WeaponReady(WRF_NOFIRE);
 			 AR1G A 1;
 			 Goto ReadyToFire;
@@ -182,6 +248,47 @@ Class AssaultRifle : JMWeapon
 			AR11 J 0 A_StartSound("weapons/ar/ReloadEnd",1);
 			AR13 IJKL 1;
 			Goto ReadyToFire;
+
+		ReloadZoomed:
+			TNT1 A 0 A_ZoomFactor(1.275);
+			AR1Z E 1 JM_WeaponReady(WRF_NOFIRE);
+			ARZR AB 1 JM_WeaponReady(WRF_NOFIRE);
+			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			ARZR BCC 1 JM_WeaponReady(WRF_NOFIRE);
+			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			ARZR DEF 1 JM_WeaponReady(WRF_NOFIRE);
+			ARZR G 7 {
+				JM_WeaponReady(WRF_NOFIRE);
+				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(4);}
+				}
+			ARZR H 1 A_StartSound("weapons/ar/magout", CHAN_AUTO);
+			ARZR IJI 1 JM_WeaponReady(WRF_NOFIRE);
+			AR12 A 0 A_JumpIf(CountInv("ARAmmo") >= 1, 2);
+			AR10 A 0 A_SpawnItemEx('ARMagazine', 25, 7, 29, random(-1,2), random(-6,-4), random(2,5));
+			ARZR K 11 {
+				JM_WeaponReady(WRF_NOFIRE);
+				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(6);}
+				}
+			ARZR A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			ARZR KKL 1 JM_WeaponReady(WRF_NOFIRE);
+			AR10 A 0 A_StartSound("weapons/ar/magin", CHAN_AUTO);
+			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			ARZR MN 1 JM_WeaponReady(WRF_NOFIRE);
+			ARZR O 1;
+			ARZR O 5 {
+				JM_WeaponReady(WRF_NOFIRE);
+				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(3);}
+				}
+			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			ARZR PQR 1 JM_WeaponReady(WRF_NOFIRE);
+			AR11 A 0 A_JumpIf(CountInv("GunIsEmpty") >= 1, "Chamber");
+			AR10 A 0 JM_ReloadGun("ARAmmo", "HighCalClip",30,1);
+			TNT1 A 0 A_ZoomFactor(1.4);
+			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			ARZR STU 1 JM_WeaponReady(WRF_NOFIRE);
+			AR11 J 0 A_StartSound("weapons/ar/ReloadEnd",1);
+			ARZR B 1 JM_WeaponReady(WRF_NOFIRE);
+			 Goto ReadyToFire;
 		ActionSpecial:
 			"####" A 0 
 			{
@@ -204,13 +311,27 @@ Class AssaultRifle : JMWeapon
 
 		Chamber:
 			TNT1 A 0 A_SetInventory("GunIsEmpty",0);
-			AR1G A 0 A_StartSound("weapons/ar/select",0);
+			AR10 A 0 JM_ReloadGun("ARAmmo", "HighCalClip",30,1);
+			TNT1 A 0 A_JumpIf(invoker.isZoomed, "Chamber2");
+			AR1G A 0 A_StartSound("weapons/ar/ReloadEnd",0);
 			AR11 D 1;
 			AR11 EF 2;
 			AR11 J 0 A_StartSound("weapons/ar/chamberbck",1);
 			AR11 GH 2;
 			AR11 N 0 A_StartSound("weapons/ar/chamberfwd",2);
 			AR11 IJKLMNO 1;
+			GOTO ReadyToFire;
+
+		Chamber2: //Zoomed
+			AR1G A 0 A_StartSound("weapons/ar/ReloadEnd",0);
+			ARZR S 2;
+			ARZS ABCD 1;
+			AR11 J 0 A_StartSound("weapons/ar/chamberbck",1);
+			ARZS EEFG 1;
+			AR11 N 0 A_StartSound("weapons/ar/chamberfwd",2);
+			ARZS HIJ 1;
+			TNT1 A 0 A_ZoomFactor(1.4);
+			ARZR STUBA 1;
 			GOTO ReadyToFire;
 		
 		FlashKick:

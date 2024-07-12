@@ -56,7 +56,7 @@ class PumpShotgun : JMWeapon
             {
                 A_FireBullets (random(3, 6), frandom(3,7), 20, 6, "ShotgunPuff20GA", FBF_NORANDOM,0,"MO_BulletTracer",0);
                 A_StartSound ("weapons/pumpshot/fire", CHAN_WEAPON);
-                A_TakeInventory("PumpShotgunAmmo",1);
+                A_TakeInventory("PumpShotgunAmmo",1, TIF_NOTAKEINFINITE);
 				A_SpawnItemEx("ShotgunSmoke",15,0,34,2,0,0);
 				JM_CheckForQuadDamage();
 		    }
@@ -105,7 +105,7 @@ class PumpShotgun : JMWeapon
 			PSGF A 1 
             {
                  A_FireBullets (random(4, 8), frandom(3,15), 40, 6, "ShotgunPuff20GA", FBF_NORANDOM,0,"MO_BulletTracer",0);
-                A_TakeInventory("PumpShotgunAmmo",2);
+                A_TakeInventory("PumpShotgunAmmo",2, TIF_NOTAKEINFINITE);
 				A_SpawnItemEx("ShotgunSmoke",15,0,34,2,0,0);
 				JM_CheckForQuadDamage();
 		    }
@@ -181,35 +181,18 @@ class PumpShotgun : JMWeapon
             PSTG A 0 A_JumpIfInventory("PumpShotgunAmmo",6,"DoneReload");           
 			TNT1 A 0 A_JumpIfInventory("MO_ShotShell",1,1);
 			Goto DoneReload;
-            PGR1 AB 1
-			{
-				if(JustPressed(BT_ATTACK)) {SetWeaponState("Fire");}
-				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
-				return JM_WeaponReady(WRF_NOFIRE);
-			}
-            PGR1 C 1 
-			{
-				A_StartSound("weapons/pumpshot/load", 1);
-				if(JustPressed(BT_ATTACK)) {SetWeaponState("Fire");}
-				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
-				return JM_WeaponReady(WRF_NOFIRE);
-			}
+            PGR1 AB 1 JM_WeaponReady(WRF_NOFIRE);
+            PGR1 C 1 A_StartSound("weapons/pumpshot/load", 1);
             PISG A 0 JM_LoadShell("PumpShotgunAmmo","MO_ShotShell",1);
 			PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
-            PGR1 DEFGHI 1 
-			{
-				if(JustPressed(BT_ATTACK)) {SetWeaponState("Fire");}
-				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
-				return JM_WeaponReady(WRF_NOFIRE);
-			}
+            PGR1 DEFGHI 1 JM_WeaponReady(WRF_NOFIRE);
             PGR1 I 6 {
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(3);}
-				if(JustPressed(BT_ATTACK)) {SetWeaponState("Fire");}
-				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
+				if(PressingFire() || PressingAltFire()) {SetWeaponState("DoneReload");}
 				return JM_WeaponReady(WRF_NOFIRE);
 			}
             PISG A 0;
-            PISG A 0 A_ReFire();
+            PISG A 0 A_JumpIf(PressingFire() || PressingAltFire(), "DoneReload");
             Loop;
         DoneReload:
             PSGR BA 1;
@@ -226,6 +209,7 @@ class PumpShotgun : JMWeapon
 			PGR2 A 0 A_StartSound("weapons/pumpshot/load", 1);
             PGR2 EF 1;
 			PGR2 A 0 JM_LoadShell("PumpShotgunAmmo","MO_ShotShell",1);
+			PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
             PGR2 GHIJ 1;
 			PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,4);
 			PGR2 KKKKKK 1;
@@ -255,7 +239,7 @@ class PumpShotgun : JMWeapon
 	//This is so that the shell loading of the inventory give and take is in one function for the Shotgun
 	action void JM_LoadShell(name type, name reserve, int c)
 	{
-		TakeInventory(reserve, c);
+		A_TakeInventory(reserve, c);
 		GiveInventory(type, c);
 	}
 }

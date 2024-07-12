@@ -44,11 +44,26 @@ server bool mo_nogunrecoil = false;
 user int mo_nvstyle = 1;
 user bool mo_nvscanlines = true;
 user bool MtOps_AlwaysBob = true;
-user bool mo_useflakshells = true;
+user int mo_aimmode = 0;
 
-/*
+
 //Custom XHairs
 user bool mo_customxhairs = false;
-user int pistolxhair = 18;
-user int SMGXHair =
-*/
+user int MO_xhairPistol = 0;
+user int MO_xhairDeagle = 0;
+user int MO_XHairSMG = 0;
+user int MO_XHairMP40 = 0;
+user int MO_XHairLAS = 0;
+user int MO_XHairPSG = 0;
+user int MO_XHairSSG = 0;
+user int MO_XHairRifle = 0;
+user int MO_XHairHCR = 0;
+user int MO_XHairChain = 0;
+user int MO_XHairRL = 0;
+user int MO_XHairRLGuided = 0;
+user int MO_XHairPlasma = 0;
+user int MO_XHairRail = 0;
+user int MO_XHairBFG = 0;
+user int MO_XHairFlamer = 0;
+user int MO_XHairUnmaker = 0;
+
