@@ -204,7 +204,7 @@ class EnforcerPistol : JMWeapon// replaces Pistol
 		PSR3 ABCCCD 1;
 		PSR3 EFG 1;
 		Goto ReadyToFire;
-	ActionSpecial:
+/*	ActionSpecial:
 		TNT1 A 0 A_JumpIfInventory("PistolSilencer",1,"RemoveSilencer");
 		S1LA AB 1;
 		PISG A 0 A_StartSound("weapons/pistol/silencerfoley",0);
@@ -231,7 +231,7 @@ class EnforcerPistol : JMWeapon// replaces Pistol
 		S1LB RSTTTUV 1;
 		S1LB VWXY 1;
 		TNT1 A 0 A_SetInventory("PistolSilencer",0);
-		Goto ReadyToFire;
+		Goto ReadyToFire;*/
 	Flash:
 		TNT1 A 7 Bright A_Light1;
 		Goto LightDone;
