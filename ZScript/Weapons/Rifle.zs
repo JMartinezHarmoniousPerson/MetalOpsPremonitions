@@ -80,9 +80,13 @@ Class AssaultRifle : JMWeapon
 
 		AltFire:
 			TNT1 A 0 A_JumpIf(invoker.isZoomed, "UnZoom");
-			TNT1 A 0 {invoker.isZoomed = true;}
-			SMGR A 0 A_ZoomFactor(1.4);
-			SMGR A 0 A_SetCrosshair(5);
+			SMGR A 0 
+			{
+				invoker.isZoomed = True;
+				A_ZoomFactor(1.4);
+				A_StartSound("weapon/adsup",0);
+				A_SetCrosshair(5);
+			}
 			AR1Z ABCD 1 JM_WeaponReady(WRF_NOFIRE);
 			AR1Z E 1 JM_WeaponReady(WRF_NOFIRE);
 		Ready2:
@@ -103,9 +107,13 @@ Class AssaultRifle : JMWeapon
 			Loop;
 
 		Unzoom:
-			TNT1 A 0 {invoker.isZoomed = false;}
-			SMGR A 0 A_ZoomFactor(1);
-			SMGR A 0 A_SetCrosshair(0);
+			SMGR A 0 
+			{
+				invoker.isZoomed = false;
+				A_ZoomFactor(1);
+				A_StartSound("weapon/adsdown",0);
+				A_SetCrosshair(0);
+			}
 			AR1Z EDCBA 1 JM_WeaponReady(WRF_NOFIRE);
 			Goto ReadyToFire;
 

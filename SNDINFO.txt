@@ -1,3 +1,8 @@
+//Misc
+weapon/adsup ADSUP
+weapon/adsdown ADSDOWN
+DRYFIRE	DRYFIRE
+
 //PISTOL
 
 $random weapons/pistol/fire {PistolFire1 PistolFire2}
@@ -280,11 +285,7 @@ weapons/flamer/firemodeactive FLMMODE
 weapons/flamer/special1 FLMSPC1
 weapons/flamer/special2 FLMSPC2
 
-$random misc/icebreak {iceshatter1 iceshatter2}
-iceshatter1	ICESHT1
-iceshatter2	ICESHT2
-DSBOTTLE FreezeShatter
-
+DSBOTTLE ICEBRK1A
 
 //BFG
 weapons/bfg/draw B7GDRAW
