@@ -51,9 +51,9 @@ Class MO_SubMachineGun : JMWeapon
 			SMGG A 0 {if(invoker.isZoomed) {SetWeaponState("Ready2");}}
             SM5G A 1 
 			{
-				if(PressingFire() && CountInv("SMGAmmo") <= 1) {SetWeaponState("Fire");}
-				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
-				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
+				if(PressingAltFire() && invoker.ADSMode == 1) {SetWeaponState("AltFire");}
+				if(JustPressed(BT_ALTATTACK) && invoker.ADSMode != 1) {SetWeaponState("AltFire");}
+				return JM_WeaponReady(WRF_NOSECONDARY|WRF_ALLOWRELOAD);
 			}
             Loop;
         Select:
@@ -79,7 +79,7 @@ Class MO_SubMachineGun : JMWeapon
 				A_SpawnItemEx("PistolCasing",29, 4, 38, random(-2,2), random(3,5), random(3,5));
 			}
             SM5F C 1 JM_WeaponReady(WRF_NOPRIMARY);
-            AR1F A 0 A_JumpIf(PressingWhichInput(BT_ATTACK), "Fire");
+            AR1F A 0 A_JumpIf(PressingFire(), "Fire");
 			TNT1 A 0 JM_CheckMag("SMGAmmo");
             Goto ReadyToFire;
 

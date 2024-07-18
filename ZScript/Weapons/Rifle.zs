@@ -32,7 +32,9 @@ Class AssaultRifle : JMWeapon
 			SMGG A 0 {if(invoker.isZoomed) {SetWeaponState("Ready2");}}
             AR1G A 1 
 			{
-				return JM_WeaponReady(WRF_ALLOWRELOAD);
+				If(PressingAltFire() && invoker.ADSMode == 1) {SetWeaponState("AltFire");}
+				if(JustPressed(BT_ALTATTACK) && invoker.ADSMode != 1) {SetWeaponState("AltFire");}
+				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
 			}
             Loop;
         Select:
