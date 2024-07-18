@@ -40,9 +40,9 @@ Version 2 changes:
 - New Powerups, Haste and Quad Damage. Haste will make your melee attacks and reload animations faster, and shotgun pumping/levering actions faster. Quad damage increases your damage by four times, like in Quake.
 - Powerup sphere sprites updated, sprites by Benjamin Zuriel, from unused powerup sprites that were going to be made for Project Brutality before being replaced.
 - Armor and Health Bonuses have variants now, either giving two or three armor.
-- SMG burst fire is now an alt fire and shoots five bullets.
+
+7/17/2024 Updates:
 - Pistol alt fire is 3 shot burst fire
-- Pistol weapon special is silencer (sprites maybe unfinished).
 - Night vision now has a shader based on Hideous Destructor's Night vision shader, mod by Matt.
 - Pump Shotgun is now a 20 gauge shotgun, shoots 20 pellets but does less damage than the lever action.
 - Bullet sparks are now enhanced, based on Cacodemon's Enhanced Puffs for BDv21 and Hellrider by Moa Dixon
@@ -61,8 +61,8 @@ a bit of AK style bolt recharge animation.
 - Kick sprites translate to player color now.
 - Flak shell ammo pool is no more. It was more common to find normal shell ammo and the SSG lost it's purpose
 from that. SSG still shoots flak but uses normal shell ammo pool.
-
-Version 2.1:
+- Night vision has scan line and green phosphorus or white phosphorus colors options.
+- Plasma firing sounds slightly changed, now has the sound from NOVA (by Gameloft) mixed in.
 - Player classes separated with a base class to be more clean.
 - Ice Break sound changed
 - Unmaker Tracers or more visible
@@ -71,3 +71,4 @@ Version 2.1:
 - SMG Burst removed, ADS altfire replaces burst.
 - Rifle alt fire added, ADS.
 - ADS Options are toggle and hold.
+- Pistol Silencer removed, will be replaced with a dual wield in the future. New pistol sprites planned too.
