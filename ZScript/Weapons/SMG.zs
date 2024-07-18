@@ -14,6 +14,7 @@ Class MO_SubMachineGun : JMWeapon
         Tag "Sub Machinegun";
 		Inventory.PickupSound "weapons/smg/pickup";
 		JMWeapon.InspectToken "NeverUsedSMG";
+		+WEAPON.NOALERT;
     }
 
     States
@@ -48,7 +49,12 @@ Class MO_SubMachineGun : JMWeapon
             SM5S ABCD 1;
         ReadyToFire:
 			SMGG A 0 {if(invoker.isZoomed) {SetWeaponState("Ready2");}}
-            SM5G A 1 JM_WeaponReady(WRF_ALLOWRELOAD);
+            SM5G A 1 
+			{
+				if(PressingFire() && CountInv("SMGAmmo") <= 1) {SetWeaponState("Fire");}
+				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("AltFire");}
+				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
+			}
             Loop;
         Select:
 			TNT1 A 0;
@@ -60,9 +66,10 @@ Class MO_SubMachineGun : JMWeapon
 			TNT1 A 0 A_JumpIf(invoker.isZoomed, "Fire2");
             SM5F A 1 BRIGHT {
                 A_FireBullets(5.6, 0, 1, 10, "UpdatedBulletPuff",FBF_NORANDOM, 0,"MO_BulletTracer",0);
-                A_TakeInventory("SMGAmmo", 1, TIF_NOTAKEINFINITE);
+                A_TakeInventory("SMGAmmo", 1);
                 A_StartSound("weapons/smg/fire", 0);
 				A_SpawnItemEx("GunSmoke",15,0,34,2,0,0);
+				A_AlertMonsters();
 				JM_CheckForQuadDamage();
             }
             SM5F B 1 BRIGHT 
@@ -71,16 +78,18 @@ Class MO_SubMachineGun : JMWeapon
 				JM_WeaponReady(WRF_NOFIRE);
 				A_SpawnItemEx("PistolCasing",29, 4, 38, random(-2,2), random(3,5), random(3,5));
 			}
-            SM5F C 1 JM_WeaponReady(WRF_NOFIRE);
+            SM5F C 1 JM_WeaponReady(WRF_NOPRIMARY);
             AR1F A 0 A_JumpIf(PressingWhichInput(BT_ATTACK), "Fire");
 			TNT1 A 0 JM_CheckMag("SMGAmmo");
             Goto ReadyToFire;
 
 		Fire2:
+			  TNT1 A 0 JM_CheckMag("SMGAmmo");
 			  SM5Z E 1 BRIGHT {
                 A_FireBullets(5.6, 0, 1, 10, "UpdatedBulletPuff",FBF_NORANDOM, 0,"MO_BulletTracer",0);
-                A_TakeInventory("SMGAmmo", 1, TIF_NOTAKEINFINITE);
+                A_TakeInventory("SMGAmmo", 1);
                 A_StartSound("weapons/smg/fire", 0);
+				A_AlertMonsters();
 				A_SpawnItemEx("GunSmoke",15,0,34,2,0,0);
 				JM_CheckForQuadDamage();
             }
@@ -90,9 +99,21 @@ Class MO_SubMachineGun : JMWeapon
 				JM_WeaponReady(WRF_NOFIRE);
 				A_SpawnItemEx("PistolCasing",29, 4, 38, random(-2,2), random(3,5), random(3,5));
 			}
-            SM5Z G 1 JM_WeaponReady(WRF_NOFIRE);
-            AR1F A 0 A_JumpIf(PressingWhichInput(BT_ATTACK), "Fire");
-			TNT1 A 0 JM_CheckMag("SMGAmmo");
+            SM5Z G 1;
+            AR1F A 0
+			{
+				if(invoker.ADSMode == 1)
+				{
+					if(!PressingAltFire()) {
+						return ResolveState("UnZoom");
+					}
+				}
+				else
+				{
+					A_ReFire("Fire2");
+				}
+				return JM_WeaponReady(WRF_NOFIRE|WRF_ALLOWRELOAD);
+			}
             Goto Ready2;
 	
 		AltFire:
@@ -101,8 +122,7 @@ Class MO_SubMachineGun : JMWeapon
 			SMGR A 0 A_StartSound("weapon/adsup",0);
 			SMGR A 0 A_ZoomFactor(1.3);
 			SMGR A 0 A_SetCrosshair(5);
-			SM5Z ABC 1 JM_WeaponReady(WRF_NOFIRE);
-			SM5Z D 2 JM_WeaponReady(WRF_NOFIRE);
+			SM5Z ABC 1;
 		Ready2:
 			SM5Z D 1 
 			{
@@ -125,8 +145,8 @@ Class MO_SubMachineGun : JMWeapon
 			SMGR A 0 A_StartSound("weapon/adsdown",0);
 			SMGR A 0 A_ZoomFactor(1.0);
 			SMGR A 0 A_SetCrosshair(0);
-			SM5Z CBA 1 JM_WeaponReady(WRF_NOFIRE);
-			SM5G A 1 JM_WeaponReady(WRF_NOFIRE);
+			SM5Z CBA 1;
+			TNT1 A 0 A_WeaponReady(WRF_NOSECONDARY);
 			Goto ReadyToFire;
 			
         Deselect:

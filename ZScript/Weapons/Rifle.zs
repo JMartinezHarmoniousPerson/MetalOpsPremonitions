@@ -50,6 +50,10 @@ Class AssaultRifle : JMWeapon
 				A_SpawnItemEx("GunSmoke",15,0,34,2,0,0);
 				JM_CheckForQuadDamage();
             }
+			AR1F A 0 {
+				if(CountInv("ARAmmo") < 1)
+					{A_SetInventory("GunIsEmpty",1);}
+			}
             AR1F B 1 BRIGHT 
 			{
 				JM_WeaponReady(WRF_NOFIRE);
@@ -61,11 +65,7 @@ Class AssaultRifle : JMWeapon
 				JM_WeaponReady(WRF_NOFIRE);
 				JM_GunRecoil(-0.7, .04);
 			}
-			AR1F D 1 JM_WeaponReady(WRF_NOFIRE);
-			AR1F A 0 {
-				if(CountInv("ARAmmo") < 1)
-					{A_SetInventory("GunIsEmpty",1);}
-			}
+			AR1F D 1 JM_WeaponReady(WRF_NOPRIMARY);
 			TNT1 A 0 JM_CheckMag("ARAmmo");		
             AR1F A 0 
 			{
@@ -133,8 +133,21 @@ Class AssaultRifle : JMWeapon
 				if(CountInv("ARAmmo") < 1)
 					{A_SetInventory("GunIsEmpty",1);}
 			}
-            AR1F A 0 A_JumpIf(PressingWhichInput(BT_ATTACK), "Fire");
 			TNT1 A 0 JM_CheckMag("ARAmmo");
+			 AR1F A 0
+			{
+				if(invoker.ADSMode == 1)
+				{
+					if(!PressingAltFire()) {
+						SetWeaponState("UnZoom");
+					}
+				}
+				if(CountInv("ARSemiAuto") >= 1)
+				{
+						SetWeaponState("FireFinished");
+				}
+				return JM_WeaponReady(WRF_NOFIRE|WRF_ALLOWRELOAD);
+			}		
             Goto Ready2;
 
         Deselect:
@@ -144,7 +157,9 @@ Class AssaultRifle : JMWeapon
             Wait;
 		
 		FireFinished:
-			AR1G A 1 JM_WeaponReady(WRF_NoFire);
+			AR1Z E 0 A_JumpIf(invoker.isZoomed, 2);
+			AR1G A 0;
+			"####" "#" 1 JM_WeaponReady(WRF_NoFire);
 			AR1F A 0 A_JumpIf(!PressingFire(), "ReadyToFire");
 			Loop;
         
