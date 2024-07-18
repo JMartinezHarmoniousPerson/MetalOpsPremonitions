@@ -74,7 +74,7 @@ Class MO_SubMachineGun : JMWeapon
             }
             SM5F B 1 BRIGHT 
 			{
-				JM_GunRecoil(-0.895, .09);
+				JM_GunRecoil(-0.6, .09);
 				JM_WeaponReady(WRF_NOFIRE);
 				A_SpawnItemEx("PistolCasing",29, 4, 38, random(-2,2), random(3,5), random(3,5));
 			}
@@ -95,7 +95,7 @@ Class MO_SubMachineGun : JMWeapon
             }
             SM5Z F 1 BRIGHT 
 			{
-				JM_GunRecoil(-0.85, .06);
+				JM_GunRecoil(-0.5, .06);
 				JM_WeaponReady(WRF_NOFIRE);
 				A_SpawnItemEx("PistolCasing",29, 4, 38, random(-2,2), random(3,5), random(3,5));
 			}

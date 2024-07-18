@@ -58,12 +58,12 @@ Class AssaultRifle : JMWeapon
 			{
 				JM_WeaponReady(WRF_NOFIRE);
 				A_SpawnItemEx("EmptyRifleBrass",42, 9, 28, random(-2,2), random(3,6), random(3,5));
-				JM_GunRecoil(-0.8, .04);
+				JM_GunRecoil(-0.45, .04);
 			}
             AR1F C 1 
 			{
 				JM_WeaponReady(WRF_NOFIRE);
-				JM_GunRecoil(-0.7, .04);
+				JM_GunRecoil(-0.6, .04);
 			}
 			AR1F D 1 JM_WeaponReady(WRF_NOPRIMARY);
 			TNT1 A 0 JM_CheckMag("ARAmmo");		
@@ -119,7 +119,7 @@ Class AssaultRifle : JMWeapon
             }
             AR1Z G 1 BRIGHT 
 			{
-				JM_GunRecoil(-0.7, .04);
+				JM_GunRecoil(-0.38, .04);
 				JM_WeaponReady(WRF_NOFIRE);
 				A_SpawnItemEx("EmptyRifleBrass",35, 4, 32, random(-2,2), random(3,5), random(3,5));
 			}
