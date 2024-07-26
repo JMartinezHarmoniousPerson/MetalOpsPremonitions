@@ -55,24 +55,29 @@ class Katana: JMWeapon replaces Fist
 	  States
 	  {
 	  Ready:
+	  SelectAnimation:
+		TNT1 A 2;
+		TNT1 A 0 A_StartSound("weapons/katana/draw",CHAN_AUTO);
+		KTAG PONMLKJI 1;
+		KTAG GFECB 1;
 	  ReadyToFire:
 		KTAG A 1 JM_WeaponReady();
 		Loop;
 	  Deselect:
+		KTAG BCDEFG 1;
+		KTAG HIJ 1;
 		TNT1 A 0 A_STARTSOUND("weapons/katana/sheathe", CHAN_AUTO, CHANF_DEFAULT,0.7);
-		DesLoop:
-		KTAG A 1 A_Lower(12);
-		Loop;
+		KTAG KKLMNOP 1;
+		TNT1 A 5;
+		KTAG A 0 A_Lower(12);
+		WAIT;
 	  Select:
 	  TNT1 A 0;
 	  Goto ClearAudioAndResetOverlays;
 	  
 	  ContinueSelect:
-	  TNT1 A 0 A_StartSound("weapons/katana/draw",CHAN_AUTO);
-	AnimLoop:
-	SelectAnimation:
-		KTAG A 1 A_Raise(12);
-		Loop;
+		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise(); 
+		Goto Ready;
 	  Fire:
 		KTAF ABCD 1;
 	  Swing1:

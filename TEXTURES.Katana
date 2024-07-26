@@ -161,28 +161,146 @@ Sprite "KTAHF0", 465, 325
 	Patch "KTAHG", 12, 25
 }
 
-Sprite "K4THA0", 291, 270
+Sprite "KTAGB0", 327, 270
 {
-	Offset -150, 84
-	Patch "KTSHTE1", 0, 0
+	Offset -120, 87
+	Patch "KTSHTE1", 24, 2
+	Patch "KTNHAND", -33, 232
 }
 
-Sprite "K4THB0", 390, 323
+Sprite "KTAGC0", 265, 323
 {
-	Offset -73, 139
-	Patch "KTSHTE2", 7, 0
+	XScale 1.100
+	YScale 1.100
+	Offset -138, 118
+	Patch "KTSHTE2", 20, 0
+	Patch "KTNHAND", -47, 291
 }
 
-Sprite "K4THC0", 121, 385
+Sprite "KTAGD0", 121, 385
 {
-	Offset -158, 175
-	Patch "KTSHTE3", 0, 0
+	XScale 1.200
+	YScale 1.200
+	Offset -177, 154
+	Patch "KTSHTE3", 0, 2
 }
 
-Sprite "K4THD0", 262, 393
+Sprite "KTAGE0", 135, 393
 {
-	Offset -121, 193
-	Patch "KTSHTE4", -75, 10
+	XScale 1.100
+	YScale 1.100
+	Offset -131, 168
+	Patch "KTSHTE4", 14, 0
+}
+
+Sprite "KTAGF0", 246, 357
+{
+	XScale 1.200
+	YScale 1.200
+	Offset -83, 109
+	Patch "KTSHTE5", 0, 0
+}
+
+Sprite "KTAGG0", 429, 201
+{
+	XScale 1.200
+	YScale 1.200
+	Offset 54, 0
+	Patch "KTSHTE6", 12, 68
+}
+
+Sprite "KTAGH0", 480, 201
+{
+	XScale 1.300
+	YScale 1.300
+	Offset 35, -29
+	Patch "KTSHTE7", 12, 45
+}
+
+Sprite "KTAGI0", 448, 321
+{
+	XScale 1.200
+	YScale 1.200
+	Offset -30, 23
+	Patch "KTSHTE8", -3, 64
+}
+
+Sprite "KTAGJ0", 448, 321
+{
+	XScale 1.200
+	YScale 1.200
+	Offset -19, 27
+	Patch "KTSHTE9", 5, 63
+}
+
+Sprite "KTAGK0", 448, 321
+{
+	XScale 1.200
+	YScale 1.200
+	Offset -19, 21
+	Patch "KTSHTE10", 2, 53
+}
+
+Sprite "KTAGL0", 448, 321
+{
+	XScale 1.200
+	YScale 1.200
+	Offset -19, 21
+	Patch "KTSHTE10", -7, 65
+}
+
+Sprite "KTAGM0", 448, 321
+{
+	XScale 1.200
+	YScale 1.200
+	Offset -19, 21
+	Patch "KTSHTE10", -19, 79
+}
+
+Sprite "KTAGN0", 448, 321
+{
+	XScale 1.200
+	YScale 1.200
+	Offset -19, 21
+	Patch "KTSHTE10", -36, 104
+}
+
+Sprite "KTAGO0", 448, 321
+{
+	XScale 1.200
+	YScale 1.200
+	Offset -19, 21
+	Patch "KTSHTE10", -55, 137
+}
+
+Sprite "KTAGP0", 448, 321
+{
+	XScale 1.200
+	YScale 1.200
+	Offset -19, 21
+	Patch "KTSHTE10", -73, 167
+}
+
+Sprite "KTAGQ0", 234, 79
+{
+	Offset -43, -89
+	Patch "KTAGQ", -19, 7
+}
+
+Sprite "KTAGR0", 207, 79
+{
+	XScale 1.100
+	YScale 1.100
+	Offset -64, -106
+	Patch "KTAGR", -2, 7
+}
+
+Sprite "KTAGS0", 234, 79
+{
+	XScale 1.200
+	YScale 1.200
+	Offset -70, -126
+	Patch "KTAGS", -1, 7
 }
 
 // End of texture definitions
