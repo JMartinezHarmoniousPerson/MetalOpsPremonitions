@@ -281,26 +281,4 @@ Sprite "KTAGP0", 448, 321
 	Patch "KTSHTE10", -73, 167
 }
 
-Sprite "KTAGQ0", 234, 79
-{
-	Offset -43, -89
-	Patch "KTAGQ", -19, 7
-}
-
-Sprite "KTAGR0", 207, 79
-{
-	XScale 1.100
-	YScale 1.100
-	Offset -64, -106
-	Patch "KTAGR", -2, 7
-}
-
-Sprite "KTAGS0", 234, 79
-{
-	XScale 1.200
-	YScale 1.200
-	Offset -70, -126
-	Patch "KTAGS", -1, 7
-}
-
 // End of texture definitions
