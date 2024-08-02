@@ -32,7 +32,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 	//Plasma Rifle Beam
 	//////////////////////////////////////////////////////////
 	
-	//temporal thing for the bfg alt fire, move this to the bfg when/if it gets rewritten in zscript
+	//plasma alt fire
 	const bfgpartstep = 15;
 	action void MO_FirePlasmaBeam()
 	{
@@ -64,8 +64,8 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		{
 			actor v = t.hitactor;
 			int dmg = 6 * random(1,4); //so this is why it feels weaker, the original projectile deals 20 * random(1,8) damage, and damagemobj doesnt add randomization, so a little randomization may help here
-			if(v && v.bismonster && v.health > 0 && !isfriend(v))
-				v.damagemobj(self,self,dmg,'Disintegrate');
+			if(v && v.health > 0 && !isfriend(v))
+				v.damagemobj(self,self,dmg,'Plasma');
 		}
 		
 		//spawn puff if hit anything

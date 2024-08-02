@@ -72,3 +72,9 @@ from that. SSG still shoots flak but uses normal shell ammo pool.
 - Rifle alt fire added, ADS.
 - ADS Options are toggle and hold.
 - Pistol Silencer removed, will be replaced with a dual wield in the future. New pistol sprites planned too.
+
+8/1/2024 minor update:
+- Katana has a select and deselect animation, new sounds for drawing and sheathing.
+- Fixed issue with the Unmaker not using any Cell ammo on primary fire.
+- New Unmaker pickup sound.
+- Fixed Plasma beam not destroying barrels
