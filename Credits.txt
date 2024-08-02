@@ -19,7 +19,7 @@ joeytd for the 1887 lever, hamburghannes for the model and ellyklamsky for the x
 
 Katana:
 HavoX, Mike12, 3D Realms - sprites
-SectionSound (from Pixabay) - Sword unsheathe and draw
+Bethesda - Sword unsheathe and draw
 Value - Swing sound
 Isolation Music - Katana hit sounds (https://www.youtube.com/watch?v=EgRvVq8mStE)
 Pickup sprite - Defeat, DaBlake, Werd (i think), Craneo
