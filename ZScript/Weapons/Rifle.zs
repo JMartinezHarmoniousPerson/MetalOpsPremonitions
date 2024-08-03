@@ -7,6 +7,7 @@ Class AssaultRifle : JMWeapon
     Default
     {
         Weapon.AmmoGive 30;
+		Weapon.AmmoUse 0;
         Weapon.AmmoType1 "HighCalClip";
         Weapon.AmmoType2 "ARAmmo";
 		Weapon.SelectionOrder 800;

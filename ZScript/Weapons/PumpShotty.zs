@@ -1,10 +1,14 @@
+Class AltPumping : MO_ZSToken{}
+Class SGPumping: MO_ZSToken{}
+
 class PumpShotgun : JMWeapon
 {
     Default
     {
         Weapon.AmmoGive 6;
+		Weapon.AmmoUse 0;
 		Weapon.SelectionOrder 1400;
-        Weapon.AmmoType "MO_ShotShell";
+        Weapon.AmmoType1 "MO_ShotShell";
         Weapon.AmmoType2 "PumpShotgunAmmo";
         Inventory.PickupMessage "You got the Pump Action Shotgun! (Slot 3)";
         Obituary "%o was blasted away by %k's Pump Shotgun.";
@@ -59,6 +63,7 @@ class PumpShotgun : JMWeapon
                 A_StartSound ("weapons/pumpshot/fire", CHAN_WEAPON);
                 A_TakeInventory("PumpShotgunAmmo",1, TIF_NOTAKEINFINITE);
 				A_SpawnItemEx("ShotgunSmoke",15,0,34,2,0,0);
+				A_SetInventory("SGPumping",1);
 				JM_CheckForQuadDamage();
 		    }
             PSGF BC 1 
@@ -74,9 +79,10 @@ class PumpShotgun : JMWeapon
 			{
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
 			}
+			TNT1 A 0 JM_CheckMag("PumpShotgunAmmo", "Reload");
             Goto Pump;
         Pump:
-            W87A A 0 SetInventory("Levering",1);
+            W87A A 0 SetInventory("SGPumping",1);
  //           W87A A 0 A_JumpIf(CountInv("LeverShottyAmmo") < 1, "TerminatorLever");
             PSGM ABC 1;		
 			PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
@@ -84,7 +90,7 @@ class PumpShotgun : JMWeapon
             W87A A 0 A_StartSound("weapons/pumpshot/pumpback", 0);
             PSGM H 1
 			{
-				SetInventory("Levering",0);
+				SetInventory("SGPumping",0);
 				A_SpawnItemEx("ShotgunCasing20ga",30, -11, 18, random(0,4), random(4,6), random(5,9));
 			}
 			TNT1 A 0 JM_WeaponReady(WRF_NOFIRE); //Quick switch	
@@ -109,6 +115,7 @@ class PumpShotgun : JMWeapon
                 A_TakeInventory("PumpShotgunAmmo",2, TIF_NOTAKEINFINITE);
 				A_SpawnItemEx("ShotgunSmoke",15,0,34,2,0,0);
 				JM_CheckForQuadDamage();
+				A_SetInventory("AltPumping",1);
 		    }
             PSGF B 1 
 			{
@@ -136,14 +143,15 @@ class PumpShotgun : JMWeapon
 		    }
             PSGF D 3;
             PSGF E 4;
-            PSGG A 10
+			PSGG A 1;
+			TNT1 A 0 JM_CheckMag("PumpShotgunAmmo", "Reload");
+            PSGG A 9
 			{
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(5);}
 			}
             Goto AltPump;
 		
 		AltPump:
-             W87A A 0 SetInventory("Levering",1);
  //           W87A A 0 A_JumpIf(CountInv("LeverShottyAmmo") < 1, "TerminatorLever");
             PSGM ABC 1;		
 			PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
@@ -151,7 +159,7 @@ class PumpShotgun : JMWeapon
             W87A A 0 A_StartSound("weapons/pumpshot/pumpback", 0);
             PSGM H 1
 			{
-				SetInventory("Levering",0);
+				SetInventory("AltPumping",0);
 				A_SpawnItemEx("ShotgunCasing20ga",30, -11, 18, random(0,4), random(4,6), random(5,9));
 				A_SpawnItemEx("ShotgunCasing20ga",30, -11, 18, random(0,4), random(4,6), random(5,9));
 			}
@@ -202,6 +210,20 @@ class PumpShotgun : JMWeapon
         ChamberShell:
             TNT1 A 0 A_StartSound("weapons/pumpshot/pumpback", 0);
             PGR2 A 1;
+			TNT1 A 0
+			{
+				if(CountInv("SGPumping") >= 1)
+				{
+					SetInventory("SGPumping",0);
+					A_SpawnItemEx("ShotgunCasing20ga",30, -11, 18, random(0,4), random(4,6), random(5,9));
+				}
+				else if(CountInv("AltPumping") >= 1)
+				{
+					SetInventory("AltPumping",0);
+					A_SpawnItemEx("ShotgunCasing20ga",30, -11, 18, random(0,4), random(4,6), random(5,9));
+					A_SpawnItemEx("ShotgunCasing20ga",30, -11, 18, random(0,4), random(4,6), random(5,9));
+				}
+			}
 			PGR2 B 6 {
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(3);}
 			}
@@ -220,7 +242,6 @@ class PumpShotgun : JMWeapon
 			{
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(5);}
 			}
-			TNT1 A 0 A_ReFire();
             Goto ShellLoop;
 		FlashKick:
 		PSGM ABCDEF 1 JM_WeaponReady();
