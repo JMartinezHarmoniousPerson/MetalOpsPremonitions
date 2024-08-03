@@ -11,6 +11,7 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
 		Inventory.PickupMessage "You got the BFG9K! Hell yeah! (Slot 7)";
 		Tag "BFG9K";
 		Inventory.PickupSound "weapons/bfg/draw";
+		Weapon.SelectionOrder 2800;
 	}
 	States
 	{

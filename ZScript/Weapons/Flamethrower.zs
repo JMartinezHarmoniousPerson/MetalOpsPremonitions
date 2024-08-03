@@ -11,6 +11,7 @@ class MO_Flamethrower : JMWeapon// replaces Chainsaw
     {
         Weapon.AmmoUse1 0;
         Weapon.AmmoGive 75;
+		Weapon.SelectionOrder 2200;
         Weapon.AmmoType1 "Gasoline";
         Inventory.PickupSound "weapons/flamer/pickup";
         Inventory.PickupMessage "You got the Flamethrower! (Slot 1)";

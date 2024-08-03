@@ -37,6 +37,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
     Default
 	{
 		Weapon.AmmoUse 1;
+		Weapon.SelectionOrder 2500;
 		Weapon.AmmoGive 5;
 		Weapon.AmmoType "MO_RocketAmmo";
 		+WEAPON.NOAUTOFIRE

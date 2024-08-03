@@ -109,6 +109,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		Obituary "%o got melted by %k's Plasma Repeater.";
 		Tag "Plasma Repeater";
 		+WEAPON.NOALERT;
+		Weapon.SelectionOrder 100;
 	}
 	States
 	{

@@ -3,6 +3,7 @@ class PumpShotgun : JMWeapon
     Default
     {
         Weapon.AmmoGive 6;
+		Weapon.SelectionOrder 1400;
         Weapon.AmmoType "MO_ShotShell";
         Weapon.AmmoType2 "PumpShotgunAmmo";
         Inventory.PickupMessage "You got the Pump Action Shotgun! (Slot 3)";

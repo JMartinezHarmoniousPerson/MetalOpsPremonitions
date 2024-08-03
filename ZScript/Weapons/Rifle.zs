@@ -9,6 +9,7 @@ Class AssaultRifle : JMWeapon
         Weapon.AmmoGive 30;
         Weapon.AmmoType1 "HighCalClip";
         Weapon.AmmoType2 "ARAmmo";
+		Weapon.SelectionOrder 800;
         Inventory.PickupMessage "You got the Combat Rifle! (Slot 4)";
         Obituary "%o was shot down by %k's Combat Rifle.";
         Tag "Combat Rifle";

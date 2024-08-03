@@ -19,6 +19,7 @@ class MO_Unmaker : JMWeapon
         Inventory.PickupMessage "$GOTUNMAKER";
         Tag "$TAG_UNMAKER";
         Inventory.PickupSound "weapons/unmaker/pick";
+		Weapon.SelectionOrder 2700;
     }
 
     States

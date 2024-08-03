@@ -12,6 +12,7 @@ class JM_SSG : JMWeapon replaces SuperShotgun
         Obituary "$OB_MPSSHOTGUN";
         Tag "Double Barrel Flak Shotgun";
 		Inventory.PickupSound "weap/ssg/pickup";
+		Weapon.SelectionOrder 400;
     }
     States
     {

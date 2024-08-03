@@ -15,6 +15,7 @@ class Katana: JMWeapon replaces Fist
 //	  +WEAPON.WIMPY_WEAPON;
 	  +WEAPON.NOALERT;
 	  Inventory.AltHudIcon "KATAN0";
+	  Weapon.SelectionOrder 3700;
 	  }
 		
 	  action bool PlayerHasBerserk()

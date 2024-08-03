@@ -11,6 +11,7 @@ class LeverShotgun : JMWeapon //replaces Shotgun
         Weapon.AmmoType2 "LeverShottyAmmo";
 		Inventory.PickupMessage "$GOTLVRSHOT";
 		Obituary "%o was terminated by %k's Lever Shotgun.";
+		Weapon.SelectionOrder 1300;
 		Tag "$TAG_LVRSHOT";
 		Inventory.PickupSound "weapons/levershotty/pickup";
 		Inventory.AltHUDIcon "W87CA0";

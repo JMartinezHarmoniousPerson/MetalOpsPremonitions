@@ -7,6 +7,7 @@ Class MO_SubMachineGun : JMWeapon
     Default
     {
         Weapon.AmmoGive 40;
+		Weapon.SelectionOrder 1800;
         Weapon.AmmoType1 "LowCalclip";
         Weapon.AmmoType2 "SMGAmmo";
         Inventory.PickupMessage "You got the Sub Machine Gun (Slot 2)!";

@@ -9,6 +9,7 @@ class MO_Deagle : JMWeapon// replaces Pistol
 		Weapon.AmmoType2 "MODeagleAmmo";
 		Obituary "%o was clocked by %k's Desert Eagle";
 		+WEAPON.WIMPY_WEAPON;
+		Weapon.SelectionOrder 1950;
 		Inventory.Pickupmessage "You got the Desert Eagle! (Slot 2)";
 		Tag "Desert Eagle";
 		Scale .75;

@@ -12,6 +12,7 @@ class EnforcerPistol : JMWeapon// replaces Pistol
 		Weapon.AmmoType2 "PistolMagAmmo";
 		Obituary "$OB_MPPISTOL";
 		+WEAPON.WIMPY_WEAPON;
+		Weapon.SelectionOrder 1900;
 		Inventory.Pickupmessage "$GOTENFPISTOL";
 		Tag "Enforcer Sidearm";
 		Scale .55;
