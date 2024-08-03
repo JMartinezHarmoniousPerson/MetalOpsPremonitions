@@ -78,3 +78,5 @@ from that. SSG still shoots flak but uses normal shell ammo pool.
 - Fixed issue with the Unmaker not using any Cell ammo on primary fire.
 - New Unmaker pickup sound.
 - Fixed Plasma beam not destroying barrels
+
+8-2-24 - Fixed weapon selection order
