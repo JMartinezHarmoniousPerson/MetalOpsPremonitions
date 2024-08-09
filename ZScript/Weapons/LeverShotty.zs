@@ -174,6 +174,7 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		W87A FED 1 A_WeaponOffset(0,33);
 		W87A C 1 A_StartSound("weapons/levershotty/up", CHAN_AUTO);
 		W87A BA 1;
+ PSTG A 0 JM_CheckMag("LeverShottyAmmo", "Reload");
 		Goto ReadyToFire;
 	Reload:
 		PSTG A 0 A_JumpIfInventory("LeverShottyAmmo",6,"ReadyToFire");
