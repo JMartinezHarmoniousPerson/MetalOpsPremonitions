@@ -241,3 +241,20 @@ Class MO_BulletTracer : FastProjectile
 	}
 }
 
+Class MO_BFG10KShotTracer : MO_BulletTracer
+{
+
+	Default
+	{
+		Speed 450;
+		SeeSound "none";
+		YScale 0.75;
+		XScale 0.75;
+	}
+	States
+	{
+		Spawn:
+			BFS1 AB 1 BRIGHT Light("BFGBallLight") A_SpawnItem("BFGTrail");
+			LOOP;
+	}
+}

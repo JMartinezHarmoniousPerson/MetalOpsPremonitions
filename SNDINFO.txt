@@ -296,7 +296,10 @@ weapons/bfg/chargelayer B7GCHAFF
 weapons/bfg/fire B7GFIRE
 weapons/bfg/ballfly b7gfly
 weapons/bfg/explosion B7GEXPLO
-$attenuation weapons/bfg/explosion 0.3
+bfg/10kfire B710KFR
+$attenuation weapons/bfg/explosion 0.5
+
+$volume weapons/bfg/idleloop 0.75
 
 //Unmaker
 weapons/unmaker/raise UNMUP

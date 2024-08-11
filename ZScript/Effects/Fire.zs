@@ -178,13 +178,26 @@ Class MO_ExplosionFlames: FlameTrails
 	States
 	{
     Spawn:
-        EXPL AA 3 BRIGHT;// A_SpawnItem("RedFlare",0,0);
+        EXPL A 3 BRIGHT;// A_SpawnItem("RedFlare",0,0);
 		EXPL AA 0; //A_CustomMissile ("ExplosionSmokeHD", 0, 0, random (0, 360), 2, random (0, 360));
         EXPL BCDEFGH 3 BRIGHT;
         Stop;
 	}
 }
 
+Class MO_GreenExplosionFlames : MO_ExplosionFlames
+{
+	Default
+	{Scale 1.75;}
+	States
+	{
+		Spawn:
+        EXPG A 3 BRIGHT;// A_SpawnItem("RedFlare",0,0);
+		EXPL AA 0; //A_CustomMissile ("ExplosionSmokeHD", 0, 0, random (0, 360), 2, random (0, 360));
+        EXPG BCDEFGH 3 BRIGHT;
+        Stop;
+	}
+}
 
 Class MO_MiniNukeFlamesImpact: FlameTrails
 {
