@@ -1,3 +1,4 @@
+Credits goes to all developers, modders, games that are used!
 Credits for sounds and weapons
 
 Pistol 
@@ -33,6 +34,7 @@ to create this
 - TiberiumSoul - Insanity's Requiem for being another inspiration for my mod, along with resources.
 - PillowBlaster - Trailblazer styled fast attack for the Katana, and inspiration
 - Endie aka Moa Dixon - Some resources from Hellrider and Slayer's Rampage used.
+- Ravik - Some sounds taken from his add-on Raviks Badass Sounds for PB 3.0.
 
 - Running With Scissors - Postal 2 Kicking sounds
 
@@ -70,7 +72,7 @@ Sprites: TSF, Green Eyesman, bullet in mag sprite by Captain J. ADS Sprites from
 
 BFG:
 Sprites by TSF
-Sounds by ID Software
+Sounds by ID Software and Raven Software
 
 Unmaker:
 Sprites by Enchanter, Zaero, DeathStalker (base)

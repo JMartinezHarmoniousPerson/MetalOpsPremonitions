@@ -80,3 +80,6 @@ from that. SSG still shoots flak but uses normal shell ammo pool.
 - Fixed Plasma beam not destroying barrels
 
 8-2-24 - Fixed weapon selection order
+
+8-12-24:
+- changed some sounds, some sounds from Ravik's Badass Sounds for PB 3.0.
