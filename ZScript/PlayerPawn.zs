@@ -16,12 +16,21 @@ class MO_PlayerBase : DoomPlayer
 	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
 	{
 		PlayerInfo plyr = Self.Player;
-		if(!plyr || plyr.mo != Self) return 0;
 		if(plyr.mo.CountInv("MO_PowerInvul") == 1)
 		{
 			A_StartSound("powerup/invul_damage",3);
 		}
 		return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
+	}
+
+	override void PostBeginPlay()
+	{
+		//Voodoo Doll Check
+		Super.PostBeginPlay();
+		if(!player || !player.mo || player.mo != self)
+		{
+			return;
+		}
 	}
 
 	int grenadecooktimer;

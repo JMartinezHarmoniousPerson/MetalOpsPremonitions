@@ -295,11 +295,21 @@ weapons/bfg/idleloop B7GIDLE
 weapons/bfg/chargelayer B7GCHAFF
 weapons/bfg/fire B7GFIRE
 weapons/bfg/ballfly b7gfly
+weapons/bfg/explosionfar bffar
 weapons/bfg/explosion B7GEXPLO
 bfg/10kfire B710KFR
-$attenuation weapons/bfg/explosion 0.5
+bfg/10expl bfafar
 
+bfg/10explfar BFGALPP
+
+$limit bfg/10expl 3
+$limit bfg/10explfar 3
+
+$attenuation bfg/10expl 0.55
+$attenuation weapons/bfg/explosion 0.5
 $volume weapons/bfg/idleloop 0.75
+
+bfg/switch B7GSWTC
 
 //Unmaker
 weapons/unmaker/raise UNMUP
