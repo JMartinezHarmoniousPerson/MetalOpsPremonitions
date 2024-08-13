@@ -305,6 +305,7 @@ bfg/10explfar BFGALPP
 $limit bfg/10expl 3
 $limit bfg/10explfar 3
 
+$rolloff weapons/bfg/explosionfar 4500 8000
 $attenuation bfg/10expl 0.55
 $attenuation weapons/bfg/explosion 0.5
 $volume weapons/bfg/idleloop 0.75

@@ -175,7 +175,7 @@ Class MO_BFGBall : BFGBall replaces BFGBall
     loop;
   Death:
     NULL A 0;
-	NULL A 0 A_StartSound("weapons/bfg/explosionfar",7,CHANF_DEFAULT,0.7, ATTN_NONE);
+	NULL A 0 A_StartSound("weapons/bfg/explosionfar",7,CHANF_DEFAULT,0.65);
 	NULL A 0 A_StopSound(6);
     NULL AAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("BFGParticle", 0,0,0, (Random(-5,5)), (Random(-5,5)), (Random(-5,5)), 0, SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION);
 	NULL AAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("BFGParticle", 0,0,0, (Random(-5,5)), (Random(-5,5)), (Random(-5,5)), 0, SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION);
