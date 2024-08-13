@@ -27,6 +27,7 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
 		Tag "$TAG_BFG9000";
 		Inventory.PickupSound "weapons/bfg/draw";
 		Weapon.SelectionOrder 2800;
+		Obituary "$OB_BFG9000";
 	}
 	States
 	{
@@ -152,7 +153,6 @@ Class MO_BFGBall : BFGBall replaces BFGBall
 	  Scale 1.25;
 	  DeathSound "weapons/bfg/explosion";
 	  DamageType "Desintegrate";
-	  Obituary "$OB_BFG9000";
 	  DamageFunction 600;
 	  +NOTELEPORT;
 	  +ZDOOMTRANS;
