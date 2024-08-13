@@ -80,10 +80,10 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 //			RLAS A 0 A_JumpIfInventory("MiniNukeMode",1,"FireNuke");
             RLAF A 1 BRIGHT
             {
-                A_FireProjectile("MO_Rocket",0,true,0,7,0);
-                A_StartSound("weapons/rocket/fire", 1);
+				A_StartSound("weapons/rocket/fire", 4, starttime: 0.09);
                 A_Overlay(-5, "MuzzleFlash");
 				JM_CheckForQuadDamage();
+				A_FireProjectile("MO_Rocket",0,true,0,7,0);
             }
             RLAF B 1 BRIGHT
             {
@@ -213,7 +213,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
             RLAF A 1 BRIGHT
             {
                 A_FireProjectile("MO_Rocket",0,0,0,7,0);
-                A_StartSound("weapons/rocket/altfire", 1);
+                A_StartSound("weapons/rocket/fire", 1);
 				A_Overlay(-5, "MuzzleFlashRapid");
 				JM_CheckForQuadDamage();
 				A_TakeInventory("MO_RocketAmmo",1);
@@ -240,7 +240,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
             {
                 A_FireProjectile("MO_Rocket",0,0,0,7,0);
 				A_TakeInventory("MO_RocketAmmo",1);
-                A_StartSound("weapons/rocket/altfire", 1);
+                A_StartSound("weapons/rocket/fire", 1);
             }
             RLAF B 1 BRIGHT
             {
@@ -264,7 +264,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
             {
                 A_FireProjectile("MO_Rocket",0,0,0,7,0);
 				A_TakeInventory("MO_RocketAmmo",1);
-                A_StartSound("weapons/rocket/altfire", 1);
+                A_StartSound("weapons/rocket/fire", 1, starttime: 0.1);
             }
             RLAF B 1 BRIGHT
             {
@@ -428,7 +428,7 @@ Class MO_Rocket : Rocket// replaces rocket
 	{
 		Spawn:
 			MI5L A 1;
-			MI5L A 1 BRIGHT A_StartSound("rocket/flyloop", CHAN_7, CHANF_LOOPING);
+			MI5L A 1 BRIGHT A_StartSound("rocket/flyloop", CHAN_BODY, CHANF_LOOPING, 0.5);
 		FlyLoop:
 			MI5L ABCD 1 BRIGHT
 			{

@@ -83,3 +83,7 @@ from that. SSG still shoots flak but uses normal shell ammo pool.
 
 8-12-24:
 - changed some sounds, some sounds from Ravik's Badass Sounds for PB 3.0.
+- BFG now has a new action special that fires like the BFG10K.
+- BFG has far distance sounds.
+- Fixed foot steps interrupting sounds using CHAN_BODY for it's sound channel.
+- Fixed voodoo dolls being invulnerable and possibly breaking maps that use them.

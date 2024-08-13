@@ -66,7 +66,7 @@ class StepEventHandler : EventHandler
 					{
 						if (wait[i] <= 0.0)
 						{
-							pl.A_StartSound(getStepSound(pl), CHAN_BODY, CHANF_DEFAULT,
+							pl.A_StartSound(getStepSound(pl), 9999, CHANF_DEFAULT,
 									clamp(speed / MAX_SPEED, 0.4, 1.0));
 							wait[i] = 7.0 * clamp(MAX_SPEED / speed, 1.0, 1.5);
 						}
