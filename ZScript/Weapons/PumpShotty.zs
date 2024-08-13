@@ -43,7 +43,14 @@ class PumpShotgun : JMWeapon
             PSGS ABCDE 1;
 			TNT1 A 0 JM_CheckInspectIfDone;
         ReadyToFire:
-            PSGG A 1 JM_WeaponReady(WRF_ALLOWRELOAD);
+            PSGG A 1 
+			{
+				JM_WeaponReady(WRF_ALLOWRELOAD);
+				if(CountInv("SGPumping") >= 1) {SetWeaponState("Pump");}
+				if(CountInv("AltPumping") >= 1) {SetWeaponState("AltPump");}
+				if(CountInv("PumpShotgunAmmo") == 0 && CountInv("MO_ShotShell") > 1)
+				{SetWeaponState("REload");}
+			}
             Loop;
         Deselect:
 			PSGS EDCBA 1;
@@ -79,11 +86,11 @@ class PumpShotgun : JMWeapon
 			{
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
 			}
+			TNT1 A 0 A_WeaponReady(WRF_NOFIRE);
 			TNT1 A 0 JM_CheckMag("PumpShotgunAmmo", "Reload");
             Goto Pump;
         Pump:
             W87A A 0 SetInventory("SGPumping",1);
- //           W87A A 0 A_JumpIf(CountInv("LeverShottyAmmo") < 1, "TerminatorLever");
             PSGM ABC 1;		
 			PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			PSGM DEFG 1;
@@ -144,11 +151,13 @@ class PumpShotgun : JMWeapon
             PSGF D 3;
             PSGF E 4;
 			PSGG A 1;
+			TNT1 A 0 A_WeaponReady(WRF_NOFIRE);
 			TNT1 A 0 JM_CheckMag("PumpShotgunAmmo", "Reload");
             PSGG A 9
 			{
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(5);}
 			}
+			TNT1 A 0 A_WeaponReady(WRF_NOFIRE);
             Goto AltPump;
 		
 		AltPump:
@@ -182,6 +191,8 @@ class PumpShotgun : JMWeapon
 			PSTG A 0 A_JumpIfInventory("PumpShotgunAmmo",6,"ReadyToFire");
 			PSTG A 0 A_JumpIfInventory("MO_ShotShell",1,1);
 			goto ReadyToFire;
+			PSTG A 0 A_SetInventory("SGPumping",0);
+			PSTG A 0 A_SetInventory("AltPumping",0);
             PSGM ABCDEF 1;// JM_WeaponReady();
             PSGA A 0 A_JumpIf(CountInv("PumpShotgunAmmo") < 1, "ChamberShell");
 			PSGR AB 1;// JM_WeaponReady();

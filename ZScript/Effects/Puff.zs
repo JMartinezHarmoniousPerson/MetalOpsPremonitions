@@ -246,7 +246,7 @@ Class MO_BFG10KShotTracer : MO_BulletTracer
 
 	Default
 	{
-		Speed 450;
+		Speed 400;
 		SeeSound "none";
 		YScale 0.75;
 		XScale 0.75;
@@ -254,7 +254,13 @@ Class MO_BFG10KShotTracer : MO_BulletTracer
 	States
 	{
 		Spawn:
-			BFS1 AB 1 BRIGHT Light("BFGBallLight") A_SpawnItem("BFGTrail");
+			TNT1 AA 0
+			{
+				A_SpawnItemEx("GreenLightningTiny", -Vel.x, -Vel.y, -Vel.z, Vel.x, Vel.y, Vel.z, 0, SXF_ABSOLUTEMOMENTUM|SXF_ABSOLUTEPOSITION, 172);
+				A_SpawnItemEx("GreenLightningSmall", -Vel.x, -Vel.y, -Vel.z, Vel.x, Vel.y, Vel.z, 0, SXF_ABSOLUTEMOMENTUM|SXF_ABSOLUTEPOSITION, 216);
+				A_SpawnItemEx("GreenLightningMedium", -Vel.x, -Vel.y, -Vel.z, Vel.x, Vel.y, Vel.z, 0, SXF_ABSOLUTEMOMENTUM|SXF_ABSOLUTEPOSITION, 248);
+			}
+			BFS1 AB 1 BRIGHT Light("BFG10KBallLight");
 			LOOP;
 	}
 }

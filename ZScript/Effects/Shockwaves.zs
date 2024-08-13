@@ -61,4 +61,4 @@ class MO_GreenShockWave : HeatBlastShockWave
 }
 
 class MO_GreenShockWaveSmall : MO_GreenShockWave
-{Default{Scale 1;}}
+{Default{Scale 1.25;}}

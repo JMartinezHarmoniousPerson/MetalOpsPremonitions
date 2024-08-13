@@ -75,10 +75,19 @@ TAG_KATANA = "Katana";
 //OB_LVRSHOT = "
 HUD_WARN1 = "Press = to switch the HUD to fullscreen.";
 HUD_WARN2 = "Make sure alternative HUD is disabled!";
+
+//BFG 9000
+GOTBFG9000 = "You got the BFG9K! Hell Yeah!";
+TAG_BFG9000 = "BFG9K";
+OB_BFG9000  = "%o was blasted away by %k's BFG9K.";
+OB_BFG9000SPLS = "%o couldn't escape from %k's BFG9K.";
+//Unmaker
 GOTUNMAKER = "You got the Unmaker! Unleash the power of Hell itself on your foes! (Slot 7)";
 TAG_UNMAKER = "The Unmaker";
 OB_UNMAKER = "%o was decimated by %k's Unmaker.";
 GOTUNMAKER2 = "What The Fuck is this?! (Slot 7)";
+
+//Options
 MO_NVISOPTN = "Night Vision Shader Color";
 MO_NVISGREN = "Green Phosphor";
 MO_NVISGREN2 = "Digital Green Phosphor";
