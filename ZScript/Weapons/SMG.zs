@@ -1,4 +1,4 @@
-//Assault Rifle
+//SMG
 
 Class SMGBurstMode : MO_ZSToken{}
 
