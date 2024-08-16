@@ -11,7 +11,7 @@ class PumpShotgun : JMWeapon
         Weapon.AmmoType1 "MO_ShotShell";
         Weapon.AmmoType2 "PumpShotgunAmmo";
         Inventory.PickupMessage "You got the Pump Action Shotgun! (Slot 3)";
-        Obituary "%o was blasted away by %k's Pump Shotgun.";
+        Obituary "%o got blasted away by %k's Pump Shotgun.";
         Tag "Pump Shotgun";
 		Inventory.PickupSound "weapons/pumpshot/pump";
 		JMWeapon.inspectToken "NeverUsedPSG";
@@ -45,11 +45,11 @@ class PumpShotgun : JMWeapon
         ReadyToFire:
             PSGG A 1 
 			{
-				JM_WeaponReady(WRF_ALLOWRELOAD);
 				if(CountInv("SGPumping") >= 1) {SetWeaponState("Pump");}
 				if(CountInv("AltPumping") >= 1) {SetWeaponState("AltPump");}
 				if(CountInv("PumpShotgunAmmo") == 0 && CountInv("MO_ShotShell") > 1)
 				{SetWeaponState("REload");}
+				return JM_WeaponReady(WRF_ALLOWRELOAD);
 			}
             Loop;
         Deselect:
