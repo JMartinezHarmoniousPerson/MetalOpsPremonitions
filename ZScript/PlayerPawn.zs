@@ -39,7 +39,7 @@ class MO_PlayerBase : DoomPlayer
 	{
 		Player.WeaponSlot 1, "MO_Flamethrower", "Katana";
 		Player.WeaponSlot 2, "EnforcerPistol", "MO_Submachinegun";
-		Player.WeaponSlot 3, "LeverShotgun", "PumpShotgun", "JM_SSG";
+		Player.WeaponSlot 3, "LeverShotgun", "PumpShotgun", "MO_SSG";
 		Player.WeaponSlot 4, "AssaultRifle", /*"MO_HeavyRifle", */ "MO_MiniGun";
 		Player.WeaponSlot 5, "MO_RocketLauncher";
 		Player.WeaponSlot 6, "JM_PlasmaRifle";

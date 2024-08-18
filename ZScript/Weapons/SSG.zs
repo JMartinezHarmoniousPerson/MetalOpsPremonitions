@@ -1,6 +1,6 @@
 //SuperShotgun
 
-class JM_SSG : JMWeapon replaces SuperShotgun
+class MO_SSG : JMWeapon replaces SuperShotgun
 {
     Default
     {
@@ -14,6 +14,40 @@ class JM_SSG : JMWeapon replaces SuperShotgun
 		Inventory.PickupSound "weap/ssg/pickup";
 		Weapon.SelectionOrder 400;
     }
+
+	action void MO_FireSSG()
+	{
+
+		for(int i = 2; i > 0; i--) //for(int i=amount;i>0;i--)
+		{
+			A_FireProjectile("FlakChunk2",random(-2,2),0,18,16);
+			A_FireProjectile("FlakChunk1",random(-2,2),0,15,-13);
+			A_FireProjectile("FlakChunk3",random(-2,2),0,13,6);
+			A_FireProjectile("FlakChunk4",random(-2,2),0,0,-15);
+			A_FireProjectile("FlakChunk4",random(-2,2),0,0,-15);
+			A_FireProjectile("FlakChunk1",random(-2,2),0,-13,8);
+			A_FireProjectile("FlakChunk2",random(-2,2),0,-15,12);
+			A_FireProjectile("FlakChunk3",random(-2,2),0,-18,6);
+		}
+	}
+
+	//Right Alt Fire
+	action void MO_FireSSG2()
+	{
+		A_FireProjectile("FlakChunk2",random(-2,2),0,18,16);
+		A_FireProjectile("FlakChunk1",random(-2,2),0,15,-13);
+		A_FireProjectile("FlakChunk3",random(-2,2),0,13,6);
+		A_FireProjectile("FlakChunk4",random(-2,2),0,0,-15);
+	}
+
+	//Left Alt Fire
+	action void MO_FireSSG3()
+	{
+		A_FireProjectile("FlakChunk4",random(-2,2),0,0,-15);
+		A_FireProjectile("FlakChunk1",random(-2,2),0,-13,8);
+		A_FireProjectile("FlakChunk2",random(-2,2),0,-15,12);
+		A_FireProjectile("FlakChunk3",random(-2,2),0,-18,6);
+	}
     States
     {
 		ContinueSelect:
@@ -46,16 +80,7 @@ class JM_SSG : JMWeapon replaces SuperShotgun
                 A_SpawnItemEx("ShotgunSmoke",15,-2,34,2,0,0);
                 A_TakeInventory("SSGAmmo",2);
 				JM_CheckForQuadDamage();
-                for(int i = 2; i > 0; i--) //for(int i=amount;i>0;i--)
-                {
-                    A_FireProjectile("FlakChunk2",random(-2,2),0,18,13);
-					A_FireProjectile("FlakChunk1",random(-2,2),0,15,-18);
-					A_FireProjectile("FlakChunk3",random(-2,2),0,13,5);
-					A_FireProjectile("FlakChunk3",random(-2,2),0,0,-15);
-					A_FireProjectile("FlakChunk4",random(-2,2),0,0,-15);
-					A_FireProjectile("FlakChunk1",random(-2,2),0,-13,8);
-					A_FireProjectile("FlakChunk2",random(-2,2),0,-18,12);
-                }
+                MO_FireSSG();
             }
             SG2F B 1 BRIGHT
             {
@@ -85,13 +110,7 @@ class JM_SSG : JMWeapon replaces SuperShotgun
             SG2A A 1 BRIGHT
             {
                 A_StartSound("weapons/ssg/altfire", 1);
-                A_FireProjectile("FlakChunk2",random(-2,2),0,18,13);
-				A_FireProjectile("FlakChunk1",random(-2,2),0,15,-18);
-				A_FireProjectile("FlakChunk3",random(-2,2),0,13,5);
-				A_FireProjectile("FlakChunk3",random(-2,2),0,0,-15);
-				A_FireProjectile("FlakChunk4",random(-2,2),0,0,-15);
-				A_FireProjectile("FlakChunk1",random(-2,2),0,-13,8);
-				A_FireProjectile("FlakChunk2",random(-2,2),0,-18,12);
+                MO_FireSSG2(); //Left
                 A_SpawnItemEx("ShotgunSmoke",15,3,34,2,0,0);
 //                A_SpawnItemEx("ShotgunSmoke",15,-2,34,2,0,0);
                 A_TakeInventory("SSGAmmo",1);
@@ -122,13 +141,7 @@ class JM_SSG : JMWeapon replaces SuperShotgun
             {
                 A_StartSound("weapons/ssg/altfire", 1);
 //                A_FireBullets(5.6,0,9,9, "SSGPuff");
-                A_FireProjectile("FlakChunk2",random(-2,2),0,18,13);
-				A_FireProjectile("FlakChunk1",random(-2,2),0,15,-18);
-				A_FireProjectile("FlakChunk3",random(-2,2),0,13,5);
-				A_FireProjectile("FlakChunk3",random(-2,2),0,0,-15);
-				A_FireProjectile("FlakChunk4",random(-2,2),0,0,-15);
-				A_FireProjectile("FlakChunk1",random(-2,2),0,-13,8);
-				A_FireProjectile("FlakChunk2",random(-2,2),0,-18,12);
+                MO_FireSSG3(); //Left
                 A_SpawnItemEx("ShotgunSmoke",15,-2,34,2,0,0);
                 A_TakeInventory("SSGAmmo",1);
 				JM_CheckForQuadDamage();
@@ -310,10 +323,11 @@ Class FlakChunk1 : Actor
     {
 	Radius 3;
 	Height 4;
-	Speed 45;
-	Damage 8;
+	Speed 55;
+	DamageFunction (random(15, 21));
 	Mass 200;
 	Scale 0.4;
+	Gravity 0.75;
 	Damagetype 'Cutless';
 	+MISSILE;
 	+BLOODSPLATTER;

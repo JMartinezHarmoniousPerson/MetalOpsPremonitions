@@ -26,7 +26,7 @@ class SSGRandomizer : actor
 		SpawnSSG:
 			TNT1 A 0;
 			TNT1 A 1 A_Jump(96, "SpawnPump", "SpawnLever");
-			TNT1 A 0 A_SpawnItemEx("JM_SSG");
+			TNT1 A 0 A_SpawnItemEx("MO_SSG");
 			Stop;
 		SpawnPump:
 			TNT1 A 0 A_SpawnItemEx("PumpShotgun");
