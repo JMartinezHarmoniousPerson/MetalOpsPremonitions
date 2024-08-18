@@ -7,6 +7,8 @@ AddOptionMenu "OptionsMenu"
 
 OptionMenu "Modsettings"
 {
+	Title "$MO_MOPSETTINGS"
+	StaticText ""
 	Submenu "$NCH_OPTMNU_TITLE", "NCHUD"
 	StaticText ""
 	Option "SSG randomly replaces Shotgun spawn", "mo_ssgrandomizer", "yesno"

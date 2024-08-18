@@ -124,6 +124,7 @@ SECRETMESSAGE4 = "You found a secret area!";
 
 
 //Options
+MO_MOPSETTINGS = "Metal Ops: Premonitions Settings";
 MO_NVISOPTN = "Night Vision Shader Color";
 MO_NVISGREN = "Green Phosphor";
 MO_NVISGREN2 = "Digital Green Phosphor";
