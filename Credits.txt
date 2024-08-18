@@ -191,3 +191,40 @@ Fourth sound of Horror Voice Flashbacks used for Mega Berserk end: Sound Effect 
 Bethesda - Doom 2016 berserk end, pickup sounds and doom 3 berserk loop
 People Can Fly - Mega Berserk loop layer
 New Blood Interactive - Mega Berserk loop ambience
+
+/////////////////////////////
+///			 Flashlight++				///
+////////////////////////////
+Programming-----------------------------------
+
+• RicardoLuis0 - the entirety of Flashlight+
+• Agent_Ash and RicardoLuis0 - Help with code (their help is highlighted in ZSCRIPT.zs with code comments)
+• generic name guy - Presets, On/Off sound, Menu polish, Code cleanup upon other under-the-hood improvements.
+• ProydohaRupert - Bug reporting and code optimizations
+• Caligari87 - DarkDoomZ sway code
+• Blackmore1014 - BD:BE Alerting code (very cool)
+• A_D_M_E_R_A_L - Rewritten toggle sound code
+
+Sound Effects---------------------------------
+
+• Altered Orbit Studios - Futuristic Flashlight sound effect
+• LOL_DUDE (Gamebanana) - Old Flashlight sound effect
+• Crowbar Collective - Default Flashlight sound effect
+• senn_twt - Resampled HL1 Flashlight sound effect
+• Lewisk3 - Alternate Flashlight sound effect 
+• IDDQD_1337 - Providing the Prey and OP4 sounds
+• DraugraK - Providing the Selaco "Clicky Clack" sounds
+• Caligari87 - DarkDoomZ Sound (mshahen: "Flashlight On/Off Clicks" (freesound.org, 271109, modified) CC BY 3.0)
+• Gearbox Software - HL OP4 NVG Sounds
+• Human Head Studio - Prey 2006 Lighter Sound
+• Grey_Wolf - LiTDOOM Flashlight sound effect
+• Sergeant_Mark_IV - Brutal Doom flashlight sound effect
+
+Localization----------------------------------
+
+• IDDQD_1337 - Russian (removed)
+• generic name guy - Portuguese
+
+Other-----------------------------------------
+
+• cosmos - Bug reporting

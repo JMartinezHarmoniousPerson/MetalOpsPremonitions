@@ -1,0 +1,58 @@
+/* Flashlight++, an extended version of Flashlight+ with extra customizability.
+Copyright (C) 2024  generic name guy
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>. */
+
+//Default
+flashlightOn    	      "SOUNDS/Flashlight/BlackMesa_On.ogg"
+flashlightOff             "SOUNDS/Flashlight/BlackMesa_off.ogg"
+
+//Halo: Doom Evolved
+altflashlightOn           "SOUNDS/Flashlight/Alternate_On.ogg"
+altflashlightOff          "SOUNDS/Flashlight/Alternate_Off.ogg"
+
+//Old BM + HL2 
+oldflashlightOn           "SOUNDS/Flashlight/BlackMesaHL2_On.ogg"
+oldflashlightOff          "SOUNDS/Flashlight/BlackMesaHL2_Off.ogg"
+
+//Half-Life
+hl1flashlightToggle       "SOUNDS/Flashlight/HalfLife1_Toggle.ogg"
+
+//Selaco
+selacoflashlightOn        "SOUNDS/Flashlight/Selaco_On.ogg"
+selacoflashlightOff       "SOUNDS/Flashlight/Selaco_Off.ogg"
+
+//DarkDoomZ
+darkdoomzflashlightToggle "SOUNDS/Flashlight/DarkDoomZ_On.ogg"
+$pitchset darkdoomzflashlightToggle 0.9 1.1
+
+//Prey '06
+preyflashlightOn          "SOUNDS/Flashlight/PreyLighter_On.ogg"
+preyflashlightOff         "SOUNDS/Flashlight/PreyLighter_Off.ogg"
+
+//HL OpForce
+op4flashlightOn           "SOUNDS/Flashlight/OpposingForce_On.ogg"
+op4flashlightOff          "SOUNDS/Flashlight/OpposingForce_Off.ogg"
+
+//Selaco
+selaco2flashlightOn       "SOUNDS/Flashlight/SelacoAlt_On.ogg"
+selaco2flashlightOff      "SOUNDS/Flashlight/SelacoAlt_Off.ogg"
+
+//LiTDOOM (When the Doom is Lit :flushed:)
+litdoomflashlightOn       "SOUNDS/Flashlight/LiTDoom_On.ogg"
+litdoomflashlightOff      "SOUNDS/Flashlight/LiTDoom_Off.ogg"
+
+//Brutal Doom
+brutaldoomflashlightOn    "SOUNDS/Flashlight/BrutalDoom_On.ogg"
+brutaldoomflashlightOff    "SOUNDS/Flashlight/BrutalDoom_Off.ogg"

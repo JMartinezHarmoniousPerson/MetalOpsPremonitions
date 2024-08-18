@@ -1,0 +1,108 @@
+// Flashlight++ - https:// forum.zdoom.org/viewtopic.php?t=75585
+
+// This will apply for Portuguese
+[ptg pt]
+
+// Position shit
+FPP_HELM = "Capacete";
+FPP_RSHO = "Ombro Direito";
+FPP_LSHO = "Ombro Esquerdo";
+FPP_CENT = "Centralizado";
+FPP_GUN = "Arma";
+FPP_DDZSHOULDER = "Ombro (DarkDoomZ)";
+FPP_DDZHAND = "Mão (DarkDoomZ)";
+FPP_CUSTPOS = "Personalizado";
+FPP_XPOS = "Coordenada X";
+FPP_XDESC = "< Esquerda/Direita >";
+FPP_YPOS = "Coordenada Y";
+FPP_YDESC = "< Trás/Frente >";
+FPP_ZPOS = "Coordenada Z";
+FPP_ZDESC = "< Baixo/Alto >";
+FPP_IFCUST = "Se a configuração acima estiver definida como \"Personalizado\", você poderar alterar a posição do feixe abaixo";
+FPP_TWEAKPOS = "Configurar posição personalizada";
+
+// Settings and shit
+FPP_TITOP = "Opções do Flashlight++";
+FPP_TITCTRL = "Controles do Flashlight++";
+FPP_TITL = "Flashlight++";
+FPP_PRST = "Predefinições";
+FPP_SNDCHOICE = "Efeito Sonoro";
+FPP_TGLE = "Ligar/Desligar Lanterna";
+FPP_CLR = "Cor da Luz";
+FPP_RNGE = "Intensidade do Feixe (Alcance)";
+FPP_IANG = "Ângulo Interno";
+FPP_OANG = "Ângulo Externo";
+FPP_BIND = "Teclas do Flashlight++"; // não consigo fazer isso menos estranho, "vinculações" talvez funciona más "teclas" é mais direto ao jogador
+FPP_ALERT = "Alertar Monstros";
+FPP_ALERT_TIP = "Alertar monstros com a luz da lanterna.";
+
+// Second Beam shit
+FPP_SECBEM = "Habilitar Segundo Feixe";
+FPP_SCBMUL = "Multiplicador de cor do Segundo Feixe";
+FPP_SCRNGE = "Intensidade do Segundo Feixe (Alcance)";
+FPP_IAN2 = "Ângulo Interno do Segundo Feixe";
+FPP_OAN2 = "Ângulo Externo do Segundo Feixe";
+
+// Misc shit
+FPP_POS = "Posição";
+FPP_WARN = "Deleta todos os atores do mod, depois disso, é seguro salvar e o mod estará removido.";
+FPP_UINS = "Desinstalar Flashlight++";
+FPP_PRTIT = "Predefinições da Lanterna";
+// FPP_PRSTAPPL = "Preset applied, turn the flashlight off then on again to see changes";
+FPP_DYNALIGHTS = "Habilita Luzes Dinâmicas, ligue isso se quer ver a lanterna!";
+FPP_FPSCAP = "\"Não\" Trava seu FPS para 35, a lanterna não vai \"gaguejar,\" ao custo de seu FPS.";
+FPP_YOUSURE = "Tem certeza que quer usar esta predefinição? Isso vai substituir as suas configurações de lanterna atuais!";
+FPP_YUSURE2 = "Tem certeza que quer remover Flashlight++ deste jogo salvo?";
+
+// Presets 4 localization1!1!1!1!!! (shit)
+FPP_DEFA = "Padrão";
+FPP_OLDDEFAULT = "Padrão Antigo (Flashlight+)";
+FPP_BLUMGK = "Mágica Azul (Hexen/Heretic)";
+FPP_GRNMGK = "Mágica Verde (Hexen/Heretic)";
+FPP_LAMP = "Lâmpada";
+FPP_HDLI = "Lanterna de Mineração";
+FPP_FULL = "Literalmente só Fullbright";
+FPP_GENE = "Lanterna Genérica";
+FPP_HARD = "Cel-Light 2000";
+FPP_METADOOM = "Lanterna da Pistola do MetaDOOM";
+FPP_OP4NVG = "Visão Noturna";
+
+// Sound Effects
+FPP_NOSOUND = "Sem Som";
+FPP_DEFCLICK = "Clique Padrão (Black Mesa)";
+FPP_OLDCLICK = "Clique Antigo (BM + HL2)";
+FPP_ALTCLICK = "Clique Alternativo (Halo Doom)";
+FPP_FUUUTURE = "Bips Futuristas (Selaco)";
+FPP_HL1TOGGLE = "Bips Tecnológicos (Half-Life)";
+FPP_DDZTOGGLE = "Estalo Crocante (DarkDoomZ)";
+FPP_PREYFLME = "Isqueiro (Prey '06)";
+FPP_OP4NVSND = "Tique de Visão Noturna (HL: OP4)";
+FPP_FUUTURE2 = "Clique Claque (Selaco)"; // i am running out of names
+FPP_LITFRONG = "Clique com Mola (LiTDOOM)"; // i don't even know anymore
+FPP_BDV21SOUND = "Clique Alternativo Alternativo (Brutal Doom)";
+
+// Sway shit
+FPP_INERTIA = "Inércia";
+FPP_INERTIADESC = "O tempo que a luz demora para alcançar a direção do jogador";
+FPP_SPRING = "Balanço";
+FPP_SPRINGDESC = "O quanto que a luz balança depois de alcançar o jogador";
+FPP_DAMPING = "Amortecimento";
+FPP_DAMPINGDESC = "A velocidade que a luz recupera de balançar";
+
+FPP_SWAY = "Balanço da Luz";
+FPP_NOSWAY = "Sem Balanço";
+FPP_SPRINGY = "Elástico";
+FPP_STIFF = "Firme";
+FPP_SWAYCUSTOM = "Personalizado";
+FPP_TWEAKSWAY = "Configurar balanço personalizado";
+
+// Advanced settings
+FPP_ADVANCED = "Configurações avançadas";
+FPP_ATTENUATED = "Atenuar luz";
+FPP_ATTENUATED_DESC = "Deixa a luz mais realista, se não um pouco escura";
+FPP_NOISE = "Ruído";
+FPP_NOISE_DESC = "A luz pisca de acordo com o mínimo definido na opção abaixo";
+FPP_NOISE_MIN = "Ruído mínimo";
+FPP_INTERPOLATE = "Interpolar Movimento";
+FPP_INTERPOLATE_DESC = "Controla se a interpolação de movimento do GZDoom será usada";
+FPP_INTERPOLATE_DESC2 = "Fazerá a luz gaguejar quando estiver movendo rapidamente";

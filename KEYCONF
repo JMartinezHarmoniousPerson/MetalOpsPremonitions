@@ -1,7 +1,3 @@
-clearplayerclasses
-addplayerclass MO_OfficerPlayer
-addplayerclass MO_SergeantPlayer
-
 addkeysection "Metal Ops Keybinds" MOBinds
 addmenukey "Toss Throwable" +user1
 defaultbind G +user1
@@ -18,3 +14,68 @@ defaultbind N
 addmenukey "Weapon Action Special" +user4
 defaultbind X +user4
 
+
+// Flashlight++ - https:// forum.zdoom.org/viewtopic.php?t=75585
+
+// 0 = Helmet
+// 1 = Right Shoulder
+// 2 = Left Shoulder
+// 3 = Center View
+// 4 = Gun 
+// 5 = Hip 
+
+// Customize Controls key
+addkeysection "$FPP_BIND" FPPBind
+addmenukey "$FPP_TGLE" FPP_Toggle
+alias FPP_Toggle "netevent flashlight_plus_toggle"
+defaultbind f FPP_Toggle
+
+// Default Preset
+
+alias cl_flashlight_defaultpreset "set cl_flashlight_plus_color 7878B4; set cl_flashlight_plus_location 2; set cl_flashlight_plus_intensity 512; set cl_flashlight_plus_inner 32.0; set cl_flashlight_plus_outer 40.0; set cl_flashlight_plus_second_beam true; set cl_flashlight_plus_color_2_mult 2.0; set cl_flashlight_plus_intensity_2 512; set cl_flashlight_plus_inner_2 0.0; set cl_flashlight_plus_outer_2 15.0"
+
+// Old Default Preset
+
+alias cl_flashlight_olddefaultpreset "set cl_flashlight_plus_color 7F7F7F; set cl_flashlight_plus_location 0; set cl_flashlight_plus_intensity 256; set cl_flashlight_plus_inner 25.0; set cl_flashlight_plus_outer 50.0; set cl_flashlight_plus_second_beam true; set cl_flashlight_plus_color_2_mult 1.0; set cl_flashlight_plus_intensity_2 512; set cl_flashlight_plus_inner_2 8.0; set cl_flashlight_plus_outer_2 16.0"
+
+// HL2 Preset
+
+alias cl_flashlight_hl2preset "set cl_flashlight_plus_color FFFFFF; set cl_flashlight_plus_location 3; set cl_flashlight_plus_intensity 134; set cl_flashlight_plus_inner 20; set cl_flashlight_plus_outer 25; set cl_flashlight_plus_second_beam true; set cl_flashlight_plus_color_2_mult 1.60; set cl_flashlight_plus_intensity_2 300; set cl_flashlight_plus_inner_2 7.0; set cl_flashlight_plus_outer_2 20.0"
+
+// Doom 3 BFG Preset
+
+alias cl_flashlight_d3preset "set cl_flashlight_plus_color D3D3D3; set cl_flashlight_plus_location 2; set cl_flashlight_plus_intensity 125; set cl_flashlight_plus_inner 35; set cl_flashlight_plus_outer 40; set cl_flashlight_plus_second_beam true; set cl_flashlight_plus_color_2_mult 1.0; set cl_flashlight_plus_intensity_2 250; set cl_flashlight_plus_inner_2 15; set cl_flashlight_plus_outer_2 30"
+
+// Green and Blue Magic Presets
+
+alias cl_flashlight_magicpreset "set cl_flashlight_plus_color 77FF6F; set cl_flashlight_plus_location 0; set cl_flashlight_plus_intensity 135; set cl_flashlight_plus_inner 0; set cl_flashlight_plus_outer 25; set cl_flashlight_plus_second_beam true; set cl_flashlight_plus_color_2_mult 5.0; set cl_flashlight_plus_intensity_2 300; set cl_flashlight_plus_inner_2 18; set cl_flashlight_plus_outer_2 27"
+
+alias cl_flashlight_magicbluepreset "set cl_flashlight_plus_color 5353FF; set cl_flashlight_plus_location 0; set cl_flashlight_plus_intensity 135; set cl_flashlight_plus_inner 0; set cl_flashlight_plus_outer 25; set cl_flashlight_plus_second_beam true; set cl_flashlight_plus_color_2_mult 5.0; set cl_flashlight_plus_intensity_2 300; set cl_flashlight_plus_inner_2 18; set cl_flashlight_plus_outer_2 27"
+
+// Lamp Preset
+
+alias cl_flashlight_lamppreset "set cl_flashlight_plus_color FFFF83; set cl_flashlight_plus_location 0; set cl_flashlight_plus_intensity 112; set cl_flashlight_plus_inner 85; set cl_flashlight_plus_outer 147; set cl_flashlight_plus_second_beam false; set cl_flashlight_plus_color_2_mult 0.0; set cl_flashlight_plus_intensity_2 0; set cl_flashlight_plus_inner_2 0; set cl_flashlight_plus_outer_2 0"
+
+// Mining Headlight Preset
+
+alias cl_flashlight_minerpreset "set cl_flashlight_plus_color ECDB57; set cl_flashlight_plus_location 0; set cl_flashlight_plus_intensity 118; set cl_flashlight_plus_inner 11; set cl_flashlight_plus_outer 37; set cl_flashlight_plus_second_beam true; set cl_flashlight_plus_color_2_mult 0.0; set cl_flashlight_plus_intensity_2 300; set cl_flashlight_plus_inner_2 21; set cl_flashlight_plus_outer_2 42"
+
+// Literally just fucking Fullbright
+
+alias cl_flashlight_fullbrightpreset "set cl_flashlight_plus_color FFFFFF; set cl_flashlight_plus_location 0; set cl_flashlight_plus_intensity 1024; set cl_flashlight_plus_inner 180; set cl_flashlight_plus_outer 180; set cl_flashlight_plus_second_beam true; set cl_flashlight_plus_color_2_mult 5.0; set cl_flashlight_plus_intensity_2 1024; set cl_flashlight_plus_inner_2 180; set cl_flashlight_plus_outer_2 180"
+
+// Generic Preset
+
+alias cl_flashlight_basicpreset "set cl_flashlight_plus_color E3DFFF; set cl_flashlight_plus_location 4; set cl_flashlight_plus_intensity 256; set cl_flashlight_plus_inner 5.0; set cl_flashlight_plus_outer 20.0; set cl_flashlight_plus_second_beam false; set cl_flashlight_plus_color_2_mult 0.0; set cl_flashlight_plus_intensity_2 0; set cl_flashlight_plus_inner_2 0.0; set cl_flashlight_plus_outer_2 0.0"
+
+// Cel Preset
+
+alias cl_flashlight_hardpreset "set cl_flashlight_plus_color FFFFFF; set cl_flashlight_plus_location 3; set cl_flashlight_plus_intensity 250; set cl_flashlight_plus_inner 25.0; set cl_flashlight_plus_outer 25.0; set cl_flashlight_plus_second_beam true; set cl_flashlight_plus_color_2_mult 1.50; set cl_flashlight_plus_intensity_2 350; set cl_flashlight_plus_inner_2 15.0; set cl_flashlight_plus_outer_2 15.0"
+
+// MetaDOOM Pistol Preset
+
+alias cl_flashlight_metadoompreset "set cl_flashlight_plus_color FFFFFF; set cl_flashlight_plus_location 4; set cl_flashlight_plus_intensity 256; set cl_flashlight_plus_inner 15.0; set cl_flashlight_plus_outer 20.0; set cl_flashlight_plus_second_beam false; set cl_flashlight_plus_color_2_mult 0.0; set cl_flashlight_plus_intensity_2 0; set cl_flashlight_plus_inner_2 0.0; set cl_flashlight_plus_outer_2 0.0"
+
+// NVG Preset
+
+alias cl_flashlight_op4nvgpreset "set cl_flashlight_plus_color 50C14D; set cl_flashlight_plus_location 0; set cl_flashlight_plus_intensity 748; set cl_flashlight_plus_inner 85.0; set cl_flashlight_plus_outer 147.0; set cl_flashlight_plus_second_beam true; set cl_flashlight_plus_color_2_mult 1.30; set cl_flashlight_plus_intensity_2 275; set cl_flashlight_plus_inner_2 25.0; set cl_flashlight_plus_outer_2 50.0"

@@ -46,6 +46,11 @@ version "4.5.0"
 #include "ZScript/StepEventHandler.zc"
 #include "ZScript/MO_Handler.zs"
 
+//Flashlight++
+#include "ZSCRIPT/Flashlight++/FPP_Holder.zs"
+#include "ZSCRIPT/Flashlight++/FPP_Handler.zs"
+#include "ZSCRIPT/Flashlight++/FPP_Light.zs"
+
 Class BaseVisualSFX : Actor// From Particle Fire Enhancer Mod (v0.8) by Z86
 {
 	Default

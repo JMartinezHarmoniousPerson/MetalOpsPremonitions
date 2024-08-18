@@ -68,24 +68,60 @@ NCH_OPTION_BGCOLOR = "Backgrounds";
 NCH_OPTION_HICOLOR = "Highlight";
 
 //Metal ops Language
+
+//Katana
+TAG_KATANA = "Katana";
+OB_KATANA = "%o got %p guts sliced and diced by %k's Katana.";
+OB_KATANA2 = "%k forced %o to commit seppuku.";
+
+//Flamethtower
+OB_FLAMER2 = "%o was set ablaze by %'s Flamethrower.";
+
+//Pistol
 GOTENFPISTOL = "You got the Enforcer Sidearm! (Slot 2)";
+OB_PISTOL = "%o was peppered by %k's Enforcer Sidearm.";
+
+//Lever Shotgun
 GOTLVRSHOT = "You got the Lever Action Shotgun! (Slot 3");
 TAG_LVRSHOT = "Lever Action Shotgun";
-TAG_KATANA = "Katana";
-//OB_LVRSHOT = "
+OB_LVRSHOT = "%o was terminated by %k's Lever Shotgun.";
+
 HUD_WARN1 = "Press = to switch the HUD to fullscreen.";
 HUD_WARN2 = "Make sure alternative HUD is disabled!";
+
+//SSG
+OB_SUPERSHOTGUN = "%o got %p insides eviscerated by %k's SSG.";
+
+//Minigun
+OB_MINIGUN = "%o was shredded to bits by %k's Minigun.";
 
 //BFG 9000
 GOTBFG9000 = "You got the BFG9K! Hell Yeah!";
 TAG_BFG9000 = "BFG9K";
-OB_BFG9000  = "%o was blasted away by %k's BFG9K.";
+OB_BFG9000  = "%o felt the extreme power of %k's BFG9K.";
 OB_BFG9000SPLS = "%o couldn't escape from %k's BFG9K.";
+
+//Heavy Combat Rifle
+TAG_HEAVYRIFLE = "Heavy Combat Rifle";
+OB_HEAVYRIFLE = "%o got sniped by %k's Heavy Combat Rifle.";
+OB_HEAVYRIFLE_GRENADE = "%o swallowed %k's 40mm Grenade from a Heavy Combat Rifle.";
+OB_HEAVYRIFLE_GRENADE_SPLASH = "%o tried to evade %k's 40mm Grenade from a Heavy Combat Rifle.";
+
 //Unmaker
 GOTUNMAKER = "You got the Unmaker! Unleash the power of Hell itself on your foes! (Slot 7)";
+GOTUNMAKER2 = "What The Fuck is this?! (Slot 7)";
 TAG_UNMAKER = "The Unmaker";
 OB_UNMAKER = "%o was decimated by %k's Unmaker.";
-GOTUNMAKER2 = "What The Fuck is this?! (Slot 7)";
+OB_UNMAKER2 = "%o got a taste of Hell's power from %k's Unmaker."
+
+//Plasma Repeater
+OB_PLASMA = "%o got melted by %k's Plasma Repeater.";
+
+//Secret Messages randomized
+SECRETMESSAGE2 = "Secret found!";
+SECRETMESSAGE3 = "A secret place!";
+SECRETMESSAGE4 = "You found a secret area!";
+
 
 //Options
 MO_NVISOPTN = "Night Vision Shader Color";
@@ -95,3 +131,114 @@ MO_NVISWHT = "White Phosphor";
 MO_ADSOPT = "ADS Control Type";
 MO_ADSTOGGLE = "Toggle";
 MO_ADSHOLD = "Hold";
+
+
+// Flashlight++ - https:// forum.zdoom.org/viewtopic.php?t=75585
+
+// This will apply for English and if there is no localization for the user's language.
+[enu default]
+
+// Position shit
+FPP_HELM = "Helmet";
+FPP_RSHO = "Right Shoulder";
+FPP_LSHO = "Left Shoulder";
+FPP_CENT = "Centered";
+FPP_GUN = "Weapon";
+FPP_DDZSHOULDER = "Shoulder (DarkDoomZ)";
+FPP_DDZHAND = "Handheld (DarkDoomZ)";
+FPP_CUSTPOS = "Custom";
+FPP_CUSTPOS_SWAY = "Custom (With Sway)";
+FPP_XPOS = "X Coordinate";
+FPP_XDESC = "< Left/Right >";
+FPP_YPOS = "Y Coordinate";
+FPP_YDESC = "< Back/Forward >";
+FPP_ZPOS = "Z Coordinate";
+FPP_ZDESC = "< Down/Up >";
+FPP_IFCUST = "If the setting above is set to \"Custom\", you will be able to tweak the beam position below";
+FPP_TWEAKPOS = "Tweak custom position";
+
+// Settings and shit
+FPP_TITOP = "Flashlight++ Options";
+FPP_TITCTRL = "Flashlight++ Controls";
+FPP_TITL = "Flashlight++";
+FPP_PRST = "Presets";
+FPP_SNDCHOICE = "Sound Effect";
+FPP_TGLE = "Toggle Flashlight";
+FPP_CLR = "Light Color";
+FPP_RNGE = "Intensity (Range)";
+FPP_IANG = "Inner Angle";
+FPP_OANG = "Outer Angle";
+FPP_BIND = "Flashlight++ Bindings";
+FPP_ALERT = "Alert Monsters";
+FPP_ALERT_TIP = "Alert monsters with your flashlight beam.";
+
+// Second Beam shit
+FPP_SECBEM = "Second Beam Enabled";
+FPP_SCBMUL = "Second Beam Color Modifier";
+FPP_SCRNGE = "Second Beam Intensity (Range)";
+FPP_IAN2 = "Second Beam Inner Angle";
+FPP_OAN2 = "Second Beam Outer Angle";
+
+// Misc shit
+FPP_POS = "Position";
+FPP_WARN = "Deletes all mod actors, after this, it's safe to save and the mod will be removed.";
+FPP_UINS = "Uninstall Flashlight++";
+FPP_PRTIT = "Flashlight Presets";
+// FPP_PRSTAPPL = "Preset applied, turn the flashlight off then on again to see changes";
+FPP_DYNALIGHTS = "Enables Dynamic Lights, turn this on if you want to see the flashlight!";
+FPP_FPSCAP = "Caps your FPS to 35, the flashlight won't look jittery, at the cost of framerate.";
+FPP_YOUSURE = "Are you sure you want to apply this preset? This will overwrite your current flashlight settings!";
+FPP_YUSURE2 = "Are you sure you want to remove Flashlight++ from this save file?";
+
+// Presets 4 localization1!1!1!1!!! (shit)
+FPP_DEFA = "Default";
+FPP_OLDDEFAULT = "Old Default (Flashlight+)";
+FPP_BLUMGK = "Blue Magic (Hexen/Heretic)";
+FPP_GRNMGK = "Green Magic (Hexen/Heretic)";
+FPP_LAMP = "Lamp";
+FPP_HDLI = "Mining Headlight";
+FPP_FULL = "Literally just fucking Fullbright";
+FPP_GENE = "Generic Flashlight";
+FPP_HARD = "Cel-Light 2000";
+FPP_METADOOM = "MetaDOOM Pistol flashlight";
+FPP_OP4NVG = "Night Vision";
+
+// Sound Effects shit
+FPP_NOSOUND = "No Sound";
+FPP_DEFCLICK = "Default Click (Black Mesa)";
+FPP_OLDCLICK = "Old Click (BM + HL2)";
+FPP_ALTCLICK = "Alternate Click (Halo Doom)";
+FPP_FUUUTURE = "Futuristic Beeps (Selaco)";
+FPP_HL1TOGGLE = "High-tech Boop (Half-Life)";
+FPP_DDZTOGGLE = "Crisp Pop (DarkDoomZ)";
+FPP_PREYFLME = "Lighter (Prey '06)";
+FPP_OP4NVSND = "Night Vision Tick (HL: OP4)";
+FPP_FUUTURE2 = "Clicky Clack (Selaco)"; // i am running out of names
+FPP_LITFRONG = "Springy Click (LiTDOOM)"; // this is gonna be a nightmare to translate to portuguese, fuck
+FPP_BDV21SOUND = "Alternate Alternate Click (Brutal Doom)";
+
+// Sway shit
+FPP_INERTIA = "Inertia";
+FPP_INERTIADESC = "How fast the light sways";
+FPP_SPRING = "Spring";
+FPP_SPRINGDESC = "How much the light bounces back when swaying";
+FPP_DAMPING = "Damping";
+FPP_DAMPINGDESC = "How fast the light recovers from spring";
+
+FPP_SWAY = "Light Sway";
+FPP_NOSWAY = "No Sway";
+FPP_SPRINGY = "Springy";
+FPP_STIFF = "Stiff";
+FPP_SWAYCUSTOM = "Custom";
+FPP_TWEAKSWAY = "Tweak custom sway";
+
+// Advanced settings
+FPP_ADVANCED = "Advanced options";
+FPP_ATTENUATED = "Attenuate beam";
+FPP_ATTENUATED_DESC = "Makes the light a bit more realistic, if not dimmer";
+FPP_NOISE = "Noise";
+FPP_NOISE_DESC = "The light flickers according to the minimum set in the option below";
+FPP_NOISE_MIN = "Minimum noise";
+FPP_INTERPOLATE = "Interpolate Movement";
+FPP_INTERPOLATE_DESC = "Control whether GZDoom's movement interpolation should be used";
+FPP_INTERPOLATE_DESC2 = "Will make the light look jerky when moving quickly";

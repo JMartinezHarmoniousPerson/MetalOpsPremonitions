@@ -160,3 +160,225 @@ OptionMenu "NCH_ColorOptions"
 	Option "$NCH_OPTION_BGCOLOR", "nchud_bgcolor", "NCH_BackgroundsColors"
 	Option "$NCH_OPTION_HICOLOR", "nchud_hicolor", "NCH_HighlightColors"
 }
+
+// Flashlight++ - https://forum.zdoom.org/viewtopic.php?t=75585
+
+OptionValue LocationOptions 
+{
+	0, "$FPP_HELM"
+	1, "$FPP_RSHO"
+	2, "$FPP_LSHO"
+	3, "$FPP_CENT"
+	4, "$FPP_GUN"
+	5, "$FPP_CUSTPOS"
+}
+
+OptionValue SwayOptions 
+{
+	0, "$FPP_NOSWAY"
+	1, "$FPP_SPRINGY"
+	2, "$FPP_STIFF"
+	3, "$FPP_SWAYCUSTOM"
+}
+
+OptionValue FlashlightSoundOptions 
+{
+	-1, "$FPP_NOSOUND"
+	0, "$FPP_DEFCLICK"
+	1, "$FPP_OLDCLICK"
+	2, "$FPP_ALTCLICK"
+	3, "$FPP_FUUUTURE"
+	4, "$FPP_HL1TOGGLE"
+	5, "$FPP_DDZTOGGLE"
+	6, "$FPP_OP4NVSND"
+	7, "$FPP_PREYFLME"
+	8, "$FPP_FUUTURE2"
+	9, "$FPP_LITFRONG"
+	10, "$FPP_BDV21SOUND"
+}
+
+OptionMenu "FlashlightPlusOptions" 
+{
+	Title "$FPP_TITL"
+
+	StaticText ""
+    
+    Submenu "$FPP_PRST","FlashlightPlusPresets"
+
+	StaticText ""
+    
+    Control "$FPP_TGLE","FPP_Toggle"
+   
+    StaticText ""
+	
+	ColorPicker "$FPP_CLR", "cl_flashlight_plus_color"
+	
+	StaticText ""
+    
+    Option "$FPP_SNDCHOICE", "cl_fpp_sound", "FlashlightSoundOptions"
+
+	StaticText ""
+	
+	Slider "$FPP_RNGE", "cl_flashlight_plus_intensity", 0, 1024, 1, 0
+
+	StaticText ""
+
+	Slider "$FPP_IANG", "cl_flashlight_plus_inner", 0, 180, 1, 0
+	Slider "$FPP_OANG", "cl_flashlight_plus_outer", 0, 180, 1, 0
+
+	StaticText ""
+
+	Option "$FPP_SECBEM", "cl_flashlight_plus_second_beam", "OnOff"
+
+	StaticText ""
+
+	Slider "$FPP_SCBMUL", "cl_flashlight_plus_color_2_mult", 0, 5, 0.05, 2, "cl_flashlight_plus_second_beam"
+
+	StaticText ""
+
+	Slider "$FPP_SCRNGE", "cl_flashlight_plus_intensity_2", 0, 1024, 1, 0, "cl_flashlight_plus_second_beam"
+
+	StaticText ""
+
+	Slider "$FPP_IAN2", "cl_flashlight_plus_inner_2", 0, 180, 1, 0, "cl_flashlight_plus_second_beam"
+	Slider "$FPP_OAN2", "cl_flashlight_plus_outer_2", 0, 180, 1, 0, "cl_flashlight_plus_second_beam"
+
+	StaticText ""
+
+    Option "$FPP_ALERT", "cl_fpp_alertmonsters", "YesNo"
+	
+	StaticText ""
+	
+	Option "$FPP_POS", "cl_flashlight_plus_location", "LocationOptions"
+	Submenu "$FPP_TWEAKPOS", "TweakPosition"
+	
+	StaticText ""
+	
+	Option "$FPP_SWAY", "cl_fpp_sway_type", "SwayOptions"
+	Submenu "$FPP_TWEAKSWAY", "TweakSway"
+	
+	StaticText ""
+	Submenu "$FPP_ADVANCED", "AdvancedFlashlightSettings"
+}
+
+AddOptionMenu "OptionsMenu"
+{
+	Submenu "$FPP_TITOP", "FlashlightPlusOptions"
+	StaticText ""
+}
+
+AddOptionMenu "OptionsMenuSimple"
+{
+	Submenu "$FPP_TITOP", "FlashlightPlusOptions"
+    StaticText ""
+}
+
+//AddOptionMenu "CustomizeControls"
+//{
+    //I have no idea if this is the proper way to do this
+  
+    //it wasn't 
+   
+    //StaticText ""
+    //StaticText "Flashlight Binds", "Gold"
+    //Control "$FPP_TGLE","netevent flashlight_plus_toggle"
+//}
+
+OptionMenu "FlashlightPlusPresets" {
+	Title "Flashlight Presets"
+	
+    SafeCommand "$FPP_DEFA", "cl_flashlight_defaultpreset", "$FPP_YOUSURE"
+	
+	StaticText ""
+	
+	SafeCommand "$FPP_OLDDEFAULT", "cl_flashlight_olddefaultpreset", "$FPP_YOUSURE"
+	
+	StaticText ""
+	
+	SafeCommand "Half-Life 2", "cl_flashlight_hl2preset", "$FPP_YOUSURE"
+
+    StaticText ""
+
+    SafeCommand "Doom 3 BFG Edition", "cl_flashlight_d3preset", "$FPP_YOUSURE"
+    
+    StaticText ""
+    
+    SafeCommand "$FPP_GRNMGK", "cl_flashlight_magicpreset", "$FPP_YOUSURE"
+    SafeCommand "$FPP_BLUMGK", "cl_flashlight_magicbluepreset", "$FPP_YOUSURE"
+    
+    StaticText ""
+    
+    SafeCommand "$FPP_LAMP", "cl_flashlight_lamppreset", "$FPP_YOUSURE"
+    
+    StaticText ""
+    
+    SafeCommand "$FPP_HDLI", "cl_flashlight_minerpreset", "$FPP_YOUSURE"
+    
+    StaticText ""
+    
+    SafeCommand "$FPP_FULL", "cl_flashlight_fullbrightpreset", "$FPP_YOUSURE"
+    
+    StaticText ""
+    
+    SafeCommand "$FPP_GENE", "cl_flashlight_basicpreset", "$FPP_YOUSURE"
+    
+    StaticText ""
+    
+    SafeCommand "$FPP_HARD", "cl_flashlight_hardpreset", "$FPP_YOUSURE"
+    
+    StaticText ""
+    
+    SafeCommand "$FPP_METADOOM", "cl_flashlight_metadoompreset", "$FPP_YOUSURE"
+    
+    StaticText ""
+    
+    SafeCommand "$FPP_OP4NVG", "cl_flashlight_op4nvgpreset", "$FPP_YOUSURE"
+}
+
+optionmenu TweakSway
+{
+	Title "$FPP_TWEAKSWAY"
+	
+	Slider "$FPP_SPRING", "cl_fpp_sway_spring", 0.1, 1.0, 0.01, 2
+	StaticText "$FPP_SPRINGDESC"
+	statictext ""
+	
+	Slider "$FPP_DAMPING", "cl_fpp_sway_damping", 0.1, 1.0, 0.01, 2
+	StaticText "$FPP_DAMPINGDESC"
+	statictext ""
+	
+	Slider "$FPP_INERTIA", "cl_fpp_sway_inertia", -10, 10, 1, 0
+	StaticText "$FPP_INERTIADESC"
+}
+
+OptionMenu TweakPosition
+{
+	Title "$FPP_TWEAKPOS"
+	
+	Slider "$FPP_XPOS", "cl_fpp_custpos_x", -32, 32, 1
+	StaticText "$FPP_XDESC"
+	statictext ""
+	
+	Slider "$FPP_YPOS", "cl_fpp_custpos_y", -32, 32, 1
+	StaticText "$FPP_YDESC"
+	statictext ""
+	
+	Slider "$FPP_ZPOS", "cl_fpp_custpos_z", -32, 32, 1
+	StaticText "$FPP_ZDESC"
+}
+
+optionmenu AdvancedFlashlightSettings
+{
+	Title "$FPP_ADVANCED"
+	
+	Option "$FPP_ATTENUATED", "cl_fpp_attenuated", "YesNo"
+	StaticText "$FPP_ATTENUATED_DESC"
+	StaticText ""
+	Option "$FPP_NOISE", "cl_fpp_noise", "YesNo"
+	StaticText "$FPP_NOISE_DESC"
+	slider "$FPP_NOISE_MIN", "cl_fpp_noise_min", 0.5, 0.99, 0.01, 2
+	StaticText ""
+	Option "$FPP_INTERPOLATE", "cl_fpp_interpolate", "YesNo"
+	StaticText "$FPP_INTERPOLATE_DESC"
+	StaticText "$FPP_INTERPOLATE_DESC2"
+}

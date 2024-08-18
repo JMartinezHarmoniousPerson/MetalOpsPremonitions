@@ -8,6 +8,8 @@ server noarchive int casingvelZ = 0;*/
 server noarchive int xtext = 0;
 server noarchive int ytext = 0;
 
+server noarchive bool mo_classicssgfire = false;
+
 user int nchud_toggletally;
 user bool nchud_toggledamage;
 user bool nchud_toggleair = true;
@@ -67,3 +69,45 @@ user int MO_XHairBFG = 0;
 user int MO_XHairFlamer = 0;
 user int MO_XHairUnmaker = 0;
 
+
+// Flashlight++ - https://forum.zdoom.org/viewtopic.php?t=75585
+
+// Flashlight+
+
+user color cl_flashlight_plus_color = "78 78 B4";
+user int cl_flashlight_plus_intensity = 512;
+
+user float cl_flashlight_plus_inner = 32.0;
+user float cl_flashlight_plus_outer = 40.0;
+
+user bool cl_flashlight_plus_second_beam = true;
+
+user float cl_flashlight_plus_color_2_mult = 2.0;
+
+user int cl_flashlight_plus_intensity_2 = 512;
+
+user float cl_flashlight_plus_inner_2 = 0.0;
+user float cl_flashlight_plus_outer_2 = 15.0;
+
+user int cl_flashlight_plus_location = 2;
+
+// Flashlight++
+
+user int cl_fpp_sound = 0;
+
+user int cl_fpp_custpos_x = 0;
+user int cl_fpp_custpos_y = 0;
+user int cl_fpp_custpos_z = 0;
+
+user bool cl_fpp_alertmonsters = true;
+
+user int cl_fpp_sway_type = 0;
+user float cl_fpp_sway_spring = 1.0;
+user float cl_fpp_sway_damping = 1.0;
+user int cl_fpp_sway_inertia = 1;
+
+user bool cl_fpp_attenuated = false;
+user bool cl_fpp_noise = false;
+user float cl_fpp_noise_min = 0.9;
+
+user bool cl_fpp_interpolate = true;
