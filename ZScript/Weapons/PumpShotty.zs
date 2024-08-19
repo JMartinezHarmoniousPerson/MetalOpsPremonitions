@@ -188,7 +188,7 @@ class PumpShotgun : JMWeapon
             TNT1 B 1 Bright A_Light2;
             Goto LightDone;
         Reload:
-			PSTG A 0 A_JumpIfInventory("PumpShotgunAmmo",6,"ReadyToFire");
+			PSTG A 0 A_JumpIfInventory("PumpShotgunAmmo",8,"ReadyToFire");
 			PSTG A 0 A_JumpIfInventory("MO_ShotShell",1,1);
 			goto ReadyToFire;
 			PSTG A 0 A_SetInventory("SGPumping",0);
@@ -198,7 +198,7 @@ class PumpShotgun : JMWeapon
 			PSGR AB 1;// JM_WeaponReady();
 			PGR1 I 5;
         ShellLoop:
-            PSTG A 0 A_JumpIfInventory("PumpShotgunAmmo",6,"DoneReload");           
+            PSTG A 0 A_JumpIfInventory("PumpShotgunAmmo",8,"DoneReload");           
 			TNT1 A 0 A_JumpIfInventory("MO_ShotShell",1,1);
 			Goto DoneReload;
             PGR1 AB 1 JM_WeaponReady(WRF_NOFIRE);
@@ -282,9 +282,9 @@ class PumpShotgunAmmo : Ammo
 	Default
 	{
 		Inventory.Amount 0;
-		Inventory.MaxAmount 6;
+		Inventory.MaxAmount 8;
 		Ammo.BackpackAmount 0;
-		Ammo.BackpackMaxAmount 6;
+		Ammo.BackpackMaxAmount 8;
 		Inventory.Icon "PSGCA0";
 		+INVENTORY.IGNORESKILL;
 	}

@@ -59,15 +59,18 @@ class MO_OfficerPlayer : MO_PlayerBase
 		Player.StartItem "LowCalClip",50;
 		Player.StartItem "HighCalClip",50;
 		Player.StartItem "LeverShottyAmmo",7;
-		Player.StartItem "PumpShotgunAmmo", 6;
+		Player.StartItem "PumpShotgunAmmo", 8;
 		Player.StartItem "ARAmmo",30;
 		Player.StartItem "SMGAmmo",40;
 		Player.StartItem "SSGAmmo",2;
-		Player.StartItem "PlasmaAmmo",50;
+		Player.StartItem "PlasmaAmmo",60;
 		Player.StartItem "Katana";
 		Player.StartItem "MOLOTOVAMMO",4;
 		Player.StartItem "GrenadeAmmo", 4;
 		Player.StartItem "FragSelected",1;
+		Player.StartItem "HeatBlastFullyCharged";
+		Player.StartItem "HeatBlastLevel",3;
+		Player.StartItem "HeatBlastShotCount", 45;
 
 		//Never used tokens
 		Player.StartItem "NeverUsedLAS";
@@ -90,15 +93,18 @@ class MO_SergeantPlayer : MO_PlayerBase
 		Player.StartItem "LowCalClip",50;
 		Player.StartItem "HighCalClip",50;
 		Player.StartItem "LeverShottyAmmo",7;
-		Player.StartItem "PumpShotgunAmmo", 6;
+		Player.StartItem "PumpShotgunAmmo", 8;
 		Player.StartItem "ARAmmo",30;
 		Player.StartItem "SMGAmmo",40;
 		Player.StartItem "SSGAmmo",2;
-		Player.StartItem "PlasmaAmmo",50;
+		Player.StartItem "PlasmaAmmo",60;
 		Player.StartItem "Katana";
 		Player.StartItem "MOLOTOVAMMO",4;
 		Player.StartItem "GrenadeAmmo", 4;
 		Player.StartItem "FragSelected",1;
+		Player.StartItem "HeatBlastFullyCharged";
+		Player.StartItem "HeatBlastLevel",3;
+		Player.StartItem "HeatBlastShotCount", 45;
 
 		//Never used tokens
 		Player.StartItem "NeverUsedLAS";
