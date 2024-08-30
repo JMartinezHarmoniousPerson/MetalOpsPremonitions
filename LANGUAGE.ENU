@@ -76,6 +76,8 @@ OB_KATANA2 = "%k forced %o to commit seppuku.";
 
 //Flamethtower
 OB_FLAMER2 = "%o was set ablaze by %'s Flamethrower.";
+GOTFLAMER = "You got the Flamethrower! (Slot 1)";
+GOTFLAMERGAS = "You got the gasoline from the Flamethrower!";
 
 //Pistol
 GOTENFPISTOL = "You got the Enforcer Sidearm! (Slot 2)";
@@ -118,6 +120,7 @@ OB_UNMAKER2 = "%o got a taste of Hell's power from %k's Unmaker."
 OB_PLASMA = "%o got melted by %k's Plasma Repeater.";
 
 //Secret Messages randomized
+//SECRETMESSAGE = "Secret Revealed!";
 SECRETMESSAGE2 = "Secret found!";
 SECRETMESSAGE3 = "A secret place!";
 SECRETMESSAGE4 = "You found a secret area!";
@@ -132,6 +135,7 @@ MO_NVISWHT = "White Phosphor";
 MO_ADSOPT = "ADS Control Type";
 MO_ADSTOGGLE = "Toggle";
 MO_ADSHOLD = "Hold";
+MO_ADSHYBRID = "Hybrid (BDv21 aim style)";
 
 
 // Flashlight++ - https:// forum.zdoom.org/viewtopic.php?t=75585

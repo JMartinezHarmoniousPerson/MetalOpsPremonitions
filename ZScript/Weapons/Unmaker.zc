@@ -129,9 +129,9 @@ class UnmakerPickup : CustomInventory
 		int msgtype = random(1,4);
 		string msg2 = "$GOTUNMAKER2";
 		if(msgtype == 4)
-		return String.Format("%s", StringTable.Localize(msg2), amount);
+		return String.Format("%s", StringTable.Localize(msg2));
 		else
-		return String.Format("%s", StringTable.Localize(pickupMsg), amount);
+		return String.Format("%s", StringTable.Localize(pickupMsg));
 	}
 	Default {+DONTGIB; Inventory.PickupMessage("$GOTUNMAKER");}
 	States

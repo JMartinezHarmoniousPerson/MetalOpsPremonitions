@@ -4,6 +4,7 @@ class JMWeapon : Weapon
 	property firstTime: isFirstTime;
 	bool pressedKick;
 	property pressedKick: pressedKick;
+	bool isHoldingAim;
 //	sound dryFireSound;
 //	property DryFireSound : dryFireSound;
 	int adsMode;
@@ -56,7 +57,7 @@ class JMWeapon : Weapon
 	}
 
 //Holy shit I can't believe I got this working
-	int SetXHair(int w)
+	int SetCustomXHair(int w)
 	{
 		static const string weaponPrefix[] =
 		{
@@ -73,7 +74,8 @@ class JMWeapon : Weapon
 	
 	action void JM_SetWeaponSprite(string s)
 	{
-		 let psp = Invoker.Owner.player.FindPSprite(PSP_WEAPON);
+		if(!player) return;
+		 let psp = player.GetPSprite(PSP_WEAPON);
 		 psp.sprite = GetSpriteIndex(s);
 	}
 	
@@ -153,7 +155,7 @@ class JMWeapon : Weapon
 		if ( (InStateSequence(invoker.owner.player.GetPSprite(PSP_WEAPON).Curstate,invoker.ResolveState("Ready")) || 
 			  InStateSequence(invoker.owner.player.GetPSprite(PSP_WEAPON).Curstate,invoker.ResolveState("ReadyToFire"))||
 			  InStateSequence(invoker.owner.player.GetPSprite(PSP_WEAPON).Curstate,invoker.ResolveState("ReadyToFire2"))||
-			   InStateSequence(invoker.owner.player.GetPSprite(PSP_WEAPON).Curstate,invoker.ResolveState("ReadyLoop"))
+			  InStateSequence(invoker.owner.player.GetPSprite(PSP_WEAPON).Curstate,invoker.ResolveState("ReadyLoop"))
 			 ) )
 		{		
 			return true;

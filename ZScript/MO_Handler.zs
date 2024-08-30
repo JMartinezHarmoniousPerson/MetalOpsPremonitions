@@ -76,7 +76,7 @@ class MOps_Handler : EventHandler
 					
 					let wp = pl.player.readyweapon;
 					State Kick = wp.FindState("Kick");
-					if(Kick != Null)
+					if(Kick != Null && !mo_wep.isZoomed)
 					{
 						pl.player.SetPSprite(-999, wp.FindState("Kick"));
 						if((players[e.Player].weaponstate & WF_WEAPONREADY) || (mo_wep && mo_wep.CheckIfInReady()))

@@ -39,6 +39,7 @@ OptionValue "ADSControl"
 {
 	0, "$MO_ADSTOGGLE"
 	1, "$MO_ADSHOLD"
+	2, "$MO_ADSHYBRID"
 }
 
 OptionValue "NCH_TallyDrawModes"

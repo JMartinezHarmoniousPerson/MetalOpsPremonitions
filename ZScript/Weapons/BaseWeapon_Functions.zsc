@@ -24,9 +24,10 @@ extend class JMWeapon
 		}
 	}
 	
-	action void JM_SetWeaponSprite(string s)
+	action void JM_SetWeaponSprite(string s, int l = PSP_WEAPON)
 	{
-		 let psp = Invoker.Owner.player.FindPSprite(PSP_WEAPON);
+		if(!player) return;
+		 let psp = player.GetPSprite(l);
 		 psp.sprite = GetSpriteIndex(s);
 	}
 	

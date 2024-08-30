@@ -41,7 +41,10 @@ Class AssaultRifle : JMWeapon
             Loop;
         Select:
 			TNT1 A 0;
-			TNT1 A 0 {invoker.isZoomed = False;}
+			TNT1 A 0 {
+				invoker.isZoomed = False;
+				invoker.isHoldingAim = False;
+			}
 			SMGR A 0 A_ZoomFactor(1.0);
 			Goto ClearAudioAndResetOverlays;
         Fire:
@@ -61,7 +64,7 @@ Class AssaultRifle : JMWeapon
             AR1F B 1 BRIGHT 
 			{
 				JM_WeaponReady(WRF_NOFIRE);
-				A_SpawnItemEx("EmptyRifleBrass",42, 9, 28, random(-2,2), random(3,6), random(3,5));
+				MO_EjectCasing("EmptyRifleBrass", false, ejectpitch: frandom(-35, -25), speed: frandom(5, 8), offset: (38, 3, -14));
 				JM_GunRecoil(-0.45, .04);
 			}
             AR1F C 1 
@@ -94,15 +97,26 @@ Class AssaultRifle : JMWeapon
 			AR1Z ABCD 1 JM_WeaponReady(WRF_NOFIRE);
 			AR1Z E 1 JM_WeaponReady(WRF_NOFIRE);
 		Ready2:
-			AR1Z E 1
+			TNT1 A 0 A_JumpIf(invoker.ADSMode <= 0, "ADSToggle");
+			TNT1 A 0 A_JumpIf(invoker.ADSMode == 1, "ADSHold");
+			TNT1 A 0 A_JumpIf(PressingFire(), "Fire");
+			AR1Z EEEEE 1 
 			{
-				if(invoker.ADSMode == 1) {SetWeaponState("ADSHold");}
+				if(JustPressed(BT_ATTACK)) {return ResolveState("Fire");}
+				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOFIRE);
+			}
+			TNT1 A 0 A_JumpIf(PressingAltFire() , "ADSHold");
+
+		ADSToggle:
+			AR1Z E 1 
+			{
 				JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
 				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("UnZoom");}
 			}
 			Loop;
 
 		ADSHold:
+			TNT1 A 0 {invoker.isHoldingAim = true;}
 			AR1Z E 1 
 			{
 				JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
@@ -114,6 +128,7 @@ Class AssaultRifle : JMWeapon
 			SMGR A 0 
 			{
 				invoker.isZoomed = false;
+				invoker.isHoldingAim = False;
 				A_ZoomFactor(1);
 				A_StartSound("weapon/adsdown",0);
 				A_SetCrosshair(0);
@@ -133,7 +148,7 @@ Class AssaultRifle : JMWeapon
 			{
 				JM_GunRecoil(-0.38, .04);
 				JM_WeaponReady(WRF_NOFIRE);
-				A_SpawnItemEx("EmptyRifleBrass",35, 4, 32, random(-2,2), random(3,5), random(3,5));
+				MO_EjectCasing("EmptyRifleBrass", false, ejectpitch: frandom(-35, -25), speed: frandom(5, 8), offset: (40, 2, -9));
 			}
 			AR1Z H 1 
 			{
@@ -146,24 +161,35 @@ Class AssaultRifle : JMWeapon
 					{A_SetInventory("GunIsEmpty",1);}
 			}
 			TNT1 A 0 JM_CheckMag("ARAmmo");
-			 AR1F A 0
+			TNT1 A 0 A_Jumpif(CountInv("ARSemiAuto") >= 1, "FireFinished");
+			AR1F A 0
 			{
-				if(invoker.ADSMode == 1)
+				if(invoker.ADSMode >= 1)
 				{
-					if(!PressingAltFire()) {
-						SetWeaponState("UnZoom");
+					if(PressingAltFire() && PressingFire())
+					{
+						invoker.isHoldingAim = true;
+						return ResolveState("Fire2");
 					}
+					if(!PressingAltFire() && invoker.isHoldingAim == true) {
+						return ResolveState("UnZoom");
+					}
+					else
+					{if(PressingFire()) {return ResolveState("Fire2");}}
 				}
-				if(CountInv("ARSemiAuto") >= 1)
-				{
-						SetWeaponState("FireFinished");
-				}
+				else
+				{A_ReFire("Fire2");}
 				return JM_WeaponReady(WRF_NOFIRE|WRF_ALLOWRELOAD);
-			}		
+			}
             Goto Ready2;
 
         Deselect:
-			TNT1 A 0 A_ZoomFactor(1);
+			TNT1 A 0 
+			{
+				invoker.isZoomed = false;
+				invoker.isHoldingAim = False;
+				A_ZoomFactor(1);
+			}
             AR1S DCBA 1;
             TNT1 A 0 A_Lower(12);
             Wait;
@@ -172,8 +198,8 @@ Class AssaultRifle : JMWeapon
 			AR1Z E 0 A_JumpIf(invoker.isZoomed, 2);
 			AR1G A 0;
 			"####" "#" 1 JM_WeaponReady(WRF_NoFire);
-			AR1F A 0 A_JumpIf(!PressingFire(), "ReadyToFire");
-			Loop;
+			AR1F A 0 A_JumpIf(PressingFire(), "FireFinished");
+			Goto ReadyToFire;
         
         Reload:
 			TNT1 A 0 A_JumpIfInventory("ARAmmo",30,"ReadyToFire");
@@ -186,6 +212,7 @@ Class AssaultRifle : JMWeapon
 			AR10 A 0 
 			{
 				invoker.isZoomed = false;
+				invoker.isHoldingAim = False;
 				A_ZoomFactor(1.0);
 				if(CountInv("ARAmmo") < 1) {return A_Jump(128, "MagFlipReload");}
 				return ResolveState(Null);
@@ -204,7 +231,8 @@ Class AssaultRifle : JMWeapon
 			"####" J 1 A_StartSound("weapons/ar/magout", CHAN_AUTO);
 			"####" KLM 1 JM_WeaponReady(WRF_NOFIRE);
 			AR12 A 0 A_JumpIf(CountInv("ARAmmo") >= 1, 2);
-			AR10 A 0 A_SpawnItemEx('ARMagazine', 25, 7, 29, random(-1,2), random(-6,-4), random(2,5));
+		
+			AR10 A 0 {MO_EjectCasing("ARMagazine",true,-30, offset:(24,2,-10));}//A_SpawnItemEx('ARMagazine', 25, 7, 29, random(-1,2), random(-6,-4), random(2,5));
 			AR10 N 11 {
 				JM_WeaponReady(WRF_NOFIRE);
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(6);}
@@ -242,7 +270,7 @@ Class AssaultRifle : JMWeapon
 			AR12 K 1 A_StartSound("weapons/ar/arflipend", 0);
 			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			AR12 L 1 JM_WeaponReady(WRF_NOFIRE);
-			AR10 A 0 A_SpawnItemEx('ARMagazine', 28, 7, 29, random(-1,2), random(-8,-4), random(2,3));
+			AR10 A 0 {MO_EjectCasing("ARMagazine",true,-20, frandom(6,10), offset:(28,5,-12));}//A_SpawnItemEx('ARMagazine', 28, 7, 29, random(-1,2), random(-8,-4), random(2,3));
 			AR12 MNO 1 JM_WeaponReady(WRF_NOFIRE);
 			AR12 P 5 {
 				JM_WeaponReady(WRF_NOFIRE);
