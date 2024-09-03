@@ -10,7 +10,7 @@ class MO_Flamethrower : JMWeapon// replaces Chainsaw
     Default
     {
         Weapon.AmmoUse1 0;
-        Weapon.AmmoGive 75;
+ //      Weapon.AmmoGive 75;
 		Weapon.SelectionOrder 2200;
         Weapon.AmmoType1 "Gasoline";
         Inventory.PickupSound "weapons/flamer/pickup";
