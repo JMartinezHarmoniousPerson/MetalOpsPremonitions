@@ -1,5 +1,8 @@
 class BaseCasing : Actor //Base class to inherit
 {
+	bool smoking;
+	string caseLump;
+	Property CaseSprite: caseLump;
     Default
     {
         Height 2;
@@ -24,9 +27,60 @@ class BaseCasing : Actor //Base class to inherit
         +THRUACTORS;
         +ROLLSPRITE;
         Mass 4;
-        BounceSound "";
+        BounceSound "casings/heavybrass";
 		BounceCount 3;
+		BaseCasing.CaseSprite 'CAS3';
     }
+
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		sprite = GetSpriteIndex(caseLump);
+	}
+
+	States
+	{
+		Spawn:
+			#### A 0;
+			#### A 0 A_Jump(256,"Spawn1","Spawn2","Spawn3");
+		Spawn1:
+			#### ABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJ  1 {
+				A_SpawnItemEx('BulletSmoke');
+				A_SetRoll(roll+16);
+			}
+			Loop;
+		Spawn2:
+			#### BCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJA  1 {
+				A_SpawnItemEx('BulletSmoke');
+				A_SetRoll(roll+32);
+			}
+			Loop;
+		Spawn3:
+			#### CDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJAB  1 {
+				A_SpawnItemEx('BulletSmoke');
+				A_SetRoll(roll+72);
+			}
+			Loop;
+
+		 Death:
+		   #### K 1
+			{
+				A_SpawnItemEx("RestingBulletSmoke");
+				A_SetRoll(0);
+				frame = frame + random(0, 9);
+			}
+			#### # 350;
+			#### # 1 A_FadeOut(0.01);
+			Wait;
+
+		CacheTextures:
+			CAS3 ABCDEFGHIJKLMNOPQRST 0;
+			CS52 ABCDEFGHIJKLMNOPQRST 0;
+			CA52 ABCDEFGHIJKLMNOPQRST 0;
+			CS20 ABCDEFGHIJKLMNOPQRST 0;
+			LMLN CD 0;
+			Stop;
+	}
 }
 
 class PistolCasing: BaseCasing
@@ -35,232 +89,79 @@ class PistolCasing: BaseCasing
    {
 		Scale 0.065;
 		BounceSound "casings/lightbrass";
+		BaseCasing.CaseSprite 'TNT1';
 	}
    States
    {
-   Spawn:
 	  Spawn:
-			TNT1 A 0;
-			CS70 ABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH 2 {
-				A_SpawnItemEx("BulletSmoke",frandom(0.3,0.2),random(0,-1.0),0,0,0,frandom(0.5,0.1),0,SXF_CLIENTSIDE,0);
+			CS70 A 0;
+			#### A 0 A_Jump(256,"Spawn1","Spawn2","Spawn3");
+	  Spawn1:
+			CS70 ABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH 1 {
+				A_SpawnItemEx("BulletSmoke");
 				A_SetRoll(roll+45);
 			}
-			Goto Death;
-
+			Loop;
+		
+		Spawn2:
+			CS70 BCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHA 1 {
+				A_SpawnItemEx('BulletSmoke');
+				A_SetRoll(roll+32);
+			}
+			Loop;
+		Spawn3:
+			CS70 CDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHAB  1 {
+				A_SpawnItemEx('BulletSmoke');
+				A_SetRoll(roll+72);
+			}
+			Loop;
 
 	   Death:
-		   C4S1 I 0;
-		   C4S1 I 0 A_SpawnItemEx("RestingBulletSmoke");
-		   TNT1 A 0 A_SetRoll(0);
-		   TNT1 A 0 A_Jump(256,"Case1","Case2","Case3","Case4","Case5","Case6","Case7","Case8");
-			Case1:
-				CS70 K 1;
-				Goto CompletelyRest;
-			Case2:
-				CS70 L 1;
-				Goto CompletelyRest;
-			Case3:
-				CS70 M 1;
-				Goto CompletelyRest;
-			Case4:
-				CS70 N 1;
-				Goto CompletelyRest;
-			Case5:
-				CS70 O 1;
-				Goto CompletelyRest;
-			Case6:
-				CS70 P 1;
-				Goto CompletelyRest;
-			Case7:
-				CS70 Q 1;
-				Goto CompletelyRest;
-
-    CompletelyRest:
-      #### # 350;
-	  #### # 1 A_FadeOut(0.01);
-      Wait;
+		   CS70 JKLMNOPQR 0;
+		   CS70 I 1
+			{
+				A_SpawnItemEx("RestingBulletSmoke");
+				A_SetRoll(0);
+				frame = frame + random(0, 9);
+			}
+			#### # 350;
+			#### # 1 A_FadeOut(0.01);
+			Wait;
    }
 }
 
 //From Project Brutality, code by Pa1nki113r and sprites by Metalman
 Class ShotgunCasing : BaseCasing
 {
-   Default{
-   Height 4;
-   Radius 4;
-   Speed 6;
-   Scale 0.15;
-   BounceSound "casings/shell";
-   }
-   States
+   Default
    {
-		Spawn:
-		TNT1 A 1;
-		CS52 A 0;
-		CS52 A 0 A_Jump(256,"SpinFast","SpinMedium","SpinSlow");
-		SpinFast:
-				"####" ABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJ 2 {
-				A_SpawnItemEx('BulletSmoke');
-//				A_SpawnItemEx("BulletSmoke",frandom(0.3,0.2),random(0,-1.0),0,0,0,frandom(0.5,0.1),0,SXF_CLIENTSIDE,0);
-				A_SetRoll(roll+frandom(-80,-120));
-					}
-		SpinMedium:
-				"####" ABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJ 2 {
-				A_SpawnItemEx('BulletSmoke');
-//				A_SpawnItemEx("BulletSmoke",frandom(0.3,0.2),random(0,-1.0),0,0,0,frandom(0.5,0.1),0,SXF_CLIENTSIDE,0);
-				A_SetRoll(roll+frandom(-25,-90));
-					}
-		SpinSlow:
-				"####" ABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJ 2 {
-				A_SpawnItemEx('BulletSmoke');
-//				A_SpawnItemEx('BulletSmoke');
-				A_SetRoll(roll+36);
-					}
-		Goto Death;
-		
-		Death:
-		  "####" A 0 A_StopSound(2);
-		  "####" I 0 A_SetRoll(0);
-		  "####" I 0 A_SpawnItemEx("RestingBulletSmoke");
-		  "####" A 0 A_Jump(256,"Case1","Case2","Case3","Case4","Case5","Case6","Case7","Case8","Case9","Case10");
-		Case1:
-			"####" K 1;
-			Goto Rest;
-		Case2:
-			"####" L 1;
-			Goto Rest;
-		Case3:
-			"####" M 1;
-			Goto Rest;
-		Case4:
-			"####" N 1;
-			Goto Rest;
-		Case5:
-			"####" O 1;
-			Goto Rest;
-		Case6:
-			"####" P 1;
-			Goto Rest;
-		Case7:
-			"####" Q 1;
-			Goto Rest;
-		Case8:
-			"####" R 1;
-			Goto Rest;
-		Case9:
-			"####" S 1;
-			Goto Rest;
-		Case10:
-			"####" T 1;
-			Goto Rest;
-		Rest:
-			#### # 350;
-			#### # 1 A_FadeOut(0.01);
-			Wait;
+		Scale 0.15;
+		BounceSound "casings/shell";
+		BaseCasing.CaseSprite 'CS52';
    }
 }
 
 Class FlakShotgunCasing : ShotgunCasing
 {
-	 Default{
-   Height 4;
-   Radius 4;
-   }
-	States
+	Default
 	{
-		Spawn:
-		TNT1 A 1;
-		CA52 A 0;
-		CA52 A 0 A_Jump(256,"SpinFast","SpinMedium","SpinSlow");
-		Goto SpinFast;
+		BaseCasing.CaseSprite 'CA52';
 	}
 }
 
 Class ShotgunCasing20GA : ShotgunCasing
 {
-	States
+	Default
 	{
-		Spawn:
-		TNT1 A 1;
-		CS20 A 0;
-		CS20 A 0 A_Jump(256,"SpinFast","SpinMedium","SpinSlow");
-		Goto SpinFast;
+		BaseCasing.CaseSprite 'CS20';
 	}
 }
 
 Class EmptyRifleBrass : BaseCasing
 {
-	bool smoking;
    Default
-   {Height 2;
-   Radius 2;
-   Speed 8;
-   Scale 0.1;
-   Mass 4;
-   BounceSound "casings/heavybrass";
-   }
-   States
    {
-		Spawn:
-			TNT1 A 0;
-			TNT1 A 0 A_Jump(256,"Spawn1","Spawn2","Spawn3");
-		Spawn1:
-			CAS3 ABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH  1 {
-				A_SpawnItemEx('BulletSmoke');
-				A_SetRoll(roll+16);
-			}
-			Goto Death;
-		Spawn2:
-			CAS3 BCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHA  1 {
-				A_SpawnItemEx('BulletSmoke');
-				A_SetRoll(roll+32);
-			}
-			Goto Death;
-		Spawn3:
-			CAS3 CDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHAB  1 {
-				A_SpawnItemEx('BulletSmoke');
-				A_SetRoll(roll+72);
-			}
-			Goto Death;
-		
-		Death:
-		  CAS3 I 0 A_SetRoll(0);
-		  C4S1 I 0 A_SpawnItemEx("RestingBulletSmoke");
-		  LCPJ A 0 A_Jump(256,"Case1","Case2","Case3","Case4","Case5","Case6","Case7","Case8","Case9","Case10");
-		Case1:
-			CAS3 K 1;
-			Goto Rest;
-		Case2:
-			CAS3 L 1;
-			Goto Rest;
-		Case3:
-			CAS3 M 1;
-			Goto Rest;
-		Case4:
-			CAS3 N 1;
-			Goto Rest;
-		Case5:
-			CAS3 O 1;
-			Goto Rest;
-		Case6:
-			CAS3 P 1;
-			Goto Rest;
-		Case7:
-			CAS3 Q 1;
-			Goto Rest;
-		Case8:
-			CAS3 R 1;
-			Goto Rest;
-		Case9:
-			CAS3 S 1;
-			Goto Rest;
-		Case10:
-			CAS3 T 1;
-			Goto Rest;
-		Rest:
-			#### # 350;
-			#### # 1 A_FadeOut(0.01);
-			Wait;
+	BaseCasing.CaseSprite 'CAS3';
    }
 }
 
@@ -272,6 +173,7 @@ class ARMagazine : BaseCasing
 		Scale 0.25;
 		+ROLLSPRITE;
 		BounceSound "casings/largemag";
+		BaseCasing.CaseSprite 'TNT1';
    }
    States
    {
@@ -299,7 +201,7 @@ class ARMagazine : BaseCasing
    }
 }
 
-Class MinigunBeltPiece : BaseCasing
+Class BeltPieceBase : BaseCasing
 {
    Default
    {Height 2;
@@ -307,12 +209,11 @@ Class MinigunBeltPiece : BaseCasing
    Speed 8;
    Scale .12;
    SeeSound "casings/heavybrass";
+	BaseCasing.CaseSprite 'LMLN';
    }
    States
    {
     Spawn:
-    Spawn1:
-		LMLN D 0 A_Jump(128,2);
 		LMLN C 0;
 	  Exist:
       "####" "#" 3 {
@@ -324,7 +225,7 @@ Class MinigunBeltPiece : BaseCasing
    Death:
 	   "####" "#" 0 A_SETROLL(0);
       "####" "#" 0 A_StopSound(CHAN_AUTO);
-	  "####" "#" 0 A_StartSound("decasebounce");  
+	  "####" "#" 0;  
     CompletelyRest:
 		#### # 350;
 		#### # 1 A_FadeOut(0.01);
@@ -341,7 +242,7 @@ Class MinigunBeltPiece : BaseCasing
    }
 }
 
-Class MinigunBeltLink : MinigunBeltPiece
+Class MinigunBeltLink : BeltPieceBase
 {
  Default
  {
@@ -349,11 +250,12 @@ Class MinigunBeltLink : MinigunBeltPiece
  }
 	States
 	{
-	Spawn1:
-		LMLN C 0;
-		Goto Exist;
-	Spawn2:
-		LMLN D 0;
+	Spawn:
+		#### A 0;
+		#### C 0
+		{
+			frame = random(2,3);
+		}
 		Goto Exist;
 	}
 }
@@ -367,10 +269,12 @@ Class EmptyCell : BaseCasing
    Speed 4;
    Scale 0.23;
    BounceSound "casings/largemag";
+	BaseCasing.CaseSprite 'TNT1';
    }
    States
    {
 	   Spawn:
+			TNT1 A 0;
 			ECEL ABCDEFG 3 {
 				A_SetRoll(roll+36, SPF_INTERPOLATE);
 				A_SpawnItemEx("EmptyCellSmoke",frandom(-1,1),random(0,-1.0),0,0,0,frandom(0.5,0.1),0,SXF_CLIENTSIDE,0);
@@ -378,15 +282,18 @@ Class EmptyCell : BaseCasing
 			lOOP;
 		Death:
 			  TNT1 A 0 A_SetRoll(0);
-			  TNT1 A 0 A_Jump(256,"Case1","Case2","Case3");
+			  TNT1 A 0 A_Jump(256, "Case1", "Case2");
 			Case1:
-				ECEL B 1;
+				ECEL A 1
+				{
+					frame = random(0,1);
+				}
 				Goto Rest;
-			Case2:
-				ECEL D 1;
-				Goto Rest;
-			Case3:
-				ECEL E 1;
+			Case1:
+				ECEL D 1
+				{
+					frame = random(3,4);
+				}
 				Goto Rest;
 			Rest:
 				#### # 350;
