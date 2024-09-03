@@ -2,6 +2,13 @@
 
 class MO_MiniGun : JMWeapon
 {
+
+	action void MO_SpawnMinigunCasings(string c1, string c2, vector3 ofs = (24, 0, -10))
+	{
+		MO_EjectCasing(c1, true, frandom(-50, -35), speed: frandom(4, 7), offset: ofs);
+		MO_EjectCasing(c2, true, frandom(-50, -35), speed: frandom(4, 7), offset: ofs);
+	}
+
 	Default
 	{
 		Weapon.AmmoUse 1;
@@ -47,8 +54,7 @@ class MO_MiniGun : JMWeapon
 		MGNF C 1 BRIGHT{
 			A_FireBullets(5.6, 0, 1, 20, "MinigunPuff", FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
 			A_Overlay(-5, "MuzzleFlash");
-			A_SpawnItemEx("EmptyRifleBrass",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
-			A_SpawnItemEx("MinigunBeltPiece",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltPiece", (37, -10, -17));
 			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
 			A_StartSound("weapons/minigun/startfire",2);
 			JM_CheckForQuadDamage();
@@ -65,8 +71,7 @@ class MO_MiniGun : JMWeapon
 		MGNF F 1 BRIGHT{
 			A_FireBullets(5.6, 0, 1, 20, "MinigunPuff", FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
 			A_Overlay(-5, "MuzzleFlash");
-			A_SpawnItemEx("EmptyRifleBrass",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
-			A_SpawnItemEx("MinigunBeltPiece",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltPiece", (37, -10, -17));
 			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
 			A_StartSound("weapons/minigun/startfire",2);
 			JM_CheckForQuadDamage();
@@ -83,8 +88,7 @@ class MO_MiniGun : JMWeapon
 		MGNF H 1 BRIGHT{
 			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
 			A_Overlay(-5, "MuzzleFlash");
-			A_SpawnItemEx("EmptyRifleBrass",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
-			A_SpawnItemEx("MinigunBeltPiece",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltPiece", (37, -10, -17));
 			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
 			A_StartSound("weapons/minigun/startfire",2);
 			JM_CheckForQuadDamage();
@@ -101,8 +105,7 @@ class MO_MiniGun : JMWeapon
 		MGNF C 1 BRIGHT{
 			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
 			A_Overlay(-5, "MuzzleFlash");
-			A_SpawnItemEx("EmptyRifleBrass",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
-			A_SpawnItemEx("MinigunBeltPiece",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltPiece", (37, -10, -17));
 			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
 			A_StartSound("weapons/minigun/startfire",2);
 			JM_CheckForQuadDamage();
@@ -119,8 +122,7 @@ class MO_MiniGun : JMWeapon
 		MGNF F 1 BRIGHT{
 			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
 			A_Overlay(-5, "MuzzleFlash");
-			A_SpawnItemEx("EmptyRifleBrass",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
-			A_SpawnItemEx("MinigunBeltPiece",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltPiece", (37, -10, -17));
 			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
 			A_StartSound("weapons/minigun/startfire",2);
 			JM_CheckForQuadDamage();
@@ -141,8 +143,7 @@ class MO_MiniGun : JMWeapon
 		MGNF A 1 BRIGHT{
 			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
 			A_Overlay(-5, "MuzzleFlash");
-			A_SpawnItemEx("EmptyRifleBrass",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
-			A_SpawnItemEx("MinigunBeltPiece",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltPiece", (37, -10, -17));
 			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
 			JM_CheckForQuadDamage();
 			}
@@ -157,8 +158,7 @@ class MO_MiniGun : JMWeapon
 		TNT1 A 0 A_CheckReload();
 		MGNF C 1 BRIGHT {
 			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
-				A_SpawnItemEx("EmptyRifleBrass",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
-			A_SpawnItemEx("MinigunBeltPiece",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltPiece", (37, -10, -17));
 			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
 			A_Overlay(-5, "MuzzleFlash");
 			}
@@ -173,8 +173,7 @@ class MO_MiniGun : JMWeapon
 		TNT1 A 0 A_CheckReload();
 		MGNF E 1 BRIGHT{
 			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
-				A_SpawnItemEx("EmptyRifleBrass",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
-			A_SpawnItemEx("MinigunBeltPiece",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltPiece", (37, -10, -17));
 			A_Overlay(-5, "MuzzleFlash");
 			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
 			JM_CheckForQuadDamage();
@@ -190,8 +189,7 @@ class MO_MiniGun : JMWeapon
 		TNT1 A 0 A_CheckReload();
 		MGNF G 1 BRIGHT {
 			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
-			A_SpawnItemEx("EmptyRifleBrass",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
-			A_SpawnItemEx("MinigunBeltPiece",31, -3, 10, random(-2,2), random(-7,-3), random(5,8));
+			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltPiece", (37, -10, -17));
 			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
 			A_Overlay(-5, "MuzzleFlash");
 			}

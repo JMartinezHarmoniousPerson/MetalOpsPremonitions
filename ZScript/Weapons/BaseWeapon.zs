@@ -13,6 +13,7 @@ class JMWeapon : Weapon
 
 
 	bool isZoomed;
+	bool hcrGrenadeReady;
 
 	//weapons should ALWAYS bob, fucking fight me -popguy
 	override void DoEffect()
@@ -106,8 +107,9 @@ class JMWeapon : Weapon
 	{
 			Actor theOwner = invoker.owner;
 			let wep = player.readyweapon;
+			State Inspect = wep.FindState("Inspect");
 			bool notInspected = invoker.inspectToken != "" && theOwner.CountInv(invoker.inspectToken);
-			if(notInspected)
+			if(notInspected && Inspect != NULL)
 			{
 				theOwner.TakeInventory(invoker.inspectToken,1);
 				theOwner.player.SetPSprite(PSP_WEAPON,wep.FindState("Inspect"));

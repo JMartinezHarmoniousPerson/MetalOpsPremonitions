@@ -380,8 +380,8 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		Goto ReadyToFire;
 			
 	HeatBlast:
-		TNT1 A 0 A_JumpIfInventory("PlasmaAmmo",15,1);
-		Goto Reload;
+		2RGG A 0 A_JumpIfInventory("PlasmaAmmo",15,1);
+		Goto ReadyToFire;
 		3RGF A 1 
 		{
 			A_AlertMonsters();
@@ -459,7 +459,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		"####" IJKLM 1 JM_WeaponReady(WRF_NOFIRE);
 		PRL3 N 1 JM_WeaponReady(WRF_NOFIRE);
 		PRGN A 0 A_JumpIf(CountInv("PlasmaAmmo") >= 1, 2);
-		PRGN A 0 A_SpawnItemEx("EmptyCell",46, -2, 15, random(-1,3), random(3,6), random(3,5));
+		PRGN A 0 {MO_EjectCasing("EmptyCell", speed: frandom(4,7), offset: (24, -7, -20));}
 		PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,4);
 		PRL3 OOOO 1 JM_WeaponReady(WRF_NOFIRE);
 		PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
@@ -763,12 +763,36 @@ class HeatedPlasmaExplosion : PlasmaExplosion
 	  }
 }
 
+class JM_HeatBlastSFX : Actor
+{
+		States
+		{
+		Spawn:
+		TNT1 A 0;
+		TNT1 A 0 A_SpawnItemEx("HeatBlastShockwave2Red",15,0,0,6,0,0);
+		TNT1 A 0 A_SpawnItemEx("HeatBlastShockwaveRed",6,0,0,3,0,0);
+		TNT1 A 0 
+		{
+				A_SpawnItemEx("RedLightningLarge");
+				A_SpawnItemEx("RedLightningSmall");
+				A_SpawnItemEx("RedLightningMedium");
+		}
+		TNT1 AAA 1;
+		TNT1 A 0 
+			{
+				A_SpawnItemEx("RedLightningLarge");
+				A_SpawnItemEx("RedLightningSmall");
+				A_SpawnItemEx("RedLightningMedium");
+			}
+		Stop;
+	}
+}
 class JM_HeatBlastMissile : FastProjectile
 {
 	Default
 	{
-		Speed 55;
-		DamageFunction (225);
+		Speed 70;
+		DamageFunction (175);
 		DeathSound "NULLSND";
 		Radius 13;
 		Height 8;
@@ -779,7 +803,7 @@ class JM_HeatBlastMissile : FastProjectile
 		RenderStyle "Add";
 		Alpha 0.85;
 		SeeSound "None";
-		Obituary "%o was blasted away by %k's Heat Blast.";
+		Obituary "%o was fried by %k's Heat Blast.";
 		DamageType "Plasma";
 		+NOTELEPORT;
 		Decal "Scorch";
@@ -790,37 +814,12 @@ class JM_HeatBlastMissile : FastProjectile
 	{
 		Spawn:
 		TNT1 A 0;
-		TNT1 A 0 A_SpawnItemEx("HeatBlastShockwave2Red",15,0,0,6,0,0);
-		TNT1 A 0 A_SpawnItemEx("HeatBlastShockwaveRed",6,0,0,3,0,0);
 		TNT1 A 0 A_SpawnItemEx("HeatBlastWaveAttack");
-		TNT1 A 0 
-		{
-				A_SpawnItemEx("RedLightningLarge");
-				A_SpawnItemEx("RedLightningSmall");
-				A_SpawnItemEx("RedLightningMedium");
-				A_RadiusThrust(1000, 110, 0);
-		}
+		TNT1 A 1 A_SpawnItemEx("JM_HeatBlastSFX",flags:SXF_NOCHECKPOSITION);
 		TNT1 A 0 A_Quake(2,4,0,4,0);
-		TNT1 A 2;
-		TNT1 A 0 
-		{
-				A_SpawnItemEx("RedLightningLarge");
-				A_SpawnItemEx("RedLightningSmall");
-				A_SpawnItemEx("RedLightningMedium");
-				A_RadiusThrust(1000, 110, 0);
-		}
-		TNT1 AAA 1;
-		Stop;
-		Death:
-			TNT1 A 0 
-			{
-				A_SpawnItemEx("RedLightningLarge");
-				A_SpawnItemEx("RedLightningSmall");
-				A_SpawnItemEx("RedLightningMedium");
-				A_RadiusThrust(1000, 110, 0);
-			}
-			TNT1 A 1 A_Explode(10,40,0);
-			STOP;
+		TNT1 A 1 A_RadiusThrust(1000, 110, 0);
+		TNT1 A 1 A_Explode(10,40,0);
+		STOP;
 	}
 }
 
@@ -829,12 +828,13 @@ Class HeatBlastWaveAttack : Actor
 	States
 	{
 		Spawn:
+		TNT1 A 0;
 		TNT1 A 1 A_Explode(45,110,0);
-		TNT1 A 1;
+		TNT1 A 1 A_RadiusThrust(1000, 110, 0);
 		TNT1 A 1 A_Explode(45,110,0);
-		TNT1 A 1;
+		TNT1 A 1 A_RadiusThrust(1000, 110, 0);
 		TNT1 A 1 A_Explode(45,110,0);
-		TNT1 A 1;
+		TNT1 A 1 A_RadiusThrust(1000, 110, 0);
 		Stop;
 	}
 }
@@ -847,24 +847,10 @@ class JM_SuperHeatBlastMissile : JM_HeatBlastMissile
 		Spawn:
 		TNT1 A 0;
 		TNT1 A 0 A_SpawnItemEx("HeatBlastWaveAttack");
-		TNT1 A 0 A_SpawnItemEx("HeatBlastShockwave2Red",15,0,0,6,0,0);
-		TNT1 A 0 A_SpawnItemEx("HeatBlastShockwaveRed",6,0,0,3,0,0);
+		TNT1 A 1 A_SpawnItemEx("JM_HeatBlastSFX",flags:SXF_NOCHECKPOSITION)
 		TNT1 A 0 A_Quake(2,4,0,4,0);
-		TNT1 A 0 
-		{
-				A_SpawnItemEx("RedLightningLarge");
-				A_SpawnItemEx("RedLightningSmall");
-				A_SpawnItemEx("RedLightningMedium");
-				A_RadiusThrust(1000, 110, 0);
-		}
-		TNT1 A 2;
-		TNT1 A 0 
-		{
-				A_SpawnItemEx("RedLightningLarge",8,0,0);
-				A_SpawnItemEx("RedLightningSmall",8,0,0);
-				A_SpawnItemEx("RedLightningMedium",8,0,0);
-				A_RadiusThrust(1000, 110, 0);
-		}
+		TNT1 A 1 A_RadiusThrust(1000, 110, 0);
+		TNT1 A 1 A_Explode(10,40,0);
 		TNT1 AAA 1;
 		Stop;
 	}

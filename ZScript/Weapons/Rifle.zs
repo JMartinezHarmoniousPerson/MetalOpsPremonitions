@@ -319,7 +319,7 @@ Class AssaultRifle : JMWeapon
 			ARZR H 1 A_StartSound("weapons/ar/magout", CHAN_AUTO);
 			ARZR IJI 1 JM_WeaponReady(WRF_NOFIRE);
 			AR12 A 0 A_JumpIf(CountInv("ARAmmo") >= 1, 2);
-			AR10 A 0 A_SpawnItemEx('ARMagazine', 25, 7, 29, random(-1,2), random(-6,-4), random(2,5));
+			AR10 A 0 {MO_EjectCasing("ARMagazine",true,-20, frandom(6,10), offset:(28,5,-12));}
 			ARZR K 11 {
 				JM_WeaponReady(WRF_NOFIRE);
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(6);}

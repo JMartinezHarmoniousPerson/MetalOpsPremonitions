@@ -117,7 +117,7 @@ Class MO_SubMachineGun : JMWeapon
 						return ResolveState("UnZoom");
 					}
 					else
-					{A_ReFire("Fire2");}
+					{if(PressingFire()) {return ResolveState("Fire2");}}
 				}
 				else
 				{A_ReFire("Fire2");}
@@ -133,7 +133,7 @@ Class MO_SubMachineGun : JMWeapon
 			SMGR A 0 A_SetCrosshair(5);
 			SM5Z ABC 1;
 		Ready2:
-			TNT1 A 0 A_JumpIf(invoker.ADSMode <= 0, "ReadyToFire2");
+			TNT1 A 0 A_JumpIf(invoker.ADSMode <= 0, "ADSToggle");
 			TNT1 A 0 A_JumpIf(invoker.ADSMode == 1, "ADSHold");
 			TNT1 A 0 A_JumpIf(PressingFire(), "Fire");
 			SM5Z DDDDD 1 
@@ -142,7 +142,7 @@ Class MO_SubMachineGun : JMWeapon
 				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOFIRE);
 			}
 			TNT1 A 0 A_JumpIf(PressingAltFire() , "ADSHold");
-		//Toggle
+
 		ADSToggle:
 			SM5Z D 1 
 			{

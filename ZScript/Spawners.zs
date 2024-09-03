@@ -119,7 +119,7 @@ class FlamethrowerSpawner : CustomInventory replaces Chainsaw
 		PickupGas:
 			TNT1 A 1
 			{
-				A_GiveInventory("Gasoline",90);
+				A_GiveInventory("Gasoline",75);
 				A_Log("You got the gasoline from the Flamethrower! +90 Gas");
 			}
 			Stop;

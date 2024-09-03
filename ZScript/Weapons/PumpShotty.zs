@@ -98,7 +98,7 @@ class PumpShotgun : JMWeapon
             PSGM H 1
 			{
 				SetInventory("SGPumping",0);
-				A_SpawnItemEx("ShotgunCasing20ga",30, -11, 18, random(0,4), random(4,6), random(5,9));
+				MO_EjectCasing("ShotgunCasing20ga", ejectpitch: frandom(-55, -45), speed: frandom(5, 7), accuracy: 5, offset:(28, -8, -14));
 			}
 			TNT1 A 0 JM_WeaponReady(WRF_NOFIRE); //Quick switch	
 			PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
@@ -169,8 +169,8 @@ class PumpShotgun : JMWeapon
             PSGM H 1
 			{
 				SetInventory("AltPumping",0);
-				A_SpawnItemEx("ShotgunCasing20ga",30, -11, 18, random(0,4), random(4,6), random(5,9));
-				A_SpawnItemEx("ShotgunCasing20ga",30, -11, 18, random(0,4), random(4,6), random(5,9));
+				MO_EjectCasing("ShotgunCasing20ga", ejectpitch: frandom(-55, -45), speed: frandom(5, 7), accuracy: 5, offset:(28, -8, -14));
+				MO_EjectCasing("ShotgunCasing20ga", ejectpitch: frandom(-55, -45), speed: frandom(5, 7), accuracy: 5, offset:(28, -8, -14));
 			}
 			TNT1 A 0 JM_WeaponReady(WRF_NOFIRE); //Quick switch	
 			PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
@@ -191,10 +191,10 @@ class PumpShotgun : JMWeapon
 			PSTG A 0 A_JumpIfInventory("PumpShotgunAmmo",8,"ReadyToFire");
 			PSTG A 0 A_JumpIfInventory("MO_ShotShell",1,1);
 			goto ReadyToFire;
-			PSTG A 0 A_SetInventory("SGPumping",0);
-			PSTG A 0 A_SetInventory("AltPumping",0);
             PSGM ABCDEF 1;// JM_WeaponReady();
             PSGA A 0 A_JumpIf(CountInv("PumpShotgunAmmo") < 1, "ChamberShell");
+			PSTG A 0 A_SetInventory("SGPumping",0);
+			PSTG A 0 A_SetInventory("AltPumping",0);
 			PSGR AB 1;// JM_WeaponReady();
 			PGR1 I 5;
         ShellLoop:
@@ -226,13 +226,13 @@ class PumpShotgun : JMWeapon
 				if(CountInv("SGPumping") >= 1)
 				{
 					SetInventory("SGPumping",0);
-					A_SpawnItemEx("ShotgunCasing20ga",30, -11, 18, random(0,4), random(4,6), random(5,9));
+					MO_EjectCasing("ShotgunCasing20ga", false, frandom(-55, -45), frandom(5, 7), 5, offset:(28, -8, -14));
 				}
 				else if(CountInv("AltPumping") >= 1)
 				{
 					SetInventory("AltPumping",0);
-					A_SpawnItemEx("ShotgunCasing20ga",30, -11, 18, random(0,4), random(4,6), random(5,9));
-					A_SpawnItemEx("ShotgunCasing20ga",30, -11, 18, random(0,4), random(4,6), random(5,9));
+					MO_EjectCasing("ShotgunCasing20ga", false, frandom(-55, -45), frandom(5, 7), 5, offset:(28, -8, -14));
+					MO_EjectCasing("ShotgunCasing20ga", false, frandom(-55, -45), frandom(5, 7), 5, offset:(28, -8, -14));
 				}
 			}
 			PGR2 B 6 {
