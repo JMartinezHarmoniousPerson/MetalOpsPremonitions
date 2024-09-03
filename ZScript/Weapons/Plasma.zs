@@ -847,7 +847,7 @@ class JM_SuperHeatBlastMissile : JM_HeatBlastMissile
 		Spawn:
 		TNT1 A 0;
 		TNT1 A 0 A_SpawnItemEx("HeatBlastWaveAttack");
-		TNT1 A 1 A_SpawnItemEx("JM_HeatBlastSFX",flags:SXF_NOCHECKPOSITION)
+		TNT1 A 1 A_SpawnItemEx("JM_HeatBlastSFX",flags:SXF_NOCHECKPOSITION);
 		TNT1 A 0 A_Quake(2,4,0,4,0);
 		TNT1 A 1 A_RadiusThrust(1000, 110, 0);
 		TNT1 A 1 A_Explode(10,40,0);
