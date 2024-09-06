@@ -54,7 +54,7 @@ class MO_MiniGun : JMWeapon
 		MGNF C 1 BRIGHT{
 			A_FireBullets(5.6, 0, 1, 20, "MinigunPuff", FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
 			A_Overlay(-5, "MuzzleFlash");
-			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltPiece", (37, -10, -17));
+			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltLink", (37, -10, -17));
 			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
 			A_StartSound("weapons/minigun/startfire",2);
 			JM_CheckForQuadDamage();
@@ -71,7 +71,7 @@ class MO_MiniGun : JMWeapon
 		MGNF F 1 BRIGHT{
 			A_FireBullets(5.6, 0, 1, 20, "MinigunPuff", FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
 			A_Overlay(-5, "MuzzleFlash");
-			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltPiece", (37, -10, -17));
+			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltLink", (37, -10, -17));
 			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
 			A_StartSound("weapons/minigun/startfire",2);
 			JM_CheckForQuadDamage();
@@ -88,7 +88,7 @@ class MO_MiniGun : JMWeapon
 		MGNF H 1 BRIGHT{
 			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
 			A_Overlay(-5, "MuzzleFlash");
-			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltPiece", (37, -10, -17));
+			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltLink", (37, -10, -17));
 			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
 			A_StartSound("weapons/minigun/startfire",2);
 			JM_CheckForQuadDamage();
@@ -105,7 +105,7 @@ class MO_MiniGun : JMWeapon
 		MGNF C 1 BRIGHT{
 			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
 			A_Overlay(-5, "MuzzleFlash");
-			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltPiece", (37, -10, -17));
+			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltLink", (37, -10, -17));
 			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
 			A_StartSound("weapons/minigun/startfire",2);
 			JM_CheckForQuadDamage();
@@ -122,7 +122,7 @@ class MO_MiniGun : JMWeapon
 		MGNF F 1 BRIGHT{
 			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
 			A_Overlay(-5, "MuzzleFlash");
-			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltPiece", (37, -10, -17));
+			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltLink", (37, -10, -17));
 			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
 			A_StartSound("weapons/minigun/startfire",2);
 			JM_CheckForQuadDamage();
@@ -143,7 +143,7 @@ class MO_MiniGun : JMWeapon
 		MGNF A 1 BRIGHT{
 			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
 			A_Overlay(-5, "MuzzleFlash");
-			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltPiece", (37, -10, -17));
+			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltLink", (37, -10, -17));
 			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
 			JM_CheckForQuadDamage();
 			}
@@ -158,7 +158,7 @@ class MO_MiniGun : JMWeapon
 		TNT1 A 0 A_CheckReload();
 		MGNF C 1 BRIGHT {
 			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
-			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltPiece", (37, -10, -17));
+			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltLink", (37, -10, -17));
 			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
 			A_Overlay(-5, "MuzzleFlash");
 			}
@@ -173,7 +173,7 @@ class MO_MiniGun : JMWeapon
 		TNT1 A 0 A_CheckReload();
 		MGNF E 1 BRIGHT{
 			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
-			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltPiece", (37, -10, -17));
+			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltLink", (37, -10, -17));
 			A_Overlay(-5, "MuzzleFlash");
 			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
 			JM_CheckForQuadDamage();
@@ -189,7 +189,7 @@ class MO_MiniGun : JMWeapon
 		TNT1 A 0 A_CheckReload();
 		MGNF G 1 BRIGHT {
 			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
-			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltPiece", (37, -10, -17));
+			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltLink", (37, -10, -17));
 			A_SpawnItemEx("GunSmoke",15,1,34,2,0,0);
 			A_Overlay(-5, "MuzzleFlash");
 			}
