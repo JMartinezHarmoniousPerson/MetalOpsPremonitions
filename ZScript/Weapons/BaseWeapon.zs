@@ -2,18 +2,15 @@ class JMWeapon : Weapon
 {
 	bool isFirstTime;
 	property firstTime: isFirstTime;
-	bool pressedKick;
-	property pressedKick: pressedKick;
 	bool isHoldingAim;
-//	sound dryFireSound;
-//	property DryFireSound : dryFireSound;
+	sound dryFireSound;
+	property DryFireSound : dryFireSound;
 	int adsMode;
 	string inspectToken;
 	property InspectToken: inspectToken;
 
 
 	bool isZoomed;
-	bool hcrGrenadeReady;
 
 	//weapons should ALWAYS bob, fucking fight me -popguy
 	override void DoEffect()
@@ -26,6 +23,12 @@ class JMWeapon : Weapon
 		{
 			player.WeaponState |= WF_WEAPONBOBBING;
 		}
+	}
+
+	override void MarkPrecacheSounds()
+	{
+		Super.MarkPrecacheSounds();
+		MarkSound(dryFireSound);
 	}
 
 	bool OwnerHasSpeed()
@@ -131,10 +134,10 @@ class JMWeapon : Weapon
 			if(CheckIfInReady())
 			return ResolveState("TossThrowable");
 		}
-		if(JustPressed(BT_USER4))
+		if(JustPressed(BT_USER4) && CheckIfInReady())
 		{
 			State ActionSpecial = invoker.owner.player.ReadyWeapon.FindState("ActionSpecial");
-			if(ActionSpecial != NULL && CheckIfInReady())
+			if(ActionSpecial != NULL)
 				return ResolveState('ActionSpecial');
 			else	
 			return null;		
@@ -142,21 +145,17 @@ class JMWeapon : Weapon
 		return null;
 	}
 	
-	action void JM_PressedKick (bool type)
-	{
-		invoker.pressedKick = type;
-	}
-	
-	action bool JM_CheckIfKicked()
-	{
-		return invoker.pressedKick;
-	}
-	
 	action bool CheckIfInReady()
 	{
 		if ( (InStateSequence(invoker.owner.player.GetPSprite(PSP_WEAPON).Curstate,invoker.ResolveState("Ready")) || 
 			  InStateSequence(invoker.owner.player.GetPSprite(PSP_WEAPON).Curstate,invoker.ResolveState("ReadyToFire"))||
 			  InStateSequence(invoker.owner.player.GetPSprite(PSP_WEAPON).Curstate,invoker.ResolveState("ReadyToFire2"))||
+			InStateSequence(invoker.owner.player.GetPSprite(PSP_WEAPON).Curstate,invoker.ResolveState("Ready2"))||
+			InStateSequence(invoker.owner.player.GetPSprite(PSP_WEAPON).Curstate,invoker.ResolveState("ADSToggle"))||
+			InStateSequence(invoker.owner.player.GetPSprite(PSP_WEAPON).Curstate,invoker.ResolveState("ADSHold"))||
+			InStateSequence(invoker.owner.player.GetPSprite(PSP_WEAPON).Curstate,invoker.ResolveState("SniperReady"))||
+			InStateSequence(invoker.owner.player.GetPSprite(PSP_WEAPON).Curstate,invoker.ResolveState("SniperToggle"))||
+			InStateSequence(invoker.owner.player.GetPSprite(PSP_WEAPON).Curstate,invoker.ResolveState("SniperHold"))||
 			  InStateSequence(invoker.owner.player.GetPSprite(PSP_WEAPON).Curstate,invoker.ResolveState("ReadyLoop"))
 			 ) )
 		{		
@@ -221,7 +220,6 @@ class JMWeapon : Weapon
 				A_SetCrosshair(0);
 				A_ClearOverlays(-8,8);
 				A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, FALSE);
-				JM_PressedKick(false);
 				}
 			TNT1 A 0 A_Jump(255, "ContinueSelect");
 			Loop;

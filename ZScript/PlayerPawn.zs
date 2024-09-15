@@ -76,6 +76,7 @@ class MO_OfficerPlayer : MO_PlayerBase
 		Player.StartItem "NeverUsedLAS";
 		Player.StartItem "NeverUsedPSG";
 		Player.StartItem "NeverUsedSMG";
+		Player.StartItem "NeverUsedHCR";
     }
 }
 
