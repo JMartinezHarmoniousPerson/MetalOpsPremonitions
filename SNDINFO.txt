@@ -3,7 +3,49 @@ weapon/adsup ADSUP
 weapon/adsdown ADSDOWN
 DRYFIRE	DRYFIRE
 
-//PISTOL
+//Slot 1 ------------------------
+//////////////////Flamethrower
+smallflames/loop FIRELOP1
+
+weapons/flamer/pickup FLMPKUP
+weapons/flamer/draw FLMSLCT
+weapons/flamer/startfire FLMSTRT
+weapons/flamer/flameon FLMSTRT2
+weapons/flamer/fireloop FLMLOOP
+weapons/flamer/end FLMCOOL
+Weapons/flamer/inwater FLNOFIR
+
+//Flamethrower Cryo mode
+weapons/flamer/iceloop FRZLOOP
+weapons/flamer/icelooplayer FRZLYRLP
+weapons/flamer/startice FRZSTR
+weapons/flamer/fireicebegin FRZFRS1
+weapons/flamer/iceend FRZDWN
+weapons/flamer/icelooplayer FRZLYRLP
+weapons/flamer/icedraw FRZUP
+
+weapons/flamer/icemodeactive FRZACT
+weapons/flamer/firemodeactive FLMMODE
+weapons/flamer/special1 FLMSPC1
+weapons/flamer/special2 FLMSPC2
+
+/////////////////////////////Katana
+weapons/katana/draw KATDRW
+weapons/katana/sheathe KATSHTE
+$random weapons/katana/swing {KATSWNG1 KATSWNG2 KATSWNG3}
+KATSWNG1 KATSWNG1
+KATSWNG2 KATSWNG2
+KATSWNG3 KATSWNG3
+
+$random weapons/katana/hit {katanahit1 katanahit2 katanahit3} 
+katanahit1 kathit1
+katanahit2 kathit2
+katanahit3 kathit3
+
+weapons/katana/miss KATCLSH
+
+//Slot 2 -------------------
+/////////////////////////////PISTOL
 
 $random weapons/pistol/fire {PistolFire1 PistolFire2}
 PistolFire1 PISTFIR1
@@ -26,7 +68,7 @@ weapons/pistol/silencerremove2 SILRMV2
 
 $volume weapons/pistol/fire 0.75
 
-//SMG
+/////////////////////////////SMG
 $random weapons/smg/fire {smfire1 smfire2 smfire3}
 smfire1 smgfir1
 smfire2 smgfir2
@@ -41,10 +83,23 @@ weapons/smg/inspect3 SMGINS3 //Shadow The Hedgehog like cocking animation, sound
 weapons/smg/inspect4 SMGINS4
 weapons/smg/modeswitch SMGSWTC
 
+
+//Deagle
+weapons/deag/draw DEGSLCT
+$random weapons/deag/fire {deagfire1 deagfire2}
+deagfire1 degfir1
+deagfire2 degfir2
+
+weapons/deag/magout DEGOUT
+weapons/deag/magin DEGIN
+weapons/deag/magclick DEGCLK
+weapons/deag/slideback DEGCHBCK
+weapons/deag/slideforward DEGCHFWD
+
 RELOAD RELOAD //Only a placeholder sound when there is no reload animation.
 $VOLUME RELOAD 2
 
-//Lever Action Shotgun
+/////////////////////////////Lever Action Shotgun
 $random weapons/levershotty/fire {LeverFire1 LeverFire2 LeverFire3}
 LeverFire1 M87FIR1
 LeverFire2 M87FIR2
@@ -61,20 +116,6 @@ weapons/levershotty/shellelevator M87ELV
 weapons/levershotty/select M87DRAW
 weapons/levershotty/pickup M87PKUP
 
-//Katana
-weapons/katana/draw KATDRW
-weapons/katana/sheathe KATSHTE
-$random weapons/katana/swing {KATSWNG1 KATSWNG2 KATSWNG3}
-KATSWNG1 KATSWNG1
-KATSWNG2 KATSWNG2
-KATSWNG3 KATSWNG3
-
-$random weapons/katana/hit {katanahit1 katanahit2 katanahit3} 
-katanahit1 kathit1
-katanahit2 kathit2
-katanahit3 kathit3
-
-weapons/katana/miss KATCLSH
 
 //Pump Action Shotgun
 $random weapons/pumpshot/fire {PumpFire1 PumpFire2 PumpFire3 PumpFire4 PumpFire5}
@@ -131,7 +172,9 @@ $random weapons/ar/fire {arfire1 arfire2}
 arfire1 arfire1
 arfire2 arfire2
 
-//Combat Rifle
+//Slot 4 ------------------------
+
+//////////////////Combat Rifle
 weapons/ar/select ARSELCT
 weapons/ar/pickup ARPICK
 
@@ -147,7 +190,47 @@ weapons/ar/magflipsound "Sounds/Weapons/AssaultRifle/AR_Empty_Mag_Flip.ogg"
 weapons/ar/chamberbck ARCHMBK
 weapons/ar/chamberfwd ARCHMFW
 
-//Minigun
+//////////////////Heavy Combat Rifle
+hcr/draw "Sounds/Weapons/HeavyRifle/HCR_Draw.ogg"
+hcr/inspectRaise "Sounds/Weapons/HeavyRifle/HCR_InspectRaise.ogg"
+hcr/inspect2 "Sounds/Weapons/HeavyRifle/HCR_InspectEnd.ogg"
+hcr/boltback "Sounds/Weapons/HeavyRifle/HCR_BoltPull.ogg"
+hcr/boltfwd "Sounds/Weapons/HeavyRifle/HCR_BoltRelease.ogg"
+hcr/magbutton "Sounds/Weapons/HeavyRifle/HCR_MagRelease.ogg"
+hcr/magout "Sounds/Weapons/HeavyRifle/HCR_MagOut.ogg"
+hcr/magin "Sounds/Weapons/HeavyRifle/HCR_MagIn.ogg"
+hcr/reloadRaise "Sounds/Weapons/HeavyRifle/HCR_ReloadUp.ogg"
+hcr/reloadend "Sounds/Weapons/HeavyRifle/HCR_ReloadEnd.ogg"
+
+$random hcr/fire {hfire1 hfire2 hfire3}
+hfire1 "Sounds/Weapons/HeavyRifle/HCR_Fire1.ogg"
+hfire2 "Sounds/Weapons/HeavyRifle/HCR_Fire2.ogg"
+hfire3 "Sounds/Weapons/HeavyRifle/HCR_Fire3.ogg"
+
+//////////////////Heavy Combat Rifle UBGL
+$random hcr/glfire {gfire1 gfire2 gfire3}
+gfire1 "Sounds/Weapons/HeavyRifle/GL/HCR_GLFire1.ogg"
+gfire2 "Sounds/Weapons/HeavyRifle/GL/HCR_GLFire2.ogg"
+gfire3 "Sounds/Weapons/HeavyRifle/GL/HCR_GLFire3.ogg"
+
+$random hcr/grenade  { bounce1 bounce2 }
+bounce1      hgrenb1a
+bounce2      hgrenb2a
+
+$random 40mmExplosion  { 40expl1 40expl2 40expl3 }
+40expl1      40expl1
+40expl2      40expl2
+40expl3		40expl3
+
+hcr/sniperzoom SNIP_ZM
+hcr/sniperunzoom SNIP_UZ
+
+hcr/grenadeopen "Sounds/Weapons/HeavyRifle/GL/HCR_GLOpen.ogg"
+hcr/grenadeload "Sounds/Weapons/HeavyRifle/GL/HCR_GLLoad.ogg"
+hcr/grenadeshellin "Sounds/Weapons/HeavyRifle/GL/HCR_GLShellIn.ogg"
+hcr/grenadeclose "Sounds/Weapons/HeavyRifle/GL/HCR_GLClose.ogg"
+
+//////////////////Minigun
 weapons/minigun/fire DSMINIGF
 
 weapons/minigun/startfire MNGNSHOT
@@ -159,7 +242,9 @@ weapons/minigun/Loop CH4INSPI
 weapons/minigun/select MGSELCT
 weapons/minigun/pickup MGPICK
 
-//Rocket Launcher
+//Slot 5 --------------------------------
+
+//////////////////Rocket Launcher
 weapons/rocket/fire RLFIRE
 weapons/rocket/draw RLDRAW
 weapons/rocket/pickup RLPICK
@@ -168,6 +253,34 @@ weapons/rocket/nukemodeact "Sounds/Weapons/RocketLauncher/RL_NukeModeActivate.og
 weapons/rocket/special1 "Sounds/Weapons/RocketLauncher/RL_SpecialLift.ogg"
 weapons/rocket/special2 "Sounds/Weapons/RocketLauncher/RL_SpecialOpen.ogg"
 weapons/rocket/special3 "Sounds/Weapons/RocketLauncher/RL_SpecialInsert.ogg"
+
+//Slot 6 -------------------
+//////////////////Plasma Rifle
+weapons/plasma/equip PLSEQUP
+weapons/plasma/fire PLSFIRE
+weapons/plasma/superheatfire PLSHFIR
+weapons/plasma/heatblast PLSHBLS
+weapons/plasma/ballhit PLSBLHT
+weapons/plasma/cellout PLSOUT
+weapons/plasma/cellin PLSIN
+weapons/plasma/goingtoturnon PLSIN2
+weapons/plasma/poweredon PLSON
+weapons/plasma/cellout PLSOUT
+weapons/plasma/cooldown PLSCOOL
+weapons/plasma/overheat PLSHEAT
+plasma/heatlevel1 PLSLVL1
+plasma/heatlevel2 PLSLVL2
+plasma/heatlevel3 PLSLVL3
+plasma/beep PLSBEP
+plasma/special1 PLSSPC1
+plasma/laser/fire PLLSR //The main firing loop sound
+plasma/laser/fireloop PLLSRLP //The layered loop sound
+plasma/laser/loopstop PLLSRST //Stop sound
+
+weapons/plasma/pickup PLSPICK
+weapons/plasma/ballexp PLSXPL
+weapons/plasma/htballexp PLSXPL
+
 
 //From Doom 2016
 weapons/rocket/loading RLLOAD
@@ -186,6 +299,7 @@ rocket/flyloop "Sounds/Weapons/RocketLauncher/RocketFlyLoop.ogg"
 
 $attenuation rocket/nukeexplosion 0.3
 
+//Magazines and casings ----------------------------
 $random casings/largemag  { largedrop1 largedrop2 largedrop3 largedrop4 largedrop5 largedrop6 }
 largedrop1		"Sounds/SFX/Casings/LargeMag/LargeMagBounce1.ogg"
 largedrop2		"Sounds/SFX/Casings/LargeMag/LargeMagBounce2.ogg"
@@ -216,6 +330,22 @@ litebrass3 "Sounds/SFX/Casings/LightBrass/Light_Brass3.ogg"
 litebrass4 "Sounds/SFX/Casings/LightBrass/Light_Brass4.ogg"
 litebrass5 "Sounds/SFX/Casings/LightBrass/Light_Brass5.ogg"
 
+$random casings/heavybrass2  { hrbrass1 hrbrass2 hrbrass3 hrbrass4 hrbrass5 hrbrass6 hrbrass7 } 
+hrbrass1	HRBRAS1
+hrbrass2	HRBRAS2
+hrbrass3	HRBRAS3
+hrbrass4	HRBRAS4
+hrbrass5	HRBRAS5
+hrbrass6	HRBRAS6
+
+$random casings/GCaseBounce { grcsbounce1 grcsbounce2 grcsbounce3 grcsbounce4 grcsbounce5 grcsbounce6 }
+grcsbounce1      CABRBNC1
+grcsbounce2      CABRBNC2
+grcsbounce3      CABRBNC3
+grcsbounce4      CABRBNC4
+grcsbounce5      CABRBNC5
+grcsbounce6      CABRBNC6
+
 playerkick KICK
 
 playerkick/footwall KICKWALL
@@ -233,61 +363,9 @@ whz2 whiz2
 whz3 whiz3
 whz4 whiz4
 
-//Plasma Rifle
-
-weapons/plasma/equip PLSEQUP
-weapons/plasma/fire PLSFIRE
-weapons/plasma/superheatfire PLSHFIR
-weapons/plasma/heatblast PLSHBLS
-weapons/plasma/ballhit PLSBLHT
-weapons/plasma/cellout PLSOUT
-weapons/plasma/cellin PLSIN
-weapons/plasma/goingtoturnon PLSIN2
-weapons/plasma/poweredon PLSON
-weapons/plasma/cellout PLSOUT
-weapons/plasma/cooldown PLSCOOL
-weapons/plasma/overheat PLSHEAT
-plasma/heatlevel1 PLSLVL1
-plasma/heatlevel2 PLSLVL2
-plasma/heatlevel3 PLSLVL3
-plasma/beep PLSBEP
-plasma/special1 PLSSPC1
-plasma/laser/fire PLLSR //The main firing loop sound
-plasma/laser/fireloop PLLSRLP //The layered loop sound
-plasma/laser/loopstop PLLSRST //Stop sound
-
-weapons/plasma/pickup PLSPICK
-weapons/plasma/ballexp PLSXPL
-weapons/plasma/htballexp PLSXPL
-
-//Flamethrower
-smallflames/loop FIRELOP1
-
-weapons/flamer/pickup FLMPKUP
-weapons/flamer/draw FLMSLCT
-weapons/flamer/startfire FLMSTRT
-weapons/flamer/flameon FLMSTRT2
-weapons/flamer/fireloop FLMLOOP
-weapons/flamer/end FLMCOOL
-Weapons/flamer/inwater FLNOFIR
-
-//Flamethrower Cryo mode
-weapons/flamer/iceloop FRZLOOP
-weapons/flamer/icelooplayer FRZLYRLP
-weapons/flamer/startice FRZSTR
-weapons/flamer/fireicebegin FRZFRS1
-weapons/flamer/iceend FRZDWN
-weapons/flamer/icelooplayer FRZLYRLP
-weapons/flamer/icedraw FRZUP
-
-weapons/flamer/icemodeactive FRZACT
-weapons/flamer/firemodeactive FLMMODE
-weapons/flamer/special1 FLMSPC1
-weapons/flamer/special2 FLMSPC2
-
 DSBOTTLE ICEBRK1A
 
-//BFG
+//////////////////BFG
 weapons/bfg/draw B7GDRAW
 weapons/bfg/pickup B7GPICK
 weapons/bfg/startfire B7GSTRT
@@ -321,19 +399,6 @@ UNMFIR2 UNMFIR2
 weapons/unmaker/afire UNMFIRE
 
 weapons/unmaker/pick UNMPICK
-
-
-//Deagle
-weapons/deag/draw DEGSLCT
-$random weapons/deag/fire {deagfire1 deagfire2}
-deagfire1 degfir1
-deagfire2 degfir2
-
-weapons/deag/magout DEGOUT
-weapons/deag/magin DEGIN
-weapons/deag/magclick DEGCLK
-weapons/deag/slideback DEGCHBCK
-weapons/deag/slideforward DEGCHFWD
 
 FragGrenade/pin FRAGPIN
 FragGrenade/Throw FRGTOSS

@@ -40,7 +40,7 @@ class MO_PlayerBase : DoomPlayer
 		Player.WeaponSlot 1, "MO_Flamethrower", "Katana";
 		Player.WeaponSlot 2, "EnforcerPistol", "MO_Submachinegun";
 		Player.WeaponSlot 3, "LeverShotgun", "PumpShotgun", "MO_SSG";
-		Player.WeaponSlot 4, "AssaultRifle", /*"MO_HeavyRifle", */ "MO_MiniGun";
+		Player.WeaponSlot 4, "AssaultRifle", "MO_HeavyRifle", "MO_MiniGun";
 		Player.WeaponSlot 5, "MO_RocketLauncher";
 		Player.WeaponSlot 6, "JM_PlasmaRifle";
 		Player.WeaponSlot 7, "MO_BFG9000", "MO_Unmaker";
@@ -61,6 +61,7 @@ class MO_OfficerPlayer : MO_PlayerBase
 		Player.StartItem "LeverShottyAmmo",7;
 		Player.StartItem "PumpShotgunAmmo", 8;
 		Player.StartItem "ARAmmo",30;
+		Player.StartItem "HCRAmmo",10;
 		Player.StartItem "SMGAmmo",40;
 		Player.StartItem "SSGAmmo",2;
 		Player.StartItem "PlasmaAmmo",60;
@@ -98,6 +99,7 @@ class MO_SergeantPlayer : MO_PlayerBase
 		Player.StartItem "ARAmmo",30;
 		Player.StartItem "SMGAmmo",40;
 		Player.StartItem "SSGAmmo",2;
+		Player.StartItem "HCRAmmo",10;
 		Player.StartItem "PlasmaAmmo",60;
 		Player.StartItem "Katana";
 		Player.StartItem "MOLOTOVAMMO",4;
@@ -111,5 +113,6 @@ class MO_SergeantPlayer : MO_PlayerBase
 		Player.StartItem "NeverUsedLAS";
 		Player.StartItem "NeverUsedPSG";
 		Player.StartItem "NeverUsedSMG";
+		Player.StartItem "NeverUsedHCR";
     }
 }
