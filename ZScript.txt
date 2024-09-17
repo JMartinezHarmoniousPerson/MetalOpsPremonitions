@@ -25,7 +25,7 @@ version "4.5.0"
 #include "ZScript/Weapons/SMG.zs"
 #include "ZScript/weapons/bfg.zs"
 #include "ZScript/weapons/Deagle.zsc"
-//#include "ZScript/weapons/heavyrifle.zs" //This will be added later!
+#include "ZScript/weapons/heavyrifle.zs"
 #include "ZScript/weapons/Unmaker.zc"
 
 #include "zscript/NCHUD/nch_basehud.zsc"

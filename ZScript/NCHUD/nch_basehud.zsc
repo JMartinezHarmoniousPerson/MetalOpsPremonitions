@@ -1652,7 +1652,14 @@ class NCH_BaseHUD : BaseStatusBar
 
 				let ammo = nch_ammoslist[i];
 				name valuecolor = (rweap && ((ammo.type == rweap.AmmoType1) || (ammo.type == rweap.AmmoType2))) ? nch_curhicolor : 'NCHLightGray';
-
+				if(rweap.GetClassName() == "MO_HeavyRifle" && CPlayer.mo.FindInventory("HCR_GLMode"))
+				{
+					 valuecolor = (rweap && ((ammo.type == rweap.AmmoType1) || (ammo.type == "MO_RocketAmmo"))) ? nch_curhicolor : 'NCHLightGray';
+				}
+				else
+				{
+						 valuecolor = (rweap && ((ammo.type == rweap.AmmoType1) || (ammo.type == rweap.AmmoType2))) ? nch_curhicolor : 'NCHLightGray';
+				}
 				DrawImage(NCHF_GetBackgroundGFX(bg), bgpos, DI_ITEM_RIGHT_TOP);
 				DrawTexture(ammo.icon, iconpos, DI_ITEM_CENTER, box : (18, 18));
 				NCHF_DrawString(nch_sfont, FormatNumber(ammo.amount, 0, 4), curpntspos, DI_TEXT_ALIGN_RIGHT, valuecolor);
@@ -1912,6 +1919,33 @@ class NCH_BaseHUD : BaseStatusBar
 	//
 	// -------------------------------------------------------------------------------------------------
 
+	virtual void NCHF_DrawThrowableBox()
+	{
+		vector2 ammopos = (-162, -128);
+		let plr = CPlayer.mo;
+		DrawImage(NCHF_GetBackgroundGFX("H_BGRIT3"), (-135,-111), DI_ITEM_RIGHT, scale: (0.95,0.95));
+		if(CPlayer.ReadyWeapon)
+		{   
+			switch(plr.CountInv("ThrowableType"))
+			{
+				case 1:
+				DrawImage("MOLOICO", (-146, -116), DI_ITEM_RIGHT_BOTTOM);
+				NCHF_DrawString(nch_bfont, FormatNumber(plr.CountInv("MolotovAmmo"), 0, 4), ammopos, DI_TEXT_ALIGN_RIGHT);
+				break;
+				default:
+				DrawImage("GRENICO", (-141, -118), DI_ITEM_RIGHT_BOTTOM, scale: (0.9,0.9));
+				NCHF_DrawString(nch_bfont, FormatNumber(plr.CountInv("GrenadeAmmo"), 0, 4), ammopos, DI_TEXT_ALIGN_RIGHT);
+				break;
+			}
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------------
+	//
+	//
+	//
+	// -------------------------------------------------------------------------------------------------
+
 	protected void DrawMainBar (double TicFrac)
 	{
 		int XWord = Cvar.FindCvar("xtext").GetInt();
@@ -1937,7 +1971,7 @@ class NCH_BaseHUD : BaseStatusBar
 		NCHF_DrawWeaponSlots();
 		NCHF_DrawHealthAndArmor();
 		NCHF_DrawWeaponAmmo();
-
+		NCHF_DrawThrowableBox();
 		if(isInventoryBarVisible())
 		{
 			NCHF_DrawInventoryBar(nch_diparms, (0, 0), 5, DI_ITEM_CENTER | DI_SCREEN_CENTER | DI_DRAWCURSORFIRST | DI_ALTICONFIRST | DI_SKIPSPAWN);

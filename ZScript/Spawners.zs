@@ -43,6 +43,7 @@ class ChaingunSpawner : RandomSpawner replaces Chaingun
     {
 		DropItem "MO_MiniGun", 255, 4;
 		DropItem "AssaultRifle", 255, 2;
+		DropItem "MO_HeavyRifle", 255,1;
 		DropItem "MO_SubMachinegun",255, 1;
 	}
 }

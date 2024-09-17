@@ -1,0 +1,651 @@
+//Heavy Combat Rifle
+
+Class HCRIsEmpty : MO_ZSToken{}
+Class HCR_GLMode : MO_ZSToken{}
+Class HCR_3XZoom : MO_ZSToken{}
+Class HCR_5XZoom : MO_ZSToken{}
+//Class NeverUsedHCR : MO_ZSToken{} //Will come later
+
+Class MO_HeavyRifle : JMWeapon
+{
+	bool hcrFiredGrenade;
+    Default
+    {
+        Weapon.AmmoGive 20;
+        Weapon.AmmoType1 "HighCalClip";
+        Weapon.AmmoType2 "HCRAmmo";
+        Inventory.PickupMessage "You got the Heavy Combat Rifle! (Slot 4)";
+        Obituary "%o was shot down by %k's Heavy Combat Rifle.";
+        Tag "Heavy Combat Rifle";
+		Weapon.SlotNumber 4;
+		Inventory.PickupSound "weapons/ar/pickup";
+		Scale 0.55;
+		JMWeapon.inspectToken "NeverUsedHCR";
+    }
+
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		hcrFiredGrenade = false;
+	}
+
+    States
+    {
+		ContinueSelect:
+		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();
+		Goto Ready;
+		
+		Inspect:
+			HCRI A 1 A_StartSound("hcr/inspectRaise", 0); //Inspect Raise
+			HCRI BCDEFGHI 1;
+			HCRI JKLLLLLLL 1;
+			HCRI MNOPQ 1;
+			HCRA A 0 A_StartSound("hcr/boltback", 0);
+			HCRI RRSSSTTUU 1;
+			HCRI U 8;
+			HCRA A 0 A_StartSound("hcr/boltfwd", 0);
+			HCRI VVWXYZZ 1;
+			HCRI Z 1 A_StartSound("hcr/inspectEnd", 6);
+			HCRI "[\]" 1;
+			1CRI AB 1;
+			Goto ReadyToFire;
+        Spawn:
+            HCRC A -1;
+            STOP;
+        Ready:
+			HCRH F 0;
+		SelectAnimation:
+			TNT1 A 0;
+			TNT1 A 0 JM_CheckInspectIfDone;
+            HCRI A 1 A_StartSound("hcr/draw", 0);
+			HCRI BCD 1;
+        ReadyToFire:
+			HCRH F 0 A_JumpIf(FindInventory("HCR_GLMode"), 2);
+			HCRG A 0;
+            #### # 1 JM_WeaponReady(WRF_ALLOWRELOAD);
+            Loop;
+        Select:
+			HCRG A 0;
+			HCRG A 0
+			{
+				invoker.isHoldingAim = false;
+				invoker.isZoomed = false;
+				A_SetInventory("HCR_3XZoom",0);
+				A_SetInventory("HCR_5XZoom",0);
+				A_ZoomFactor(1.0);
+			}
+			Goto ClearAudioAndResetOverlays;
+        Fire:
+			TNT1 A 0 JM_CheckMag("HCRAmmo");
+			TNT1 A 0 A_JumpIf(invoker.isZoomed == true, "Fire2");
+			TNT1 A 0 A_GunFlash("Flash");
+            TNT1 A 1 BRIGHT {
+                A_FireBullets(5.6, 0, 1, 18, "UpdatedBulletPuff",FBF_NORANDOM);
+                A_TakeInventory("HCRAmmo", 1,TIF_NOTAKEINFINITE);
+                A_StartSound("hcr/fire", 0);
+				A_Overlay(-2, "MuzzleSmoke");
+				A_SpawnItemEx("ShotGunSmoke",20, zofs: 40, xvel: 2);
+            }
+            TNT1 B 1 BRIGHT 
+			{
+				JM_WeaponReady(WRF_NOFIRE);
+				MO_EjectCasing("HeavyRifleBrass", ejectpitch: frandom(-55, -35), speed: frandom(6, 9), offset:(30, 2, -14));
+				JM_GunRecoil(-1.1, .04);
+			}
+		ResumeFire:
+            HCRF C 1 
+			{
+				JM_WeaponReady(WRF_NOFIRE);
+				JM_GunRecoil(-1.1, .04);
+			}
+			HCRF D 1 
+			{
+				JM_WeaponReady(WRF_NOFIRE);
+				JM_GunRecoil(-1.1, .04);
+			}
+			HCRF D 1 JM_WeaponReady(WRF_NOFIRE);
+			HCRF EF 1
+			{
+				JM_WeaponReady(WRF_NOFIRE);
+				JM_GunRecoil(1.0, .10);
+			}
+			HCRF G 1 JM_WeaponReady(WRF_NOFIRE);
+			HCRG AAAAAAAA 1 
+			{
+				If(JustPressed(BT_ATTACK)) {Return ResolveState("fIRE");}
+				return JM_WeaponReady(WRF_NOFIRE);
+			}
+			TNT1 A 0 JM_CheckMag("HCRAmmo");
+			TNT1 A 0 A_ReFire;
+            Goto ReadyToFire;
+
+		Flash:
+			TNT1 A 0 A_Jump(256, "FlashAB", "FlashHI", "FlashJK", "FlashLM");
+		FlashAB:
+			HCRF AB 1 BRIGHT;
+			Stop;
+
+		FlashHI: //Frames H and I
+			HCRF HI 1 BRIGHT;
+			Stop;
+
+		FlashJK: //Frames J and K
+			HCRF JK 1 BRIGHT;
+			Stop;
+
+		FlashLM: //Frames L and M
+			HCRF JK 1 BRIGHT;
+			Stop;
+
+		Fire2:
+			TNT1 A 0 A_JumpIf(CountInv("HCR_3XZoom") || CountInv("HCR_5XZoom") >= 1, "SniperFire");
+			TNT1 A 0 JM_CheckMag("HCRAmmo");
+            HC2G B 1 BRIGHT {
+                A_FireBullets(5.6, 0, 1, 18, "UpdatedBulletPuff",FBF_NORANDOM);
+                A_TakeInventory("HCRAmmo", 1,TIF_NOTAKEINFINITE);
+                A_StartSound("hcr/fire", 0);
+				A_Overlay(-5, "ZOOMEDFLASH");
+				A_SpawnItemEx("ShotGunSmoke",20, zofs: 40, xvel: 2);
+            }
+            HC2G C 1 BRIGHT 
+			{
+				JM_WeaponReady(WRF_NOFIRE);
+				MO_EjectCasing("HeavyRifleBrass", ejectpitch: frandom(-45, -35), speed: frandom(6, 8),  offset:(15, 2, -6));
+				JM_GunRecoil(-1.1, .04);
+			}
+            HC2G D 1 
+			{
+				JM_WeaponReady(WRF_NOFIRE);
+				JM_GunRecoil(-1.1, .04);
+			}
+			HC2G D 1 
+			{
+				JM_WeaponReady(WRF_NOFIRE);
+				JM_GunRecoil(-1.1, .04);
+			}
+			HC2G E 1 JM_WeaponReady(WRF_NOFIRE);
+			HC2G EF 1
+			{
+				JM_WeaponReady(WRF_NOFIRE);
+				JM_GunRecoil(+1.0, .10);
+			}
+			HC2G G 1 JM_WeaponReady(WRF_NOFIRE);
+			HC2G AAAAAAA 1 
+			{
+				If(JustPressed(BT_ATTACK)) {Return ResolveState("fIRE");}
+				return JM_WeaponReady(WRF_NOFIRE);
+			}
+			TNT1 A 0 JM_CheckMag("HCRAmmo");
+			AR1F A 0
+			{
+				if(invoker.ADSMode >= 1)
+				{
+					if(PressingAltFire() && PressingFire())
+					{
+						invoker.isHoldingAim = true;
+						return ResolveState("Fire2");
+					}
+					if(!PressingAltFire() && invoker.isHoldingAim) {
+						return ResolveState("UnZoom");
+					}
+					else
+					{if(PressingFire()) {return ResolveState("Fire2");}}
+				}
+				else
+				{A_ReFire("Fire2");}
+				return JM_WeaponReady(WRF_NOFIRE|WRF_ALLOWRELOAD);
+			}
+            Goto Ready2;
+
+		SniperFire:
+			TNT1 A 0 JM_CheckMag("HCRAmmo");
+            HC2Z D 1 BRIGHT {
+                A_FireBullets(5.6, 0, 1, 18, "UpdatedBulletPuff",FBF_NORANDOM);
+                A_TakeInventory("HCRAmmo", 1,TIF_NOTAKEINFINITE);
+                A_StartSound("hcr/fire", 0);
+				A_SpawnItemEx("ShotGunSmoke",20, zofs: 40, xvel: 2);
+            }
+            HC2Z D 1 BRIGHT 
+			{
+				JM_WeaponReady(WRF_NOFIRE);
+				MO_EjectCasing("HeavyRifleBrass", ejectpitch: frandom(-45, -35), speed: frandom(6, 8),  offset:(15, 2, -6));
+				JM_GunRecoil(-1.1, .04);
+			}
+			HC2Z DD 1 
+			{
+				JM_WeaponReady(WRF_NOFIRE);
+				JM_GunRecoil(-1.1, .04);
+			}
+			HC2Z D 1 JM_WeaponReady(WRF_NOFIRE);
+			HC2Z DD 1
+			{
+				JM_WeaponReady(WRF_NOFIRE);
+				JM_GunRecoil(+1.0, .10);
+			}
+			HC2Z D 1 JM_WeaponReady(WRF_NOFIRE);
+			HC2Z DDDDDDD 1 
+			{
+				If(JustPressed(BT_ATTACK)) {Return ResolveState("SniperFire");}
+				return JM_WeaponReady(WRF_NOFIRE);
+			}
+			TNT1 A 0 JM_CheckMag("HCRAmmo");
+			AR1F A 0
+			{
+				if(invoker.ADSMode >= 1)
+				{
+					if(PressingAltFire() && PressingFire())
+					{
+						invoker.isHoldingAim = true;
+						return ResolveState("SniperFire");
+					}
+					if(!PressingAltFire() && invoker.isHoldingAim) {
+						return ResolveState("UnZoom");
+					}
+					else
+					{if(PressingFire()) {return ResolveState("SniperFire");}}
+				}
+				else
+				{A_ReFire("SniperFire");}
+				return JM_WeaponReady(WRF_NOFIRE|WRF_ALLOWRELOAD);
+			}
+            Goto Ready2;
+
+        Deselect:
+			HCRG A 0
+			{
+				A_SetInventory("HCR_3XZoom",0);
+				A_SetInventory("HCR_3XZoom",0);
+				invoker.isHoldingAim = false;
+				invoker.isZoomed = false;
+				A_ZoomFactor(1.0);
+			}
+            HCRI D 1;
+			HCRI CBA 1;
+            TNT1 A 0 A_Lower(12);
+            Wait;
+        
+
+		ActionSpecial:
+			#### # 1;
+			TNT1 A 0 A_JumpIf(invoker.isZoomed == true, "ZoomSniper");
+			TNT1 A 0 A_StartSound("weapons/smg/modeswitch",0);
+			TNT1 A 0 A_JumpIfInventory("HCR_GLMode",1,"DeselectUBGL");
+			TNT1 A 0 A_Print("Underbarrel Grenade Launcher Alt Fire");
+			TNT1 A 0 A_SetInventory("HCR_GLMode",1);
+			Goto ReadyToFire;
+
+		ZoomSniper:
+			TNT1 A 0 A_JumpIfInventory("HCR_5XZoom",1, "ReturnToNormalAim");
+			TNT1 A 0 A_StartSound("hcr/sniperzoom");
+			TNT1 A 0 A_JumpIfInventory("HCR_3XZoom",1, "Zoom5X");
+			TNT1 A 0
+			{
+				A_SetInventory("HCR_3XZoom",1);
+				A_SetInventory("HCR_5XZoom",0);
+				A_Print("3x Sniper Zoom");
+				A_ZoomFactor(3.4);
+			}
+			HC2G A 1;
+			HC2Z ABC 1;
+			Goto SniperReady;
+
+		Zoom5X:
+			TNT1 A 0
+			{
+					A_SetInventory("HCR_3XZoom",0);
+					A_SetInventory("HCR_5XZoom",1);
+					A_Print("5x Sniper Zoom");
+					A_ZoomFactor(5.4);
+			}
+			Goto SniperReady;
+
+		ReturnToNormalAim:
+			TNT1 A 0
+			{
+					A_StartSound("hcr/sniperunzoom");
+					A_SetInventory("HCR_3XZoom",0);
+					A_SetInventory("HCR_5XZoom",0);
+					A_Print("Normal Aim");
+					A_ZoomFactor(1.4);
+			}
+			HC2Z CBA 1;
+			HC2G A 1;
+			Goto Ready2;
+
+		SniperUnZoom:
+			TNT1 A 0
+			{
+					A_SetInventory("HCR_3XZoom",0);
+					A_SetInventory("HCR_5XZoom",0);
+					A_ZoomFactor(1.4);
+			}
+			HC2Z CBA 1;
+			HC2G A 1;
+			Goto UnZoom;
+			
+		DeselectUBGL:
+			TNT1 A 0 A_Print("Sniper/Zoom Aim Alt Fire");
+			TNT1 A 0 A_SetInventory("HCR_GLMode",0);
+			Goto ReadyToFire;
+
+		AltFire:
+			HCRA A 0 A_JumpIfInventory("HCR_GLMode",1,"GrenadeFire");
+			HCRA A 0 A_JumpIf(invoker.isZoomed, "UnZoom");
+			HCRA A 0 {
+				invoker.isZoomed = true;
+				A_StartSound("weapon/adsup",0);
+				A_ZoomFactor(1.5);
+				A_SetCrosshair(5);
+			}
+			HCRZ ABCDEF 1;
+//			TNT1 A 0 A_Print("Sniper Zoom not done yet!");
+
+		Ready2:
+			TNT1 A 0 A_JumpIf(CountInv("HCR_3XZoom") || CountInv("HCR_5XZoom") >= 1, "SniperReady");
+			TNT1 A 0 A_JumpIf(invoker.ADSMode <= 0, "ADSToggle");
+			TNT1 A 0 A_JumpIf(invoker.ADSMode == 1, "ADSHold");
+			TNT1 A 0 A_JumpIf(PressingFire(), "Fire2");
+			HC2G AAAAA 1 
+			{
+				if(JustPressed(BT_ATTACK)) {return ResolveState("Fire2");}
+				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOFIRE);
+			}
+			TNT1 A 0 A_JumpIf(PressingAltFire() , "ADSHold");
+
+		ADSToggle:
+			HC2G A 1 
+			{
+				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("UnZoom");}
+				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
+			}
+			Loop;
+		//Hold and Hybrid
+		ADSHold:
+			TNT1 A 0 {invoker.isHoldingAim = true;}
+			HC2G A 1 
+			{
+				if(!PressingAltFire()) {SetWeaponState("UnZoom");}
+				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
+			}
+			Loop;
+
+		SniperReady:
+			TNT1 A 0 A_JumpIf(invoker.ADSMode <= 0, "SniperToggle");
+			TNT1 A 0 A_JumpIf(invoker.ADSMode == 1, "SniperHold");
+			TNT1 A 0 A_JumpIf(PressingFire(), "Fire2");
+			HC2Z DDDDD 1 
+			{
+				if(JustPressed(BT_ATTACK)) {return ResolveState("Fire2");}
+				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOFIRE);
+			}
+			TNT1 A 0 A_JumpIf(PressingAltFire() , "SniperHold");
+
+		SniperToggle:
+			HC2Z D 1 
+			{
+				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("SniperUnZoom");}
+				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
+			}
+			Loop;
+		//Sniper Hold and Hybrid
+		SniperHold:
+			TNT1 A 0 {invoker.isHoldingAim = true;}
+			HC2Z D 1 
+			{
+				if(!PressingAltFire()) {SetWeaponState("SniperUnZoom");}
+				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
+			}
+			Loop;
+
+		Unzoom:
+			HCRA A 0 {
+				invoker.isZoomed = false;
+				invoker.isHoldingAim = false;
+				A_SetInventory("HCR_3XZoom",0);
+				A_SetInventory("HCR_5XZoom",0);
+				A_StartSound("weapon/adsdown",0);
+				A_ZoomFactor(1.0);
+				A_SetCrosshair(0);
+			}
+			HCRZ FEDCBA 1;
+			Goto ReadyToFire;
+
+		GrenadeFire:
+			TNT1 A 0 A_JumpIfInventory("MO_RocketAmmo",1,1);
+			Goto ReadyToFire;
+			HCRA A 0 A_JumpIf(invoker.hcrFiredGrenade == true, "ReloadGrenade");
+			HCRA A 0 {invoker.hcrFiredGrenade = true;}
+			HCRA A 0 A_TakeInventory("MO_RocketAmmo",1);
+			HCRH A 1  bright
+			{
+				A_StartSound("hcr/glfire",0);
+				A_Overlay(-3, "GrenMuzzleSmoke");
+				A_FireProjectile("HCRGrenade",0,0,0,8);
+			}
+			HCRH BC 1 bright JM_GunRecoil(-1.0, .25);
+			HCRH D 1;
+			HCRH EF 1 JM_GunRecoil(0.5, .10);
+			HCRH F 4 A_WeaponReady(WRF_NOFIRE);
+			TNT1 A 0 A_JumpIfInventory("MO_RocketAmmo",1,1);
+			Goto ReadyToFire;
+		ReloadGrenade:
+			HRG1 AB 1 A_WeaponReady(WRF_NOFIRE);
+			HRG1 C 1 A_StartSound("hcr/grenadeopen",0);
+			TNT1 A 0 A_Jumpif(invoker.OwnerHasSpeed(), 2);
+			HRG1 DEFGH 1;
+			TNT1 A 0 A_Jumpif(invoker.OwnerHasSpeed(), 3);
+			TNT1 A 0;
+			HRG1 I 1;
+			TNT1 AA 0;
+			TNT1 A 0 {MO_EjectCasing("EmptyGrenadeShell",true, -5, frandom(0,1), offset: (22,8,-11));}
+			HRG1 JKLM 1;
+			HRG1 N 12 {if(invoker.OwnerHasSpeed()) A_SetTics(6);}
+			HRG1 OP 1;
+			TNT1 A 0 A_StartSound("hcr/grenadeload",0);
+			TNT1 A 0 A_Jumpif(invoker.OwnerHasSpeed(), 1);
+			HRG1 QRS 1;
+			TNT1 A 0 A_StartSound("hcr/grenadeshellin",0);
+			TNT1 A 0 A_Jumpif(invoker.OwnerHasSpeed(), 1);
+			HRG1 TUV 1;
+			TNT1 A 0 A_Jumpif(invoker.OwnerHasSpeed(), 1);
+			HRG1 WXY 1;
+			HRG1 Z 8 {if(invoker.OwnerHasSpeed()) A_SetTics(4);}
+			HCRA A 0 {invoker.hcrFiredGrenade = false;}
+			HRG2 A 2 A_StartSound("hcr/grenadeclose",0);
+			HRG2 BBCCDEFGH 1;
+			Goto ReadyToFire;
+
+		GrenMuzzleSmoke:
+			TNT1 A 0
+			{
+				A_OverlayFlags(OverlayID(), PSPF_FORCEALPHA, true);
+				A_OverlayAlpha(OverlayID(), 0.75);
+			}
+			HMZH A 1 bright;
+			HMZH b 1 BRIGHT;
+			HMZH C 1 BRIGHT;
+			Stop;
+
+		MuzzleSmoke:
+			TNT1 A 0
+			{
+				A_OverlayFlags(OverlayID(), PSPF_FORCEALPHA, true);
+				A_OverlayAlpha(OverlayID(), 0.6);
+			}
+			HMZF ABC 1 bright;
+			Stop;
+
+		ZoomedFlash:
+			HC2M AB 1 BRIGHT;
+			STOP;
+
+        Reload:
+			TNT1 A 0 A_JumpIfInventory("HCRAmmo",10,"ReadyToFire");
+			TNT1 A 0 A_JumpIfInventory("HighCalClip",1,1);
+			Goto ReadyToFire;
+			HCRA A 0 {
+				invoker.isZoomed = false;
+				invoker.isHoldingAim = false;
+				A_ZoomFactor(1.0);
+				A_SetInventory("HCR_3XZoom",0);
+				A_SetInventory("HCR_5XZoom",0);
+				A_SetCrosshair(0);
+			}
+			AR1F A 0 {
+				if(CountInv("HCRAmmo") < 1)
+					{A_SetInventory("HCRIsEmpty",1);}
+			}
+			TNT1 A 0 A_StartSound("hcr/reloadRaise", 7);
+			HR4R A 0; //Initialize empty reload sprite frames into memory
+			HCRR ABCD 1 JM_WeaponReady(WRF_NOFIRE);
+			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 1);
+			HCRR EF 1;
+			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 1);
+			HCRR GHIJ 1 JM_WeaponReady(WRF_NOFIRE);
+			HCRR A 0 A_StartSound("hcr/magbutton",1);
+			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 1);
+			HCRR K 1;
+			HCRR L 8
+			{
+				JM_WeaponReady(WRF_NOFIRE);
+				{if(invoker.OwnerHasSpeed()) A_SetTics(5);}
+			}
+			HCRR MN 1 JM_WeaponReady(WRF_NOFIRE);
+			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 1);
+			HCRR OP 1;
+			HCRR P 4 {if(invoker.OwnerHasSpeed()) A_SetTics(2);}
+			HCRR Q 1 A_StartSound("hcr/magout", CHAN_AUTO);
+			HCRR RS 1 {
+				JM_WeaponReady(WRF_NOFIRE);
+				if(CountInv("HCRAmmo") < 1) {JM_SetWeaponSprite("HR4R");}
+			}
+			HCRR TU 1 {
+				JM_WeaponReady(WRF_NOFIRE);
+				if(CountInv("HCRAmmo") < 1) {JM_SetWeaponSprite("HR4R");}
+			}
+			AR12 A 0 A_JumpIf(CountInv("HCRAmmo") >= 1, 2);
+			HCRR A 0 {MO_EjectCasing("ARMagazine", ejectpitch: frandom(-20, -15), speed: frandom(4, 5),  offset:(28, 16, -13));}
+			HCRR V 16 {if(invoker.OwnerHasSpeed()) A_SetTics(8);}
+			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 1);
+			HCRR W 1 JM_WeaponReady(WRF_NOFIRE);
+			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 1);
+			HCRR X 1 JM_WeaponReady(WRF_NOFIRE);
+			HCRR YYZZ 1 JM_WeaponReady(WRF_NOFIRE);
+			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 2);
+			1CRR AAA 1 JM_WeaponReady(WRF_NOFIRE);
+			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 2);
+			1CRR BBC 1 JM_WeaponReady(WRF_NOFIRE);
+			AR10 A 0 A_StartSound("hcr/magin", CHAN_AUTO);
+			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 1);
+			1CRR CC 1 JM_WeaponReady(WRF_NOFIRE);
+			1CRR D 1 JM_WeaponReady(WRF_NOFIRE);
+			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 1);
+			1CRR EE 1 JM_WeaponReady(WRF_NOFIRE);
+			AR10 A 0 JM_ReloadGun("HCRAmmo", "HighCalClip",10,3);
+			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 1);
+			1CRR FFG 1 JM_WeaponReady(WRF_NOFIRE);
+			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 1);
+			1CRR HIJ 1 JM_WeaponReady(WRF_NOFIRE);
+			1CRR K 6 {if(invoker.OwnerHasSpeed()) A_SetTics(3);}
+			HCRA A 0 A_JumpIf(CountInv("HCRIsEmpty") >= 1, "Chamber");
+			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 1);
+			AR10 A 0 A_StartSound("hcr/reloadend", CHAN_AUTO);
+			1CRR LMN 1 JM_WeaponReady(WRF_NOFIRE);
+			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 1);
+			1CRR OPQ 1;
+			HCRR BA 1;
+            Goto ReadyToFire;
+
+		Chamber:
+			HCRA A 0 A_SetInventory("HCRIsEmpty",0);
+			HR4R XYZ 1;
+			HCRI Q 1;
+			HCRA A 0 A_StartSound("hcr/boltback", 0);
+			HCRI RRSSSTUU 1;
+			HCRI U 2 {if(invoker.OwnerHasSpeed()) A_SetTics(1);}
+			HCRA A 0 A_StartSound("hcr/boltfwd", 0);
+			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 2);
+			HCRI VWXYZ 1;
+			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 2);
+			HCRI Z 1 A_StartSound("hcr/inspectEnd", 6);
+			HCRI "[\]" 1;
+			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 1);
+			1CRI AB 1;
+			GOTO ReadyToFire;
+		
+		FlashKick:
+			HR4K ABCDEFGHIJKLMO 1;// JM_WeaponReady();
+			Goto ReadyToFire;
+		
+		FlashAirKick:
+			HR4K ABCDEFGHHIJJKLMO 1;// JM_WeaponReady();
+			Goto ReadyToFire;
+
+		FlashKickFast:
+			HR4K ABCDEFHKLMO 1;// JM_WeaponReady();
+			Goto ReadyToFire;
+		
+		FlashAirKickFast:
+			HR4K ABCDEFGHIJKLMO 1;// JM_WeaponReady();
+			Goto ReadyToFire;
+    }
+} 
+
+Class HCRAmmo : Ammo
+{
+	Default
+	{
+    Inventory.Amount 0;
+	Inventory.MaxAmount 10;
+	Ammo.BackpackAmount 0;
+	Ammo.BackpackMaxAmount 10;
+	Inventory.Icon "HCRCA0";
+	+INVENTORY.IGNORESKILL;
+	}
+}
+
+Class HCRGrenade : Actor
+{
+	int timer;
+	Default
+	{
+	Radius 8;
+	Height 8;
+	DamageFunction (25);
+	Speed 50;
+	Scale 0.5;
+	BounceSound "hcr/grenade";
+	BounceType "Doom";
+	Projectile;
+	BounceFactor 0.5;
+//	ReactionTime 30;
+	-NOGRAVITY
+    +BLOODSPLATTER
+	+EXTREMEDEATH
+	+FORCEXYBILLBOARD
+	+CANBOUNCEWATER
+	}
+	States
+	{
+	Spawn:
+		SHRP O 0;
+	SpawnLoop:
+		SHRP O 0 A_SpawnItemEx("MO_GrenadeSmokeTrail",flags:SXF_NOCHECKPOSITION,0);
+		SHRP O 1 {timer++;}
+		SHRP O 0 A_JumpIf(timer >= 55, "Explode");
+		Loop;
+	Death:
+		SHRP O 0 A_SpawnItemEx("MO_GrenadeSmokeTrail",flags:SXF_NOCHECKPOSITION,0);
+		SHRP O 1 {timer++;}
+		SHRP O 0 A_JumpIf(timer >= 55, "Explode");
+		Loop;
+	XDeath:
+	Explode:
+		TNT1 A 0 A_StopSound(CHAN_7);
+		TNT1 A 0 A_StartSound("40mmExplosion");
+		TNT1 A 1 A_SpawnItemEx("RocketExplosionFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
+		TNT1 A 0 A_Explode(125, 180);
+		TNT1 A 0 DESTROY();
+		Stop;
+	}
+}
