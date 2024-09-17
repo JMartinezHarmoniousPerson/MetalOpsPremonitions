@@ -4,7 +4,6 @@ Class HCRIsEmpty : MO_ZSToken{}
 Class HCR_GLMode : MO_ZSToken{}
 Class HCR_3XZoom : MO_ZSToken{}
 Class HCR_5XZoom : MO_ZSToken{}
-//Class NeverUsedHCR : MO_ZSToken{} //Will come later
 
 Class MO_HeavyRifle : JMWeapon
 {
@@ -80,7 +79,7 @@ Class MO_HeavyRifle : JMWeapon
 			TNT1 A 0 A_JumpIf(invoker.isZoomed == true, "Fire2");
 			TNT1 A 0 A_GunFlash("Flash");
             TNT1 A 1 BRIGHT {
-                A_FireBullets(5.6, 0, 1, 18, "UpdatedBulletPuff",FBF_NORANDOM);
+                A_FireBullets(5.6, 0, 1, 28, "UpdatedBulletPuff",FBF_NORANDOM);
                 A_TakeInventory("HCRAmmo", 1,TIF_NOTAKEINFINITE);
                 A_StartSound("hcr/fire", 0);
 				A_Overlay(-2, "MuzzleSmoke");
@@ -141,7 +140,7 @@ Class MO_HeavyRifle : JMWeapon
 			TNT1 A 0 A_JumpIf(CountInv("HCR_3XZoom") || CountInv("HCR_5XZoom") >= 1, "SniperFire");
 			TNT1 A 0 JM_CheckMag("HCRAmmo");
             HC2G B 1 BRIGHT {
-                A_FireBullets(5.6, 0, 1, 18, "UpdatedBulletPuff",FBF_NORANDOM);
+                A_FireBullets(5.6, 0, 1, 28, "UpdatedBulletPuff",FBF_NORANDOM);
                 A_TakeInventory("HCRAmmo", 1,TIF_NOTAKEINFINITE);
                 A_StartSound("hcr/fire", 0);
 				A_Overlay(-5, "ZOOMEDFLASH");
@@ -200,8 +199,8 @@ Class MO_HeavyRifle : JMWeapon
 		SniperFire:
 			TNT1 A 0 JM_CheckMag("HCRAmmo");
             HC2Z D 1 BRIGHT {
-                A_FireBullets(5.6, 0, 1, 18, "UpdatedBulletPuff",FBF_NORANDOM);
-                A_TakeInventory("HCRAmmo", 1,TIF_NOTAKEINFINITE);
+                A_FireBullets(5.6, 0, 1, 46, "UpdatedBulletPuff",FBF_NORANDOM);
+                A_TakeInventory("HCRAmmo", 2,TIF_NOTAKEINFINITE);
                 A_StartSound("hcr/fire", 0);
 				A_SpawnItemEx("ShotGunSmoke",20, zofs: 40, xvel: 2);
             }
