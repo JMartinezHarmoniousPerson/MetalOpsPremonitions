@@ -141,13 +141,13 @@ Class MO_SubMachineGun : JMWeapon
 				if(JustPressed(BT_ATTACK)) {return ResolveState("Fire");}
 				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOFIRE);
 			}
-			TNT1 A 0 A_JumpIf(PressingAltFire() , "ADSHold");
+			TNT1 A 0 A_JumpIf(invoker.ADSMode == 2 && PressingAltFire() , "ADSHold");
 
 		ADSToggle:
 			SM5Z D 1 
 			{
-				JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
 				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("UnZoom");}
+				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
 			}
 			Loop;
 		//Hold and Hybrid
@@ -155,10 +155,14 @@ Class MO_SubMachineGun : JMWeapon
 			TNT1 A 0 {invoker.isHoldingAim = true;}
 			SM5Z D 1 
 			{
-				JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
 				if(!PressingAltFire()) {SetWeaponState("UnZoom");}
+				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
 			}
 			Loop;
+
+	NoAmmoZoomed:
+			SM5Z D 1;
+			Goto Ready2;
 
 		UnZoom:
 			TNT1 A 0 
@@ -192,7 +196,8 @@ Class MO_SubMachineGun : JMWeapon
         
         Reload:
 			TNT1 A 0 A_JumpIfInventory("SMGAmmo",40,"ReadyToFire");
-			TNT1 A 0 A_JumpIfInventory("LowCalClip",1,1);
+			TNT1 A 0 A_JumpIfInventory("LowCalClip",1,2);
+			TNT1 A 0 A_JumpIf(invoker.isZoomed, "NoAmmoZoomed");
 			Goto ReadyToFire;
 			TNT1 AAA 0;
 			TNT1 A 0 A_JumpIf(Invoker.isZoomed, "ReloadZoomed");

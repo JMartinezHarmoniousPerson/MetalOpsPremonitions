@@ -14,13 +14,20 @@ Class MO_HeavyRifle : JMWeapon
         Weapon.AmmoType1 "HighCalClip";
         Weapon.AmmoType2 "HCRAmmo";
         Inventory.PickupMessage "You got the Heavy Combat Rifle! (Slot 4)";
-        Obituary "%o was shot down by %k's Heavy Combat Rifle.";
-        Tag "Heavy Combat Rifle";
+        Obituary "$OB_HEAVYRIFLE";
+        Tag "$TAG_HEAVYRIFLE";
 		Weapon.SlotNumber 4;
 		Inventory.PickupSound "weapons/ar/pickup";
 		Scale 0.55;
 		JMWeapon.inspectToken "NeverUsedHCR";
     }
+
+	action state JM_CheckMagHMR(int m = 1, statelabel rel = "Reload")
+	{
+		if(CountInv(invoker.ammotype2) < m)
+			return ResolveState(rel);
+		return ResolveState(Null);
+	}
 
 	override void PostBeginPlay()
 	{
@@ -75,8 +82,8 @@ Class MO_HeavyRifle : JMWeapon
 			}
 			Goto ClearAudioAndResetOverlays;
         Fire:
-			TNT1 A 0 JM_CheckMag("HCRAmmo");
 			TNT1 A 0 A_JumpIf(invoker.isZoomed == true, "Fire2");
+			TNT1 A 0 JM_CheckMagHMR(1);
 			TNT1 A 0 A_GunFlash("Flash");
             TNT1 A 1 BRIGHT {
                 A_FireBullets(5.6, 0, 1, 28, "UpdatedBulletPuff",FBF_NORANDOM);
@@ -114,7 +121,7 @@ Class MO_HeavyRifle : JMWeapon
 				If(JustPressed(BT_ATTACK)) {Return ResolveState("fIRE");}
 				return JM_WeaponReady(WRF_NOFIRE);
 			}
-			TNT1 A 0 JM_CheckMag("HCRAmmo");
+			TNT1 A 0 JM_CheckMagHMR(1);
 			TNT1 A 0 A_ReFire;
             Goto ReadyToFire;
 
@@ -138,7 +145,7 @@ Class MO_HeavyRifle : JMWeapon
 
 		Fire2:
 			TNT1 A 0 A_JumpIf(CountInv("HCR_3XZoom") || CountInv("HCR_5XZoom") >= 1, "SniperFire");
-			TNT1 A 0 JM_CheckMag("HCRAmmo");
+			TNT1 A 0 JM_CheckMagHMR(1);
             HC2G B 1 BRIGHT {
                 A_FireBullets(5.6, 0, 1, 28, "UpdatedBulletPuff",FBF_NORANDOM);
                 A_TakeInventory("HCRAmmo", 1,TIF_NOTAKEINFINITE);
@@ -174,7 +181,7 @@ Class MO_HeavyRifle : JMWeapon
 				If(JustPressed(BT_ATTACK)) {Return ResolveState("fIRE");}
 				return JM_WeaponReady(WRF_NOFIRE);
 			}
-			TNT1 A 0 JM_CheckMag("HCRAmmo");
+			TNT1 A 0 JM_CheckMagHMR(1);
 			AR1F A 0
 			{
 				if(invoker.ADSMode >= 1)
@@ -197,10 +204,10 @@ Class MO_HeavyRifle : JMWeapon
             Goto Ready2;
 
 		SniperFire:
-			TNT1 A 0 JM_CheckMag("HCRAmmo");
+			TNT1 A 0 JM_CheckMagHMR(3);
             HC2Z D 1 BRIGHT {
-                A_FireBullets(5.6, 0, 1, 46, "UpdatedBulletPuff",FBF_NORANDOM);
-                A_TakeInventory("HCRAmmo", 2,TIF_NOTAKEINFINITE);
+                A_FireBullets(5.6, 0, 1, 44, "UpdatedBulletPuff",FBF_NORANDOM);
+                A_TakeInventory("HCRAmmo", 3,TIF_NOTAKEINFINITE);
                 A_StartSound("hcr/fire", 0);
 				A_SpawnItemEx("ShotGunSmoke",20, zofs: 40, xvel: 2);
             }
@@ -221,13 +228,13 @@ Class MO_HeavyRifle : JMWeapon
 				JM_WeaponReady(WRF_NOFIRE);
 				JM_GunRecoil(+1.0, .10);
 			}
-			HC2Z D 1 JM_WeaponReady(WRF_NOFIRE);
-			HC2Z DDDDDDD 1 
+			HC2Z D 6 JM_WeaponReady(WRF_NOFIRE);
+			HC2Z DDDD 1
 			{
 				If(JustPressed(BT_ATTACK)) {Return ResolveState("SniperFire");}
 				return JM_WeaponReady(WRF_NOFIRE);
 			}
-			TNT1 A 0 JM_CheckMag("HCRAmmo");
+			TNT1 A 0 JM_CheckMagHMR(3);
 			AR1F A 0
 			{
 				if(invoker.ADSMode >= 1)
@@ -281,7 +288,7 @@ Class MO_HeavyRifle : JMWeapon
 			{
 				A_SetInventory("HCR_3XZoom",1);
 				A_SetInventory("HCR_5XZoom",0);
-				A_Print("3x Sniper Zoom");
+				A_Print("Sniper bullets enabled, 3x Sniper Zoom");
 				A_ZoomFactor(3.4);
 			}
 			HC2G A 1;
@@ -304,7 +311,7 @@ Class MO_HeavyRifle : JMWeapon
 					A_StartSound("hcr/sniperunzoom");
 					A_SetInventory("HCR_3XZoom",0);
 					A_SetInventory("HCR_5XZoom",0);
-					A_Print("Normal Aim");
+					A_Print("Normal Aim, sniper bullets disabled");
 					A_ZoomFactor(1.4);
 			}
 			HC2Z CBA 1;
@@ -337,8 +344,6 @@ Class MO_HeavyRifle : JMWeapon
 				A_SetCrosshair(5);
 			}
 			HCRZ ABCDEF 1;
-//			TNT1 A 0 A_Print("Sniper Zoom not done yet!");
-
 		Ready2:
 			TNT1 A 0 A_JumpIf(CountInv("HCR_3XZoom") || CountInv("HCR_5XZoom") >= 1, "SniperReady");
 			TNT1 A 0 A_JumpIf(invoker.ADSMode <= 0, "ADSToggle");
@@ -349,7 +354,7 @@ Class MO_HeavyRifle : JMWeapon
 				if(JustPressed(BT_ATTACK)) {return ResolveState("Fire2");}
 				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOFIRE);
 			}
-			TNT1 A 0 A_JumpIf(PressingAltFire() , "ADSHold");
+			TNT1 A 0 A_JumpIf(invoker.ADSMode == 2 && PressingAltFire(), "ADSHold"); //Hybrid
 
 		ADSToggle:
 			HC2G A 1 
@@ -377,7 +382,7 @@ Class MO_HeavyRifle : JMWeapon
 				if(JustPressed(BT_ATTACK)) {return ResolveState("Fire2");}
 				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOFIRE);
 			}
-			TNT1 A 0 A_JumpIf(PressingAltFire() , "SniperHold");
+			TNT1 A 0 A_JumpIf(invoker.ADSMode == 2 && PressingAltFire() , "SniperHold");
 
 		SniperToggle:
 			HC2Z D 1 
@@ -419,7 +424,7 @@ Class MO_HeavyRifle : JMWeapon
 			{
 				A_StartSound("hcr/glfire",0);
 				A_Overlay(-3, "GrenMuzzleSmoke");
-				A_FireProjectile("HCRGrenade",0,0,0,8);
+				A_FireProjectile("HCRGrenade",0,0,0,11);
 			}
 			HCRH BC 1 bright JM_GunRecoil(-1.0, .25);
 			HCRH D 1;
@@ -477,10 +482,17 @@ Class MO_HeavyRifle : JMWeapon
 		ZoomedFlash:
 			HC2M AB 1 BRIGHT;
 			STOP;
+	
+		NoAmmoZoomed:
+			HC2Z D 0 A_JumpIf(CountInv("HCR_3XZoom") || CountInv("HCR_5XZoom") >= 1, 2);
+			HC2G A 0;
+			#### # 1;
+			Goto Ready2;
 
         Reload:
-			TNT1 A 0 A_JumpIfInventory("HCRAmmo",10,"ReadyToFire");
-			TNT1 A 0 A_JumpIfInventory("HighCalClip",1,1);
+			TNT1 A 0 A_JumpIfInventory("HCRAmmo",12,"ReadyToFire");
+			TNT1 A 0 A_JumpIfInventory("HighCalClip",1,2);
+			TNT1 A 0 A_JumpIf(Invoker.isZoomed, "NoAmmoZoomed");
 			Goto ReadyToFire;
 			HCRA A 0 {
 				invoker.isZoomed = false;
@@ -516,11 +528,11 @@ Class MO_HeavyRifle : JMWeapon
 			HCRR Q 1 A_StartSound("hcr/magout", CHAN_AUTO);
 			HCRR RS 1 {
 				JM_WeaponReady(WRF_NOFIRE);
-				if(CountInv("HCRAmmo") < 1) {JM_SetWeaponSprite("HR4R");}
+				if(CountInv("HCRIsEmpty") < 1) {JM_SetWeaponSprite("HR4R");}
 			}
 			HCRR TU 1 {
 				JM_WeaponReady(WRF_NOFIRE);
-				if(CountInv("HCRAmmo") < 1) {JM_SetWeaponSprite("HR4R");}
+				if(CountInv("HCRIsEmpty") < 1) {JM_SetWeaponSprite("HR4R");}
 			}
 			AR12 A 0 A_JumpIf(CountInv("HCRAmmo") >= 1, 2);
 			HCRR A 0 {MO_EjectCasing("ARMagazine", ejectpitch: frandom(-20, -15), speed: frandom(4, 5),  offset:(28, 16, -13));}
@@ -540,7 +552,7 @@ Class MO_HeavyRifle : JMWeapon
 			1CRR D 1 JM_WeaponReady(WRF_NOFIRE);
 			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 1);
 			1CRR EE 1 JM_WeaponReady(WRF_NOFIRE);
-			AR10 A 0 JM_ReloadGun("HCRAmmo", "HighCalClip",10,3);
+			AR10 A 0 JM_ReloadGun("HCRAmmo", "HighCalClip",12,3);
 			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 1);
 			1CRR FFG 1 JM_WeaponReady(WRF_NOFIRE);
 			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 1);
@@ -595,9 +607,9 @@ Class HCRAmmo : Ammo
 	Default
 	{
     Inventory.Amount 0;
-	Inventory.MaxAmount 10;
+	Inventory.MaxAmount 12;
 	Ammo.BackpackAmount 0;
-	Ammo.BackpackMaxAmount 10;
+	Ammo.BackpackMaxAmount 12;
 	Inventory.Icon "HCRCA0";
 	+INVENTORY.IGNORESKILL;
 	}
@@ -617,6 +629,7 @@ Class HCRGrenade : Actor
 	BounceType "Doom";
 	Projectile;
 	BounceFactor 0.5;
+	Obituary "$OB_HEAVYRIFLE_GRENADE";
 //	ReactionTime 30;
 	-NOGRAVITY
     +BLOODSPLATTER

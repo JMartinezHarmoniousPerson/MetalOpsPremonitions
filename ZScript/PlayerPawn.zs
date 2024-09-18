@@ -61,7 +61,7 @@ class MO_OfficerPlayer : MO_PlayerBase
 		Player.StartItem "LeverShottyAmmo",7;
 		Player.StartItem "PumpShotgunAmmo", 8;
 		Player.StartItem "ARAmmo",30;
-		Player.StartItem "HCRAmmo",10;
+		Player.StartItem "HCRAmmo",12;
 		Player.StartItem "SMGAmmo",40;
 		Player.StartItem "SSGAmmo",2;
 		Player.StartItem "PlasmaAmmo",60;
@@ -99,7 +99,7 @@ class MO_SergeantPlayer : MO_PlayerBase
 		Player.StartItem "ARAmmo",30;
 		Player.StartItem "SMGAmmo",40;
 		Player.StartItem "SSGAmmo",2;
-		Player.StartItem "HCRAmmo",10;
+		Player.StartItem "HCRAmmo",12;
 		Player.StartItem "PlasmaAmmo",60;
 		Player.StartItem "Katana";
 		Player.StartItem "MOLOTOVAMMO",4;

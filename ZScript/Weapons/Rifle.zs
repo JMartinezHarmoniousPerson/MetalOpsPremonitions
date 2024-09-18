@@ -99,19 +99,18 @@ Class AssaultRifle : JMWeapon
 		Ready2:
 			TNT1 A 0 A_JumpIf(invoker.ADSMode <= 0, "ADSToggle");
 			TNT1 A 0 A_JumpIf(invoker.ADSMode == 1, "ADSHold");
-			TNT1 A 0 A_JumpIf(PressingFire(), "Fire");
 			AR1Z EEEEE 1 
 			{
 				if(JustPressed(BT_ATTACK)) {return ResolveState("Fire");}
 				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOFIRE);
 			}
-			TNT1 A 0 A_JumpIf(PressingAltFire() , "ADSHold");
+			TNT1 A 0 A_JumpIf(invoker.ADSMode == 2 && PressingAltFire() , "ADSHold");
 
 		ADSToggle:
 			AR1Z E 1 
 			{
-				JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
 				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("UnZoom");}
+				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
 			}
 			Loop;
 
@@ -119,8 +118,8 @@ Class AssaultRifle : JMWeapon
 			TNT1 A 0 {invoker.isHoldingAim = true;}
 			AR1Z E 1 
 			{
-				JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
 				if(!PressingAltFire()) {SetWeaponState("UnZoom");}
+				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
 			}
 			Loop;
 
@@ -200,10 +199,15 @@ Class AssaultRifle : JMWeapon
 			"####" "#" 1 JM_WeaponReady(WRF_NoFire);
 			AR1F A 0 A_JumpIf(PressingFire(), "FireFinished");
 			Goto ReadyToFire;
+
+		NoAmmoZoomed:
+			AR1Z E 1;
+			Goto Ready2;
         
         Reload:
 			TNT1 A 0 A_JumpIfInventory("ARAmmo",30,"ReadyToFire");
-			TNT1 A 0 A_JumpIfInventory("HighCalClip",1,1);
+			TNT1 A 0 A_JumpIfInventory("HighCalClip",1,2);
+			TNT1 A 0 A_JumpIf(invoker.isZoomed, "NoAmmoZoomed");
 			Goto ReadyToFire;
 			TNT1 AAA 0;
 			AR10 A 0 {

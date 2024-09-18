@@ -104,10 +104,9 @@ OB_BFG9000  = "%o felt the extreme power of %k's BFG9K.";
 OB_BFG9000SPLS = "%o couldn't escape from %k's BFG9K.";
 
 //Heavy Combat Rifle
-TAG_HEAVYRIFLE = "Heavy Combat Rifle";
-OB_HEAVYRIFLE = "%o got sniped by %k's Heavy Combat Rifle.";
-OB_HEAVYRIFLE_GRENADE = "%o swallowed %k's 40mm Grenade from a Heavy Combat Rifle.";
-OB_HEAVYRIFLE_GRENADE_SPLASH = "%o tried to evade %k's 40mm Grenade from a Heavy Combat Rifle.";
+TAG_HEAVYRIFLE = "Heavy Marksman Rifle";
+OB_HEAVYRIFLE = "%o got sniped by %k's Heavy Marksman Rifle.";
+OB_HEAVYRIFLE_GRENADE = "%o swallowed a 40mm Grenade fired from %k's Heavy Marksman Rifle.";
 
 //Unmaker
 GOTUNMAKER = "You got the Unmaker! Unleash the power of Hell itself on your foes! (Slot 7)";
