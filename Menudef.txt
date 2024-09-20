@@ -1,24 +1,91 @@
-AddOptionMenu "OptionsMenu"
+LISTMENU "MainMenu"
 {
-	Submenu "Mod Settings", "Modsettings"
-	StaticText ""
+	IfGame(Doom, Chex)
+	{
+		LineSpacing 16	// This must account for some single-graphic replacements, so it cannot be widened
+		StaticPatch 94, 2, "M_DOOM"
+		Position 97, 72
+		IfOption(ReadThis)
+		{
+			Position 97, 64
+		}
+	}
+	IfGame(Strife)
+	{
+		StaticPatch 84, 2, "M_STRIFE"
+		Position 97, 45
+	}
+	IfGame(Heretic)
+	{
+		StaticPatch 88, 0, "M_HTIC"
+		StaticPatch 40, 10, "M_SKL01"
+		StaticPatch 232, 10, "M_SKL00"
+		Position 110, 56
+	}
+	IfGame(Hexen)
+	{
+		StaticPatch 88, 0, "M_HTIC"
+		StaticPatch 37, 80, "FBULB0"
+		StaticPatch 278, 80, "FBULA0"
+		Position 110, 56
+	}
+
+	IfGame(Doom, Strife, Chex)
+	{
+		TextItem "$MNU_NEWGAME", "n", "PlayerclassMenu"
+		ifOption(SwapMenu)
+		{
+			TextItem "$MNU_LOADGAME", "l", "LoadGameMenu"
+			TextItem "$MNU_SAVEGAME", "s", "SaveGameMenu"
+			TextItem "$MNU_OPTIONS", "o", "OptionsMenu"
+			 TextItem "$MNU_MOSETTINGS", "h", "MetalOpsMenu"
+		}
+		else
+		{
+			TextItem "$MNU_OPTIONS", "o", "OptionsMenu"
+			 TextItem "$MNU_MOSETTINGS", "h", "MetalOpsMenu"
+			TextItem "$MNU_LOADGAME", "l", "LoadGameMenu"
+			TextItem "$MNU_SAVEGAME", "s", "SaveGameMenu"
+		}
+		ifOption(ReadThis)
+		{
+			TextItem "Read This!","r", "ReadThisMenu"
+		}
+		TextItem "Quit Game", "q", "QuitMenu"
+	}
+
+	IfGame(Heretic, Hexen)
+	{
+		TextItem "$MNU_NEWGAME", "n", "PlayerclassMenu"
+		TextItem "$MNU_OPTIONS", "o", "OptionsMenu"
+		TextItem "$MNU_GAMEFILES", "g", "GameFilesMenu"
+		TextItem "$MNU_INFO", "i", "ReadThisMenu"
+		TextItem "$MNU_QUITGAME", "q", "QuitMenu"
+	}
 }
 
-
-OptionMenu "Modsettings"
+OptionMenu "MetalOpsMenu"
 {
+	class TF_TooltipOptionMenu
+	DefaultSelection 3
+	TooltipGeometry 0.0, 0.45, 0.3, 1.0, 0.5
+	TooltipAppearance "", "", "tfttbg"
 	Title "$MO_MOPSETTINGS"
 	StaticText ""
 	Submenu "$NCH_OPTMNU_TITLE", "NCHUD"
+	ToolTip "Open the HUD options for Metal Ops: Premonitions."
+	StaticText ""
+	SubMenu "$FPP_TITOP", "FlashlightPlusOptions"
+	ToolTip "Go to Flashlight++ options."
 	StaticText ""
 	Option "SSG randomly replaces Shotgun spawn", "mo_ssgrandomizer", "yesno"
-	StaticText "The SSG would randomly replace the Shotgun."
-	StaticText "This option should only be used if you're playing Doom 1 or FreeDoom Phase 1", darkgrey
+	ToolTip "$MO_SSGTIP"
 	StaticText ""
 	Option "Bullet ricochet sounds", "mo_bulletsparksound", "OnOff"
-	StaticText "Play bullet ricochet sounds if bullets hit a wall."
-	StaticText ""
+	Tooltip "$MO_RICOCHET"
 	Option "$MO_ADSOPT", "mo_aimmode", "ADSControl"
+	Tooltip "$MO_ADSTIP"
+	Tooltip "$MO_ADSTIP_CHAINGUN"
 	StaticText ""
 	Option "Disable Gun Recoil", "mo_nogunrecoil", "yesno"
 	StaticText "Disables recoil on shootable weapons."
@@ -120,9 +187,18 @@ OptionMenu "NCH_GeneralOptions"
 
 OptionMenu "NCH_AmmoListOptions"
 {
+	class TF_TooltipOptionMenu
+	DefaultSelection 4
+	TooltipGeometry 0.0, 0.45, 0.3, 1.0, 0.5
+	TooltipAppearance "", "", "tfttbg"
+
 	Title "$NCH_OPTMNU_AMMOLIST"
 	Option "$NCH_OPTION_DRAWMODE", "nchud_toggleammo", "NCH_AmmoListDrawModes"
+	ToolTip "Off: The ammo list is not drawn. \nOwned weapons: Only displays owned weapons. \nAll: Displays all of the ammo list."
+	ToolTip "\cyI recommend setting this to All!"
 	Option "$NCH_OPTION_AMMOLISTOVERRIDE", "nchud_allowammolistoverride", "YesNo", "nchud_toggleammo"
+	ToolTip "\cyTURN THIS OPTION ON"
+	
 }
 
 OptionMenu "NCH_OvermaxBarModeOptions"
@@ -266,12 +342,18 @@ OptionMenu "FlashlightPlusOptions"
 
 AddOptionMenu "OptionsMenu"
 {
+	Submenu "$MO_MOPSETTINGS", "MetalOpsMenu"
+	StaticText ""
+
 	Submenu "$FPP_TITOP", "FlashlightPlusOptions"
 	StaticText ""
 }
 
 AddOptionMenu "OptionsMenuSimple"
 {
+	Submenu "$MO_MOPSETTINGS", "MetalOpsMenu"
+	StaticText ""
+
 	Submenu "$FPP_TITOP", "FlashlightPlusOptions"
     StaticText ""
 }
