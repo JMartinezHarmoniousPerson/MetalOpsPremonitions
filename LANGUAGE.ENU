@@ -71,7 +71,12 @@ NCH_OPTION_SPAWNHPTHRESHOLD = "Spawn health threshold";
 NCH_OPTION_BGCOLOR = "Backgrounds";
 NCH_OPTION_HICOLOR = "Highlight";
 
-//Metal ops Language
+
+//----------------------------------------------------------------
+//
+//					METAL OPS LANGUAGE
+//
+//-----------------------------------------------------------------
 
 //Katana
 TAG_KATANA = "Katana";
@@ -136,6 +141,7 @@ MO_NVISOPTN = "Night Vision Shader Color";
 MO_NVISGREN = "Green Phosphor";
 MO_NVISGREN2 = "Digital Green Phosphor";
 MO_NVISWHT = "White Phosphor";
+MO_NVISTIP = "\czWhite Phosphor: A modern teal color, may have better visibility. \n\cdGreen Phosphor: The classic green that everyone knows and loves." ;
 MO_SSGTIP = "The SSG will randomly spawn in place of the Shotgun. \n\cuThis option should only be used if you're playing Doom 1 or Freedoom Phase 1 if you want too.";
 MO_ADSOPT = "ADS/Minigun Spin Control Type";
 MO_ADSTIP = "Toggle: Click alt fire once to aim down the sights, click alt fire again to to unzoom. \nHold: Click alt fire to aim down the sights, release to unzoom. \nHybrid: Based on BDv21's system that combines both Toggle and Hold." ;
