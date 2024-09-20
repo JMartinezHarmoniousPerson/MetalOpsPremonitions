@@ -1,5 +1,9 @@
 [enu default]
 
+//------------------------------------------------------------------
+//	NC HUD
+//------------------------------------------------------------------
+
 NCH_LABEL_TIME = "T";
 NCH_LABEL_KILLS = "K";
 NCH_LABEL_ITEMS = "I";
@@ -125,16 +129,21 @@ SECRETMESSAGE3 = "A secret place!";
 SECRETMESSAGE4 = "You found a secret area!";
 
 
-//Options
+//Metal Ops Options
+MNU_MOSETTINGS = "Metal Ops Settings";
 MO_MOPSETTINGS = "Metal Ops: Premonitions Settings";
 MO_NVISOPTN = "Night Vision Shader Color";
 MO_NVISGREN = "Green Phosphor";
 MO_NVISGREN2 = "Digital Green Phosphor";
 MO_NVISWHT = "White Phosphor";
-MO_ADSOPT = "ADS Control Type";
+MO_SSGTIP = "The SSG will randomly spawn in place of the Shotgun. \n\cuThis option should only be used if you're playing Doom 1 or Freedoom Phase 1 if you want too.";
+MO_ADSOPT = "ADS/Minigun Spin Control Type";
+MO_ADSTIP = "Toggle: Click alt fire once to aim down the sights, click alt fire again to to unzoom. \nHold: Click alt fire to aim down the sights, release to unzoom. \nHybrid: Based on BDv21's system that combines both Toggle and Hold." ;
+MO_ADSTIP_CHAINGUN = "Chaingun: Toggle is pressing once to spin the barrel, and press again to stop. \nHold is pressing once to spin the barrel, release to stop it. Hybrid combines both.";
 MO_ADSTOGGLE = "Toggle";
 MO_ADSHOLD = "Hold";
 MO_ADSHYBRID = "Hybrid (BDv21 aim style)";
+MO_RICOCHET = "Toggle the bullet ricochet sounds when bullet based hitscan attacks hit the wall, ceiling or floor.";
 
 
 // Flashlight++ - https:// forum.zdoom.org/viewtopic.php?t=75585

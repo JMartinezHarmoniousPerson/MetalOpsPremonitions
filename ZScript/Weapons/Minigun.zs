@@ -8,7 +8,8 @@ class MO_MiniGun : JMWeapon
 		MO_EjectCasing(c1, true, frandom(-50, -35), speed: frandom(4, 7), offset: ofs);
 		MO_EjectCasing(c2, true, frandom(-50, -35), speed: frandom(4, 7), offset: ofs);
 	}
-
+	
+	bool isHolding;
 	Default
 	{
 		Weapon.AmmoUse 1;
@@ -20,6 +21,13 @@ class MO_MiniGun : JMWeapon
 		Tag "Vulcan Minigun";
 		Inventory.PickupSound "weapons/minigun/pickup";
 	}
+
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		isHolding = false;
+	}
+
 	States
 	{
 	ContinueSelect:
@@ -35,7 +43,8 @@ class MO_MiniGun : JMWeapon
 		Loop;
 	Deselect:
 		tnt1 a 0;
-		TNT1 A 0 A_JumpIfInventory("MinigunSpin",1,"DeselectMinigunSpin");
+		TNT1 A 0 {invoker.isHolding = False;}
+		TNT1 A 0 A_JumpIfInventory("MinigunSpin",1,"DeselectSpin");
 		TNT1 A 0 A_StopSound(CHAN_WEAPON);
 		TNT1 A 0 A_StopSound(CHAN_AUTO);
 	ActuallySwitchWeapons:
@@ -206,6 +215,7 @@ class MO_MiniGun : JMWeapon
 	
 	StopAltFire:
 		TNT1 A 0 {
+			invoker.isHolding = false;
 			A_StopSound(1);
 			A_StopSound(5);
 			A_StopSound(4);
@@ -250,10 +260,25 @@ class MO_MiniGun : JMWeapon
 		MGNG AABCD 1;
 		TNT1 A 0 A_StartSound("Weapons/Minigun/Loop",6, CHANF_LOOPING);
 		MGNG EFGH 1;
+		TNT1 A 0 {
+			if(invoker.ADSMode == 1) {invoker.isHolding = true;}
+			if(invoker.ADSMode == 2 && PressingAltFire()) {invoker.isHolding = true;}
+		}
 	ReadyToFire2:
 		TNT1 A 0 A_StartSound("Weapons/Minigun/Loop",6, CHANF_LOOPING);
 		TNT1 A 0 A_StopSound(CHAN_WEAPON);
-		MGNG ABCDEFGH 1 JM_WeaponReady();
+		MGNG ABCDEFGH 1 
+		{
+				if(invoker.isHolding && !PressingAltFire())
+				{
+					return ResolveState("StopAltFire");
+				}
+				else if(!invoker.isHolding && JustPressed(BT_ALTATTACK))
+				{
+					return ResolveState("StopAltFire");
+				}
+				return JM_WeaponReady(WRF_NOSECONDARY);
+		}
 		Loop;
 	MuzzleFlashStarting:
 		TNT1 A 0 A_Jump(256, "MS1", "MS2", "MS3", "MS4");

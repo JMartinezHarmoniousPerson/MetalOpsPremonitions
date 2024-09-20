@@ -65,7 +65,7 @@ class JMWeapon : Weapon
 	{
 		static const string weaponPrefix[] =
 		{
-			"Pistol", "Deagle", "SMG", "LAS", "PSG", "SSG", "Rifle", "Chain", 
+			"Pistol", "Deagle", "SMG", "LAS", "PSG", "SSG", "Rifle", "HMR", "Chaingun",
 			"RL", "RLGuided", "Plasma", "Rail", "BFG", "MP40", "Unmaker",
 			"Flamer"
 		};

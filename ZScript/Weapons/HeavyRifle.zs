@@ -3,7 +3,7 @@
 Class HCRIsEmpty : MO_ZSToken{}
 Class HCR_GLMode : MO_ZSToken{}
 Class HCR_3XZoom : MO_ZSToken{}
-Class HCR_5XZoom : MO_ZSToken{}
+Class HCR_6XZoom : MO_ZSToken{}
 
 Class MO_HeavyRifle : JMWeapon
 {
@@ -77,7 +77,7 @@ Class MO_HeavyRifle : JMWeapon
 				invoker.isHoldingAim = false;
 				invoker.isZoomed = false;
 				A_SetInventory("HCR_3XZoom",0);
-				A_SetInventory("HCR_5XZoom",0);
+				A_SetInventory("HCR_6XZoom",0);
 				A_ZoomFactor(1.0);
 			}
 			Goto ClearAudioAndResetOverlays;
@@ -144,7 +144,7 @@ Class MO_HeavyRifle : JMWeapon
 			Stop;
 
 		Fire2:
-			TNT1 A 0 A_JumpIf(CountInv("HCR_3XZoom") || CountInv("HCR_5XZoom") >= 1, "SniperFire");
+			TNT1 A 0 A_JumpIf(CountInv("HCR_3XZoom") || CountInv("HCR_6XZoom") >= 1, "SniperFire");
 			TNT1 A 0 JM_CheckMagHMR(1);
             HC2G B 1 BRIGHT {
                 A_FireBullets(5.6, 0, 1, 28, "UpdatedBulletPuff",FBF_NORANDOM);
@@ -281,13 +281,13 @@ Class MO_HeavyRifle : JMWeapon
 			Goto ReadyToFire;
 
 		ZoomSniper:
-			TNT1 A 0 A_JumpIfInventory("HCR_5XZoom",1, "ReturnToNormalAim");
+			TNT1 A 0 A_JumpIfInventory("HCR_6XZoom",1, "ReturnToNormalAim");
 			TNT1 A 0 A_StartSound("hcr/sniperzoom");
 			TNT1 A 0 A_JumpIfInventory("HCR_3XZoom",1, "Zoom5X");
 			TNT1 A 0
 			{
 				A_SetInventory("HCR_3XZoom",1);
-				A_SetInventory("HCR_5XZoom",0);
+				A_SetInventory("HCR_6XZoom",0);
 				A_Print("Sniper bullets enabled, 3x Sniper Zoom");
 				A_ZoomFactor(3.4);
 			}
@@ -299,9 +299,9 @@ Class MO_HeavyRifle : JMWeapon
 			TNT1 A 0
 			{
 					A_SetInventory("HCR_3XZoom",0);
-					A_SetInventory("HCR_5XZoom",1);
-					A_Print("5x Sniper Zoom");
-					A_ZoomFactor(5.4);
+					A_SetInventory("HCR_6XZoom",1);
+					A_Print("6x Sniper Zoom");
+					A_ZoomFactor(6.5);
 			}
 			Goto SniperReady;
 
@@ -310,7 +310,7 @@ Class MO_HeavyRifle : JMWeapon
 			{
 					A_StartSound("hcr/sniperunzoom");
 					A_SetInventory("HCR_3XZoom",0);
-					A_SetInventory("HCR_5XZoom",0);
+					A_SetInventory("HCR_6XZoom",0);
 					A_Print("Normal Aim, sniper bullets disabled");
 					A_ZoomFactor(1.4);
 			}
@@ -322,7 +322,7 @@ Class MO_HeavyRifle : JMWeapon
 			TNT1 A 0
 			{
 					A_SetInventory("HCR_3XZoom",0);
-					A_SetInventory("HCR_5XZoom",0);
+					A_SetInventory("HCR_6XZoom",0);
 					A_ZoomFactor(1.4);
 			}
 			HC2Z CBA 1;
@@ -345,7 +345,7 @@ Class MO_HeavyRifle : JMWeapon
 			}
 			HCRZ ABCDEF 1;
 		Ready2:
-			TNT1 A 0 A_JumpIf(CountInv("HCR_3XZoom") || CountInv("HCR_5XZoom") >= 1, "SniperReady");
+			TNT1 A 0 A_JumpIf(CountInv("HCR_3XZoom") || CountInv("HCR_6XZoom") >= 1, "SniperReady");
 			TNT1 A 0 A_JumpIf(invoker.ADSMode <= 0, "ADSToggle");
 			TNT1 A 0 A_JumpIf(invoker.ADSMode == 1, "ADSHold");
 			TNT1 A 0 A_JumpIf(PressingFire(), "Fire2");
@@ -406,7 +406,7 @@ Class MO_HeavyRifle : JMWeapon
 				invoker.isZoomed = false;
 				invoker.isHoldingAim = false;
 				A_SetInventory("HCR_3XZoom",0);
-				A_SetInventory("HCR_5XZoom",0);
+				A_SetInventory("HCR_6XZoom",0);
 				A_StartSound("weapon/adsdown",0);
 				A_ZoomFactor(1.0);
 				A_SetCrosshair(0);
@@ -484,7 +484,7 @@ Class MO_HeavyRifle : JMWeapon
 			STOP;
 	
 		NoAmmoZoomed:
-			HC2Z D 0 A_JumpIf(CountInv("HCR_3XZoom") || CountInv("HCR_5XZoom") >= 1, 2);
+			HC2Z D 0 A_JumpIf(CountInv("HCR_3XZoom") || CountInv("HCR_6XZoom") >= 1, 2);
 			HC2G A 0;
 			#### # 1;
 			Goto Ready2;
@@ -499,7 +499,7 @@ Class MO_HeavyRifle : JMWeapon
 				invoker.isHoldingAim = false;
 				A_ZoomFactor(1.0);
 				A_SetInventory("HCR_3XZoom",0);
-				A_SetInventory("HCR_5XZoom",0);
+				A_SetInventory("HCR_6XZoom",0);
 				A_SetCrosshair(0);
 			}
 			AR1F A 0 {

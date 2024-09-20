@@ -52,6 +52,12 @@ version "4.5.0"
 #include "ZSCRIPT/Flashlight++/FPP_Handler.zs"
 #include "ZSCRIPT/Flashlight++/FPP_Light.zs"
 
+//LibTool Tips
+#include "ZScript/libtooltipmenu/Tooltips.zsc"
+#include "ZScript/libtooltipmenu/TooltipOptionMenu.zsc"
+#include "ZScript/libtooltipmenu/TooltipListMenu.zsc"
+
+
 Class BaseVisualSFX : Actor// From Particle Fire Enhancer Mod (v0.8) by Z86
 {
 	Default
