@@ -234,7 +234,6 @@ Class MO_HeavyRifle : JMWeapon
 				If(JustPressed(BT_ATTACK)) {Return ResolveState("SniperFire");}
 				return JM_WeaponReady(WRF_NOFIRE);
 			}
-			TNT1 A 0 JM_CheckMagHMR(3);
 			AR1F A 0
 			{
 				if(invoker.ADSMode >= 1)
