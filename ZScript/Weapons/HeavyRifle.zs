@@ -33,6 +33,8 @@ Class MO_HeavyRifle : JMWeapon
 	{
 		Super.PostBeginPlay();
 		hcrFiredGrenade = false;
+		isZoomed = false;
+		isHoldingAim = false;
 	}
 
     States
@@ -235,6 +237,7 @@ Class MO_HeavyRifle : JMWeapon
 				If(JustPressed(BT_ATTACK)) {Return ResolveState("SniperFire");}
 				return JM_WeaponReady(WRF_NOFIRE);
 			}
+			TNT1 A 0 JM_CheckMagHMR(1);
 			AR1F A 0
 			{
 				if(invoker.ADSMode >= 1)
@@ -399,7 +402,12 @@ Class MO_HeavyRifle : JMWeapon
 		SniperToggle:
 			HC2Z D 1 
 			{
-				if(JustPressed(BT_ALTATTACK)) {SetWeaponState("SniperUnZoom");}
+				if(JustPressed(BT_ALTATTACK)) 
+				{
+					invoker.isZoomed = false;
+					invoker.isHoldingAim = false;
+					SetWeaponState("SniperUnZoom");
+				}
 				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
 			}
 			Loop;
@@ -408,7 +416,12 @@ Class MO_HeavyRifle : JMWeapon
 			TNT1 A 0 {invoker.isHoldingAim = true;}
 			HC2Z D 1 
 			{
-				if(!PressingAltFire()) {SetWeaponState("SniperUnZoom");}
+				if(!PressingAltFire()) 
+				{
+					invoker.isZoomed = false;
+					invoker.isHoldingAim = false;
+					SetWeaponState("SniperUnZoom");
+				}
 				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
 			}
 			Loop;
