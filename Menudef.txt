@@ -67,7 +67,6 @@ LISTMENU "MainMenu"
 OptionMenu "MetalOpsMenu"
 {
 	class TF_TooltipOptionMenu
-	DefaultSelection 3
 	TooltipGeometry 0.0, 0.45, 0.3, 1.0, 0.5
 	TooltipAppearance "", "", "tfttbg"
 	Title "$MO_MOPSETTINGS"
@@ -78,6 +77,7 @@ OptionMenu "MetalOpsMenu"
 	SubMenu "$FPP_TITOP", "FlashlightPlusOptions"
 	ToolTip "Go to Flashlight++ options."
 	StaticText ""
+//	SubMenu "Customizable Crosshairs", "CustomCrosshairsMenu"
 	Option "SSG randomly replaces Shotgun spawn", "mo_ssgrandomizer", "yesno"
 	ToolTip "$MO_SSGTIP"
 	StaticText ""
@@ -101,7 +101,25 @@ OptionMenu "MetalOpsMenu"
 	Option "NVG Shader scanlines", "mo_nvscanlines", "OnOff"
 	StaticText ""
 }
-
+/*
+OptionMenu "CustomCrosshairsMenu"
+{
+	class TF_TooltipOptionMenu
+	TooltipGeometry 0.0, 0.45, 0.3, 1.0, 0.5
+	TooltipAppearance "", "", "tfttbg"
+	Title "Customizable Crosshair Options"
+	Option "Enable custom crosshairs", "mo_customxhairs", "OnOff"
+	ToolTip "Crosshair 0 is the default crosshair set by the player. \nCrosshair 5 is nothing at all. \n\crYou need to exit back to the game in order for it take effect."
+	StaticText "Slot 2:"
+	Slider "Pistol", "mo_xhairpistol", 0, 99, 1
+	Slider "Deagle", "mo_xhairDeagle", 0, 99, 1
+	Slider "Submachine Gun", "MO_XHairSMG", 0, 99, 1
+	StaticText "Slot 3:"
+	Slider "Lever Action Shotgun", "mo_xhairLAS", 0, 99, 1
+	Slider "Pump Action Shotgun", "mo_xhairPSG", 0, 99, 1
+	Slider "Super Shotgun", "mo_xhairSSG", 0, 99, 1
+}
+*/
 OptionValue "MO_NightVisionColors"
 {
 	0, "$MO_NVISGREN"
@@ -194,7 +212,6 @@ OptionMenu "NCH_GeneralOptions"
 OptionMenu "NCH_AmmoListOptions"
 {
 	class TF_TooltipOptionMenu
-	DefaultSelection 4
 	TooltipGeometry 0.0, 0.45, 0.3, 1.0, 0.5
 	TooltipAppearance "", "", "tfttbg"
 
