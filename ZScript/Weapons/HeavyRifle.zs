@@ -204,7 +204,8 @@ Class MO_HeavyRifle : JMWeapon
             Goto Ready2;
 
 		SniperFire:
-			TNT1 A 0 JM_CheckMagHMR(3);
+			TNT1 A 0 JM_CheckMagHMR(1);
+			TNT1 A 0 JM_CheckMagHMR(3, "LowSniperCount");
             HC2Z D 1 BRIGHT {
                 A_FireBullets(5.6, 0, 1, 44, "UpdatedBulletPuff",FBF_NORANDOM);
                 A_TakeInventory("HCRAmmo", 3,TIF_NOTAKEINFINITE);
@@ -313,9 +314,21 @@ Class MO_HeavyRifle : JMWeapon
 					A_Print("Normal Aim, sniper bullets disabled");
 					A_ZoomFactor(1.4);
 			}
+		SniperUnzoomAnimation:
 			HC2Z CBA 1;
 			HC2G A 1;
 			Goto Ready2;
+
+	LowSniperCount:
+		TNT1 A 0
+		{
+				A_StartSound("hcr/sniperunzoom");
+				A_SetInventory("HCR_3XZoom",0);
+				A_SetInventory("HCR_6XZoom",0);
+				A_Print("Returning to normal ADS, not enough rounds.");
+				A_ZoomFactor(1.4);
+		}
+		Goto SniperUnZoomAnimation;
 
 		SniperUnZoom:
 			TNT1 A 0
