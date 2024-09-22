@@ -249,10 +249,12 @@ class PumpShotgun : JMWeapon
 			PGR2 KKKKKK 1;
             PGR2 A 0 A_StartSound("weapons/pumpshot/pumpforward", 0);
             PGR2 KLM 1;
+			PSGG A 0 A_JumpIf(PressingFire() || PressingAltFire(), "DoneReload");
             PGR2 M 9 
 			{
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(5);}
 			}
+			PSGG A 0 A_JumpIf(PressingFire() || PressingAltFire(), "DoneReload");
             Goto ShellLoop;
 		FlashKick:
 		PSGM ABCDEF 1 JM_WeaponReady();
