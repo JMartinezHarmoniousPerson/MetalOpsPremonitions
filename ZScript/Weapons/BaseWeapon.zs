@@ -8,8 +8,6 @@ class JMWeapon : Weapon
 	int adsMode;
 	string inspectToken;
 	property InspectToken: inspectToken;
-
-
 	bool isZoomed;
 
 	//weapons should ALWAYS bob, fucking fight me -popguy
@@ -23,6 +21,12 @@ class JMWeapon : Weapon
 		{
 			player.WeaponState |= WF_WEAPONBOBBING;
 		}
+	}
+
+	override void PostBeginPlay()
+	{	
+			isZoomed = false;
+			isHoldingAim = false;
 	}
 
 	override void MarkPrecacheSounds()
@@ -128,9 +132,9 @@ class JMWeapon : Weapon
 	action state JM_WeaponReady(int wpflags = 0)
 	{	
 		A_WeaponReady(wpflags);
-		if(player.cmd.buttons & BT_USER1)
+		if(JustPressed(BT_USER1))
 		{
-			if(CheckIfInReady() && !invoker.isZoomed)
+			if(CheckIfInReady())
 			return ResolveState("TossThrowable");
 		}
 		if(JustPressed(BT_USER4) && CheckIfInReady())
@@ -229,7 +233,6 @@ class JMWeapon : Weapon
 		Ready:
 		FIRE:
 		ReallyReady:
-			"####" A 0;
 			"####" A 0;
 			"####" AAAA 1 A_Jump(256, "readytofire");
 			Loop;
@@ -362,8 +365,13 @@ class JMWeapon : Weapon
 		
 		//From the PB Add-on	
 		TossThrowable:
-			"####" "#" 0;
+			"####" "#" 1;
 			"####" "#" 0 {
+				if(player.readyweapon.GetClassName() == "MO_HeavyRifle" && CountInv("HCR_3XZoom") >= 1 || CountInv("HCR_6XZoom") >= 1)
+				{
+					A_Print("You can't throw while in sniper mode!");
+					return ResolveState("ReallyReady");
+				}
 				if(CountInv("ThrowableType") == 1)
 				{return ResolveState("ThrowMolotov");}
 				else

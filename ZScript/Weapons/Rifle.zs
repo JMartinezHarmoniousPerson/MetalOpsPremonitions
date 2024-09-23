@@ -30,6 +30,7 @@ Class AssaultRifle : JMWeapon
 		SelectAnimation:
 			TNT1 A 0 A_StartSound("weapons/ar/select",0);
             AR1S ABCD 1;
+			HCRG A 0 A_JumpIf(invoker.isZoomed, "Zoom");
         ReadyToFire:
 			SMGG A 0 {if(invoker.isZoomed) {SetWeaponState("Ready2");}}
             AR1G A 1 
@@ -87,6 +88,7 @@ Class AssaultRifle : JMWeapon
 
 		AltFire:
 			TNT1 A 0 A_JumpIf(invoker.isZoomed, "UnZoom");
+		Zoom:
 			SMGR A 0 
 			{
 				invoker.isZoomed = True;

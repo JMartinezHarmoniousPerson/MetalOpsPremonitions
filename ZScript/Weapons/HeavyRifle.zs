@@ -67,6 +67,7 @@ Class MO_HeavyRifle : JMWeapon
 			TNT1 A 0 JM_CheckInspectIfDone;
             HCRI A 1 A_StartSound("hcr/draw", 0);
 			HCRI BCD 1;
+			HCRG A 0 A_JumpIf(invoker.isZoomed, "Zoom");
         ReadyToFire:
 			HCRG A 0 A_JumpIf(invoker.isZoomed, "Ready2");
 			HCRH F 0 A_JumpIf(FindInventory("HCR_GLMode"), 2);
@@ -353,6 +354,7 @@ Class MO_HeavyRifle : JMWeapon
 		AltFire:
 			HCRA A 0 A_JumpIfInventory("HCR_GLMode",1,"GrenadeFire");
 			HCRA A 0 A_JumpIf(invoker.isZoomed, "UnZoom");
+		Zoom:
 			HCRA A 0 {
 				invoker.isZoomed = true;
 				A_StartSound("weapon/adsup",0);

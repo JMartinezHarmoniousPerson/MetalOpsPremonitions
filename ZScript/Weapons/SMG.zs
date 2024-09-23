@@ -18,6 +18,12 @@ Class MO_SubMachineGun : JMWeapon
 		+WEAPON.NOALERT;
     }
 
+	override void PostBeginPlay()
+	{	
+			isZoomed = false;
+			isHoldingAim = false;
+	}
+
     States
     {
 		ContinueSelect:
@@ -48,22 +54,19 @@ Class MO_SubMachineGun : JMWeapon
 			TNT1 A 0 A_StartSound("weapons/smg/select",0);
 			SMGR A 0 A_SetCrosshair(0);
             SM5S ABCD 1;
+			SMGG A 0 A_JumpIf(invoker.isZoomed, "Zoom");
         ReadyToFire:
 			SMGG A 0 {if(invoker.isZoomed) {SetWeaponState("Ready2");}}
             SM5G A 1 
 			{
-				if(PressingAltFire() && invoker.ADSMode >= 1) {SetWeaponState("AltFire");}
-				if(JustPressed(BT_ALTATTACK) && invoker.ADSMode < 1) {SetWeaponState("AltFire");}
+				if(PressingAltFire() && invoker.ADSMode >= 1) {return ResolveState("AltFire");}
+				if(JustPressed(BT_ALTATTACK) && invoker.ADSMode < 1) {return ResolveState("AltFire");}
 				return JM_WeaponReady(WRF_NOSECONDARY|WRF_ALLOWRELOAD);
 			}
             Loop;
         Select:
 			TNT1 A 0;
-			TNT1 A 0 {
-				invoker.isZoomed = False;
-				invoker.isHoldingAim = False;
-			}
-			SMGR A 0 A_ZoomFactor(1.0);
+			TNT1 A 0 A_ZoomFactor(1.0);
 			Goto ClearAudioAndResetOverlays;
         Fire:
 			TNT1 A 0 JM_CheckMag("SMGAmmo");
@@ -127,6 +130,7 @@ Class MO_SubMachineGun : JMWeapon
 	
 		AltFire:
 			TNT1 A 0 A_JumpIf(invoker.isZoomed, "UnZoom");
+		Zoom:
 			TNT1 A 0 {invoker.isZoomed = true;}
 			SMGR A 0 A_StartSound("weapon/adsup",0);
 			SMGR A 0 A_ZoomFactor(1.3);
