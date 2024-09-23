@@ -61,13 +61,12 @@ class JMWeapon : Weapon
 	}
 
 //Holy shit I can't believe I got this working
-	int SetCustomXHair(int w)
+	int GetXHair(int w)
 	{
 		static const string weaponPrefix[] =
 		{
-			"Pistol", "Deagle", "SMG", "LAS", "PSG", "SSG", "Rifle", "HMR", "Chaingun",
-			"RL", "RLGuided", "Plasma", "Rail", "BFG", "MP40", "Unmaker",
-			"Flamer"
+			"Pistol", "Deagle", "MP40", "SMG", "LAS", "PSG", "SSG", "Rifle", "HMR", "Chaingun",
+			"RL", "RLGuided", "Plasma", "Rail", "BFG",  "Unmaker","Flamer", "HMR40MM"
 		};
 		string weaponCVar = "mo_xhair".. String.Format("%s", weaponPrefix[w]);
 		if(owner.GetCvar("mo_customxhairs"))
@@ -131,7 +130,7 @@ class JMWeapon : Weapon
 		A_WeaponReady(wpflags);
 		if(player.cmd.buttons & BT_USER1)
 		{
-			if(CheckIfInReady())
+			if(CheckIfInReady() && !invoker.isZoomed)
 			return ResolveState("TossThrowable");
 		}
 		if(JustPressed(BT_USER4) && CheckIfInReady())

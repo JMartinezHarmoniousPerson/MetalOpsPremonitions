@@ -68,6 +68,7 @@ Class MO_HeavyRifle : JMWeapon
             HCRI A 1 A_StartSound("hcr/draw", 0);
 			HCRI BCD 1;
         ReadyToFire:
+			HCRG A 0 A_JumpIf(invoker.isZoomed, "Ready2");
 			HCRH F 0 A_JumpIf(FindInventory("HCR_GLMode"), 2);
 			HCRG A 0;
             #### # 1 JM_WeaponReady(WRF_ALLOWRELOAD);
