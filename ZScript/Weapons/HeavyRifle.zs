@@ -14,6 +14,7 @@ Class MO_HeavyRifle : JMWeapon
         Weapon.AmmoType1 "HighCalClip";
         Weapon.AmmoType2 "HCRAmmo";
         Inventory.PickupMessage "You got the Heavy Combat Rifle! (Slot 4)";
+		Weapon.SelectionOrder 650;
         Obituary "$OB_HEAVYRIFLE";
         Tag "$TAG_HEAVYRIFLE";
 		Weapon.SlotNumber 4;
@@ -90,7 +91,7 @@ Class MO_HeavyRifle : JMWeapon
 			TNT1 A 0 JM_CheckMagHMR(1);
 			TNT1 A 0 A_GunFlash("Flash");
             TNT1 A 1 BRIGHT {
-                A_FireBullets(5.6, 0, 1, 28, "UpdatedBulletPuff",FBF_NORANDOM);
+                A_FireBullets(5.6, 0, 1, 30, "UpdatedBulletPuff",FBF_NORANDOM);
                 A_TakeInventory("HCRAmmo", 1,TIF_NOTAKEINFINITE);
                 A_StartSound("hcr/fire", 0);
 				A_Overlay(-2, "MuzzleSmoke");
@@ -151,7 +152,7 @@ Class MO_HeavyRifle : JMWeapon
 			TNT1 A 0 A_JumpIf(CountInv("HCR_3XZoom") || CountInv("HCR_6XZoom") >= 1, "SniperFire");
 			TNT1 A 0 JM_CheckMagHMR(1);
             HC2G B 1 BRIGHT {
-                A_FireBullets(5.6, 0, 1, 28, "UpdatedBulletPuff",FBF_NORANDOM);
+                A_FireBullets(5.6, 0, 1, 30, "UpdatedBulletPuff",FBF_NORANDOM);
                 A_TakeInventory("HCRAmmo", 1,TIF_NOTAKEINFINITE);
                 A_StartSound("hcr/fire", 0);
 				A_Overlay(-5, "ZOOMEDFLASH");
@@ -211,7 +212,7 @@ Class MO_HeavyRifle : JMWeapon
 			TNT1 A 0 JM_CheckMagHMR(1);
 			TNT1 A 0 JM_CheckMagHMR(3, "LowSniperCount");
             HC2Z D 1 BRIGHT {
-                A_FireBullets(5.6, 0, 1, 44, "UpdatedBulletPuff",FBF_NORANDOM);
+                A_FireBullets(5.6, 0, 1, 60, "UpdatedBulletPuff",FBF_NORANDOM);
                 A_TakeInventory("HCRAmmo", 3,TIF_NOTAKEINFINITE);
                 A_StartSound("hcr/fire", 0);
 				A_SpawnItemEx("ShotGunSmoke",20, zofs: 40, xvel: 2);
@@ -443,7 +444,8 @@ Class MO_HeavyRifle : JMWeapon
 			Goto ReadyToFire;
 
 		GrenadeFire:
-			TNT1 A 0 A_JumpIfInventory("MO_RocketAmmo",1,1);
+			TNT1 A 0 A_JumpIfInventory("MO_RocketAmmo",1,2);
+			TNT1 A 0 A_Print("Out of Rocket Ammo");
 			Goto ReadyToFire;
 			HCRA A 0 A_JumpIf(invoker.hcrFiredGrenade == true, "ReloadGrenade");
 			HCRA A 0 {invoker.hcrFiredGrenade = true;}

@@ -28,6 +28,7 @@ class EnforcerPistol : JMWeapon// replaces Pistol
 		Goto Ready;
 	Ready:
 		PSLF ABCDE 0;
+		PSTG A 0 A_SetCrosshair(invoker.GetXHair(0));
 	SelectAnimation:
 		TNT1 A 0 A_StartSound("weapons/pistol/draw",1);
 		PSTD ABCD 1;
@@ -42,7 +43,7 @@ class EnforcerPistol : JMWeapon// replaces Pistol
 		PSTG A 0 A_Lower(12);
 		Wait;
 	Select:
-		TNT1 A 0;
+		PSTG A 0;
 		Goto ClearAudioAndResetOverlays;
 	Fire:
 		PSTG A 0 JM_CheckMag("PistolMagAmmo", "Reload");	
@@ -52,7 +53,7 @@ class EnforcerPistol : JMWeapon// replaces Pistol
 		    {JM_SetWeaponSprite("PSLF");}
 		}
 		#### A 2 {
-			A_FireBullets (5.6, 0, 1, 14, "UpdatedBulletPuff", FBF_NORANDOM,0,"MO_BulletTracer", 0);
+			A_FireBullets (5.6, 0, 1, 10, "UpdatedBulletPuff", FBF_NORANDOM,0,"MO_BulletTracer", 0);
 				if(CountInv("PistolSilencer") == 1)
 				{
 					A_StartSound("weapons/pistol/silfire", CHAN_WEAPON);
@@ -94,7 +95,7 @@ class EnforcerPistol : JMWeapon// replaces Pistol
 		    {JM_SetWeaponSprite("PSLF");}
 		}
 		#### A 1 {
-			A_FireBullets (5.6, 0, 1, 14, "UpdatedBulletPuff", FBF_NORANDOM,0,"MO_BulletTracer", 0);
+			A_FireBullets (5.6, 0, 1, 10, "UpdatedBulletPuff", FBF_NORANDOM,0,"MO_BulletTracer", 0);
 			if(CountInv("PistolSilencer") == 1)
 			{
 				A_StartSound("weapons/pistol/silfire", CHAN_WEAPON);
