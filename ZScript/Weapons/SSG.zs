@@ -63,8 +63,10 @@ class MO_SSG : JMWeapon replaces SuperShotgun
             Loop;
 		Select:
 			TNT1 A 0;
+			TNT1 A 0 A_SetCrosshair(invoker.GetXHair(6));
 			Goto ClearAudioAndResetOverlays;
 		Deselect:
+			TNT1 A 0 A_SetCrosshair(invoker.GetXHair(6));
 			 SG2S DCBA 1;
 			 TNT1 A 0 A_Lower(12);
 			 Wait;

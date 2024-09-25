@@ -17,6 +17,12 @@ Class AssaultRifle : JMWeapon
 		Inventory.PickupSound "weapons/ar/pickup";
     }
 
+	override void PostBeginPlay()
+	{	
+			isZoomed = false;
+			isHoldingAim = false;
+	}
+
     States
     {
 		ContinueSelect:
@@ -42,11 +48,13 @@ Class AssaultRifle : JMWeapon
             Loop;
         Select:
 			TNT1 A 0;
-			TNT1 A 0 {
-				invoker.isZoomed = False;
+			TNT1 A 0 
+			{
+				invoker.isZoomed = false;
 				invoker.isHoldingAim = False;
+				A_ZoomFactor(1);
 			}
-			SMGR A 0 A_ZoomFactor(1.0);
+			TNT1 A 0 A_SetCrosshair(invoker.GetXHair(7));
 			Goto ClearAudioAndResetOverlays;
         Fire:
 			TNT1 A 0 JM_CheckMag("ARAmmo");
@@ -132,7 +140,7 @@ Class AssaultRifle : JMWeapon
 				invoker.isHoldingAim = False;
 				A_ZoomFactor(1);
 				A_StartSound("weapon/adsdown",0);
-				A_SetCrosshair(0);
+				A_SetCrosshair(invoker.GetXHair(7));
 			}
 			AR1Z EDCBA 1 JM_WeaponReady(WRF_NOFIRE);
 			Goto ReadyToFire;
@@ -190,6 +198,7 @@ Class AssaultRifle : JMWeapon
 				invoker.isZoomed = false;
 				invoker.isHoldingAim = False;
 				A_ZoomFactor(1);
+				A_SetCrosshair(invoker.GetXHair(7));
 			}
             AR1S DCBA 1;
             TNT1 A 0 A_Lower(12);

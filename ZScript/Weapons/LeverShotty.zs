@@ -45,17 +45,15 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		W87G A 0 A_JumpIf(PressingAltFire(), "AltFire");
 		Loop;
 	Deselect:
+		TNT1 A 0 A_SetCrosshair(invoker.GetXHair(4));
 		W87S FEDCBA 1;
 	DeselectFast:
 		TNT1 A 0 A_Lower(12);
 		Wait;
 	
-	DeselectToPSG:
-		TNT1 A 1 A_SelectWeapon("PumpShotgun");
-		Goto DeselectFast;
-	
 	Select:
 		TNT1 A 0;
+		TNT1 A 0 A_SetCrosshair(invoker.GetXHair(4));
 		Goto ClearAudioAndResetOverlays;
 	Fire:
 		PSTG A 0 JM_CheckMag("LeverShottyAmmo", "Reload");

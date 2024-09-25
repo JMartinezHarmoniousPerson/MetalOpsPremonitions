@@ -70,6 +70,9 @@ NCH_OPTION_HPCOUNTER = "Health counter";
 NCH_OPTION_SPAWNHPTHRESHOLD = "Spawn health threshold";
 NCH_OPTION_BGCOLOR = "Backgrounds";
 NCH_OPTION_HICOLOR = "Highlight";
+HUD_WARN1 = "Press = to switch the HUD to fullscreen.";
+HUD_WARN2 = "Make sure alternative HUD is disabled!";
+
 
 
 //----------------------------------------------------------------
@@ -92,16 +95,28 @@ GOTFLAMERGAS = "You got the gasoline from the Flamethrower!";
 GOTENFPISTOL = "You got the Enforcer Sidearm! (Slot 2)";
 OB_PISTOL = "%o was peppered by %k's Enforcer Sidearm.";
 
+//SMG
+GOTSMG = "You got the Submachine Gun! (Slot 2)"
+OB_SMG = "%o got turned into swiss cheese by %k's Submachine Gun.";
+TAG_SMG = "Submachine Gun";
+
 //Lever Shotgun
 GOTLVRSHOT = "You got the Lever Action Shotgun! (Slot 3");
 TAG_LVRSHOT = "Lever Action Shotgun";
 OB_LVRSHOT = "%o was terminated by %k's Lever Shotgun.";
 
-HUD_WARN1 = "Press = to switch the HUD to fullscreen.";
-HUD_WARN2 = "Make sure alternative HUD is disabled!";
+//Pump Shotgun
+GOTPUMPSHOTTY = "You got the Pump Action Shotgun! (Slot 3)";
+TAG_PUMPSHOTTY =  "Pump Shotgun";
+OB_PUMPSHOTTY = "%o got blasted away by %k's Pump Shotgun.";
 
 //SSG
 OB_SUPERSHOTGUN = "%o got %p insides eviscerated by %k's SSG.";
+
+//Combat Rifle
+GOTCOMBATRIFLE = "You got the Combat Rifle! (Slot 4)"
+OB_COMBATRIFLE = "%o was shot down by %k's Combat Rifle.";
+TAG_COMBATRIFLE = "Combat Rifle";
 
 //Minigun
 OB_MINIGUN = "%o was shredded to bits by %k's Minigun.";

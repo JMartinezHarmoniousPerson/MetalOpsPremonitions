@@ -17,6 +17,18 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
 			A_StartSound("weapons/bfg/chargelayer", 0, CHANF_DEFAULT,1);
 	}
 
+	action void MO_SetBFGCrosshair()
+	{
+		{
+				if(FindInventory("MO_BFG10KFire"))
+				{
+					A_SetCrossHair(invoker.GetXHair(18));
+				}
+				else 
+				{A_SetCrossHair(invoker.GetXHair(14));}
+		}
+	}
+
 	Default
 	{
 		Height 20;
@@ -32,6 +44,7 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
 	States
 	{
 	Ready:
+		
 	SelectAnimation:
 		TNT1 A 0 A_StartSound("weapons/bfg/draw",1);
 		B7SS ABCDEF 1;
@@ -42,12 +55,14 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
 		B7GG AABBCCDDEE 1 JM_WeaponReady;
 		Loop;
 	Deselect:
+		TNT1 A 0 MO_SetBFGCrosshair;
 		TNT1 A 0 A_StopSound(6);
 		B7SS FEDCBA 1;
 		B7GG A 0 A_Lower;
 		Wait;
 	Select:
 		TNT1 A 0;	
+		TNT1 A 0 MO_SetBFGCrosshair;
 		Goto ClearAudioAndResetOverlays;
 	ContinueSelect:
 		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();
@@ -101,6 +116,7 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
 		TNT1 A 0 A_SetInventory("MO_BFG10KFire",1);
 		TNT1 A 0 A_Print("BFG10K Fire", 1);
 	ActionSpecialAnim:
+		TNT1 A 0 MO_SetBFGCrosshair;
 		B7GA A 0 A_StartSound("bfg/switch",1); 
 		B7GG FFGHIJ 2;
 		Goto ReadyToFire;

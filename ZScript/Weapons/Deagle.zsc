@@ -22,7 +22,7 @@ class MO_Deagle : JMWeapon// replaces Pistol
 	ContinueSelect:
 		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();
 		Goto Ready;
-	Ready:
+	Ready:	
 	SelectAnimation:
 		TNT1 A 0 A_StartSound("weapons/deag/draw",1);
 		DGLS ABCD 1;
@@ -30,11 +30,13 @@ class MO_Deagle : JMWeapon// replaces Pistol
 		DGLG A 1 JM_WeaponReady(WRF_ALLOWRELOAD);
 		Loop;
 	Deselect:
+		TNT1 A 0 A_SetCrosshair(invoker.GetXHair(1));
 		DGLS DCBA 1;
 		PSTG A 0 A_Lower(12);
 		Wait;
 	Select:
 		TNT1 A 0;
+		TNT1 A 0 A_SetCrosshair(invoker.GetXHair(1));
 		Goto ClearAudioAndResetOverlays;
 	Fire:
 		PSTG A 0 JM_CheckMag("MODeagleAmmo", "Reload");
@@ -45,8 +47,8 @@ class MO_Deagle : JMWeapon// replaces Pistol
 			A_SpawnItemEx("BigGunSmoke",18,0,34,2,0,0);
 			JM_CheckForQuadDamage();
 			}
-		PSTG A 0 A_SpawnItemEx("PistolCasing",30, 3, 33, random(-2,2), random(4,6), random(4,7), 0);
 		DGLF B 1 JM_GunRecoil(-1.6, .19);
+		DGLG A 0 {MO_EjectCasing("PistolCasing", false, speed: frandom(4,7), offset: (20, 0, -6));}
 		DGLF C 1 JM_GunRecoil(-1.6, .19);
 		DGLF DD 1 JM_GunRecoil(-.9, .19);
 		DGLF E 2 JM_GunRecoil(-.9, -.19);
@@ -94,7 +96,7 @@ class MO_Deagle : JMWeapon// replaces Pistol
 		PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 		DGLR Q 1 JM_WeaponReady(WRF_NOFIRE);
 		DGLR R 1 JM_WeaponReady(WRF_NOFIRE);
-		PSTG A 0 JM_ReloadGun("MODeagleAmmo", "LowCalClip",7,1);
+		PSTG A 0 JM_ReloadGun("MODeagleAmmo", "LowCalClip",7,2);
 		DGLR STU 1 JM_WeaponReady(WRF_NOFIRE);
 		DGLR U 6 
 		{
@@ -132,7 +134,7 @@ class MO_Deagle : JMWeapon// replaces Pistol
 		PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 		DG2R Q 1;
 		DG2R R 1;
-		PSTG A 0 JM_ReloadGun("MODeagleAmmo", "LowCalClip",7,1);
+		PSTG A 0 JM_ReloadGun("MODeagleAmmo", "LowCalClip",7,2);
 		PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 		DG2R STUVW 1 JM_WeaponReady(WRF_NOFIRE);
 		PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);

@@ -77,7 +77,9 @@ OptionMenu "MetalOpsMenu"
 	SubMenu "$FPP_TITOP", "FlashlightPlusOptions"
 	ToolTip "Go to Flashlight++ options."
 	StaticText ""
-//	SubMenu "Customizable Crosshairs", "CustomCrosshairsMenu"
+	SubMenu "Customizable Crosshairs", "CustomCrosshairsMenu"
+	ToolTip "Open the Customizable Crosshairs option menu."
+	StaticText ""
 	Option "SSG randomly replaces Shotgun spawn", "mo_ssgrandomizer", "yesno"
 	ToolTip "$MO_SSGTIP"
 	StaticText ""
@@ -101,25 +103,45 @@ OptionMenu "MetalOpsMenu"
 	Option "NVG Shader scanlines", "mo_nvscanlines", "OnOff"
 	StaticText ""
 }
-/*
+
 OptionMenu "CustomCrosshairsMenu"
 {
-	class TF_TooltipOptionMenu
-	TooltipGeometry 0.0, 0.45, 0.3, 1.0, 0.5
-	TooltipAppearance "", "", "tfttbg"
 	Title "Customizable Crosshair Options"
 	Option "Enable custom crosshairs", "mo_customxhairs", "OnOff"
-	ToolTip "Crosshair 0 is the default crosshair set by the player. \nCrosshair 5 is nothing at all. \n\crYou need to exit back to the game in order for it take effect."
-	StaticText "Slot 2:"
+	StaticText "Crosshair 0 is the default crosshair set by the player.", "white"
+	StaticText "Crosshair 5 is nothing at all.", "purple"
+	StaticText "You need to exit back to the game in order for it take effect.", "gray"
+	StaticText ""
+	SafeCommand "Reset Default Crosshairs",  "mo_xhairs_defaultpreset"
+//	SafeCommand "Randomize Crosshairs", "mo_xhairs_randomize"
+	StaticText ""
+	StaticText "Slot 1"
+	Slider "Flamethrower", "MO_XHairFlamer", 0, 99, 1
+	StaticText "Slot 2"
 	Slider "Pistol", "mo_xhairpistol", 0, 99, 1
 	Slider "Deagle", "mo_xhairDeagle", 0, 99, 1
 	Slider "Submachine Gun", "MO_XHairSMG", 0, 99, 1
-	StaticText "Slot 3:"
+	StaticText "Slot 3"
 	Slider "Lever Action Shotgun", "mo_xhairLAS", 0, 99, 1
 	Slider "Pump Action Shotgun", "mo_xhairPSG", 0, 99, 1
 	Slider "Super Shotgun", "mo_xhairSSG", 0, 99, 1
+	StaticText "Slot 4"
+	Slider "Combat Rifle", "MO_XHairRIFLE", 0, 99, 1
+	Slider "Vulcan Minigun", "MO_XHairChaingun", 0, 99, 1
+	Slider "Heavy Marksman Rifle", "MO_XHairHMR", 0, 99, 1
+	Slider "Heavy Marksman Rifle UBGL", "MO_XHairHMR_GL", 0, 99, 1
+	StaticText "Slot 5"
+	Slider "Rocket Launcher", "mo_xhairRL", 0, 99, 1
+	StaticText "Slot 6"
+	Slider "Plasma Repeater", "MO_XHairPlasma", 0, 99, 1
+	StaticText "Slot 7"
+	Slider "BFG9K", "MO_XHairBFG", 0, 99, 1
+	Slider "BFG9K 10K Mode", "MO_XHairBFG10K", 0, 99, 1
+	StaticText "Slot 8"
+	Slider "Unmaker", "MO_XHairUnmaker", 0, 99, 1
+//	Stati
 }
-*/
+
 OptionValue "MO_NightVisionColors"
 {
 	0, "$MO_NVISGREN"

@@ -34,11 +34,13 @@ class MO_Flamethrower : JMWeapon// replaces Chainsaw
         FLMG A 1 JM_WeaponReady();
         Loop;
     Deselect:
+		TNT1 A 0 A_SetCrosshair(invoker.GetXHair(16));
         FLMS DCBA 1;
 		TNT1 A 0 A_Lower(12);
         Wait;
     Select:
         TNT1 A 0;
+		TNT1 A 0 A_SetCrosshair(invoker.GetXHair(16));
         Goto ClearAudioAndResetOverlays;
     ContinueSelect:
 		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();

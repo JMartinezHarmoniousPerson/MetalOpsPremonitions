@@ -42,8 +42,11 @@ class MO_MiniGun : JMWeapon
 		MGNG A 1 JM_WeaponReady();
 		Loop;
 	Deselect:
-		tnt1 a 0;
-		TNT1 A 0 {invoker.isHolding = False;}
+		TNT1 A 0 
+		{
+			A_SetCrosshair(invoker.GetXHair(9));
+			invoker.isHolding = False;
+		}
 		TNT1 A 0 A_JumpIfInventory("MinigunSpin",1,"DeselectSpin");
 		TNT1 A 0 A_StopSound(CHAN_WEAPON);
 		TNT1 A 0 A_StopSound(CHAN_AUTO);
@@ -54,6 +57,11 @@ class MO_MiniGun : JMWeapon
 		Wait;
 	Select:
 		TNT1 A 0;
+		TNT1 A 0 
+		{
+			A_SetCrosshair(invoker.GetXHair(9));
+			invoker.isHolding = False;
+		}
 		Goto ClearAudioAndResetOverlays;
 	Fire:
 		TNT1 A 0 A_JumpIf(CountInv("MinigunSpin") == 1, "Hold");

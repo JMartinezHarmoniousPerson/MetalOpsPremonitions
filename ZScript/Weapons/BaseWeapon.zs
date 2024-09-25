@@ -70,7 +70,8 @@ class JMWeapon : Weapon
 		static const string weaponPrefix[] =
 		{
 			"Pistol", "Deagle", "MP40", "SMG", "LAS", "PSG", "SSG", "Rifle", "HMR", "Chaingun",
-			"RL", "RLGuided", "Plasma", "Rail", "BFG",  "Unmaker","Flamer", "HMR40MM"
+			"RL", "RLGuided", "Plasma", "Rail", "BFG",  "Unmaker","Flamer", "HMR_GL", "BFG10K",
+			"HeatPlasma"
 		};
 		string weaponCVar = "mo_xhair".. String.Format("%s", weaponPrefix[w]);
 		if(owner.GetCvar("mo_customxhairs"))
@@ -213,14 +214,13 @@ class JMWeapon : Weapon
 			TNT1 A 1 A_RAISE();
 			wait;
 		ClearAudioAndResetOverlays:
-			TNT1 A 0;
-			TNT1 A 1 {
+			TNT1 A 1;
+			TNT1 A 0 {
 				A_StopSound(CHAN_5);
 				A_StopSound(CHAN_WEAPON);
 				A_StopSound(CHAN_6);
 				A_STOPSOUND(CHAN_7);
 				SetPlayerProperty(0,0,0);
-				A_SetCrosshair(0);
 				A_ClearOverlays(-8,8);
 				A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, FALSE);
 				}

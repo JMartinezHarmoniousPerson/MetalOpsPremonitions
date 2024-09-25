@@ -52,7 +52,6 @@ Class MO_SubMachineGun : JMWeapon
 			TNT1 A 0 JM_CheckInspectIfDone;
 		SelectAnimation:
 			TNT1 A 0 A_StartSound("weapons/smg/select",0);
-			SMGR A 0 A_SetCrosshair(0);
             SM5S ABCD 1;
 			SMGG A 0 A_JumpIf(invoker.isZoomed, "Zoom");
         ReadyToFire:
@@ -66,7 +65,13 @@ Class MO_SubMachineGun : JMWeapon
             Loop;
         Select:
 			TNT1 A 0;
-			TNT1 A 0 A_ZoomFactor(1.0);
+			TNT1 A 0
+			{
+				invoker.isZoomed = False;
+				invoker.isHoldingAim = False;
+				A_ZoomFactor(1.0);
+				A_SetCrosshair(invoker.GetXHair(3));
+			}
 			Goto ClearAudioAndResetOverlays;
         Fire:
 			TNT1 A 0 JM_CheckMag("SMGAmmo");
@@ -176,7 +181,7 @@ Class MO_SubMachineGun : JMWeapon
 			}
 			SMGR A 0 A_StartSound("weapon/adsdown",0);
 			SMGR A 0 A_ZoomFactor(1.0);
-			SMGR A 0 A_SetCrosshair(0);
+			SMGR A 0 A_SetCrosshair(invoker.GetXHair(3));
 			SM5Z CBA 1;
 			SM5G AAA 3
 			{
@@ -191,9 +196,9 @@ Class MO_SubMachineGun : JMWeapon
 			{
 				invoker.isZoomed = False;
 				invoker.isHoldingAim = False;
+				A_SetCrosshair(invoker.GetXHair(3));
 			}
 			SMGR A 0 A_ZoomFactor(1.0);
-			SMGR A 0 A_SetCrosshair(0);
             SM5S DCBA 1;
             TNT1 A 0 A_Lower(12);
             Wait;

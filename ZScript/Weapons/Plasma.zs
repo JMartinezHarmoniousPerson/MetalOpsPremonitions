@@ -111,6 +111,19 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		+WEAPON.NOALERT;
 		Weapon.SelectionOrder 100;
 	}
+	
+	action void MO_SetPRCrosshair()
+	{
+		{
+				if(FindInventory("HeatedRoundsReady"))
+				{
+					A_SetCrossHair(invoker.GetXHair(19));
+				}
+				else 
+				{A_SetCrossHair(invoker.GetXHair(12));}
+		}
+	}
+
 	States
 	{
 	ReadyToFire:
@@ -124,6 +137,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		"####" A 1 JM_WeaponReady(WRF_ALLOWRELOAD);
 		Loop;
 	Deselect:
+		PSTG A 0 MO_SetPRCrosshair;
 		PRGS DCBA 1
 		{
 			if(CheckInventory("HeatedRoundsReady",1))
@@ -135,6 +149,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		Wait;
 	Select:
 		PRGG A 0;
+		TNT1 A 0 MO_SetPRCrosshair;
 		Goto ClearAudioAndResetOverlays;
 		
 	ContinueSelect:
@@ -377,6 +392,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 				A_SetInventory("HeatedRoundsReady",1);
 			}
 		}
+		#### A 0 MO_SetPRCrosshair;
 		Goto ReadyToFire;
 			
 	HeatBlast:

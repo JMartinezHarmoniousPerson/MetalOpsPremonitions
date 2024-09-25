@@ -37,7 +37,32 @@ class SSGRandomizer : actor
 	}
 }
 
-class ChaingunSpawner : RandomSpawner replaces Chaingun
+//Based on code from Jarwill and Ac1d
+class ChaingunDropper : Inventory replaces Chaingun
+{
+	Default{+DROPPED}
+    Override bool SpecialDropAction(Actor dropper)
+    {
+        If(dropper is "ChaingunGuy"){ A_DropItem("MO_MiniGun"); } //If actor that dropped the item is a zombieman (or derived)
+        Else { A_DropItem("ChaingunSpawner"); }
+		Return 1; //Destroy the item if it was dropped at all
+    }
+	
+	States
+	{
+	 Spawn:
+        TNT1 A 0 NoDelay
+        {
+            If(invoker.bTOSSED)
+                { A_SpawnItem("MO_MiniGun"); }
+            Else
+                { A_SpawnItem("ChaingunSpawner"); }
+        }
+        Stop;
+   }
+}
+
+class ChaingunSpawner : RandomSpawner
 {
 	Default
     {
@@ -46,6 +71,29 @@ class ChaingunSpawner : RandomSpawner replaces Chaingun
 		DropItem "MO_HeavyRifle", 255,1;
 		DropItem "MO_SubMachinegun",255, 1;
 	}
+}
+
+Class HMRDropper : Inventory
+{
+	Default{+DROPPED}
+    Override bool SpecialDropAction(Actor dropper)
+    {
+        If(dropper is "ChaingunGuy"){ A_DropItem("MO_MiniGun"); } //If actor that dropped the item is a zombieman (or derived)
+        Else { A_DropItem("MO_HeavyRifle"); }
+        Return 1; //Destroy the item if it was dropped at all
+    }
+    States
+    {
+    Spawn:
+        TNT1 A 0 NoDelay
+        {
+            If(invoker.bTOSSED)
+                { A_SpawnItem("MO_MiniGun"); }
+            Else
+                { A_SpawnItem("MO_HeavyRifle"); }
+        }
+        Stop;
+   }
 }
 
 class ClipSpawner : RandomSpawner replaces Clip

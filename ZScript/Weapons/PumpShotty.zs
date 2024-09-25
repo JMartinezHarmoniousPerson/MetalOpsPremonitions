@@ -1,7 +1,7 @@
 Class AltPumping : MO_ZSToken{}
 Class SGPumping: MO_ZSToken{}
 
-class PumpShotgun : JMWeapon
+class MO_PumpShotgun : JMWeapon
 {
     Default
     {
@@ -53,11 +53,13 @@ class PumpShotgun : JMWeapon
 			}
             Loop;
         Deselect:
+			PSTG A 0 A_SetCrosshair(invoker.GetXHair(5));
 			PSGS EDCBA 1;
             SHTG A 0 A_Lower(12);
             WAIT;
         Select:
             TNT1 A 0;
+			TNT1 A 0 A_SetCrosshair(invoker.GetXHair(5));
             Goto ClearAudioAndResetOverlays;
 		ContinueSelect:
 			TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();
@@ -291,3 +293,5 @@ class PumpShotgunAmmo : Ammo
 		+INVENTORY.IGNORESKILL;
 	}
 }
+
+class PumpShotgun : MO_PumpShotgun{}

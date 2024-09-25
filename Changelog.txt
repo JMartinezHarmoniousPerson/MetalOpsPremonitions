@@ -92,3 +92,12 @@ from that. SSG still shoots flak but uses normal shell ammo pool.
 - Fixed Pump shotgun bug where you couldn't use equipment.
 - Fixed footstep sounds being interrupted when a sound with the BODY channel was used.
 - Fixed voodoo dolls being invincible in case maps used voodoo dolls.
+
+9/22 - 9/23:
+- Added the Heavy Marksman Rifle, replaces the Chaingun randomly.
+- Changed Chaingun spawner so that Chaingun Guys only drop Chainguns.
+- Hybrid ADS aiming added.
+- Chaingun holding now has the ADS system on it.
+
+9/24:
+- Added customizable crosshairs in the options.

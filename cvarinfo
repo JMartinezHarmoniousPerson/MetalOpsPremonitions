@@ -51,23 +51,26 @@ user int mo_aimmode = 0;
 
 //Custom XHairs
 user bool mo_customxhairs = false;
-user int MO_xhairPistol = 0;
-user int MO_xhairDeagle = 0;
-user int MO_XHairSMG = 0;
+user int MO_xhairPistol = 20;
+user int MO_xhairDeagle = 25;
+user int MO_XHairSMG = 22;
 user int MO_XHairMP40 = 0;
-user int MO_XHairLAS = 0;
-user int MO_XHairPSG = 0;
-user int MO_XHairSSG = 0;
-user int MO_XHairRifle = 0;
-user int MO_XHairHCR = 0;
-user int MO_XHairChain = 0;
-user int MO_XHairRL = 0;
+user int MO_XHairLAS = 71;
+user int MO_XHairPSG = 69;
+user int MO_XHairSSG = 41;
+user int MO_XHairRifle = 56;
+user int MO_XHairHMR = 52;
+user int MO_XHairHMR_GL = 89;
+user int MO_XHairChaingun = 75;
+user int MO_XHairRL = 43;
 user int MO_XHairRLGuided = 0;
-user int MO_XHairPlasma = 0;
+user int MO_XHairPlasma = 39;
+user int MO_XHairHeatPlasma = 44;
 user int MO_XHairRail = 0;
-user int MO_XHairBFG = 0;
-user int MO_XHairFlamer = 0;
-user int MO_XHairUnmaker = 0;
+user int MO_XHairBFG = 95;
+user int MO_XHairBFG10K = 90; //BFG9K 10K Mode
+user int MO_XHairFlamer = 91;
+user int MO_XHairUnmaker = 98;
 
 
 // Flashlight++ - https://forum.zdoom.org/viewtopic.php?t=75585

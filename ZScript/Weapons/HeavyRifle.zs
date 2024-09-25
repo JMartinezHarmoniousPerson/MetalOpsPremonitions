@@ -30,6 +30,18 @@ Class MO_HeavyRifle : JMWeapon
 		return ResolveState(Null);
 	}
 
+	action void MO_SetHMRCrosshair()
+	{
+		{
+				if(FindInventory("HCR_GLMode"))
+				{
+					A_SetCrossHair(invoker.GetXHair(17));
+				}
+				else 
+				{A_SetCrossHair(invoker.GetXHair(8));}
+		}
+	}
+
 	override void PostBeginPlay()
 	{
 		Super.PostBeginPlay();
@@ -62,7 +74,7 @@ Class MO_HeavyRifle : JMWeapon
             HCRC A -1;
             STOP;
         Ready:
-			HCRH F 0;
+			HCRG A 0;
 		SelectAnimation:
 			TNT1 A 0;
 			TNT1 A 0 JM_CheckInspectIfDone;
@@ -84,6 +96,7 @@ Class MO_HeavyRifle : JMWeapon
 				A_SetInventory("HCR_3XZoom",0);
 				A_SetInventory("HCR_6XZoom",0);
 				A_ZoomFactor(1.0);
+				MO_SetHMRCrosshair();
 			}
 			Goto ClearAudioAndResetOverlays;
         Fire:
@@ -270,6 +283,7 @@ Class MO_HeavyRifle : JMWeapon
 				invoker.isHoldingAim = false;
 				invoker.isZoomed = false;
 				A_ZoomFactor(1.0);
+				MO_SetHMRCrosshair();
 			}
             HCRI D 1;
 			HCRI CBA 1;
@@ -283,6 +297,7 @@ Class MO_HeavyRifle : JMWeapon
 			TNT1 A 0 A_StartSound("weapons/smg/modeswitch",0);
 			TNT1 A 0 A_JumpIfInventory("HCR_GLMode",1,"DeselectUBGL");
 			TNT1 A 0 A_Print("Underbarrel Grenade Launcher Alt Fire");
+			HCRG A 0 A_SetCrossHair(invoker.GetXHair(17));
 			TNT1 A 0 A_SetInventory("HCR_GLMode",1);
 			Goto ReadyToFire;
 
@@ -342,12 +357,14 @@ Class MO_HeavyRifle : JMWeapon
 					A_SetInventory("HCR_3XZoom",0);
 					A_SetInventory("HCR_6XZoom",0);
 					A_ZoomFactor(1.4);
+					A_SetCrossHair(invoker.GetXHair(8));
 			}
 			HC2Z CBA 1;
 			HC2G A 1;
 			Goto UnZoom;
 			
 		DeselectUBGL:
+			HCRG A 0 A_SetCrossHair(invoker.GetXHair(8));
 			TNT1 A 0 A_Print("Sniper/Zoom Aim Alt Fire");
 			TNT1 A 0 A_SetInventory("HCR_GLMode",0);
 			Goto ReadyToFire;
@@ -438,7 +455,7 @@ Class MO_HeavyRifle : JMWeapon
 				A_SetInventory("HCR_6XZoom",0);
 				A_StartSound("weapon/adsdown",0);
 				A_ZoomFactor(1.0);
-				A_SetCrosshair(0);
+				A_SetCrossHair(invoker.GetXHair(8));
 			}
 			HCRZ FEDCBA 1;
 			Goto ReadyToFire;
@@ -530,7 +547,7 @@ Class MO_HeavyRifle : JMWeapon
 				A_ZoomFactor(1.0);
 				A_SetInventory("HCR_3XZoom",0);
 				A_SetInventory("HCR_6XZoom",0);
-				A_SetCrosshair(0);
+				MO_SetHMRCrosshair();
 			}
 			AR1F A 0 {
 				if(CountInv("HCRAmmo") < 1)

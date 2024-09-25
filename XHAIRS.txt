@@ -92,7 +92,7 @@
 92 "92. Instinct XL"
 93 "93. Aim Guide"
 94 "94. Skybrim/Medieval"
-95 "95. Click"
+95 "95. Measure 3"
 96 "96. Link"
 97 "97. Quakeworld"
 98 "98. Doom 3"

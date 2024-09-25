@@ -100,9 +100,11 @@ class MO_Unmaker : JMWeapon
 			
         Select:
 			TNT1 A 0;
+			TNT1 A 0 A_SetCrosshair(invoker.GetXHair(15));
 			Goto ClearAudioAndResetOverlays;
 
         Deselect:
+			TNT1 A 0 A_SetCrosshair(invoker.GetXHair(15));
 			TNT1 A 0 A_STOPSOUND(6);
             UHSD FEDCBA 1;
             TNT1 A 0 A_Lower(12);

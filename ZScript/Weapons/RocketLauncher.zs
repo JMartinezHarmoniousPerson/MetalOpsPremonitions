@@ -67,8 +67,10 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
             Loop;
 		Select:
 			TNT1 A 0;
+			TNT1 A 0 A_SETCROSSHAIR(Invoker.GetXHair(10));
 			Goto ClearAudioAndResetOverlays;
 		Deselect:
+			TNT1 A 0 A_SETCROSSHAIR(Invoker.GetXHair(10));
 			RNAS A 0 A_JumpIfInventory("MiniNukeMode",1,2);
 			RLAS A 0;
 			"####" FEDCB 1;
