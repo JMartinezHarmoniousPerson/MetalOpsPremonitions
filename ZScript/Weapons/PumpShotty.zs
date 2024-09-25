@@ -293,5 +293,3 @@ class PumpShotgunAmmo : Ammo
 		+INVENTORY.IGNORESKILL;
 	}
 }
-
-class PumpShotgun : MO_PumpShotgun{}

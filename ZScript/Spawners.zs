@@ -3,7 +3,7 @@ class ShotgunSpawner : RandomSpawner replaces Shotgun
 	Default
     {
 		DropItem "LeverShotgun", 255, 4;
-		DropItem "PumpShotgun", 255, 2;
+		DropItem "MO_PumpShotgun", 255, 2;
 		DropItem "SSGRandomizer", 255,1;
 	}
 }
@@ -29,7 +29,7 @@ class SSGRandomizer : actor
 			TNT1 A 0 A_SpawnItemEx("MO_SSG");
 			Stop;
 		SpawnPump:
-			TNT1 A 0 A_SpawnItemEx("PumpShotgun");
+			TNT1 A 0 A_SpawnItemEx("MO_PumpShotgun");
 			Stop;
 		SpawnLever:
 			TNT1 A 0 A_SpawnItemEx("LeverShotgun");
