@@ -134,6 +134,7 @@ OptionMenu "CustomCrosshairsMenu"
 	Slider "Rocket Launcher", "mo_xhairRL", 0, 99, 1
 	StaticText "Slot 6"
 	Slider "Plasma Repeater", "MO_XHairPlasma", 0, 99, 1
+	Slider "Plasma Heated Rounds", "MO_XHairHeatPlasma", 0, 99, 1
 	StaticText "Slot 7"
 	Slider "BFG9K", "MO_XHairBFG", 0, 99, 1
 	Slider "BFG9K 10K Mode", "MO_XHairBFG10K", 0, 99, 1
