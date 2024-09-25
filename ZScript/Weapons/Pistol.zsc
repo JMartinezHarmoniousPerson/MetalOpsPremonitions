@@ -54,7 +54,7 @@ class EnforcerPistol : JMWeapon// replaces Pistol
 		    {JM_SetWeaponSprite("PSLF");}
 		}
 		#### A 2 {
-			A_FireBullets (5.6, 0, 1, 10, "UpdatedBulletPuff", FBF_NORANDOM,0,"MO_BulletTracer", 0);
+			A_FireBullets (5.6, 0, 1, 12, "UpdatedBulletPuff", FBF_NORANDOM,0,"MO_BulletTracer", 0);
 				if(CountInv("PistolSilencer") == 1)
 				{
 					A_StartSound("weapons/pistol/silfire", CHAN_WEAPON);
@@ -96,7 +96,7 @@ class EnforcerPistol : JMWeapon// replaces Pistol
 		    {JM_SetWeaponSprite("PSLF");}
 		}
 		#### A 1 {
-			A_FireBullets (5.6, 0, 1, 10, "UpdatedBulletPuff", FBF_NORANDOM,0,"MO_BulletTracer", 0);
+			A_FireBullets (5.6, 0, 1, 12, "UpdatedBulletPuff", FBF_NORANDOM,0,"MO_BulletTracer", 0);
 			if(CountInv("PistolSilencer") == 1)
 			{
 				A_StartSound("weapons/pistol/silfire", CHAN_WEAPON);

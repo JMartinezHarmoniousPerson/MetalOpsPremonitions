@@ -41,7 +41,7 @@ class MO_Deagle : JMWeapon// replaces Pistol
 	Fire:
 		PSTG A 0 JM_CheckMag("MODeagleAmmo", "Reload");
 		DGLF A 1 {
-			A_FireBullets (5.6, 0, 1, 45, "UpdatedBulletPuff", FBF_NORANDOM, 0,"MO_BulletTracer",0);
+			A_FireBullets (5.6, 0, 1, 40, "UpdatedBulletPuff", FBF_NORANDOM, 0,"MO_BulletTracer",0);
 			A_StartSound("weapons/deag/fire", CHAN_WEAPON);
 			JM_UseAmmo("MODeagleAmmo",1);
 			A_SpawnItemEx("BigGunSmoke",18,0,34,2,0,0);
