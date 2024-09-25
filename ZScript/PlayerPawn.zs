@@ -37,14 +37,14 @@ class MO_PlayerBase : DoomPlayer
 
 	Default
 	{
-		Player.WeaponSlot 1, "MO_Flamethrower", "Katana";
+		Player.WeaponSlot 1, "Katana";
 		Player.WeaponSlot 2, "EnforcerPistol", "MO_Submachinegun";
 		Player.WeaponSlot 3, "LeverShotgun", "MO_PumpShotgun", "MO_SSG";
 		Player.WeaponSlot 4, "AssaultRifle", "MO_MiniGun", "MO_HeavyRifle";
 		Player.WeaponSlot 5, "MO_RocketLauncher";
 		Player.WeaponSlot 6, "JM_PlasmaRifle";
-		Player.WeaponSlot 7, "MO_BFG9000";
-		Player.WeaponSlot 8, "MO_Unmaker";
+		Player.WeaponSlot 7, "MO_BFG9000", "MO_Unmaker";
+		Player.WeaponSlot 8, "MO_Flamethrower";
 	}
 }
 

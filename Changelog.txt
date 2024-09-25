@@ -99,5 +99,7 @@ from that. SSG still shoots flak but uses normal shell ammo pool.
 - Hybrid ADS aiming added.
 - Chaingun holding now has the ADS system on it.
 
-9/24:
+9/24 - 9/25:
 - Added customizable crosshairs in the options.
+- Flamethrower moved to Slot 8.
+- Added option to enable Discord rich presence.

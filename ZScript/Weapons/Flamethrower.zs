@@ -5,17 +5,17 @@
 
 class IceMode :  Inventory {Default{Inventory.MaxAmount 1;}}
 
-class MO_Flamethrower : JMWeapon// replaces Chainsaw
+class MO_Flamethrower : JMWeapon replaces Chainsaw
 {
     Default
     {
         Weapon.AmmoUse1 0;
- //      Weapon.AmmoGive 75;
+       Weapon.AmmoGive1 75;
 		Weapon.SelectionOrder 2200;
         Weapon.AmmoType1 "Gasoline";
         Inventory.PickupSound "weapons/flamer/pickup";
-        Inventory.PickupMessage "You got the Flamethrower! (Slot 1)";
-		Tag "Flamethrower";
+        Inventory.PickupMessage "$GOTFLAMER";
+		Tag "$TAG_FLAMER";
         +FLOORCLIP;
 		Scale 0.42;
 		Obituary "%o was burnt to a crisp by %k's Flamethrower.";

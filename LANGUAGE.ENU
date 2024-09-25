@@ -88,7 +88,8 @@ OB_KATANA2 = "%k forced %o to commit seppuku.";
 
 //Flamethtower
 OB_FLAMER2 = "%o was set ablaze by %'s Flamethrower.";
-GOTFLAMER = "You got the Flamethrower! (Slot 1)";
+TAG_FLAMER = "Flamethrower";
+GOTFLAMER = "You got the Flamethrower! (Slot 8)";
 GOTFLAMERGAS = "You got the gasoline from the Flamethrower!";
 
 //Pistol
@@ -135,7 +136,7 @@ OB_HEAVYRIFLE_GRENADE = "%o swallowed a 40mm Grenade fired from %k's Heavy Marks
 //Unmaker
 GOTUNMAKER = "You got the Unmaker! Unleash the power of Hell itself on your foes! (Slot 7)";
 GOTUNMAKER2 = "What The Fuck is this?! (Slot 7)";
-TAG_UNMAKER = "The Unmaker";
+TAG_UNMAKER = "Unmaker";
 OB_UNMAKER = "%o was decimated by %k's Unmaker.";
 OB_UNMAKER2 = "%o got a taste of Hell's power from %k's Unmaker."
 

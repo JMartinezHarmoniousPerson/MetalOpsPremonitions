@@ -3,7 +3,7 @@ class ShotgunSpawner : RandomSpawner replaces Shotgun
 	Default
     {
 		DropItem "LeverShotgun", 255, 4;
-		DropItem "MO_PumpShotgun", 255, 2;
+		DropItem "MO_Pumpshotgun", 255, 2;
 		DropItem "SSGRandomizer", 255,1;
 	}
 }
@@ -29,7 +29,7 @@ class SSGRandomizer : actor
 			TNT1 A 0 A_SpawnItemEx("MO_SSG");
 			Stop;
 		SpawnPump:
-			TNT1 A 0 A_SpawnItemEx("MO_PumpShotgun");
+			TNT1 A 0 A_SpawnItemEx("MO_Pumpshotgun");
 			Stop;
 		SpawnLever:
 			TNT1 A 0 A_SpawnItemEx("LeverShotgun");
@@ -139,6 +139,7 @@ class BFGSpawner : RandomSpawner replaces BFG9000
 	}
 }
 
+/*
 class FlamethrowerSpawner : CustomInventory replaces Chainsaw
 {
 	Default
@@ -174,6 +175,7 @@ class FlamethrowerSpawner : CustomInventory replaces Chainsaw
 			Stop;
 	}
 }
+*/
 
 //Items and Powerups
 Class BerserkPackSpawner: RandomSpawner replaces Berserk
