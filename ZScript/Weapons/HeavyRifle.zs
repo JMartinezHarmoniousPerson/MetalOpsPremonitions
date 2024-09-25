@@ -377,7 +377,7 @@ Class MO_HeavyRifle : JMWeapon
 				invoker.isZoomed = true;
 				A_StartSound("weapon/adsup",0);
 				A_ZoomFactor(1.5);
-				A_SetCrosshair(5);
+				A_SetCrosshair(99);
 			}
 			HCRZ ABCDEF 1;
 		Ready2:

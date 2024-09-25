@@ -57,9 +57,9 @@ Sprite "GRE1G0", 248, 180
 	Patch "TOSS3", 17, 61
 }
 
-Graphic "XHAIRB5", 1, 1
+Graphic "XHAIRB99", 1, 1
 {
-	Patch "NULLA0", 0, 0
+	Patch "TNT1A0", 0, 0
 }
 
 Sprite "S9RKA0", 68, 71

@@ -139,7 +139,7 @@ Class MO_SubMachineGun : JMWeapon
 			TNT1 A 0 {invoker.isZoomed = true;}
 			SMGR A 0 A_StartSound("weapon/adsup",0);
 			SMGR A 0 A_ZoomFactor(1.3);
-			SMGR A 0 A_SetCrosshair(5);
+			SMGR A 0 A_SetCrosshair(99);
 			SM5Z ABC 1;
 		Ready2:
 			TNT1 A 0 A_JumpIf(invoker.ADSMode <= 0, "ADSToggle");

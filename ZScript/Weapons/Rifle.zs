@@ -102,7 +102,7 @@ Class AssaultRifle : JMWeapon
 				invoker.isZoomed = True;
 				A_ZoomFactor(1.4);
 				A_StartSound("weapon/adsup",0);
-				A_SetCrosshair(5);
+				A_SetCrosshair(99);
 			}
 			AR1Z ABCD 1 JM_WeaponReady(WRF_NOFIRE);
 			AR1Z E 1 JM_WeaponReady(WRF_NOFIRE);
