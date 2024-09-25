@@ -103,3 +103,4 @@ from that. SSG still shoots flak but uses normal shell ammo pool.
 - Added customizable crosshairs in the options.
 - Flamethrower moved to Slot 8.
 - Added option to enable Discord rich presence.
+- Deagle gets a slight nerf
