@@ -1,7 +1,7 @@
 //Mostly based on the Smooth Doom barrels
 class MO_ExplosiveBarrel : ExplosiveBarrel replaces ExplosiveBarrel
 {
-	bool notSunlust;
+	bool isSunlust; //For Sunlust's Map 30 for the beginning crushers
 	int age;
 	Default
 	{
@@ -12,7 +12,7 @@ class MO_ExplosiveBarrel : ExplosiveBarrel replaces ExplosiveBarrel
 
 	override void PostBeginPlay()
 	{
-		notSunlust = false;
+		isSunlust = true;
 	}
 
 	override int DamageMobj (Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
@@ -26,13 +26,14 @@ class MO_ExplosiveBarrel : ExplosiveBarrel replaces ExplosiveBarrel
 		return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
 	}
 
+	//This is for Sunlust's Map 30 when the barrels at the beginning get crushed when the map starts.
 	override void Tick()
 	{
 		super.Tick();
 		age++;
 		if(age >= 35)
 		{
-			self.notSunlust = true;
+			self.isSunlust = false;
 		}
 	}
 		
@@ -47,7 +48,8 @@ class MO_ExplosiveBarrel : ExplosiveBarrel replaces ExplosiveBarrel
 		B3XP B 6 BRIGHT;
 		B3XP C 4 BRIGHT;
 		B3XP D 2 BRIGHT;
-		BEXP E 0 A_JumpIf(invoker.notSunlust == true, "PerformanceDeath");
+	Death.Crush:
+		BEXP E 0 A_JumpIf(invoker.isSunlust, "PerformanceDeath");
 		bexp E 0 Bright 
 		{
 				A_SpawnItemEx ("BarrelShrapnelA",0,0,5,random (5, -5),random (5, -5),random (5, 8),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
@@ -66,6 +68,7 @@ class MO_ExplosiveBarrel : ExplosiveBarrel replaces ExplosiveBarrel
 	PerformanceDeath:
 		TNT1 A 0
 		{
+			A_Log("Low quality");
 			A_Scream();
 			A_Explode();
 		}
