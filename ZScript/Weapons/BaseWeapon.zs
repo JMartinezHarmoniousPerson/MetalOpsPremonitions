@@ -99,6 +99,13 @@ class JMWeapon : Weapon
 		return ResolveState(Null);
 	}
 
+	action state JM_CheckMagNew(int m = 1, statelabel rel = "Reload")
+	{
+		if(CountInv(invoker.ammotype2) < m)
+			return ResolveState(rel);
+		return ResolveState(Null);
+	}
+
 	//Based on the Set and Check functions from Project Brutality
 	action void JM_SetInspect(bool type)
 	{

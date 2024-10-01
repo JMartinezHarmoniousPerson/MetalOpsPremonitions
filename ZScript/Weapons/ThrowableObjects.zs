@@ -199,7 +199,7 @@ Class MO_ThrownGrenade : Actor
 		TNT1 A 0 A_Explode(125, 220);
 		TNT1 A 0 A_NoBlocking;
 		TNT1 A 0 A_AlertMonsters(200);
-		TNT1 A 0 A_StartSound("rocket/explosion", 6);
+		TNT1 A 0 A_StartSound("fraggrenade/explosion", 6);
 		TNT1 A 0 A_SpawnItemEx("RocketExplosionFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
 		TNT1 A 1;
 		TNT1 A 0 Destroy();

@@ -55,10 +55,22 @@ class MO_GreenShockWave : HeatBlastShockWave
 	{
 		Spawn:
 			SSHK AB 1 BRIGHT;
-			SSHK CDEFGHIJKLMNOPQR 1 BRIGHT A_FadeOut(0.03);
+			SSHK CDGHIJKLMNOP 1 BRIGHT A_FadeOut(0.03);
 			Stop;
 	}
 }
 
 class MO_GreenShockWaveSmall : MO_GreenShockWave
+{Default{Scale 1.25;}}
+
+class MO_ShockWave : MO_GreenShockWaveSmall
+{
+	Default 
+	{
+		ALPHA 0.6;
+		Translation "196:196=4:4", "197:207=80:95", "240:247=96:96";
+	}
+}
+
+class MO_ShockwaveSmall : MO_ShockWave
 {Default{Scale 1.25;}}

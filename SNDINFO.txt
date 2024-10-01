@@ -285,13 +285,10 @@ weapons/plasma/htballexp PLSXPL
 //From Doom 2016
 weapons/rocket/loading RLLOAD
 
-$random rocket/explosion {rcktxpl1 rcktxpl2 rcktxpl3 rcktxpl4 rcktxpl5 rcktxpl6}
+$random rocket/explosion {rcktxpl1 rcktxpl2 rcktxpl3}
 rcktxpl1 rcktxpl1
 rcktxpl2 rcktxpl2
 rcktxpl3 rcktxpl3
-rcktxpl4 rcktxpl4
-rcktxpl5 rcktxpl5
-rcktxpl6 rcktxpl6
 
 rocket/nukeexplosion NUKEXPL
 rocket/nukeexplosionfar NKEFRXP
@@ -407,3 +404,9 @@ grnbounce1 FRGBNC1
 grnbounce2 FRGBNC2
 grnbounce3 FRGBNC3
 FragGrenade/Pickup FRAGPKUP
+$random FragGrenade/Explosion {grnexpl1 grnexpl2 grnexpl3}
+grnexpl1 FRGEXPL1
+grnexpl2 FRGEXPL2
+grnexpl3 FRGEXPL3
+
+World/barrelExpl BAREXPL

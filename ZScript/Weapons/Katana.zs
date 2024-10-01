@@ -14,6 +14,7 @@ class Katana: JMWeapon replaces Fist
 	  Tag "Katana";
 //	  +WEAPON.WIMPY_WEAPON;
 	  +WEAPON.NOALERT;
+	//  +WEAPON.NODEATHDESELECT;
 	  Inventory.AltHudIcon "KATAN0";
 	  Weapon.SelectionOrder 3700;
 	  }
@@ -66,6 +67,7 @@ class Katana: JMWeapon replaces Fist
 		Loop;
 	  Deselect:
 		TNT1 A 0 A_SetCrosshair(99);
+		TNT1 A 0 A_JumpIfHealthLower(0, "DeadDeselect");
 		KTAG BCDEFG 1;
 		KTAG HIJ 1;
 		TNT1 A 0 A_STARTSOUND("weapons/katana/sheathe", CHAN_AUTO, CHANF_DEFAULT,0.7);
@@ -77,7 +79,13 @@ class Katana: JMWeapon replaces Fist
 	  TNT1 A 0;
 	  TNT1 A 0 A_SetCrosshair(99);
 	  Goto ClearAudioAndResetOverlays;
-	  
+	
+		DeadDeselect:
+		KTAK ABCDEF 1;
+		TNT1 A 1;
+		KTAG A 0 A_Lower(12);
+		WAIT;
+
 	  ContinueSelect:
 		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise(); 
 		Goto Ready;

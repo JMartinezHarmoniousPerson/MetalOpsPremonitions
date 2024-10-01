@@ -65,7 +65,7 @@ class MO_PumpShotgun : JMWeapon
 			TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();
 			Goto Ready;
         Fire:
-            PSTG A 0 JM_CheckMag("PumpShotgunAmmo", "Reload");
+            PSTG A 0 JM_CheckMagNew;
             PSGF A 1 
             {
                 A_FireBullets (random(3, 6), frandom(3,7), 20, 6, "ShotgunPuff20GA", FBF_NORANDOM,0,"MO_BulletTracer",0);
@@ -89,7 +89,7 @@ class MO_PumpShotgun : JMWeapon
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
 			}
 			TNT1 A 0 A_WeaponReady(WRF_NOFIRE);
-			TNT1 A 0 JM_CheckMag("PumpShotgunAmmo", "Reload");
+			TNT1 A 0 JM_CheckMagNew;
             Goto Pump;
         Pump:
             W87A A 0 SetInventory("SGPumping",1);
@@ -114,8 +114,7 @@ class MO_PumpShotgun : JMWeapon
             Goto ReadyToFire;
 			
 		AltFire:
-			PSTG A 0 A_JumpIf(CountInv("PumpShotgunAmmo") == 1, "Fire");
-			PSTG A 0 JM_CheckMag("PumpShotgunAmmo", "Reload");
+			PSTG A 0 JM_CheckMagNew(2);
 			TNT1 A 0 A_StartSound ("weapons/pumpshot/fire", CHAN_WEAPON, CHANF_DEFAULT, 0.85);
 			TNT1 A 0 A_StartSound("weapons/pumpshot/altfire",CHAN_7);
 			PSGF A 1 
@@ -154,7 +153,7 @@ class MO_PumpShotgun : JMWeapon
             PSGF E 4;
 			PSGG A 1;
 			TNT1 A 0 A_WeaponReady(WRF_NOFIRE);
-			TNT1 A 0 JM_CheckMag("PumpShotgunAmmo", "Reload");
+			TNT1 A 0 JM_CheckMagNew;
             PSGG A 9
 			{
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(5);}
@@ -207,8 +206,8 @@ class MO_PumpShotgun : JMWeapon
             PGR1 C 1 A_StartSound("weapons/pumpshot/load", 1);
             PISG A 0 JM_LoadShell("PumpShotgunAmmo","MO_ShotShell",1);
 			PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
-            PGR1 DEFGHI 1 JM_WeaponReady(WRF_NOFIRE);
-            PGR1 I 6 {
+            PGR1 DEFGHII 1 JM_WeaponReady(WRF_NOFIRE);
+            PGR1 I 5 {
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(3);}
 				if(PressingFire() || PressingAltFire()) {SetWeaponState("DoneReload");}
 				return JM_WeaponReady(WRF_NOFIRE);
@@ -251,12 +250,12 @@ class MO_PumpShotgun : JMWeapon
 			PGR2 KKKKKK 1;
             PGR2 A 0 A_StartSound("weapons/pumpshot/pumpforward", 0);
             PGR2 KLM 1;
-			PSGG A 0 A_JumpIf(PressingFire() || PressingAltFire(), "DoneReload");
+			PSGG A 0 A_JumpIf(PressingFire(), "DoneReload");
             PGR2 M 9 
 			{
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(5);}
 			}
-			PSGG A 0 A_JumpIf(PressingFire() || PressingAltFire(), "DoneReload");
+			PSGG A 0 A_JumpIf(PressingFire(), "DoneReload");
             Goto ShellLoop;
 		FlashKick:
 		PSGM ABCDEF 1 JM_WeaponReady();

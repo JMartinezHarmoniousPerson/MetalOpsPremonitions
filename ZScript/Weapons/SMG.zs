@@ -74,7 +74,7 @@ Class MO_SubMachineGun : JMWeapon
 			}
 			Goto ClearAudioAndResetOverlays;
         Fire:
-			TNT1 A 0 JM_CheckMag("SMGAmmo");
+			TNT1 A 0 JM_CheckMagNew;
 			TNT1 A 0 A_JumpIf(invoker.isZoomed, "Fire2");
             SM5F A 1 BRIGHT {
                 A_FireBullets(5.6, 0, 1, 10, "UpdatedBulletPuff",FBF_NORANDOM, 0,"MO_BulletTracer",0);
@@ -92,11 +92,11 @@ Class MO_SubMachineGun : JMWeapon
 			}
             SM5F C 1 JM_WeaponReady(WRF_NOPRIMARY);
             AR1F A 0 A_JumpIf(PressingFire(), "Fire");
-			TNT1 A 0 JM_CheckMag("SMGAmmo");
+			TNT1 A 0 JM_CheckMagNew;
             Goto ReadyToFire;
 
 		Fire2:
-			  TNT1 A 0 JM_CheckMag("SMGAmmo");
+			  TNT1 A 0 JM_CheckMagNew;
 			  SM5Z E 1 BRIGHT {
                 A_FireBullets(5.6, 0, 1, 10, "UpdatedBulletPuff",FBF_NORANDOM, 0,"MO_BulletTracer",0);
                 A_TakeInventory("SMGAmmo", 1);
@@ -112,6 +112,7 @@ Class MO_SubMachineGun : JMWeapon
 				MO_EjectCasing("PistolCasing", false, speed: frandom(4,7), offset: (28, 4, -4));
 			}
             SM5Z G 1;
+			TNT1 A 0 JM_CheckMagNew;
             AR1F A 0
 			{
 				if(invoker.ADSMode >= 1)

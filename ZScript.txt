@@ -1,5 +1,6 @@
 version "4.5.0"
 
+#include "ZScript/Barrel.zs"
 #include "ZScript/PlayerPawn.zs"
 #include "ZScript/MO_Tokens.zs"
 #include "ZScript/Items/Ammo.zs"
@@ -43,7 +44,7 @@ version "4.5.0"
 #include "ZScript/Effects/Thunder.zc"
 #include "ZScript/Effects/Shockwaves.zs"
 #include "ZScript/Effects/Particles.zs"
-
+#include "ZScript/Effects/Explosions.zs"
 #include "ZScript/StepEventHandler.zc"
 #include "ZScript/MO_Handler.zs"
 

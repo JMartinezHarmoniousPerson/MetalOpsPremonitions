@@ -74,6 +74,7 @@ Class MO_HeavyRifle : JMWeapon
             HCRC A -1;
             STOP;
         Ready:
+			HCGG A 0;
 			HCRG A 0;
 		SelectAnimation:
 			TNT1 A 0;
@@ -83,9 +84,11 @@ Class MO_HeavyRifle : JMWeapon
 			HCRG A 0 A_JumpIf(invoker.isZoomed, "Zoom");
         ReadyToFire:
 			HCRG A 0 A_JumpIf(invoker.isZoomed, "Ready2");
-			HCRH F 0 A_JumpIf(FindInventory("HCR_GLMode"), 2);
-			HCRG A 0;
-            #### # 1 JM_WeaponReady(WRF_ALLOWRELOAD);
+			HCRG A 0
+			{
+				if(FindInventory("HCR_GLMode")) {JM_SetWeaponSprite("HCGG");}
+			}
+            #### A 1 JM_WeaponReady(WRF_ALLOWRELOAD);
             Loop;
         Select:
 			HCRG A 0;
