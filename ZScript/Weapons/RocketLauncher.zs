@@ -87,36 +87,13 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 				JM_CheckForQuadDamage();
 				A_FireProjectile("MO_Rocket",0,true,0,7,0);
             }
-            RLAF B 1 BRIGHT
-            {
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-                 A_SetPitch(pitch-3.0,SPF_Interpolate);
-			    A_SetAngle(angle+.75,SPF_INTERPOLATE);
-				}
-		    }
-            RLAF C 1
-            {
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-                A_SetPitch(pitch-3.0,SPF_Interpolate);
-			    A_SetAngle(angle+.75,SPF_INTERPOLATE);
-				}
-		    }
-            RLAF D 1
-            {
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-                A_SetPitch(pitch-3.0,SPF_Interpolate);
-			    A_SetAngle(angle+.75,SPF_INTERPOLATE);
-				}
-            }
+            RLAF BCD 1 BRIGHT JM_GunRecoil(-1.5, .05);
 			TNT1 A 0 A_JumpIf(CountInv("MO_RocketAmmo") < 1,2);
 			RLAF A 0 A_StartSound("weapons/rocket/loading",6);
 			TNT1 AAA 0;
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
             RLAF E 1;
-			RLAF FFG 1;
+			RLAF FFG 1 JM_GunRecoil(-0.2, .04);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			RLAF G 1;
 			RLAF H 2 
@@ -129,6 +106,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			RLAF HHHH 1{
 				A_WeaponOffset(1,36);
+				JM_GunRecoil(-0.075, +.04);
 				A_OverlayScale(PSP_WEAPON, 1.03, 0);
 			}
 			RLAF H 0
@@ -138,77 +116,21 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			}
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			RLAF HHH 1 A_WeaponOffset(0,32);
-			RLAF II 1;
+			RLAF II 1 JM_GunRecoil(+0.6, -.04);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-			RLAF EJ 1 A_WeaponOffset(0,32);
-			RLAF K 1;
+			RLAF EJ 1 
+			{
+				JM_GunRecoil(+0.6, -.04);
+				A_WeaponOffset(0,32);
+			}
+			RLAF K 1 JM_GunRecoil(+0.6, -.04);
             RLAS F 6 {
 			if(CountInv("MO_powerspeed") == 1)
 			{A_SetTics(3);}
 			}
 			TNT1 A 0 A_JumpIf(PressingFire(), "Fire");
             Goto REadyToFire;
-		FireNuke:
-			TNT1 A 0;
-			RLAF A 0 A_JumpIfInventory("MiniNukeCooldown",1, "OnCooldown");
-			TNT1 A 0 A_JumpIfInventory("MO_RocketAmmo",30,1);
-			Goto ReadyToFire;
-            RNAF A 1 BRIGHT
-            {
-                A_FireProjectile("MO_MiniNukeRocket",0,false,0,7,0);
-				A_TakeInventory("MO_RocketAmmo",30);
-                A_StartSound("weapons/rocket/fire", 1);
-                A_Overlay(-5, "MuzzleFlash");
-				JM_CheckForQuadDamage();
-            }
-            RNAF B 1 BRIGHT
-            {
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-                 A_SetPitch(pitch-3.0,SPF_Interpolate);
-			    A_SetAngle(angle+.75,SPF_INTERPOLATE);
-				}
-		    }
-            RNAF C 1
-            {
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-                A_SetPitch(pitch-4.0,SPF_Interpolate);
-			    A_SetAngle(angle+.75,SPF_INTERPOLATE);
-				}
-		    }
-            RNAF D 1
-            {
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-                A_SetPitch(pitch-5.0,SPF_Interpolate);
-			    A_SetAngle(angle+.75,SPF_INTERPOLATE);
-				}
-            }
-            TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-            RLAF E 1;
-			RLAF FFG 1;
-			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-			RLAF G 1;
-			RLAF H 2 A_WeaponOffset(0,35);
-			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-			RLAF HHH 1 A_WeaponOffset(0,37);
-			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-			RLAF HH 1 A_WeaponOffset(0,34);
-			RLAF II 1 A_WeaponOffset(0,32);
-			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-			RLAF EEJ 1 A_WeaponOffset(0,36);
-			RLAF K 1 A_WeaponOffset(0,33);
-            RLAS F 6 {
-			if(CountInv("MO_powerspeed") == 1)
-			{A_SetTics(3);}
-			}
-			TNT1 A 0 A_ReFire;
-            Goto REadyToFire;
-		OnCooldown:
-			TNT1 A 0 A_Print("Mini nuke on cooldown");
-			Goto ReadyToFire;
-			
+
         AltFire:
 			TNT1 A 0 A_JumpIfInventory("MiniNukeMode",1,"NoAltForNuke");
 			TNT1 A 0 A_JumpIf(CountInv("MO_RocketAmmo") < 1,"ReadyToFire");
@@ -220,23 +142,9 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 				JM_CheckForQuadDamage();
 				A_TakeInventory("MO_RocketAmmo",1);
             }
-            RLAF B 1 BRIGHT
-            {
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-                A_SetPitch(pitch-2.0,SPF_Interpolate);
-			    A_SetAngle(angle+0.4,SPF_INTERPOLATE);
-				}
-		    }
+            RLAF B 1 BRIGHT JM_GunRecoil(-1.0, .05);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-            RLAF CC 1
-            {
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-                A_SetPitch(pitch-1.0,SPF_Interpolate);
-			    A_SetAngle(angle+0.2,SPF_INTERPOLATE);
-				}
-		    }
+            RLAF CC 1 JM_GunRecoil(-0.95, .05);
 			TNT1 A 0 A_JumpIf(CountInv("MO_RocketAmmo") < 1,"BurstDone");
             RLAF A 1 BRIGHT
             {
@@ -244,23 +152,9 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 				A_TakeInventory("MO_RocketAmmo",1);
                 A_StartSound("weapons/rocket/fire", 1);
             }
-            RLAF B 1 BRIGHT
-            {
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-                A_SetPitch(pitch-2.0,SPF_Interpolate);
-			    A_SetAngle(angle+0.4,SPF_INTERPOLATE);
-				}
-		    }
+            RLAF B 1 BRIGHT JM_GunRecoil(-1.0, .05);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-            RLAF CC 1
-            {
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-                A_SetPitch(pitch-1.0,SPF_Interpolate);
-			    A_SetAngle(angle+0.2,SPF_INTERPOLATE);
-				}
-		    }
+            RLAF CC 1 JM_GunRecoil(-0.95, .05);
 			TNT1 A 0 A_JumpIf(CountInv("MO_RocketAmmo") < 1,"BurstDone");
             RLAF A 1 BRIGHT
             {
@@ -268,37 +162,16 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 				A_TakeInventory("MO_RocketAmmo",1);
                 A_StartSound("weapons/rocket/fire", 1, starttime: 0.1);
             }
-            RLAF B 1 BRIGHT
-            {
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-                A_SetPitch(pitch-2.0,SPF_Interpolate);
-			    A_SetAngle(angle+0.4,SPF_INTERPOLATE);
-				}
-		    }
+            RLAF B 1 BRIGHT JM_GunRecoil(-1.0, .05);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-            RLAF CC 1
-            {
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-                A_SetPitch(pitch-1.0,SPF_Interpolate);
-			    A_SetAngle(angle+0.2,SPF_INTERPOLATE);
-				}
-		    }
+            RLAF CC 1 JM_GunRecoil(-0.95, .05);
 		BurstDone:
-            RLAF D 1
-            {
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-                A_SetPitch(pitch-3.0,SPF_Interpolate);
-			    A_SetAngle(angle+.75,SPF_INTERPOLATE);
-				}
-            }
+            RLAF D 1 JM_GunRecoil(-1.0, .05);
 			TNT1 A 0 A_JumpIf(CountInv("MO_RocketAmmo") < 1,2);
 			RLAF A 0 A_StartSound("weapons/rocket/loading",6);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
             RLAF E 1;
-			RLAF FFG 1;
+			RLAF FFG 1 JM_GunRecoil(-0.2, .04);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			RLAF G 1;
 			RLAF H 2 
@@ -308,9 +181,10 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 				A_OverlayScale(PSP_WEAPON, 1.06, 0);
 				A_OverlayPivotAlign(PSP_WEAPON, PSPA_CENTER, PSPA_BOTTOM);
 			}
-			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
+			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			RLAF HHHH 1{
 				A_WeaponOffset(1,36);
+				JM_GunRecoil(-0.075, +.04);
 				A_OverlayScale(PSP_WEAPON, 1.03, 0);
 			}
 			RLAF H 0
@@ -318,12 +192,16 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 				A_WeaponOffset(0,34);
 				A_OverlayScale(PSP_WEAPON, 1, 0);
 			}
-			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			RLAF HHH 1 A_WeaponOffset(0,32);
-			RLAF II 1;
+			RLAF II 1 JM_GunRecoil(+0.6, -.04);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-			RLAF EJ 1 A_WeaponOffset(0,32);
-			RLAF K 1;
+			RLAF EJ 1 
+			{
+				JM_GunRecoil(+0.6, -.04);
+				A_WeaponOffset(0,32);
+			}
+			RLAF K 1 JM_GunRecoil(+0.6, -.04);
             RLAS F 6 {
 			if(CountInv("MO_powerspeed") == 1)
 			{A_SetTics(3);}
