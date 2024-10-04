@@ -126,8 +126,6 @@ OptionMenu "CustomCrosshairsMenu"
 	SafeCommand "Reset Default Crosshairs",  "mo_xhairs_defaultpreset"
 //	SafeCommand "Randomize Crosshairs", "mo_xhairs_randomize"
 	StaticText ""
-	StaticText "Slot 1"
-	Slider "Flamethrower", "MO_XHairFlamer", 0, 99, 1
 	StaticText "Slot 2"
 	Slider "Pistol", "mo_xhairpistol", 0, 99, 1
 	Slider "Deagle", "mo_xhairDeagle", 0, 99, 1
@@ -149,9 +147,9 @@ OptionMenu "CustomCrosshairsMenu"
 	StaticText "Slot 7"
 	Slider "BFG9K", "MO_XHairBFG", 0, 99, 1
 	Slider "BFG9K 10K Mode", "MO_XHairBFG10K", 0, 99, 1
-	StaticText "Slot 8"
 	Slider "Unmaker", "MO_XHairUnmaker", 0, 99, 1
-//	Stati
+	StaticText "Slot 8"
+	Slider "Flamethrower", "MO_XHairFlamer", 0, 99, 1
 }
 
 OptionValue "MO_NightVisionColors"
