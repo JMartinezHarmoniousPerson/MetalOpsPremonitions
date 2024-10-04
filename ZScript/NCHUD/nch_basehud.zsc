@@ -539,8 +539,6 @@ class NCH_BaseHUD : BaseStatusBar
 			NCHF_AddSingleAmmo("MO_ShotShell");
 			NCHF_AddSingleAmmo("MO_RocketAmmo");
 			NCHF_AddSingleAmmo("MO_Cell");
-			NCHF_AddSingleAmmo("MolotovAmmo");
-			NCHF_AddSingleAmmo("GrenadeAmmo");
 	}
 
 	// -------------------------------------------------------------------------------------------------
