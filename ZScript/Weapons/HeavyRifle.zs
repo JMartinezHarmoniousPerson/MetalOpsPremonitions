@@ -21,6 +21,7 @@ Class MO_HeavyRifle : JMWeapon
 		Inventory.PickupSound "weapons/ar/pickup";
 		Scale 0.55;
 		JMWeapon.inspectToken "NeverUsedHCR";
+		+INVENTORY.TOSSED
     }
 
 	action state JM_CheckMagHMR(int m = 1, statelabel rel = "Reload")
@@ -28,6 +29,11 @@ Class MO_HeavyRifle : JMWeapon
 		if(CountInv(invoker.ammotype2) < m)
 			return ResolveState(rel);
 		return ResolveState(Null);
+	}
+	
+	action void MO_SetGrenade(bool fired = false)
+	{
+		invoker.hcrFiredGrenade = fired;
 	}
 
 	action void MO_SetHMRCrosshair()
@@ -468,7 +474,7 @@ Class MO_HeavyRifle : JMWeapon
 			TNT1 A 0 A_Print("Out of Rocket Ammo");
 			Goto ReadyToFire;
 			HCRA A 0 A_JumpIf(invoker.hcrFiredGrenade == true, "ReloadGrenade");
-			HCRA A 0 {invoker.hcrFiredGrenade = true;}
+			HCRA A 0 MO_SetGrenade(true);
 			HCRA A 0 A_TakeInventory("MO_RocketAmmo",1);
 			HCRH A 1  bright
 			{
@@ -504,7 +510,7 @@ Class MO_HeavyRifle : JMWeapon
 			TNT1 A 0 A_Jumpif(invoker.OwnerHasSpeed(), 1);
 			HRG1 WXY 1;
 			HRG1 Z 8 {if(invoker.OwnerHasSpeed()) A_SetTics(4);}
-			HCRA A 0 {invoker.hcrFiredGrenade = false;}
+			HCRA A 0 MO_SetGrenade(false);
 			HRG2 A 2 A_StartSound("hcr/grenadeclose",0);
 			HRG2 BBCCDEFGH 1;
 			Goto ReadyToFire;
@@ -578,11 +584,11 @@ Class MO_HeavyRifle : JMWeapon
 			HCRR Q 1 A_StartSound("hcr/magout", CHAN_AUTO);
 			HCRR RS 1 {
 				JM_WeaponReady(WRF_NOFIRE);
-				if(CountInv("HCRIsEmpty") < 1) {JM_SetWeaponSprite("HR4R");}
+				if(CountInv("HCRIsEmpty") >= 1) {JM_SetWeaponSprite("HR4R");}
 			}
 			HCRR TU 1 {
 				JM_WeaponReady(WRF_NOFIRE);
-				if(CountInv("HCRIsEmpty") < 1) {JM_SetWeaponSprite("HR4R");}
+				if(CountInv("HCRIsEmpty") >= 1) {JM_SetWeaponSprite("HR4R");}
 			}
 			AR12 A 0 A_JumpIf(CountInv("HCRAmmo") >= 1, 2);
 			HCRR A 0 {MO_EjectCasing("ARMagazine", ejectpitch: frandom(-20, -15), speed: frandom(4, 5),  offset:(28, 16, -13));}
