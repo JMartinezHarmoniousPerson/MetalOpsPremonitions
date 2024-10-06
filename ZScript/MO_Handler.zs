@@ -11,6 +11,28 @@ class MOps_Handler : EventHandler
 			kicktimer--;
     }
 	
+	override void CheckReplacement(replaceEvent e)
+	{
+		PlayerInfo p = players[consoleplayer];
+		switch(e.Replacee.GetClassName())
+		{
+			case 'Pistol':
+				if(p.mo is "MO_SergeantPlayer")
+				{e.Replacement = "MO_Deagle";}
+				else
+				{e.Replacement = "EnforcerPistol";}
+				break;
+			case 'Shotgun':
+				e.Replacement = "ShotgunDropper";
+				break;
+			case 'Chaingun':
+			case 'Minigun':
+				e.Replacement = "ChaingunDropper";
+				break;
+		}
+		e.isFinal = false;
+	}
+
     override void NetworkProcess(ConsoleEvent e)
     {
         let pl = players[e.Player].mo;
@@ -86,21 +108,6 @@ class MOps_Handler : EventHandler
 					}
 				}
 			}
-		}
-	}
-}
-
-class PistolReplacerHandler : EventHandler
-{
-	override void CheckReplacement(replaceEvent e)
-	{
-		PlayerInfo p = players[consoleplayer];
-		if(e.Replacee == "Pistol")
-		{
-			if(p.mo is "MO_SergeantPlayer")
-			e.Replacement = "MO_Deagle";
-			else
-			e.Replacement = "EnforcerPistol";
 		}
 	}
 }

@@ -15,7 +15,8 @@ Class MO_SubMachineGun : JMWeapon
         Tag "Submachine Gun";
 		Inventory.PickupSound "weapons/smg/pickup";
 		JMWeapon.InspectToken "NeverUsedSMG";
-		+WEAPON.NOALERT;
+		+WEAPON.NOALERT;	
+		+INVENTORY.TOSSED;
     }
 
 	override void PostBeginPlay()

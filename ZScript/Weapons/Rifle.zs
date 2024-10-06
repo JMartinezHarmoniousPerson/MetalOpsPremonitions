@@ -15,6 +15,7 @@ Class AssaultRifle : JMWeapon
         Obituary "%o was shot down by %k's Combat Rifle.";
         Tag "Combat Rifle";
 		Inventory.PickupSound "weapons/ar/pickup";
+		+INVENTORY.TOSSED
     }
 
 	override void PostBeginPlay()

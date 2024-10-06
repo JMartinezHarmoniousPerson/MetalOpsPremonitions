@@ -1,4 +1,21 @@
-class ShotgunSpawner : RandomSpawner replaces Shotgun
+class ShotgunDropper : Inventory
+{
+	Default{+DROPPED}
+	States
+	{
+	 Spawn:
+        TNT1 A 0 NoDelay
+        {
+            If(invoker.bTOSSED) //If a monster drops this, only drop the Lever Shotgun
+                { A_SpawnItemEx("LeverShotgun", flags:SXF_NOCHECKPOSITION); }
+            Else
+                { A_SpawnItemEx("ShotgunSpawner", flags:SXF_NOCHECKPOSITION); }
+        }
+        Stop;
+   }
+}
+
+class ShotgunSpawner : RandomSpawner
 {
 	Default
     {
@@ -25,7 +42,7 @@ class SSGRandomizer : actor
 			}
 		SpawnSSG:
 			TNT1 A 0;
-			TNT1 A 1 A_Jump(96, "SpawnPump", "SpawnLever");
+			TNT1 A 1 A_Jump(80, "SpawnPump", "SpawnLever");
 			TNT1 A 0 A_SpawnItemEx("MO_SSG");
 			Stop;
 		SpawnPump:
@@ -38,22 +55,15 @@ class SSGRandomizer : actor
 }
 
 //Based on code from Jarwill and Ac1d
-class ChaingunDropper : Inventory replaces Chaingun
+class ChaingunDropper : Inventory// replaces Chaingun
 {
 	Default{+DROPPED}
-    Override bool SpecialDropAction(Actor dropper)
-    {
-        If(dropper is "ChaingunGuy"){ A_DropItem("MO_MiniGun"); } //If actor that dropped the item is a zombieman (or derived)
-        Else { A_DropItem("ChaingunSpawner"); }
-		Return 1; //Destroy the item if it was dropped at all
-    }
-	
 	States
 	{
 	 Spawn:
         TNT1 A 0 NoDelay
         {
-            If(invoker.bTOSSED)
+            If(invoker.bTOSSED) //If a monster drops this, only drop the Minigun
                 { A_SpawnItem("MO_MiniGun"); }
             Else
                 { A_SpawnItem("ChaingunSpawner"); }
@@ -71,29 +81,6 @@ class ChaingunSpawner : RandomSpawner
 		DropItem "MO_HeavyRifle", 255,1;
 		DropItem "MO_SubMachinegun",255, 1;
 	}
-}
-
-Class HMRDropper : Inventory
-{
-	Default{+DROPPED}
-    Override bool SpecialDropAction(Actor dropper)
-    {
-        If(dropper is "ChaingunGuy"){ A_DropItem("MO_MiniGun"); } //If actor that dropped the item is a zombieman (or derived)
-        Else { A_DropItem("MO_HeavyRifle"); }
-        Return 1; //Destroy the item if it was dropped at all
-    }
-    States
-    {
-    Spawn:
-        TNT1 A 0 NoDelay
-        {
-            If(invoker.bTOSSED)
-                { A_SpawnItem("MO_MiniGun"); }
-            Else
-                { A_SpawnItem("MO_HeavyRifle"); }
-        }
-        Stop;
-   }
 }
 
 class ClipSpawner : RandomSpawner replaces Clip
