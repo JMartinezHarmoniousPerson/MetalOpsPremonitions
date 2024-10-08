@@ -23,7 +23,7 @@ class MO_LowCalBox : MO_LowCaliber// replaces Clipbox
 {
 	Default
 	{
-	  Inventory.PickupMessage "Picked up a box of low caliber bullets"; // "Picked up a box of bullets."
+	  Inventory.PickupMessage "Picked up a box of low caliber bullets."; // "Picked up a box of bullets."
 	  Inventory.Amount 50;
 	  Scale 1.0;
 	  Inventory.PickUpSound "misc/ammobox";
