@@ -4,9 +4,9 @@ class MO_LowCaliber : Ammo
 	{
 	  Inventory.PickupMessage "Picked up a low caliber magazine."; // "Picked up a clip."
 	  Inventory.Amount 10;
-	  Inventory.MaxAmount 100;
+	  Inventory.MaxAmount 150;
 	  Ammo.BackpackAmount 30;
-	  Ammo.BackpackMaxAmount 200;
+	  Ammo.BackpackMaxAmount 250;
 	  Inventory.Icon "CLIPB0";
 	  Inventory.PickUpSound "misc/ammopickup";
 	  Scale 0.55;
