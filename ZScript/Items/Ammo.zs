@@ -6,7 +6,7 @@ class MO_LowCaliber : Ammo
 	  Inventory.Amount 10;
 	  Inventory.MaxAmount 150;
 	  Ammo.BackpackAmount 30;
-	  Ammo.BackpackMaxAmount 250;
+	  Ammo.BackpackMaxAmount 300;
 	  Inventory.Icon "CLIPB0";
 	  Inventory.PickUpSound "misc/ammopickup";
 	  Scale 0.55;
