@@ -1,12 +1,12 @@
-class LowCalClip : Ammo
+class MO_LowCaliber : Ammo
 {
 	Default
 	{
 	  Inventory.PickupMessage "Picked up a low caliber magazine."; // "Picked up a clip."
 	  Inventory.Amount 10;
-	  Inventory.MaxAmount 150;
+	  Inventory.MaxAmount 100;
 	  Ammo.BackpackAmount 30;
-	  Ammo.BackpackMaxAmount 300;
+	  Ammo.BackpackMaxAmount 200;
 	  Inventory.Icon "CLIPB0";
 	  Inventory.PickUpSound "misc/ammopickup";
 	  Scale 0.55;
@@ -19,7 +19,7 @@ class LowCalClip : Ammo
 	}
  }
  
-class LowCalBox : LowCalClip// replaces Clipbox
+class MO_LowCalBox : MO_LowCaliber// replaces Clipbox
 {
 	Default
 	{
@@ -36,7 +36,7 @@ class LowCalBox : LowCalClip// replaces Clipbox
 	  }
 }
  
- class HighCalClip : Ammo
+ class MO_HighCaliber : Ammo
 {
 	Default
 	{
@@ -57,7 +57,7 @@ class LowCalBox : LowCalClip// replaces Clipbox
 	}
  }
  
- class HighCalBox : HighCalClip// replaces Clipbox
+ class MO_HighCalBox : MO_HighCaliber// replaces Clipbox
  {
 	Default
 	{
@@ -74,7 +74,7 @@ class LowCalBox : LowCalClip// replaces Clipbox
 	  }
 }
 
-class Gasoline : Ammo
+class MO_Gasoline : Ammo
 {
 	Default
 	{
@@ -151,22 +151,6 @@ Class MO_ShellBox : MO_ShotShell
   }
 }
 
-Class MO_FlakShellBox : MO_FlakShell
-{
-	Default
-	{
-	  Inventory.PickupMessage "Picked up a box of flak shotgun shells."; // "Picked up a box of shotgun shells."
-	  Inventory.Amount 20;
-	  Inventory.PickUpSound "misc/shellbox";
-	  Scale 1;
-	}
-  States
-  {
-  Spawn:
-    SBOX C -1;
-    Stop;
-  }
-}
 Class MO_RocketAmmo : Ammo replaces RocketAmmo
 {
 	Default
@@ -223,7 +207,6 @@ Class MO_Cell : Ammo replaces Cell
   {
   Spawn:
     CELL A 1;
-  SpawnLoop:
 	CELL BCDEF 3;
     Loop;
   }
@@ -244,24 +227,4 @@ Class MO_CellPack: MO_Cell replaces Cellpack
     CELP ABCD 3;
     Loop;
   }
-}
-
-Class MO_DemonicAmmo : Ammo
-{
-	Default
-	{
-	  Inventory.Amount 40;
-	  Inventory.MaxAmount 400;
-	  Ammo.BackpackAmount 100;
-	  Ammo.BackpackMaxAmount 800;
-	  Inventory.Icon "CELLA0";
-	  inventory.pickupsound "misc/cell";
-	  Scale 0.25;
-	  }
-	  States
-	  {
-	  Spawn:
-		CELL A -1;
-		Stop;
-    }
 }

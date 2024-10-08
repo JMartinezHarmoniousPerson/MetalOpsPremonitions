@@ -87,8 +87,8 @@ class ClipSpawner : RandomSpawner replaces Clip
 {
 	Default
 	{
-		DropItem "HighCalClip";
-		DropItem "LowCalClip";
+		DropItem "MO_HighCaliber";
+		DropItem "MO_LowCaliber";
 	}
 }
 
@@ -96,8 +96,8 @@ class ClipboxSpawner : RandomSpawner replaces Clipbox
 {
 	Default
 	{
-		DropItem "HighCalBox", 255;
-		DropItem "LowCalBox", 255;
+		DropItem "MO_HighCalBox", 255;
+		DropItem "MO_LowCalBox", 255;
 	}
 }
 
@@ -149,14 +149,14 @@ class FlamethrowerSpawner : CustomInventory replaces Chainsaw
 			TNT1 A 1
 			{
 				A_GiveInventory("MO_Flamethrower",1);
-				A_GiveInventory("Gasoline",75);
+				A_GiveInventory("MO_Gasoline",75);
 				A_Log("You got the Flamethrower! (Slot 1)");
 			}
 			Stop;
 		PickupGas:
 			TNT1 A 1
 			{
-				A_GiveInventory("Gasoline",75);
+				A_GiveInventory("MO_Gasoline",75);
 				A_Log("You got the gasoline from the Flamethrower! +90 Gas");
 			}
 			Stop;

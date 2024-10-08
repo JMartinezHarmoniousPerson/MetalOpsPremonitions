@@ -56,9 +56,9 @@ class MO_OfficerPlayer : MO_PlayerBase
 		Player.DisplayName "Officer (Pistol Start)";
 		Player.CrouchSprite "PLYC";
 		Player.StartItem "PistolMagAmmo",12;
-		Player.StartItem "Gasoline", 200;
-		Player.StartItem "LowCalClip",50;
-		Player.StartItem "HighCalClip",50;
+		Player.StartItem "MO_Gasoline", 200;
+		Player.StartItem "MO_LowCaliber",50;
+		Player.StartItem "MO_HighCaliber",50;
 		Player.StartItem "LeverShottyAmmo",7;
 		Player.StartItem "PumpShotgunAmmo", 8;
 		Player.StartItem "ARAmmo",30;
@@ -92,9 +92,9 @@ class MO_SergeantPlayer : MO_PlayerBase
 		Player.WeaponSlot 2, "MO_Deagle", "MO_Submachinegun";
 		Player.StartItem "SergeantClass", 1;
 		Player.StartItem "MODeagleAmmo",7;
-		Player.StartItem "Gasoline", 200;
-		Player.StartItem "LowCalClip",50;
-		Player.StartItem "HighCalClip",50;
+		Player.StartItem "MO_Gasoline", 200;
+		Player.StartItem "MO_LowCaliber",50;
+		Player.StartItem "MO_HighCaliber",50;
 		Player.StartItem "LeverShottyAmmo",7;
 		Player.StartItem "PumpShotgunAmmo", 8;
 		Player.StartItem "ARAmmo",30;

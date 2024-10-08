@@ -8,7 +8,7 @@ Class AssaultRifle : JMWeapon
     {
         Weapon.AmmoGive 30;
 		Weapon.AmmoUse 0;
-        Weapon.AmmoType1 "HighCalClip";
+        Weapon.AmmoType1 "MO_HighCaliber";
         Weapon.AmmoType2 "ARAmmo";
 		Weapon.SelectionOrder 800;
         Inventory.PickupMessage "You got the Combat Rifle! (Slot 4)";
@@ -218,7 +218,7 @@ Class AssaultRifle : JMWeapon
         
         Reload:
 			TNT1 A 0 A_JumpIfInventory("ARAmmo",30,"ReadyToFire");
-			TNT1 A 0 A_JumpIfInventory("HighCalClip",1,2);
+			TNT1 A 0 A_JumpIfInventory("MO_HighCaliber",1,2);
 			TNT1 A 0 A_JumpIf(invoker.isZoomed, "NoAmmoZoomed");
 			Goto ReadyToFire;
 			TNT1 AAA 0;
@@ -266,7 +266,7 @@ Class AssaultRifle : JMWeapon
 			AR11 AB 1 JM_WeaponReady(WRF_NOFIRE);
 			AR11 J 0 A_StartSound("weapons/ar/ReloadEnd",1);
 			AR11 A 0 A_JumpIf(CountInv("GunIsEmpty") >= 1, "Chamber");
-			AR10 A 0 JM_ReloadGun("ARAmmo", "HighCalClip",30,1);
+			AR10 A 0 JM_ReloadGun("ARAmmo", "MO_HighCaliber",30,1);
 			AR11 C 1 JM_WeaponReady(WRF_NOFIRE);
 			 AR1G A 1;
 			 Goto ReadyToFire;
@@ -297,7 +297,7 @@ Class AssaultRifle : JMWeapon
 			AR10 A 0 A_StartSound("weapons/ar/magin", CHAN_AUTO);
 			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			AR12 TUV 1 JM_WeaponReady(WRF_NOFIRE);
-			AR10 A 0 JM_ReloadGun("ARAmmo", "HighCalClip",30,1);
+			AR10 A 0 JM_ReloadGun("ARAmmo", "MO_HighCaliber",30,1);
 			AR12 W 5 {
 				JM_WeaponReady(WRF_NOFIRE);
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(3);}
@@ -353,7 +353,7 @@ Class AssaultRifle : JMWeapon
 			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			ARZR PQR 1 JM_WeaponReady(WRF_NOFIRE);
 			AR11 A 0 A_JumpIf(CountInv("GunIsEmpty") >= 1, "Chamber");
-			AR10 A 0 JM_ReloadGun("ARAmmo", "HighCalClip",30,1);
+			AR10 A 0 JM_ReloadGun("ARAmmo", "MO_HighCaliber",30,1);
 			TNT1 A 0 A_ZoomFactor(1.4);
 			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			ARZR STU 1 JM_WeaponReady(WRF_NOFIRE);
@@ -382,7 +382,7 @@ Class AssaultRifle : JMWeapon
 
 		Chamber:
 			TNT1 A 0 A_SetInventory("GunIsEmpty",0);
-			AR10 A 0 JM_ReloadGun("ARAmmo", "HighCalClip",30,1);
+			AR10 A 0 JM_ReloadGun("ARAmmo", "MO_HighCaliber",30,1);
 			TNT1 A 0 A_JumpIf(invoker.isZoomed, "Chamber2");
 			AR1G A 0 A_StartSound("weapons/ar/ReloadEnd",0);
 			AR11 D 1;

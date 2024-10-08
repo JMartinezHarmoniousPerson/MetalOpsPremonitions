@@ -8,7 +8,7 @@ Class MO_SubMachineGun : JMWeapon
     {
         Weapon.AmmoGive 40;
 		Weapon.SelectionOrder 1800;
-        Weapon.AmmoType1 "LowCalclip";
+        Weapon.AmmoType1 "MO_LowCaliber";
         Weapon.AmmoType2 "SMGAmmo";
         Inventory.PickupMessage "You got the Submachine Gun (Slot 2)!";
         Obituary "%o got turned into swiss cheese by %k's Submachine Gun.";
@@ -207,7 +207,7 @@ Class MO_SubMachineGun : JMWeapon
         
         Reload:
 			TNT1 A 0 A_JumpIfInventory("SMGAmmo",40,"ReadyToFire");
-			TNT1 A 0 A_JumpIfInventory("LowCalClip",1,2);
+			TNT1 A 0 A_JumpIfInventory("MO_LowCaliber",1,2);
 			TNT1 A 0 A_JumpIf(invoker.isZoomed, "NoAmmoZoomed");
 			Goto ReadyToFire;
 			TNT1 AAA 0;
@@ -247,7 +247,7 @@ Class MO_SubMachineGun : JMWeapon
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			SMR1 S 1 JM_WeaponReady(WRF_NOFIRE);
 			SMR1 TU 1 JM_WeaponReady(WRF_NOFIRE);
-			TNT1 A 0 JM_ReloadGun("SMGAmmo","LowCalClip",40,1);
+			TNT1 A 0 JM_ReloadGun("SMGAmmo","MO_LowCaliber",40,1);
 	DoneReload:
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			SMR1 VWXYZ 1;
@@ -293,7 +293,7 @@ Class MO_SubMachineGun : JMWeapon
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			SMRZ LL 1 JM_WeaponReady(WRF_NOFIRE);
 			SMRZ MN 1 JM_WeaponReady(WRF_NOFIRE);
-			TNT1 A 0 JM_ReloadGun("SMGAmmo","LowCalClip",40,1);
+			TNT1 A 0 JM_ReloadGun("SMGAmmo","MO_LowCaliber",40,1);
 	DoneReloadZoomed:
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			SMRZ OONML 1;

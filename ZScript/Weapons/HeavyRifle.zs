@@ -11,7 +11,7 @@ Class MO_HeavyRifle : JMWeapon
     Default
     {
         Weapon.AmmoGive 20;
-        Weapon.AmmoType1 "HighCalClip";
+        Weapon.AmmoType1 "MO_HighCaliber";
         Weapon.AmmoType2 "HCRAmmo";
         Inventory.PickupMessage "You got the Heavy Combat Rifle! (Slot 4)";
 		Weapon.SelectionOrder 650;
@@ -547,7 +547,7 @@ Class MO_HeavyRifle : JMWeapon
 
         Reload:
 			TNT1 A 0 A_JumpIfInventory("HCRAmmo",12,"ReadyToFire");
-			TNT1 A 0 A_JumpIfInventory("HighCalClip",1,2);
+			TNT1 A 0 A_JumpIfInventory("MO_HighCaliber",1,2);
 			TNT1 A 0 A_JumpIf(Invoker.isZoomed, "NoAmmoZoomed");
 			Goto ReadyToFire;
 			HCRA A 0 {
@@ -608,7 +608,7 @@ Class MO_HeavyRifle : JMWeapon
 			1CRR D 1 JM_WeaponReady(WRF_NOFIRE);
 			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 1);
 			1CRR EE 1 JM_WeaponReady(WRF_NOFIRE);
-			AR10 A 0 JM_ReloadGun("HCRAmmo", "HighCalClip",12,3);
+			AR10 A 0 JM_ReloadGun("HCRAmmo", "MO_HighCaliber",12,3);
 			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 1);
 			1CRR FFG 1 JM_WeaponReady(WRF_NOFIRE);
 			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 1);

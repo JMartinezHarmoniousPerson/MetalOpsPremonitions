@@ -14,7 +14,7 @@ class MO_MiniGun : JMWeapon
 	{
 		Weapon.AmmoUse 1;
 		Weapon.AmmoGive 20;
-		Weapon.AmmoType "HighCalClip";
+		Weapon.AmmoType "MO_HighCaliber";
 		Weapon.SelectionOrder 700;
 		Inventory.PickupMessage "You got the Vulcan Minigun! (Slot 4)";
 		Obituary "$OB_MPCHAINGUN";
