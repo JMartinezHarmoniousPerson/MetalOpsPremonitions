@@ -16,6 +16,7 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		Inventory.PickupSound "weapons/levershotty/pickup";
 		Inventory.AltHUDIcon "W87CA0";
 		JMWeapon.inspectToken "NeverUsedLAS";
++Weapon.NoAlert
 	}
 	States
 	{
@@ -62,7 +63,7 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 			A_StartSound ("weapons/levershotty/fire", CHAN_WEAPON);
 			JM_UseAmmo("LeverShottyAmmo",1);
 			A_SpawnItemEx("ShotgunSmoke",20,0,34,2,0,0);
-			 JM_CheckForQuadDamage();
+			 JM_CheckForQuadDamage();                                       A_AlertMonsters();
 		}
 		W87F B 1 BRIGHT
 		{
@@ -140,7 +141,7 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 			A_StartSound ("weapons/levershotty/fire", CHAN_WEAPON);
 			JM_UseAmmo("LeverShottyAmmo",1);
 			A_SpawnItemEx("ShotgunSmoke",20,0,34,2,0,0);
-			 JM_CheckForQuadDamage();
+			 JM_CheckForQuadDamage();                                       A_AlertMonsters();
 		}
 		W87F B 1 BRIGHT
 		{
