@@ -15,6 +15,7 @@ class MO_PumpShotgun : JMWeapon
         Tag "Pump Shotgun";
 		Inventory.PickupSound "weapons/pumpshot/pump";
 		JMWeapon.inspectToken "NeverUsedPSG";
++Weapon.NoAlert
     }
     States
     {
@@ -74,6 +75,7 @@ class MO_PumpShotgun : JMWeapon
 				A_SpawnItemEx("ShotgunSmoke",15,0,34,2,0,0);
 				A_SetInventory("SGPumping",1);
 				JM_CheckForQuadDamage();
+A_AlertMonsters();
 		    }
             PSGF BC 1 
 			{
@@ -123,7 +125,7 @@ class MO_PumpShotgun : JMWeapon
                 A_TakeInventory("PumpShotgunAmmo",2, TIF_NOTAKEINFINITE);
 				A_SpawnItemEx("ShotgunSmoke",15,0,34,2,0,0);
 				JM_CheckForQuadDamage();
-				A_SetInventory("AltPumping",1);
+				A_SetInventory("AltPumping",1);                                       A_AlertMonsters();
 		    }
             PSGF B 1 
 			{
