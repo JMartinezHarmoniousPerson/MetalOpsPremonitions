@@ -7,11 +7,18 @@ class ShotgunDropper : Inventory
         TNT1 A 0 NoDelay
         {
             If(invoker.bTOSSED) //If a monster drops this, only drop the Lever Shotgun
-                { A_SpawnItemEx("LeverShotgun", flags:SXF_NOCHECKPOSITION); }
+                { return A_Jump(256, "SpawnLAS", "SpawnPSG"); }
             Else
                 { A_SpawnItemEx("ShotgunSpawner", flags:SXF_NOCHECKPOSITION); }
+			return resolvestate(null);
         }
-        Stop;
+		Stop;
+		SpawnLAS:
+			TNT1 A 0 A_SpawnItemEx("LeverShotgun", flags:SXF_NOCHECKPOSITION);
+			Stop;
+		SpawnPSG:
+			TNT1 A 0 A_SpawnItemEx("MO_Pumpshotgun", flags:SXF_NOCHECKPOSITION); 
+			Stop;
    }
 }
 
@@ -28,8 +35,9 @@ class ShotgunSpawner : RandomSpawner
 //This is not a spawner! This is a randomizer actor for the SSG spawn option.
 //If the ssg random spawn on shotgun is off, it would spawn either the 
 //lever action or pump shotgun. -JM
-class SSGRandomizer : actor
+class SSGRandomizer : inventory
 {
+	Default{+Inventory.TOSSED}
 	States
 	{
 		Spawn:
