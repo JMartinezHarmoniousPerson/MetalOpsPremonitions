@@ -55,7 +55,7 @@ class MO_OfficerPlayer : MO_PlayerBase
         Player.StartItem "EnforcerPistol";
 		Player.DisplayName "Officer (Pistol Start)";
 		Player.CrouchSprite "PLYC";
-		Player.StartItem "PistolMagAmmo",12;
+		Player.StartItem "PistolMagAmmo",18;
 		Player.StartItem "MO_Gasoline", 200;
 		Player.StartItem "MO_LowCaliber",50;
 		Player.StartItem "MO_HighCaliber",50;

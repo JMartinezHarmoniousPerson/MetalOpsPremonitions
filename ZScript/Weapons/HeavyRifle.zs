@@ -22,6 +22,7 @@ Class MO_HeavyRifle : JMWeapon
 		Scale 0.55;
 		JMWeapon.inspectToken "NeverUsedHCR";
 		+INVENTORY.TOSSED
+		+WEAPON.NOALERT
     }
 
 	action state JM_CheckMagHMR(int m = 1, statelabel rel = "Reload")
@@ -117,6 +118,7 @@ Class MO_HeavyRifle : JMWeapon
                 A_TakeInventory("HCRAmmo", 1,TIF_NOTAKEINFINITE);
                 A_StartSound("hcr/fire", 0);
 				A_Overlay(-2, "MuzzleSmoke");
+				A_AlertMonsters();
 				A_SpawnItemEx("ShotGunSmoke",20, zofs: 40, xvel: 2);
             }
             TNT1 B 1 BRIGHT 
@@ -179,6 +181,7 @@ Class MO_HeavyRifle : JMWeapon
                 A_StartSound("hcr/fire", 0);
 				A_Overlay(-5, "ZOOMEDFLASH");
 				A_SpawnItemEx("ShotGunSmoke",20, zofs: 40, xvel: 2);
+				A_AlertMonsters();
             }
             HC2G C 1 BRIGHT 
 			{
@@ -234,10 +237,11 @@ Class MO_HeavyRifle : JMWeapon
 			TNT1 A 0 JM_CheckMagHMR(1);
 			TNT1 A 0 JM_CheckMagHMR(3, "LowSniperCount");
             HC2Z D 1 BRIGHT {
-                A_FireBullets(5.6, 0, 1, 60, "UpdatedBulletPuff",FBF_NORANDOM);
+                A_FireBullets(5.6, 0, 1, 85, "UpdatedBulletPuff",FBF_NORANDOM);
                 A_TakeInventory("HCRAmmo", 3,TIF_NOTAKEINFINITE);
                 A_StartSound("hcr/fire", 0);
 				A_SpawnItemEx("ShotGunSmoke",20, zofs: 40, xvel: 2);
+				A_AlertMonsters();
             }
             HC2Z D 1 BRIGHT 
 			{
@@ -481,6 +485,7 @@ Class MO_HeavyRifle : JMWeapon
 				A_StartSound("hcr/glfire",0);
 				A_Overlay(-3, "GrenMuzzleSmoke");
 				A_FireProjectile("HCRGrenade",0,0,0,11);
+				A_AlertMonsters();
 			}
 			HCRH BC 1 bright JM_GunRecoil(-1.0, .25);
 			HCRH D 1;
