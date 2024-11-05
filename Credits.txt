@@ -48,6 +48,14 @@ and Xbox Game Studios (firing)
 Shotgun shell casing sounds - Valve
 Shotgun shell and heavy brass casing sprites - Metalman
 
+Minigun:
+Sprites: Sonik.o.fan/tesefy
+Sounds: Magmacow 
+
+Heavy Marksman Rifle:
+Sprites: Metalman
+Sounds: Magmacow, Infinity Ward, Activision
+
 Plasma Rifle:
 Sounds : Bethesda Game Studios/Softworks, Zenimax, Gameloft
 Obsidian Entertainment, ID Software, Splash Damage Ltd
