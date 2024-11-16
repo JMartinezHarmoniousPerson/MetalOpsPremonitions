@@ -66,7 +66,6 @@ class EnforcerPistol : JMWeapon// replaces Pistol
 					A_AlertMonsters();
 				}
 			A_TakeInventory("PistolMagAmmo",1,TIF_NOTAKEINFINITE);
-			A_SpawnItemEx("GunSmoke",18,0,32,2,0,0);
 			JM_CheckForQuadDamage();
 			}
 		#### A 0 A_SpawnItemEx("PistolCasing",30, -2, 33, random(-2,2), random(-6,-4), random(4,7), 0);
@@ -108,7 +107,6 @@ class EnforcerPistol : JMWeapon// replaces Pistol
 				A_AlertMonsters();
 			}
 			A_TakeInventory("PistolMagAmmo",1,TIF_NOTAKEINFINITE);
-			A_SpawnItemEx("GunSmoke",18,0,32,2,0,0);
 			JM_CheckForQuadDamage();
 			A_GiveInventory("PistolBurstCounter",1);
 			}

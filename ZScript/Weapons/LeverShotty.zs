@@ -62,28 +62,14 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 			A_FireBullets (random(3, 6), frandom(2,5), 9, 12, "ShotgunShellPuff", FBF_NORANDOM,0,"MO_BulletTracer",0);
 			A_StartSound ("weapons/levershotty/fire", CHAN_WEAPON);
 			JM_UseAmmo("LeverShottyAmmo",1);
-			A_SpawnItemEx("ShotgunSmoke",20,0,34,2,0,0);
-			 JM_CheckForQuadDamage();                                       A_AlertMonsters();
+			 JM_CheckForQuadDamage();
+			A_AlertMonsters();
 		}
-		W87F B 1 BRIGHT
-		{
-			if(!GetCvar("mo_nogunrecoil"))
-			{
-			A_SetPitch(pitch-1.6,SPF_Interpolate);
-			A_SetAngle(angle+.13,SPF_INTERPOLATE);
-			}
-		 }
-		 W87F C 1 BRIGHT
-		{
-			if(!GetCvar("mo_nogunrecoil"))
-			{
-			A_SetPitch(pitch-1.6,SPF_Interpolate);
-			A_SetAngle(angle+.13,SPF_INTERPOLATE);
-			}
-		 }
+		W87F B 1 BRIGHT JM_GunRecoil(-1.2,.09);
+		 W87F C 1 BRIGHT JM_GunRecoil(-1.2,.09);
 		//possible recoil
-		W87F D 1 JM_GunRecoil(0.6,.13);
-		W87F E 1 JM_GunRecoil(0.6,.13);
+		W87F D 1 JM_GunRecoil(+0.4,.13);
+		W87F E 1 JM_GunRecoil(+0.1,.13);
 		W87G A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 		W87F FFF 1;
         Goto Lever;
@@ -96,7 +82,6 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		W87P EGH 1;
 		W87G A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 		W87P IJ 1;
-		TNT1 A 0 A_SpawnItemEx("GunSmoke",28,-37,23,-2,-1,0);
 		TNT1 A 0 A_SpawnItemEx("ShotgunCasing",28, -32, random(17,20), random(-5,0), random(-5,-2), random(5,8));
 		PSTG A 0 JM_WeaponReady(WRF_NOFIRE); //Quick switch
 		W87G A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
@@ -140,30 +125,15 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 			A_FireBullets (random(3, 6), frandom(2,6.7), 9, 12, "ShotgunShellPuff", FBF_NORANDOM,0,"MO_BulletTracer",0);
 			A_StartSound ("weapons/levershotty/fire", CHAN_WEAPON);
 			JM_UseAmmo("LeverShottyAmmo",1);
-			A_SpawnItemEx("ShotgunSmoke",20,0,34,2,0,0);
-			 JM_CheckForQuadDamage();                                       A_AlertMonsters();
+			 JM_CheckForQuadDamage();
+			A_AlertMonsters();
 		}
-		W87F B 1 BRIGHT
-		{
-			if(!GetCvar("mo_nogunrecoil"))
-			{
-			A_SetPitch(pitch-1.6,SPF_Interpolate);
-			A_SetAngle(angle+.13,SPF_INTERPOLATE);
-			}
-		 }
-		 W87A A 1
-		{
-			if(!GetCvar("mo_nogunrecoil"))
-			{
-			A_SetPitch(pitch-1.6,SPF_Interpolate);
-			A_SetAngle(angle+.13,SPF_INTERPOLATE);
-			}
-		 }
-		W87A B 1;
-		W87A C 1;
+		W87F B 1 BRIGHT JM_GunRecoil(-1.2,.09);
+		 W87A A 1 JM_GunRecoil(-1.2,.09);
+		W87A B 1 JM_GunRecoil(+0.4,.09);
+		W87A C 1 JM_GunRecoil(+0.1,.09);
 		W87A D 1;// A_StartSound("weapons/levershotty/down", CHAN_AUTO);
 		W87A E 1;
-		TNT1 A 0 A_SpawnItemEx("GunSmoke",28,-5,23,-2,-1,0);
 		TNT1 A 0 A_SpawnItemEx("ShotgunCasing",28, -3, random(17,20), random(-5,0), random(-5,-2), random(8,12));
 		W87A F 1 A_StartSound("weapons/levershotty/down", CHAN_AUTO);
 		W87A F 1 A_WeaponOffset(0,35);

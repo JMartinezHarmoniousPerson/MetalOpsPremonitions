@@ -72,20 +72,14 @@ class MO_PumpShotgun : JMWeapon
                 A_FireBullets (random(3, 6), frandom(3,7), 20, 6, "ShotgunPuff20GA", FBF_NORANDOM,0,"MO_BulletTracer",0);
                 A_StartSound ("weapons/pumpshot/fire", CHAN_WEAPON);
                 A_TakeInventory("PumpShotgunAmmo",1, TIF_NOTAKEINFINITE);
-				A_SpawnItemEx("ShotgunSmoke",15,0,34,2,0,0);
+//				A_SpawnItemEx("ShotgunSmoke",15,0,34,2,0,0);
 				A_SetInventory("SGPumping",1);
 				JM_CheckForQuadDamage();
-A_AlertMonsters();
+				A_AlertMonsters();
 		    }
-            PSGF BC 1 
-			{
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-				A_SetPitch(pitch-1.6,SPF_Interpolate);
-				A_SetAngle(angle+.13,SPF_INTERPOLATE);
-				}
-		    }
-            PSGF DE 1 JM_GunRecoil(0.3,.13);
+            PSGF BC 1 JM_GunRecoil(-1.2,.09);
+            PSGF D 1 JM_GunRecoil(0.3,.09);
+			PSGF E 1 JM_GunRecoil(0.1,.09);
             PSGG A 4
 			{
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
@@ -123,35 +117,15 @@ A_AlertMonsters();
             {
                  A_FireBullets (random(4, 8), frandom(3,15), 40, 6, "ShotgunPuff20GA", FBF_NORANDOM,0,"MO_BulletTracer",0);
                 A_TakeInventory("PumpShotgunAmmo",2, TIF_NOTAKEINFINITE);
-				A_SpawnItemEx("ShotgunSmoke",15,0,34,2,0,0);
+//				A_SpawnItemEx("ShotgunSmoke",15,0,34,2,0,0);
 				JM_CheckForQuadDamage();
-				A_SetInventory("AltPumping",1);                                       A_AlertMonsters();
+				A_SetInventory("AltPumping",1);
+				A_AlertMonsters();
 		    }
-            PSGF B 1 
-			{
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-				A_SetPitch(pitch-2.5,SPF_Interpolate);
-				A_SetAngle(angle+.13,SPF_INTERPOLATE);
-				}
-		    }
-			PSGF C 1 
-			{
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-				A_SetPitch(pitch-1.8,SPF_Interpolate);
-				A_SetAngle(angle+.13,SPF_INTERPOLATE);
-				}
-		    }
-			PSGF C 1 
-			{
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-				A_SetPitch(pitch-1.8,SPF_Interpolate);
-				A_SetAngle(angle+.13,SPF_INTERPOLATE);
-				}
-		    }
-            PSGF D 3;
+            PSGF B 1 JM_GunRecoil(-2.25,.09);
+			PSGF C 1 JM_GunRecoil(-1.6,.09);
+			PSGF C 1 JM_GunRecoil(.6,.09);
+            PSGF D 3 JM_GunRecoil(.4,.09);
             PSGF E 4;
 			PSGG A 1;
 			TNT1 A 0 A_WeaponReady(WRF_NOFIRE);

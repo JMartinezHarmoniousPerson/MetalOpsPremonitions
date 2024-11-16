@@ -85,7 +85,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 				A_StartSound("weapons/rocket/fire", 4, starttime: 0.09);
                 A_Overlay(-5, "MuzzleFlash");
 				JM_CheckForQuadDamage();
-				A_FireProjectile("MO_Rocket",0,true,0,7,0);
+				A_FireProjectile("MO_Rocket",0,true,0,0,0);
             }
             RLAF BCD 1 BRIGHT JM_GunRecoil(-1.5, .05);
 			TNT1 A 0 A_JumpIf(CountInv("MO_RocketAmmo") < 1,2);
@@ -148,7 +148,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			TNT1 A 0 A_JumpIf(CountInv("MO_RocketAmmo") < 1,"BurstDone");
             RLAF A 1 BRIGHT
             {
-                A_FireProjectile("MO_Rocket",0,0,0,7,0);
+                A_FireProjectile("MO_Rocket",0,0,0,0,0);
 				A_TakeInventory("MO_RocketAmmo",1);
                 A_StartSound("weapons/rocket/fire", 1);
             }
@@ -158,7 +158,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			TNT1 A 0 A_JumpIf(CountInv("MO_RocketAmmo") < 1,"BurstDone");
             RLAF A 1 BRIGHT
             {
-                A_FireProjectile("MO_Rocket",0,0,0,7,0);
+                A_FireProjectile("MO_Rocket",0,0,0,0,0);
 				A_TakeInventory("MO_RocketAmmo",1);
                 A_StartSound("weapons/rocket/fire", 1, starttime: 0.1);
             }

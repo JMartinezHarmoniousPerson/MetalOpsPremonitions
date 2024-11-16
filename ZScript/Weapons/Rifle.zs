@@ -64,7 +64,7 @@ Class AssaultRifle : JMWeapon
                 A_FireBullets(5.6, 0, 1, 18, "UpdatedBulletPuff",FBF_NORANDOM,0,"MO_BulletTracer",0);
                 A_TakeInventory("ARAmmo", 1, TIF_NOTAKEINFINITE);
                 A_StartSound("weapons/ar/fire", 0);
-				A_SpawnItemEx("GunSmoke",15,0,34,2,0,0);
+//				A_SpawnItemEx("GunSmoke",15,0,34,2,0,0);
 				JM_CheckForQuadDamage();
             }
 			AR1F A 0 {
@@ -151,7 +151,7 @@ Class AssaultRifle : JMWeapon
                  A_FireBullets(5.6, 0, 1, 18, "UpdatedBulletPuff",FBF_NORANDOM,0,"MO_BulletTracer",0);
                 A_TakeInventory("ARAmmo", 1, TIF_NOTAKEINFINITE);
                 A_StartSound("weapons/ar/fire", 0);
-				A_SpawnItemEx("GunSmoke",15,0,34,2,0,0);
+//				A_SpawnItemEx("GunSmoke",15,0,34,2,0,0);
 				JM_CheckForQuadDamage();
             }
             AR1Z G 1 BRIGHT 

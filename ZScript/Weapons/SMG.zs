@@ -81,7 +81,6 @@ Class MO_SubMachineGun : JMWeapon
                 A_FireBullets(5.6, 0, 1, 10, "UpdatedBulletPuff",FBF_NORANDOM, 0,"MO_BulletTracer",0);
                 A_TakeInventory("SMGAmmo", 1);
                 A_StartSound("weapons/smg/fire", 0);
-				A_SpawnItemEx("GunSmoke",15,0,34,2,0,0);
 				A_AlertMonsters();
 				JM_CheckForQuadDamage();
             }
@@ -103,7 +102,6 @@ Class MO_SubMachineGun : JMWeapon
                 A_TakeInventory("SMGAmmo", 1);
                 A_StartSound("weapons/smg/fire", 0);
 				A_AlertMonsters();
-				A_SpawnItemEx("GunSmoke",15,0,34,2,0,0);
 				JM_CheckForQuadDamage();
             }
             SM5Z F 1 BRIGHT 

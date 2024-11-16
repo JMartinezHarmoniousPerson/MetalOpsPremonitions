@@ -82,11 +82,7 @@ class MO_Flamethrower : JMWeapon replaces Chainsaw
         FTF1 ABCD 1 {
             A_WeaponOffset(random(-3,3), random(32, 36));
             A_FireProjectile("FlamethrowerAttack",0,0,0,4);
-			if(!GetCvar("mo_nogunrecoil"))
-			{
-				A_SetPitch(pitch-.4,SPF_Interpolate);
-				A_SetAngle(angle-0,SPF_INTERPOLATE);
-			}
+			JM_GunRecoil(-.1,0);
 			if(CountInv("MO_Gasoline") < 4) {return ResolveState("StopFire");}
 			return ResolveState(null);
 			}
@@ -176,11 +172,7 @@ class MO_Flamethrower : JMWeapon replaces Chainsaw
         FTF2 ABCD 1 {
             A_WeaponOffset(random(-3,3), random(32, 36));
             A_FireProjectile("IcethrowerAttack",0,0,0,4);
-			if(!GetCvar("mo_nogunrecoil"))
-			{
-				A_SetPitch(pitch-.4,SPF_Interpolate);
-				A_SetAngle(angle-0,SPF_INTERPOLATE);
-			}
+			JM_GunRecoil(-.1,0);
 			if(CountInv("MO_Gasoline") < 4) {return ResolveState("StopFireIce");}
 			return ResolveState(null);
 			}

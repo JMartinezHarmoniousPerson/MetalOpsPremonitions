@@ -191,7 +191,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 			if(CountInv("HeatedRoundsReady") == 1)
 			{
 				A_StartSound("weapons/plasma/superheatfire", CHAN_AUTO,CHANF_DEFAULT,0.6,ATTN_NORM);
-				A_FireProjectile("JM_HeatedPlasmaBall", 0, FALSE, 0, 5, 0);
+				A_FireProjectile("JM_HeatedPlasmaBall", 0, FALSE);
 				A_Overlay(-60, "MuzzleFlashHeated");
 				JM_AddHeatBlastCharge();
 				A_AlertMonsters();
@@ -200,7 +200,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 			Else
 			{
 				A_StartSound("weapons/plasma/fire", CHAN_AUTO,CHANF_DEFAULT,1,ATTN_NORM,1.2);
-				A_FireProjectile("JM_PlasmaBall", 0, FALSE, 0, 5, 0);
+				A_FireProjectile("JM_PlasmaBall", 0, FALSE);
 				A_SpawnItemEx("PlasmaWepLightSpawner",0,0,0,0,0,0);
 				A_Overlay(-60, "MuzzleFlash");
 			}

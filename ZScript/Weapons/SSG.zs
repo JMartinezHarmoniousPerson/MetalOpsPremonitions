@@ -77,30 +77,14 @@ class MO_SSG : JMWeapon replaces SuperShotgun
             SG2F A 1 BRIGHT
             {
                 A_StartSound("weapons/ssg/fire", 1);
-//                A_FireBullets(5.6,0,18,9, "SSGPuff");
-                A_SpawnItemEx("ShotgunSmoke",15,3,34,2,0,0);
-                A_SpawnItemEx("ShotgunSmoke",15,-2,34,2,0,0);
                 A_TakeInventory("SSGAmmo",2);
 				JM_CheckForQuadDamage();
                 MO_FireSSG();
             }
-            SG2F B 1 BRIGHT
-            {
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-				A_SetPitch(pitch-2.6,SPF_Interpolate);
-				A_SetAngle(angle+.09,SPF_INTERPOLATE);
-				}
-		    }
-            SG2F C 1
-            {
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-				A_SetPitch(pitch-2.6,SPF_Interpolate);
-				A_SetAngle(angle+.09,SPF_INTERPOLATE);
-				}
-		    }
-            SG2F DEFGHIJ 1;
+            SG2F B 1 BRIGHT JM_GunRecoil(-2.1, .12);
+            SG2F C 1 JM_GunRecoil(-1.86, .12);
+            SG2F DEF 1 JM_GunRecoil(.4, .12);
+			SG2F GHIJ 1;
             SG2S D 3;
 			SG2S A 0 JM_WeaponReady(WRF_NOFIRE);
             SG2S A 0 A_JumpIfInventory("MO_ShotShell", 1, "Reload");
@@ -113,28 +97,13 @@ class MO_SSG : JMWeapon replaces SuperShotgun
             {
                 A_StartSound("weapons/ssg/altfire", 1);
                 MO_FireSSG2(); //Left
-                A_SpawnItemEx("ShotgunSmoke",15,3,34,2,0,0);
-//                A_SpawnItemEx("ShotgunSmoke",15,-2,34,2,0,0);
                 A_TakeInventory("SSGAmmo",1);
 				JM_CheckForQuadDamage();
             }
-            SG2A B 1 BRIGHT
-            {
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-				A_SetPitch(pitch-1.2,SPF_Interpolate);
-				A_SetAngle(angle+.09,SPF_INTERPOLATE);
-				}
-		    }
-            SG2F C 1
-            {
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-				A_SetPitch(pitch-1.2,SPF_Interpolate);
-				A_SetAngle(angle+.09,SPF_INTERPOLATE);
-				}
-		    }
-            SG2F DEHIJ 1;
+            SG2A B 1 BRIGHT JM_GunRecoil(-1.1, .12);
+            SG2F C 1 JM_GunRecoil(-1.1, .12);
+            SG2F DE 1 JM_GunRecoil(0.3, .12);
+			SG2F HIJ 1;
             SG2S D 1;
             Goto ReadyToFire;
         
@@ -144,27 +113,13 @@ class MO_SSG : JMWeapon replaces SuperShotgun
                 A_StartSound("weapons/ssg/altfire", 1);
 //                A_FireBullets(5.6,0,9,9, "SSGPuff");
                 MO_FireSSG3(); //Left
-                A_SpawnItemEx("ShotgunSmoke",15,-2,34,2,0,0);
                 A_TakeInventory("SSGAmmo",1);
 				JM_CheckForQuadDamage();
             }
-            SG2A D 1 BRIGHT
-            {
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-				A_SetPitch(pitch-1.2,SPF_Interpolate);
-				A_SetAngle(angle-.09,SPF_INTERPOLATE);
-				}
-		    }
-            SG2F C 1
-            {
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-				A_SetPitch(pitch-1.2,SPF_Interpolate);
-				A_SetAngle(angle-.09,SPF_INTERPOLATE);
-				}
-		    }
-            SG2F DEHIJ 1;
+            SG2A D 1 BRIGHT JM_GunRecoil(-1.1, -.12);
+            SG2F C 1 JM_GunRecoil(-1.1, -.12);
+            SG2F DE 1  JM_GunRecoil(-.5, -.12);
+			SG2F HIJ 1;
             SG2S D 1;
             Goto Reload;
 
@@ -321,6 +276,7 @@ class SSGAmmo : Ammo
 //Iamcarrotmaster told me that these will have improved sprites, thanks carrot!
 Class FlakChunk1 : Actor
 {
+	int projAge;
     Default
     {
 	Radius 3;
@@ -329,7 +285,7 @@ Class FlakChunk1 : Actor
 	DamageFunction (random(15, 21));
 	Mass 200;
 	Scale 0.4;
-	Gravity 0.75;
+	Gravity 0.9;
 	Damagetype 'Cutless';
 	+MISSILE;
 	+BLOODSPLATTER;
@@ -341,6 +297,16 @@ Class FlakChunk1 : Actor
 	BounceSound "weapons/smcasebounce";
 //	MissileType "FlakTrail";
     }
+
+	override void Tick()
+	{
+		Super.Tick();
+		projAge++;
+		
+		if(projAge >= 140)
+			SetStateLabel("Death");
+	}
+
 	States
 	{
 		Spawn:
