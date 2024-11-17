@@ -72,13 +72,16 @@ OptionMenu "MetalOpsMenu"
 	Title "$MO_MOPSETTINGS"
 	StaticText ""
 	Submenu "$NCH_OPTMNU_TITLE", "NCHUD"
-	ToolTip "Open the HUD options for Metal Ops: Premonitions."
+	ToolTip "Metal Ops: Premonitions HUD Options (NCHUD by BlueShadow)."
 	StaticText ""
 	SubMenu "$FPP_TITOP", "FlashlightPlusOptions"
-	ToolTip "Go to Flashlight++ options."
+	ToolTip "Flashlight++ options (by GenericNameGuy)"
 	StaticText ""
 	SubMenu "Customizable Crosshairs", "CustomCrosshairsMenu"
-	ToolTip "Open the Customizable Crosshairs option menu."
+	ToolTip "Customizable Crosshairs option menu"
+	StaticText ""
+	SubMenu "$PC_TITLE", pc_Menu
+	ToolTip "Precise Crosshairs option menu"
 	StaticText ""
 	Option "SSG randomly replaces Shotgun spawn", "mo_ssgrandomizer", "yesno"
 	ToolTip "$MO_SSGTIP"
@@ -89,8 +92,8 @@ OptionMenu "MetalOpsMenu"
 	Tooltip "$MO_ADSTIP"
 	Tooltip "$MO_ADSTIP_CHAINGUN"
 	StaticText ""
-	Option "Disable Gun Recoil", "mo_nogunrecoil", "yesno"
-	StaticText "Disables recoil on shootable weapons."
+	Option "Disable Gun Recoil", "mo_nogunrecoil", "OnOff"
+	Tooltip "$MO_RECOIL"
 	StaticText ""
 	ToolTip ""
 	Command "Disable GZDoom's enhanced night vision", "gl_enhanced_nightvision false"
@@ -101,9 +104,57 @@ OptionMenu "MetalOpsMenu"
 	ToolTip "$MO_NVISTIP"
 	StaticText ""
 	Option "NVG Shader scanlines", "mo_nvscanlines", "OnOff"
+	ToolTip "$MO_SCAN_TIP"
 	StaticText ""
 	Option "$MO_DISCORD_PRESENCE", "i_discordrpc","YesNo"
+	ToolTip "$MO_DISCORD_TIP"
 }
+
+// Precise XHair Menus ///////////////////////////////////////////////////////////////////////
+
+OptionMenu pc_Menu
+{
+  class TF_TooltipOptionMenu
+  TooltipGeometry 0.0, 0.45, 0.3, 1.0, 0.5
+  TooltipAppearance "", "", "tfttbg"
+  Title      "$PC_TITLE"
+  
+  StaticText "$PC_ENGINE"          , 1
+
+  StaticText ""
+  StaticText "$PC_OFF"
+  Option     "$HUDMNU_CROSSHAIRON" , crosshairon, OnOff
+  ToolTip ""
+  StaticText ""
+  StaticText "$PC_NONE"
+  Option     "$HUDMNU_CROSSHAIR"   , crosshair, Crosshairs
+
+  StaticText ""
+  StaticText "$PC_OTHER"
+  Submenu    "$OPTMNU_HUD"         , HUDOptions
+
+  StaticText ""
+  StaticText "$PC_OPTIONS"         , 1
+  StaticText ""
+  Option     "$PC_ENABLE"          , pc_enable            , YesNo
+
+  StaticText ""
+  Option     "$PC_MIRROR_H"        , pc_flip_x            , YesNo
+  Option     "$PC_MIRROR_V"        , pc_flip_y            , YesNo
+
+  StaticText ""
+  Option     "$PC_SLOT_1"          , pc_disable_slot_1    , YesNo
+  ToolTip ""
+
+  Option     "$PC_NOT_READY"       , pc_disable_not_ready , YesNo
+  ToolTip "$PC_NOT_READY_NO"
+  Option     "$PC_NO_WEAPON"       , pc_disable_no_weapon , YesNo
+
+  StaticText ""
+  Option     "$PC_TARGET_COLOR"    , pc_target_health     , YesNo
+
+} // OptionMenu pc_Menu
+
 
 OptionMenu "CustomCrosshairsMenu"
 {
@@ -117,14 +168,11 @@ OptionMenu "CustomCrosshairsMenu"
 	StaticText ""
 	StaticText "$MO_CROSSHAIR_SHORTCUT", "white"
 	StaticText "---------------------------------------------------------------------------------", white
-	Option "$HUDMNU_CROSSHAIRON",			"crosshairon", "OnOff"
-	Option "$HUDMNU_CROSSHAIR",				"crosshair", "Crosshairs"
-	Option "$HUDMNU_FORCECROSSHAIR",		"crosshairforce", "OnOff"
+	Submenu    "$OPTMNU_HUD"         , HUDOptions
 	StaticText ""
 	StaticText "$MO_CROSSHAIR_SLIDER", white
 	StaticText "---------------------------------------------------------------------------------", white
 	SafeCommand "Reset Default Crosshairs",  "mo_xhairs_defaultpreset"
-//	SafeCommand "Randomize Crosshairs", "mo_xhairs_randomize"
 	StaticText ""
 	StaticText "Slot 2"
 	Slider "Pistol", "mo_xhairpistol", 0, 99, 1

@@ -73,6 +73,28 @@ NCH_OPTION_HICOLOR = "Highlight";
 HUD_WARN1 = "Press = to switch the HUD to fullscreen.";
 HUD_WARN2 = "Make sure alternative HUD is disabled!";
 
+//------------------------------------------------------------------
+//	Precise Crosshair stuff
+//------------------------------------------------------------------
+
+PC_TITLE  = "Precise Crosshair";
+
+PC_ENGINE = "Engine Crosshair Options";
+PC_OFF    = "This must be OFF:";
+PC_NONE   = "This must be not None:";
+PC_OTHER  = "Other crosshair options also apply to Precise Crosshair:";
+
+PC_OPTIONS = "Precise Crosshair Options";
+PC_ENABLE  = "Enabled";
+
+PC_MIRROR_H = "Mirror horizontally";
+PC_MIRROR_V = "Mirror vertically";
+PC_SLOT_1   = "Disable on slot 1";
+PC_NOT_READY_NO = "Keep this option on No, or else the crosshair with disappear when shooting.";
+PC_NOT_READY = "Disable when weapon is not ready";
+PC_NO_WEAPON = "Disable when there is no weapon";
+PC_TARGET_COLOR = "Show target color instead of player";
+
 
 
 //----------------------------------------------------------------
@@ -167,9 +189,11 @@ MO_ADSHOLD = "Hold";
 MO_ADSHYBRID = "Hybrid (BDv21 aim style)";
 MO_RICOCHET = "Toggle the bullet ricochet sounds when bullet based hitscan attacks hit the wall, ceiling or floor.";
 MO_DISCORD_PRESENCE = "Enable Discord rich presence";
-MO_CROSSHAIR_SHORTCUT = "GZDoom Crosshair Shortcuts";
+MO_CROSSHAIR_SHORTCUT = "GZDoom Crosshair Option Menu to apply to Custom Crosshairs";
 MO_CROSSHAIR_SLIDER = "Crosshair Settings";
-
+MO_RECOIL = "Disables recoil on shootable weapons. \nIf you're not using mouse look, this MUST be turned on!";
+MO_SCAN_TIP = "Enable/Disable scanlines on night vision shaders";
+MO_DISCORD_TIP = "Enable/Disable Discord Rich Presence";
 // Flashlight++ - https:// forum.zdoom.org/viewtopic.php?t=75585
 
 // This will apply for English and if there is no localization for the user's language.

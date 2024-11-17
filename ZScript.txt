@@ -54,9 +54,24 @@ version "4.5.0"
 #include "ZSCRIPT/Flashlight++/FPP_Light.zs"
 
 //LibTool Tips
-#include "ZScript/libtooltipmenu/Tooltips.zsc"
-#include "ZScript/libtooltipmenu/TooltipOptionMenu.zsc"
-#include "ZScript/libtooltipmenu/TooltipListMenu.zsc"
+#include "ZScript/Util/libtooltipmenu/Tooltips.zsc"
+#include "ZScript/Util/libtooltipmenu/TooltipOptionMenu.zsc"
+#include "ZScript/Util/libtooltipmenu/TooltipListMenu.zsc"
+
+//Precise Crosshair
+#include "zscript/Util/PreciseXHair/pc_event_handler.zs"
+#include "zscript/Util/PreciseXHair/pc_puff.zs"
+
+#include "zscript/Util/PreciseXHair/libeye/pc_projector.zs"
+#include "zscript/Util/PreciseXHair/libeye/pc_projector gl.zs"
+#include "zscript/Util/PreciseXHair/libeye/pc_projector planar.zs"
+#include "zscript/Util/PreciseXHair/libeye/pc_viewport.zs"
+
+#include "zscript/Util/PreciseXHair/settings/pc_settings_base.zs"
+#include "zscript/Util/PreciseXHair/settings/pc_cvar_setting.zs"
+#include "zscript/Util/PreciseXHair/settings/pc_bool_setting.zs"
+#include "zscript/Util/PreciseXHair/settings/pc_settings_pack.zs"
+#include "zscript/Util/PreciseXHair/settings/pc_settings.zs"
 
 
 Class BaseVisualSFX : Actor// From Particle Fire Enhancer Mod (v0.8) by Z86

@@ -8,5 +8,5 @@ gameinfo
 {
 	PlayerClasses  = "MO_OfficerPlayer", "MO_SergeantPlayer"
 	AddEventHandlers = "NCH_Handler", "FPP_Handler"
-	addEventHandlers = "StepEventHandler", "MOps_Handler"
+	addEventHandlers = "StepEventHandler", "MOps_Handler","pc_EventHandler"
 }
