@@ -195,9 +195,9 @@ class JMWeapon : Weapon
 
 	action void JM_GunRecoil(float gunPitch, float gunAngle)
 	{
-		CVar checkRecoil = CVar.FindCVar("mo_nogunrecoil");
+		CVar checkRecoil = CVar.GetCVar("mo_nogunrecoil", player);
 		bool noRecoil = checkRecoil.GetBool();
-		if(!noRecoil)
+		if(!noRecoil && GetCvar("freelook") == true)
 		{
 			A_SetPitch(pitch+gunPitch, SPF_INTERPOLATE);
 			A_SetAngle(angle+gunAngle, SPF_INTERPOLATE);
