@@ -230,6 +230,7 @@ class JMWeapon : Weapon
 				SetPlayerProperty(0,0,0);
 				A_ClearOverlays(-8,8);
 				A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, FALSE);
+				A_RemoveLight('GunLighting');
 				}
 			TNT1 A 0 A_Jump(255, "ContinueSelect");
 			Loop;

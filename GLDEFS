@@ -42,16 +42,36 @@ object UpdatedBulletPuff
     frame BPUFB { light BulletHitLightBig }
 }
 
-pointlight PlasmaWepLight
+//Gun Lighting taken from lights.pk3, mainly ZOMBIEATK
+
+flickerlight2 GunFireLight
 {
-	color 0.0 0.2 0.8
-	size 80
-	offset 0 0 0
+    color 1.0 0.8 0.2
+    size 72
+    secondarySize 84
+    interval 1
+    offset 0 40 0
+	attenuate 1
 }
 
-object PlasmaWepLightSpawner
+flickerlight2 PlasmaWepLight
 {
-	Frame TNT1A  { light PlasmaWepLight }
+    color 0.0 0.2 0.8
+    size 72
+    secondarySize 84
+    interval 1
+    offset 0 40 0
+	attenuate 1
+}
+
+flickerlight2 HeatedPlasmaWepLight
+{
+    color 1.0 0.2 0.0
+    size 72
+    secondarySize 84
+    interval 1
+    offset 0 40 0
+	attenuate 1
 }
 
 pointlight PlasmaBallLight

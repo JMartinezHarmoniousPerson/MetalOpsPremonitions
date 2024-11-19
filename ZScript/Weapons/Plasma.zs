@@ -23,7 +23,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 				break;
 			}
 	}
-	
+	//MO_DummyPuff
 //From PB.
 //Rails / Beams things
 //all this is done this way cause ideally, every weapon should have its own specific functions, though a generic version of this could be made for addons use or simple "laser" like things
@@ -194,38 +194,28 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 				A_FireProjectile("JM_HeatedPlasmaBall", 0, FALSE);
 				A_Overlay(-60, "MuzzleFlashHeated");
 				JM_AddHeatBlastCharge();
-				A_AlertMonsters();
+				A_AttachLightDef('GunLighting', 'HeatedPlasmaWepLight');
 				A_GiveInventory("HeatBlastShotCount",1);
 			}
 			Else
 			{
 				A_StartSound("weapons/plasma/fire", CHAN_AUTO,CHANF_DEFAULT,1,ATTN_NORM,1.2);
 				A_FireProjectile("JM_PlasmaBall", 0, FALSE);
-				A_SpawnItemEx("PlasmaWepLightSpawner",0,0,0,0,0,0);
+				A_AttachLightDef('GunLighting', 'PlasmaWepLight');
 				A_Overlay(-60, "MuzzleFlash");
 			}
+			A_AlertMonsters();
 			A_TakeInventory("PlasmaAmmo",1);
 			A_GiveInventory("PlasmaRifleCooldownCount",1);		
 		}
-		"####" B 1
-		{
-			if(!GetCvar("mo_nogunrecoil"))
-			{
-			A_SetPitch(pitch-1.7,SPF_Interpolate);
-			A_SetAngle(angle+.09,SPF_INTERPOLATE);
-			}
-		}
-		"####" C 1;
+		"####" B 1 JM_GunRecoil(-1.1,+.03);
+		"####" C 1 A_RemoveLight('GunLighting');
 		"####" A 0 A_JumpIf(PressingFire(), "FireContinue");
 		"####" A 0 A_JumpIfInventory("PlasmaRifleCooldownCount",25,"Cooldown");
 		"####" A 0 A_SetInventory("PlasmaRifleCooldownCount",0);
 		"####" A 0 JM_CheckMag("PlasmaAmmo");
 		Goto ReadyToFire;
-	Flash:
-		TNT1 A 4 Bright A_Light1;
-		Goto LightDone;
-		TNT1 B 4 Bright A_Light1;
-		Goto LightDone;
+
 	Spawn:
 		PLAS A -1;
 		Stop;
@@ -329,7 +319,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		TNT1 A 0 JM_CheckMag("PlasmaAmmo", "StopBeam");
 		PRGG A 0 A_StartSound("plasma/laser/fireloop",4);
 		PRGG A 0 A_Overlay(-60, "MuzzleFlash");
-		TNT1 A 0 A_SpawnItemEx("PlasmaWepLightSpawner",0,0,0,0,0,0);
+		PRGG A 0 A_AttachLightDef('GunLighting', 'PlasmaWepLight');
 		PRGA BB 1 
 		{
 			JM_CheckForQuadDamage();
@@ -340,7 +330,6 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		}
 		PRGG A 0 JM_GunRecoil(-0.9, .09);
 		PRGG A 0 A_Overlay(-60, "MuzzleFlash");
-		TNT1 A 0 A_SpawnItemEx("PlasmaWepLightSpawner",0,0,0,0,0,0);
 		PRGA CC 1
 		{
 			JM_CheckForQuadDamage();
@@ -352,6 +341,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		}
 		TNT1 A 0 A_JumpIf(PressingAltFire(), "HoldBeam");
 		StopBeam:
+		TNT1 A 0 A_RemoveLight('GunLighting');
 		TNT1 A 0 A_StopSound(4);
 		TNT1 A 0 A_StartSound("plasma/laser/loopstop",1);		
 		PRGA B 1;
@@ -411,30 +401,9 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 			A_TakeInventory("HeatBlastFullyCharged",1);
 			A_TakeInventory("HeatBlastShotCount",45);
 		}
-		3RGF B 1
-		{
-			if(!GetCvar("mo_nogunrecoil"))
-			{
-			A_SetPitch(pitch-2.7,SPF_Interpolate);
-			A_SetAngle(angle+.09,SPF_INTERPOLATE);
-			}
-		}
-		2RGA A 1
-		{
-			if(!GetCvar("mo_nogunrecoil"))
-			{
-			A_SetPitch(pitch-2.7,SPF_Interpolate);
-			A_SetAngle(angle+.09,SPF_INTERPOLATE);
-			}
-		}
-		2RGA BCD 1
-		{
-			if(!GetCvar("mo_nogunrecoil"))
-			{
-			A_SetPitch(pitch-2.7,SPF_Interpolate);
-			A_SetAngle(angle+.09,SPF_INTERPOLATE);
-			}
-		}
+		3RGF B 1 JM_GunRecoil(-2.15,+.03);
+		2RGA A 1 JM_GunRecoil(-2.15,+.03);
+		2RGA BCD 1 JM_GunRecoil(-1.75,+.03);
 		2RGA EFF 1;
 		2RGA EDCBA 1;
 		Goto Cooldown;
@@ -890,24 +859,6 @@ Class PlasmaBeamTrail : Actor
 	Spawn:
 		PAR2 A 4 Bright;
 		Stop;
-	}
-}
-
-class PlasmaWepLightSpawner : Actor
-{
-	Default
-	{
-		+THRUACTORS;
-		+NONSHOOTABLE;
-		+NOGRAVITY;
-	}
-	States
-	{
-		Spawn:
-			TNT1 A 3;
-		Death:
-			TNT1 A 0;
-			Stop;
 	}
 }
 

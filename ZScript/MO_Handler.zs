@@ -10,6 +10,17 @@ class MOps_Handler : EventHandler
 		if(kicktimer > 0)
 			kicktimer--;
     }
+
+	override void PlayerDied(PlayerEvent e) //destroy gun lighting on Death
+	{
+		let pl = MO_PlayerBase(players[e.PlayerNumber].mo);
+//		let plrWep = JMWeapon(pl.readyweapon);
+
+		if(pl)
+		{
+			pl.A_RemoveLight('GunLighting');
+		}
+	}
 	
 	override void CheckReplacement(replaceEvent e)
 	{

@@ -75,13 +75,7 @@ class MO_MiniGun : JMWeapon
 			A_StartSound("weapons/minigun/startfire",2);
 			JM_CheckForQuadDamage();
 			}
-		TNT1 A 0 
-		{
-			if(!GetCvar("mo_nogunrecoil"))
-			{
-			A_SetPitch(pitch-0.9,SPF_Interpolate);
-			}
-		 }
+		TNT1 A 0 JM_GunRecoil(-0.4,0);
         MGNG CDDEEF 1;
 		TNT1 A 0 A_CheckReload();
 		MGNF F 1 BRIGHT{
@@ -91,13 +85,7 @@ class MO_MiniGun : JMWeapon
 			A_StartSound("weapons/minigun/startfire",2);
 			JM_CheckForQuadDamage();
 			}
-		TNT1 A 0 
-		{
-			if(!GetCvar("mo_nogunrecoil"))
-			{
-			A_SetPitch(pitch-0.9,SPF_Interpolate);
-			}
-		 }
+		TNT1 A 0 JM_GunRecoil(-0.4,0);
 		MGNG GGGH 1;
 		TNT1 A 0 A_CheckReload();
 		MGNF H 1 BRIGHT{
@@ -107,13 +95,7 @@ class MO_MiniGun : JMWeapon
 			A_StartSound("weapons/minigun/startfire",2);
 			JM_CheckForQuadDamage();
 			}
-		TNT1 A 0 
-		{
-			if(!GetCvar("mo_nogunrecoil"))
-			{
-			A_SetPitch(pitch-0.9,SPF_Interpolate);
-			}
-		 }
+		TNT1 A 0 JM_GunRecoil(-0.4,0);
 		MGNG HAB 1;
 		TNT1 A 0 A_CheckReload();
 		MGNF C 1 BRIGHT{
@@ -123,13 +105,7 @@ class MO_MiniGun : JMWeapon
 			A_StartSound("weapons/minigun/startfire",2);
 			JM_CheckForQuadDamage();
 			}
-		TNT1 A 0 
-		{
-			if(!GetCvar("mo_nogunrecoil"))
-			{
-			A_SetPitch(pitch-0.9,SPF_Interpolate);
-			}
-		 }
+		TNT1 A 0 JM_GunRecoil(-0.4,0);
 		MGNF DE 1;
 		TNT1 A 0 A_CheckReload();
 		MGNF F 1 BRIGHT{
@@ -139,13 +115,7 @@ class MO_MiniGun : JMWeapon
 			A_StartSound("weapons/minigun/startfire",2);
 			JM_CheckForQuadDamage();
 			}
-		TNT1 A 0 
-		{
-			if(!GetCvar("mo_nogunrecoil"))
-			{
-			A_SetPitch(pitch-0.9,SPF_Interpolate);
-			}
-		 }
+		TNT1 A 0 JM_GunRecoil(-0.4,0);
         MGNG GH 1;
 	Hold:
 		TNT1 A 0 A_CheckReload();
@@ -158,28 +128,14 @@ class MO_MiniGun : JMWeapon
 			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltLink", (37, -10, -17));
 			JM_CheckForQuadDamage();
 			}
-		TNT1 A 0 
-		{
-			if(!GetCvar("mo_nogunrecoil"))
-			{
-			A_SetPitch(pitch-0.9,SPF_Interpolate);
-			}
-		 }
-		MGNF B 1 BRIGHT;
+		MGNF B 1 BRIGHT JM_GunRecoil(-0.4,0);
 		TNT1 A 0 A_CheckReload();
 		MGNF C 1 BRIGHT {
 			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
 			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltLink", (37, -10, -17));
 			A_Overlay(-5, "MuzzleFlash");
 			}
-		TNT1 A 0 
-		{
-			if(!GetCvar("mo_nogunrecoil"))
-			{
-			A_SetPitch(pitch-0.9,SPF_Interpolate);
-			}
-		 }
-		MGNF D 1 BRIGHT;
+		MGNF D 1 BRIGHT JM_GunRecoil(-0.4,0);
 		TNT1 A 0 A_CheckReload();
 		MGNF E 1 BRIGHT{
 			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
@@ -187,28 +143,14 @@ class MO_MiniGun : JMWeapon
 			A_Overlay(-5, "MuzzleFlash");
 			JM_CheckForQuadDamage();
 			}
-		TNT1 A 0 
-		{
-			if(!GetCvar("mo_nogunrecoil"))
-			{
-			A_SetPitch(pitch-0.9,SPF_Interpolate);
-			}
-		 }
-		MGNF F 1 BRIGHT;
+		MGNF F 1 BRIGHT JM_GunRecoil(-0.4,0);
 		TNT1 A 0 A_CheckReload();
 		MGNF G 1 BRIGHT {
 			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
 			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltLink", (37, -10, -17));
 			A_Overlay(-5, "MuzzleFlash");
 			}
-		TNT1 A 0 
-		{
-			if(!GetCvar("mo_nogunrecoil"))
-			{
-			A_SetPitch(pitch-0.9,SPF_Interpolate);
-			}
-		 }
-		MGNF H 1 BRIGHT;
+		MGNF H 1 BRIGHT JM_GunRecoil(-0.4,0);
 		MGNG B 0 A_JumpIf(PressingFire(), "HoldingFire");
 		Goto StopSpin;
 	

@@ -49,15 +49,8 @@ class MO_Unmaker : JMWeapon
 			TNT1 A 0 JM_CheckForQuadDamage();
 		//	TNT1 A 0 A_RailAttack(1, 0, 0, "", "red", RGF_NOPIERCING | RGF_SILENT | RGF_CENTERZ | RGF_FULLBRIGHT, 0, "", 0, 0, 9999, 1, 0.3);
             UNHF F 1 BRIGHT A_WeaponOffset(0,32);
-            UNHF GH 1 BRIGHT
-			{
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-				A_SetPitch(pitch-0.9,SPF_Interpolate);
-				A_SetAngle(angle+.09,SPF_INTERPOLATE);
-				}
-			}
-			UNHF IJ 1 BRIGHT;
+            UNHF GH 1 BRIGHT JM_GunRecoil(-.5,+.04);
+			UNHF IJ 1 BRIGHT JM_GunRecoil(+.11,-.04);
             UNHF K 1;
 			TNT1 A 0 A_CheckReload();
 			TNT1 A 0 A_JumpIf(PressingFire(), "Hold");
@@ -83,15 +76,8 @@ class MO_Unmaker : JMWeapon
 //		TNT1 A 0 A_RailAttack(1, 0, 0, "", "red", RGF_NOPIERCING | RGF_SILENT | RGF_CENTERZ | RGF_FULLBRIGHT, 0, "", 0, 0, 9999, 1, 0.5);
 			TNT1 A 0 A_TakeInventory("MO_Cell",10);
             UNHF F 1 BRIGHT A_WeaponOffset(0,32);
-            UNHF GH 1
-			 {
-				if(!GetCvar("mo_nogunrecoil"))
-				{
-				A_SetPitch(pitch-0.9,SPF_Interpolate);
-				A_SetAngle(angle+.09,SPF_INTERPOLATE);
-				}
-			 }
-			UNHF IJ 1 BRIGHT;
+            UNHF GH 1 JM_GunRecoil(-.5,+.04);
+			UNHF IJ 1 BRIGHT JM_GunRecoil(+.11,-.04);
             UNHF K 1 BRIGHT;
 			TNT1 A 0 A_JumpIf(PressingAltFire(), "AltHold");
 			UNHF LM 1 BRIGHT;

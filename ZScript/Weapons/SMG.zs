@@ -83,6 +83,7 @@ Class MO_SubMachineGun : JMWeapon
                 A_StartSound("weapons/smg/fire", 0);
 				A_AlertMonsters();
 				JM_CheckForQuadDamage();
+				A_AttachLightDef('GunLighting', 'GunFireLight');
             }
             SM5F B 1 BRIGHT 
 			{
@@ -92,6 +93,7 @@ Class MO_SubMachineGun : JMWeapon
 			}
             SM5F C 1 JM_WeaponReady(WRF_NOPRIMARY);
             AR1F A 0 A_JumpIf(PressingFire(), "Fire");
+			AR1F A 0 A_RemoveLight('GunLighting');
 			TNT1 A 0 JM_CheckMagNew;
             Goto ReadyToFire;
 
@@ -103,6 +105,7 @@ Class MO_SubMachineGun : JMWeapon
                 A_StartSound("weapons/smg/fire", 0);
 				A_AlertMonsters();
 				JM_CheckForQuadDamage();
+				A_AttachLightDef('GunLighting', 'GunFireLight');
             }
             SM5Z F 1 BRIGHT 
 			{
@@ -111,6 +114,7 @@ Class MO_SubMachineGun : JMWeapon
 				MO_EjectCasing("PistolCasing", false, speed: frandom(4,7), offset: (28, 4, -4));
 			}
             SM5Z G 1;
+			TNT1 A 0 A_RemoveLight('GunLighting');
 			TNT1 A 0 JM_CheckMagNew;
             AR1F A 0
 			{
