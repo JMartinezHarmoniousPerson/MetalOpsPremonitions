@@ -53,11 +53,11 @@ class MO_Deagle : JMWeapon// replaces Pistol
 		DGLF E 2 JM_GunRecoil(-.9, -.19);
 		DGLF FFFGG 1
 		{
-			JM_GunRecoil(+.6, -.19);
 			If(JustPressed(BT_ATTACK))
 				{SetWeaponState("Fire");}
 		}
  		DGLF HHIIJKLM  1 {
+				JM_GunRecoil(+.5, -.05);
 				If(JustPressed(BT_ATTACK))
 				{SetWeaponState("Fire");}
 				return JM_WeaponReady(WRF_NOFIRE|WRF_ALLOWRELOAD);

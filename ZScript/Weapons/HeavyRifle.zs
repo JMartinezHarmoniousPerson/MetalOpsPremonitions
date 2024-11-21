@@ -25,13 +25,6 @@ Class MO_HeavyRifle : JMWeapon
 		+WEAPON.NOALERT
     }
 
-	action state JM_CheckMagHMR(int m = 1, statelabel rel = "Reload")
-	{
-		if(CountInv(invoker.ammotype2) < m)
-			return ResolveState(rel);
-		return ResolveState(Null);
-	}
-	
 	action void MO_SetGrenade(bool fired = false)
 	{
 		invoker.hcrFiredGrenade = fired;
@@ -111,7 +104,7 @@ Class MO_HeavyRifle : JMWeapon
 			Goto ClearAudioAndResetOverlays;
         Fire:
 			TNT1 A 0 A_JumpIf(invoker.isZoomed == true, "Fire2");
-			TNT1 A 0 JM_CheckMagHMR(1);
+			TNT1 A 0 MO_CheckMag(1);
 			TNT1 A 0 A_GunFlash("Flash");
             TNT1 A 1 BRIGHT {
                 A_FireBullets(5.6, 0, 1, 30, "UpdatedBulletPuff",FBF_NORANDOM);
@@ -149,7 +142,7 @@ Class MO_HeavyRifle : JMWeapon
 				If(JustPressed(BT_ATTACK)) {Return ResolveState("fIRE");}
 				return JM_WeaponReady(WRF_NOFIRE);
 			}
-			TNT1 A 0 JM_CheckMagHMR(1);
+			TNT1 A 0 MO_CheckMag(1);
 			TNT1 A 0 A_ReFire;
             Goto ReadyToFire;
 
@@ -173,7 +166,7 @@ Class MO_HeavyRifle : JMWeapon
 
 		Fire2:
 			TNT1 A 0 A_JumpIf(CountInv("HCR_3XZoom") || CountInv("HCR_6XZoom") >= 1, "SniperFire");
-			TNT1 A 0 JM_CheckMagHMR(1);
+			TNT1 A 0 MO_CheckMag(1);
             HC2G B 1 BRIGHT {
                 A_FireBullets(5.6, 0, 1, 30, "UpdatedBulletPuff",FBF_NORANDOM);
                 A_TakeInventory("HCRAmmo", 1,TIF_NOTAKEINFINITE);
@@ -209,7 +202,7 @@ Class MO_HeavyRifle : JMWeapon
 				If(JustPressed(BT_ATTACK)) {Return ResolveState("fIRE");}
 				return JM_WeaponReady(WRF_NOFIRE);
 			}
-			TNT1 A 0 JM_CheckMagHMR(1);
+			TNT1 A 0 MO_CheckMag(1);
 			AR1F A 0
 			{
 				if(invoker.ADSMode >= 1)
@@ -232,8 +225,8 @@ Class MO_HeavyRifle : JMWeapon
             Goto Ready2;
 
 		SniperFire:
-			TNT1 A 0 JM_CheckMagHMR(1);
-			TNT1 A 0 JM_CheckMagHMR(3, "LowSniperCount");
+			TNT1 A 0 MO_CheckMag(1);
+			TNT1 A 0 MO_CheckMag(3, "LowSniperCount");
             HC2Z D 1 BRIGHT {
                 A_FireBullets(5.6, 0, 1, 85, "UpdatedBulletPuff",FBF_NORANDOM);
                 A_TakeInventory("HCRAmmo", 3,TIF_NOTAKEINFINITE);
@@ -264,7 +257,7 @@ Class MO_HeavyRifle : JMWeapon
 				If(JustPressed(BT_ATTACK)) {Return ResolveState("SniperFire");}
 				return JM_WeaponReady(WRF_NOFIRE);
 			}
-			TNT1 A 0 JM_CheckMagHMR(1);
+			TNT1 A 0 MO_CheckMag(1);
 			AR1F A 0
 			{
 				if(invoker.ADSMode >= 1)
@@ -348,7 +341,7 @@ Class MO_HeavyRifle : JMWeapon
 			}
 		SniperUnzoomAnimation:
 			HC2Z CBA 1;
-			HC2G A 1;
+			HC2G A 4;
 			Goto Ready2;
 
 	LowSniperCount:
@@ -395,7 +388,6 @@ Class MO_HeavyRifle : JMWeapon
 			TNT1 A 0 A_JumpIf(CountInv("HCR_3XZoom") || CountInv("HCR_6XZoom") >= 1, "SniperReady");
 			TNT1 A 0 A_JumpIf(invoker.ADSMode <= 0, "ADSToggle");
 			TNT1 A 0 A_JumpIf(invoker.ADSMode == 1, "ADSHold");
-			TNT1 A 0 A_JumpIf(PressingFire(), "Fire2");
 			HC2G AAAAA 1 
 			{
 				if(JustPressed(BT_ATTACK)) {return ResolveState("Fire2");}

@@ -3,76 +3,8 @@ version "4.5.0"
 #include "ZScript/Barrel.zs"
 #include "ZScript/PlayerPawn.zs"
 #include "ZScript/MO_Tokens.zs"
-#include "ZScript/Items/Ammo.zs"
-#include "ZScript/Items/Keys.zs"
-#include "ZScript/Items/ARMOR.zs"
-#include "ZScript/Items/Health.zs"
-#include "ZScript/Items/Powerups.zs"
-#include "ZScript/Items/Spheres.zs"
-#include "ZScript/Weapons/ThrowableObjects.zs"
-#include "ZScript/Weapons/BaseWeapon.zs"
-#include "zscript/weapons/BaseWeapon_Casings.zs"
-#include "ZScript/Weapons/Katana.zs"
-#include "ZScript/Weapons/Pistol.zsc"
-#include "ZScript/Weapons/LeverShotty.zs"
-#include "ZScript/Weapons/PumpShotty.zs"
-#include "ZScript/Weapons/SSG.zs"
+#include "ZScript/ZSLibraries.zs"
 #include "ZScript/Spawners.zs"
-#include "ZScript/Weapons/Rifle.zs"
-#include "ZScript/Weapons/Minigun.zs"
-#include "ZScript/Weapons/RocketLauncher.zs"
-#include "ZScript/Weapons/Plasma.zs"
-#include "ZScript/Weapons/Flamethrower.zs"
-#include "ZScript/Weapons/SMG.zs"
-#include "ZScript/weapons/bfg.zs"
-#include "ZScript/weapons/Deagle.zsc"
-#include "ZScript/weapons/heavyrifle.zs"
-#include "ZScript/weapons/Unmaker.zc"
-
-#include "zscript/NCHUD/nch_basehud.zsc"
-#include "zscript/NCHUD/nch_debug.zsc"
-#include "zscript/NCHUD/nch_handler.zsc"
-#include "zscript/NCHUD/nch_helper.zsc"
-
-
-
-//Effects
-#include "ZScript/Effects/Smoke.zs"
-#include "ZScript/Effects/Puff.zs"
-#include "ZScript/Effects/Fire.zs"
-#include "ZScript/Effects/Casings.zc"
-#include "ZScript/Effects/Thunder.zc"
-#include "ZScript/Effects/Shockwaves.zs"
-#include "ZScript/Effects/Particles.zs"
-#include "ZScript/Effects/Explosions.zs"
-#include "ZScript/StepEventHandler.zc"
-#include "ZScript/MO_Handler.zs"
-
-//Flashlight++
-#include "ZSCRIPT/Flashlight++/FPP_Holder.zs"
-#include "ZSCRIPT/Flashlight++/FPP_Handler.zs"
-#include "ZSCRIPT/Flashlight++/FPP_Light.zs"
-
-//LibTool Tips
-#include "ZScript/Util/libtooltipmenu/Tooltips.zsc"
-#include "ZScript/Util/libtooltipmenu/TooltipOptionMenu.zsc"
-#include "ZScript/Util/libtooltipmenu/TooltipListMenu.zsc"
-
-//Precise Crosshair
-#include "zscript/Util/PreciseXHair/pc_event_handler.zs"
-#include "zscript/Util/PreciseXHair/pc_puff.zs"
-
-#include "zscript/Util/PreciseXHair/libeye/pc_projector.zs"
-#include "zscript/Util/PreciseXHair/libeye/pc_projector gl.zs"
-#include "zscript/Util/PreciseXHair/libeye/pc_projector planar.zs"
-#include "zscript/Util/PreciseXHair/libeye/pc_viewport.zs"
-
-#include "zscript/Util/PreciseXHair/settings/pc_settings_base.zs"
-#include "zscript/Util/PreciseXHair/settings/pc_cvar_setting.zs"
-#include "zscript/Util/PreciseXHair/settings/pc_bool_setting.zs"
-#include "zscript/Util/PreciseXHair/settings/pc_settings_pack.zs"
-#include "zscript/Util/PreciseXHair/settings/pc_settings.zs"
-
 
 Class BaseVisualSFX : Actor// From Particle Fire Enhancer Mod (v0.8) by Z86
 {
