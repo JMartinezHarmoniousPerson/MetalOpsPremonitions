@@ -174,10 +174,10 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		Goto ReadyToFire;
 		
 	Fire:
-		TNT1 A 0 JM_CheckMagNew;
+		TNT1 A 0 MO_CheckMag;
 		TNT1 A 0 JM_CheckForQuadDamage();
 	FireContinue:
-		TNT1 A 0 JM_CheckMagNew;
+		TNT1 A 0 MO_CheckMag;
 		3RGF A 0; //Initialize the sprite name into memory
 		PRGF A 0
 		{
@@ -213,7 +213,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		"####" A 0 A_JumpIf(PressingFire(), "FireContinue");
 		"####" A 0 A_JumpIfInventory("PlasmaRifleCooldownCount",25,"Cooldown");
 		"####" A 0 A_SetInventory("PlasmaRifleCooldownCount",0);
-		"####" A 0 JM_CheckMagNew;
+		"####" A 0 MO_CheckMag;
 		Goto ReadyToFire;
 
 	Spawn:
@@ -294,7 +294,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 	
 	AltFire:
 		TNT1 A 0;
-		TNT1 A 0 JM_CheckMagNew;
+		TNT1 A 0 MO_CheckMag;
 		TNT1 A 0 {
 			if(CountInv("HeatedRoundsReady") >=1 && CountInv("HeatBlastLevel") >= 1)
 			{
@@ -316,7 +316,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		PRGA A 3;
 		TNT1 A 0 A_JumpIf(JustReleased(BT_ALTATTACK), "CheckForCooldown");
 	HoldBeam:
-		TNT1 A 0 JM_CheckMagNew(1,"StopBeam")
+		TNT1 A 0 MO_CheckMag(1,"StopBeam");
 		PRGG A 0 A_StartSound("plasma/laser/fireloop",4);
 		PRGG A 0 A_Overlay(-60, "MuzzleFlash");
 		PRGG A 0 A_AttachLightDef('GunLighting', 'PlasmaWepLight');

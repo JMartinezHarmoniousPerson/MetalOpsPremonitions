@@ -58,7 +58,7 @@ Class AssaultRifle : JMWeapon
 			TNT1 A 0 A_SetCrosshair(invoker.GetXHair(7));
 			Goto ClearAudioAndResetOverlays;
         Fire:
-			TNT1 A 0 JM_CheckMagNew;
+			TNT1 A 0 MO_CheckMag;
 			TNT1 A 0 A_JumpIf(invoker.isZoomed, "Fire2");
             AR1F A 1 BRIGHT {
                 A_FireBullets(5.6, 0, 1, 18, "UpdatedBulletPuff",FBF_NORANDOM,0,"MO_BulletTracer",0);
@@ -83,7 +83,7 @@ Class AssaultRifle : JMWeapon
 				JM_GunRecoil(-0.6, .04);
 			}
 			AR1F D 1 JM_WeaponReady(WRF_NOPRIMARY);
-			TNT1 A 0 JM_CheckMagNew;		
+			TNT1 A 0 MO_CheckMag;		
             AR1F A 0 
 			{
 				if(PressingFire())
@@ -170,7 +170,7 @@ Class AssaultRifle : JMWeapon
 				if(CountInv("ARAmmo") < 1)
 					{A_SetInventory("GunIsEmpty",1);}
 			}
-			TNT1 A 0 JM_CheckMagNew;
+			TNT1 A 0 MO_CheckMag;
 			TNT1 A 0 A_Jumpif(CountInv("ARSemiAuto") >= 1, "FireFinished");
 			AR1F A 0
 			{

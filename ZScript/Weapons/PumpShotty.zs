@@ -66,7 +66,7 @@ class MO_PumpShotgun : JMWeapon
 			TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();
 			Goto Ready;
         Fire:
-            PSTG A 0 JM_CheckMagNew;
+            PSTG A 0 MO_CheckMag;
             PSGF A 1 
             {
                 A_FireBullets (random(3, 6), frandom(3,7), 20, 6, "ShotgunPuff20GA", FBF_NORANDOM,0,"MO_BulletTracer",0);
@@ -85,7 +85,7 @@ class MO_PumpShotgun : JMWeapon
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
 			}
 			TNT1 A 0 A_WeaponReady(WRF_NOFIRE);
-			TNT1 A 0 JM_CheckMagNew;
+			TNT1 A 0 MO_CheckMag;
             Goto Pump;
         Pump:
             W87A A 0 SetInventory("SGPumping",1);
@@ -110,7 +110,7 @@ class MO_PumpShotgun : JMWeapon
             Goto ReadyToFire;
 			
 		AltFire:
-			PSTG A 0 JM_CheckMagNew(2);
+			PSTG A 0 MO_CheckMag(2);
 			TNT1 A 0 A_StartSound ("weapons/pumpshot/fire", CHAN_WEAPON, CHANF_DEFAULT, 0.85);
 			TNT1 A 0 A_StartSound("weapons/pumpshot/altfire",CHAN_7);
 			PSGF A 1 
@@ -129,7 +129,7 @@ class MO_PumpShotgun : JMWeapon
             PSGF E 4;
 			PSGG A 1;
 			TNT1 A 0 A_WeaponReady(WRF_NOFIRE);
-			TNT1 A 0 JM_CheckMagNew;
+			TNT1 A 0 MO_CheckMag;
             PSGG A 9
 			{
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(5);}

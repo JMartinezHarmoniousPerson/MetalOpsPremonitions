@@ -71,7 +71,7 @@ class MO_SSG : JMWeapon replaces SuperShotgun
 			 TNT1 A 0 A_Lower(12);
 			 Wait;
         Fire:
-            SG2S A 0 JM_CheckMagNew;
+            SG2S A 0 MO_CheckMag;
             SG2S A 0 A_JumpIfInventory("SSGAmmo",2,1);
             Goto AltFire2;
             SG2F A 1 BRIGHT
@@ -90,7 +90,7 @@ class MO_SSG : JMWeapon replaces SuperShotgun
             SG2S A 0 A_JumpIfInventory("MO_ShotShell", 1, "Reload");
             Goto ReadyToFire;
         AltFire:
-            SG2S A 0 JM_CheckMagNew;
+            SG2S A 0 MO_CheckMag;
             SG2S A 0 A_JumpIfInventory("SSGAmmo",2,1);
             Goto AltFire2;
             SG2A A 1 BRIGHT

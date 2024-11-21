@@ -90,7 +90,7 @@ class JMWeapon : Weapon
 	action bool PressingFire(){return player.cmd.buttons & BT_ATTACK;}
     action bool PressingAltfire(){return player.cmd.buttons & BT_ALTATTACK;}
 
-	action state JM_CheckMagNew(int m = 1, statelabel st = "Reload")
+	action state MO_CheckMag(int m = 1, statelabel st = "Reload")
 	{
 		if(CountInv(invoker.ammotype2) < m)
 			return ResolveState(st);
