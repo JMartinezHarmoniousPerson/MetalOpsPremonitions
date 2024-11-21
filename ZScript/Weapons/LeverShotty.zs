@@ -57,7 +57,7 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		TNT1 A 0 A_SetCrosshair(invoker.GetXHair(4));
 		Goto ClearAudioAndResetOverlays;
 	Fire:
-		PSTG A 0 JM_CheckMag("LeverShottyAmmo", "Reload");
+		PSTG A 0 JM_CheckMagNew;
 		W87F A 1 BRIGHT {
 			A_FireBullets (random(3, 6), frandom(2,5), 9, 12, "ShotgunShellPuff", FBF_NORANDOM,0,"MO_BulletTracer",0);
 			A_StartSound ("weapons/levershotty/fire", CHAN_WEAPON);
@@ -94,7 +94,7 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		W87G A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 		W87P CBA 1 JM_WeaponReady(WRF_NOFIRE);
 		W87G A 1 A_ReFire();
-		PSTG A 0 JM_CheckMag("LeverShottyAmmo", "Reload");
+		PSTG A 0 JM_CheckMagNew;
 		Goto ReadyToFire;
 	TerminatorLever: //From M1887 BDv21 add-on
 	   W87G A 0 SetInventory("Levering",1);   
@@ -116,11 +116,11 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 	   W87G A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 	   W87T VWXYZ 1 JM_WeaponReady(WRF_NOFIRE);
 	   W87G A 0;
-	   PSTG A 0 JM_CheckMag("LeverShottyAmmo", "Reload");
+	   PSTG A 0 JM_CheckMagNew;
 	   Goto ReadyToFire;
 	
 	AltFire:
-		PSTG A 0 JM_CheckMag("LeverShottyAmmo", "Reload");
+		PSTG A 0 JM_CheckMagNew;
 		W87F A 1 BRIGHT {
 			A_FireBullets (random(3, 6), frandom(2,6.7), 9, 12, "ShotgunShellPuff", FBF_NORANDOM,0,"MO_BulletTracer",0);
 			A_StartSound ("weapons/levershotty/fire", CHAN_WEAPON);
@@ -143,7 +143,7 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		W87A FED 1 A_WeaponOffset(0,33);
 		W87A C 1 A_StartSound("weapons/levershotty/up", CHAN_AUTO);
 		W87A BA 1;
- PSTG A 0 JM_CheckMag("LeverShottyAmmo", "Reload");
+		PSTG A 0 JM_CheckMagNew;
 		Goto ReadyToFire;
 	Reload:
 		PSTG A 0 A_JumpIfInventory("LeverShottyAmmo",6,"ReadyToFire");
