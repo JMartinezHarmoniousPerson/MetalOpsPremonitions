@@ -37,6 +37,7 @@ to create this
 - Ravik - Some sounds taken from his add-on Raviks Badass Sounds for PB 3.0.
 - ToxicFrog - LibToolTipMenu
 - Alexander 'm8f' Kromm - Precise Crosshair
+- Gemini0 - Player.AttackZOffset fix
 
 - Running With Scissors - Postal 2 Kicking sounds
 
