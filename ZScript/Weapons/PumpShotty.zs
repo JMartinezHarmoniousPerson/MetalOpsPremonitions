@@ -72,7 +72,7 @@ class MO_PumpShotgun : JMWeapon
                 A_FireBullets (random(3, 6), frandom(3,7), 20, 6, "ShotgunPuff20GA", FBF_NORANDOM,0,"MO_BulletTracer",0);
                 A_StartSound ("weapons/pumpshot/fire", CHAN_WEAPON);
                 A_TakeInventory("PumpShotgunAmmo",1, TIF_NOTAKEINFINITE);
-//				A_SpawnItemEx("ShotgunSmoke",15,0,34,2,0,0);
+				A_GunFlash();
 				A_SetInventory("SGPumping",1);
 				JM_CheckForQuadDamage();
 				A_AlertMonsters();
@@ -117,7 +117,7 @@ class MO_PumpShotgun : JMWeapon
             {
                  A_FireBullets (random(4, 8), frandom(3,15), 40, 6, "ShotgunPuff20GA", FBF_NORANDOM,0,"MO_BulletTracer",0);
                 A_TakeInventory("PumpShotgunAmmo",2, TIF_NOTAKEINFINITE);
-//				A_SpawnItemEx("ShotgunSmoke",15,0,34,2,0,0);
+				A_GunFlash();
 				JM_CheckForQuadDamage();
 				A_SetInventory("AltPumping",1);
 				A_AlertMonsters();
@@ -161,9 +161,10 @@ class MO_PumpShotgun : JMWeapon
             Goto ReadyToFire;
 			
         Flash:
-            TNT1 A 1 Bright A_Light1;
-            TNT1 B 1 Bright A_Light2;
-            Goto LightDone;
+			TNT1 A 2 A_AttachLightDef('GunLighting', 'GunFireLight');
+			TNT1 A 0 A_RemoveLight('GunLighting');
+			Stop;
+
         Reload:
 			PSTG A 0 A_JumpIfInventory("PumpShotgunAmmo",8,"ReadyToFire");
 			PSTG A 0 A_JumpIfInventory("MO_ShotShell",1,1);

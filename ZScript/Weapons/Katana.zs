@@ -10,7 +10,7 @@ class Katana: JMWeapon replaces Fist
 {
 	  Default 
 	  {
-	  Obituary "%o was sliced and diced by %k's Katana.";
+	  Obituary "";
 	  Tag "Katana";
 //	  +WEAPON.WIMPY_WEAPON;
 	  +WEAPON.NOALERT;
@@ -18,6 +18,17 @@ class Katana: JMWeapon replaces Fist
 	  Inventory.AltHudIcon "KATAN0";
 	  Weapon.SelectionOrder 3700;
 	  }
+
+	 override string GetObituary (Actor victim, Actor inflictor, Name mod, bool playerattack)
+	{
+		static const string messages[] =
+		{
+			"$OB_KATANA",
+			"$OB_KATANA2"
+		};
+
+		return messages[Random(0, messages.Size() - 1)];
+	}
 		
 	  action bool PlayerHasBerserk()
 	  {

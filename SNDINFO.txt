@@ -224,6 +224,7 @@ $random 40mmExplosion  { 40expl1 40expl2 40expl3 }
 
 hcr/sniperzoom SNIP_ZM
 hcr/sniperunzoom SNIP_UZ
+hcr/sniperfire "Sounds/Weapons/HeavyRifle/HMR_SniperFire.ogg"
 
 hcr/grenadeopen "Sounds/Weapons/HeavyRifle/GL/HCR_GLOpen.ogg"
 hcr/grenadeload "Sounds/Weapons/HeavyRifle/GL/HCR_GLLoad.ogg"

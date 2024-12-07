@@ -10,6 +10,7 @@ class MO_MiniGun : JMWeapon
 	}
 	
 	bool isHolding;
+	bool isSpinning;
 	Default
 	{
 		Weapon.AmmoUse 1;
@@ -26,6 +27,7 @@ class MO_MiniGun : JMWeapon
 	{
 		Super.PostBeginPlay();
 		isHolding = false;
+		isSpinning = false;
 	}
 
 	States
@@ -222,6 +224,7 @@ class MO_MiniGun : JMWeapon
 		}
 		Loop;
 	MuzzleFlashStarting:
+		TNT1 A 0 A_AttachLightDef('GunLighting', 'GunFireLight');
 		TNT1 A 0 A_Jump(256, "MS1", "MS2", "MS3", "MS4");
 		Stop;
 	MS1:
@@ -236,29 +239,34 @@ class MO_MiniGun : JMWeapon
 	MS4:
 		MGF1 D 1 BRIGHT;
 		Stop;
-		
+	
+	FlashDONE:
+		TNT1 A 1 A_RemoveLight('GunLighting');
+		Stop;
+	
 	MuzzleFlash:
 		TNT1 A 0
 		{
-			A_OverlayFlags(-5, PSPF_FORCEALPHA, true);
-			A_OverlayScale(-5, 0.85);
-			A_OverlayOffset(-5,7,10);
-			A_OverlayAlpha(-5, 0.85);
+			A_AttachLightDef('GunLighting', 'GunFireLight');
+			A_OverlayFlags(OverlayID(), PSPF_FORCEALPHA, true);
+			A_OverlayScale(OverlayID(), 0.85);
+			A_OverlayOffset(OverlayID(),7,10);
+			A_OverlayAlpha(OverlayID(), 0.85);
 		}
 		TNT1 A 0 A_Jump(256, "M1", "M2", "M3", "M4");
-		Stop;
+		Goto FlashDone;
 	M1:
 		MGF1 AC 1 BRIGHT;
-		STOP;
+		Goto FlashDone;
 	M2:
 		MGF1 BD 1 BRIGHT;
-		STOP;
+		Goto FlashDone;
 	M3:
 		MGF1 AB 1 BRIGHT;
-		STOP;
+		Goto FlashDone;
 	M4:
 		MGF1 CD 1 BRIGHT;
-		STOP;
+		Goto FlashDone;
 	Spawn:
 		MGUN A -1;
 		Stop;

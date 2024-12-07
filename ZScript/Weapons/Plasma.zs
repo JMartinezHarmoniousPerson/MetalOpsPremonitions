@@ -1,5 +1,6 @@
 class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 {
+	const PSP_MUZZLEFLASH = -60;
 	action void JM_AddHeatBlastCharge()
 	{
 		int h = CountInv("HeatBlastShotCount");
@@ -22,6 +23,14 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 				}
 				break;
 			}
+	}
+
+	action void MO_AttachPlasmaLight(string plight, string hlight)
+	{
+		if(CountInv("HeatedRoundsReady") >= 1)
+			A_AttachLightDef('GunLighting', hlight);
+		else
+			A_AttachLightDef('GunLighting', plight);
 	}
 	//MO_DummyPuff
 //From PB.
@@ -104,10 +113,10 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		Weapon.AmmoGive 60;
 		Weapon.AmmoType1 "MO_Cell";
 		Weapon.AmmoType2 "PlasmaAmmo";
-		Inventory.PickupMessage "You got the Plasma Repeater! (Slot 6)";
+		Inventory.PickupMessage "$MO_GOTPLASMA";
 		Inventory.PickupSound "weapons/plasma/pickup";
-		Obituary "%o got melted by %k's Plasma Repeater.";
-		Tag "Plasma Repeater";
+		Obituary "$OB_PLASMABEAM";
+		Tag "$TAG_PLASMA";
 		+WEAPON.NOALERT;
 		Weapon.SelectionOrder 100;
 	}
@@ -192,29 +201,33 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 			{
 				A_StartSound("weapons/plasma/superheatfire", CHAN_AUTO,CHANF_DEFAULT,0.6,ATTN_NORM);
 				A_FireProjectile("JM_HeatedPlasmaBall", 0, FALSE);
-				A_Overlay(-60, "MuzzleFlashHeated");
+				A_Overlay(PSP_MUZZLEFLASH, "MuzzleFlashHeated");
 				JM_AddHeatBlastCharge();
-				A_AttachLightDef('GunLighting', 'HeatedPlasmaWepLight');
 				A_GiveInventory("HeatBlastShotCount",1);
 			}
 			Else
 			{
 				A_StartSound("weapons/plasma/fire", CHAN_AUTO,CHANF_DEFAULT,1,ATTN_NORM,1.2);
 				A_FireProjectile("JM_PlasmaBall", 0, FALSE);
-				A_AttachLightDef('GunLighting', 'PlasmaWepLight');
-				A_Overlay(-60, "MuzzleFlash");
+				A_Overlay(PSP_MUZZLEFLASH, "MuzzleFlash");
 			}
 			A_AlertMonsters();
+			A_GunFlash();
 			A_TakeInventory("PlasmaAmmo",1);
 			A_GiveInventory("PlasmaRifleCooldownCount",1);		
 		}
 		"####" B 1 JM_GunRecoil(-1.1,+.03);
-		"####" C 1 A_RemoveLight('GunLighting');
+		"####" C 1;
 		"####" A 0 A_JumpIf(PressingFire(), "FireContinue");
 		"####" A 0 A_JumpIfInventory("PlasmaRifleCooldownCount",25,"Cooldown");
 		"####" A 0 A_SetInventory("PlasmaRifleCooldownCount",0);
 		"####" A 0 MO_CheckMag;
 		Goto ReadyToFire;
+
+	Flash:
+			TNT1 A 2 MO_AttachPlasmaLight('PlasmaWepLight', 'HeatedPlasmaWepLight');
+			TNT1 A 0 A_RemoveLight('GunLighting');
+			Stop;
 
 	Spawn:
 		PLAS A -1;
@@ -318,24 +331,24 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 	HoldBeam:
 		TNT1 A 0 MO_CheckMag(1,"StopBeam");
 		PRGG A 0 A_StartSound("plasma/laser/fireloop",4);
-		PRGG A 0 A_Overlay(-60, "MuzzleFlash");
+		PRGG A 0 A_Overlay(PSP_MUZZLEFLASH, "MuzzleFlash");
 		PRGG A 0 A_AttachLightDef('GunLighting', 'PlasmaWepLight');
 		PRGA BB 1 
 		{
 			JM_CheckForQuadDamage();
 			A_WeaponOffset(random(-1,1), random(32, 34));
 			MO_FirePlasmaBeam();
-			A_OverlayOffset(-60, 0, 18);
+			A_OverlayOffset(PSP_MUZZLEFLASH, 0, 18);
 			A_AlertMonsters();
 		}
 		PRGG A 0 JM_GunRecoil(-0.9, .09);
-		PRGG A 0 A_Overlay(-60, "MuzzleFlash");
+		PRGG A 0 A_Overlay(PSP_MUZZLEFLASH, "MuzzleFlash");
 		PRGA CC 1
 		{
 			JM_CheckForQuadDamage();
 			A_WeaponOffset(random(-1,1), random(32, 34));
 			MO_FirePlasmaBeam();
-			A_OverlayOffset(-60, 0, 18);
+			A_OverlayOffset(PSP_MUZZLEFLASH, 0, 18);
 			A_AlertMonsters();
 			A_TakeInventory("PlasmaAmmo",1);
 		}
@@ -659,7 +672,7 @@ class JM_PlasmaBall : FastProjectile replaces PlasmaBall
 		Alpha 0.85;
 		SeeSound "None";
 		DeathSound "weapons/plasma/ballexp";
-		Obituary "$OB_MPPLASMARIFLE";
+		Obituary "$OB_PLASMA";
 		DamageType "Plasma";
 		+NOTELEPORT;
 		Decal "Scorch";
@@ -690,7 +703,7 @@ class JM_HeatedPlasmaBall : JM_PlasmaBall
 {
 	Default
 	{
-		Obituary "%o was scorched by %k's Heated Plasma Repeater.";
+		Obituary "$OB_HEATPLASMA";
 		DeathSound "weapons/plasma/htballexp";
 		DamageFunction(30);
 	}

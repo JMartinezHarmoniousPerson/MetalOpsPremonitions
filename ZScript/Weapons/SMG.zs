@@ -83,7 +83,7 @@ Class MO_SubMachineGun : JMWeapon
                 A_StartSound("weapons/smg/fire", 0);
 				A_AlertMonsters();
 				JM_CheckForQuadDamage();
-				A_AttachLightDef('GunLighting', 'GunFireLight');
+				A_GunFlash();
             }
             SM5F B 1 BRIGHT 
 			{
@@ -93,7 +93,6 @@ Class MO_SubMachineGun : JMWeapon
 			}
             SM5F C 1 JM_WeaponReady(WRF_NOPRIMARY);
             AR1F A 0 A_JumpIf(PressingFire(), "Fire");
-			AR1F A 0 A_RemoveLight('GunLighting');
 			TNT1 A 0 MO_CheckMag;
             Goto ReadyToFire;
 
@@ -105,7 +104,7 @@ Class MO_SubMachineGun : JMWeapon
                 A_StartSound("weapons/smg/fire", 0);
 				A_AlertMonsters();
 				JM_CheckForQuadDamage();
-				A_AttachLightDef('GunLighting', 'GunFireLight');
+				A_GunFlash();
             }
             SM5Z F 1 BRIGHT 
 			{
@@ -114,7 +113,6 @@ Class MO_SubMachineGun : JMWeapon
 				MO_EjectCasing("PistolCasing", false, speed: frandom(4,7), offset: (28, 4, -4));
 			}
             SM5Z G 1;
-			TNT1 A 0 A_RemoveLight('GunLighting');
 			TNT1 A 0 MO_CheckMag;
             AR1F A 0
 			{
@@ -136,6 +134,11 @@ Class MO_SubMachineGun : JMWeapon
 				return JM_WeaponReady(WRF_NOFIRE|WRF_ALLOWRELOAD);
 			}
             Goto Ready2;
+
+		Flash:
+			TNT1 A 2 A_AttachLightDef('GunLighting', 'GunFireLight');
+			TNT1 A 0 A_RemoveLight('GunLighting');
+			Stop;
 	
 		AltFire:
 			TNT1 A 0 A_JumpIf(invoker.isZoomed, "UnZoom");

@@ -35,11 +35,11 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
 		Weapon.AmmoGive 40;
 		Weapon.AmmoType "MO_Cell";
 		+WEAPON.NOAUTOFIRE;
-		Inventory.PickupMessage "$GOTBFG9000";
-		Tag "$TAG_BFG9000";
+		Inventory.PickupMessage "$MO_GOTBFG9000";
+		Tag "$TAG_MO_BFG9000";
 		Inventory.PickupSound "weapons/bfg/draw";
 		Weapon.SelectionOrder 2800;
-		Obituary "$OB_BFG9000";
+		Obituary "$OBMO_BFG9000";
 	}
 	States
 	{
@@ -71,7 +71,11 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
 		BFGA A 0 A_JumpIfInventory("MO_BFG10KFire",1,"Fire2");
 		BFGA A 0 A_JumpIfInventory("MO_Cell",40,1);
 		Goto ReadyToFire;
-		B7GF A 1 BRIGHT MO_BFGSound;
+		B7GF A 1 BRIGHT 
+		{
+			A_GunFlash();
+			MO_BFGSound();
+		}
 		B7GF B 1 BRIGHT;
 		B7GF C 1 BRIGHT;
 		B7GF D 1 BRIGHT;
@@ -85,6 +89,7 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
 		B7GF D 1 BRIGHT;
         B7GF EFGH 1 BRIGHT;
         B7GF EFGH 1 BRIGHT;
+
 		B7GF EFGHHI 1 BRIGHT;
 		B7GF A 0 A_TakeInventory("MO_Cell",40);
         B7GF J 1 A_StartSound("weapons/bfg/FIRE", 1);
@@ -110,6 +115,16 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
         B7GF SSTTU 1;
 		TNT1 A 0 A_ReFire("Fire");
 		Goto ReadyToFire;
+	
+	Flash:
+		TNT1 A 25 A_AttachLightDef('GunLighting', 'BFGLight');
+		TNT1 A 1 A_RemoveLight('GunLighting');
+		Stop;
+
+	BFG10KFlash:
+		TNT1 A 3 A_AttachLightDef('GunLighting', 'BFGLight');
+		TNT1 A 1 A_RemoveLight('GunLighting');
+		Stop;
 
 	ActionSpecial:
 		TNT1 A 0 A_JumpIfInventory("MO_BFG10KFire",1, "ReturnTo9K");
@@ -140,6 +155,7 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
 		{
 			A_TakeInventory("MO_CELL",10, TIF_NOTAKEINFINITE);
 			MO_FireBFG10KShot();
+			A_GunFlash("BFG10KFlash");
 			A_WeaponOffset(0,32);
 		}
 		B7GF KLMN 1 JM_GunRecoil(-.75, .05);
@@ -172,6 +188,7 @@ Class MO_BFGBall : BFGBall replaces BFGBall
 	  DamageFunction 600;
 	  +NOTELEPORT;
 	  +ZDOOMTRANS;
+		Obituary "$OBMO_BFG9000";
 	}
   States
   {
@@ -341,7 +358,7 @@ class MO_BFGExtra : BFGExtra replaces BFGExtra
 	{
 	Alpha 1;
 	Scale 0.5;
-	Obituary "$OB_BFG9000SPLS";
+	Obituary "$OBMO_BFG9000SPLSH";
 	}
   States
   {
@@ -394,6 +411,7 @@ Class MO_BFG10KShot : Actor
     +PuffOnActors
     +PuffGetsOwner
     +ForceRadiusDmg
+	 Obituary "$OBMO_BFG10K";
   }
 
   States

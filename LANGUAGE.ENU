@@ -109,17 +109,18 @@ OB_KATANA = "%o got %p guts sliced and diced by %k's Katana.";
 OB_KATANA2 = "%k forced %o to commit seppuku.";
 
 //Flamethtower
-OB_FLAMER2 = "%o was set ablaze by %'s Flamethrower.";
+OB_FLAMER = "%o was set ablaze by %k's Flamethrower.";
 TAG_FLAMER = "Flamethrower";
 GOTFLAMER = "You got the Flamethrower! (Slot 8)";
+OB_ICEFLAMER = "%o was frozen by %k's Freezethrower.";
 GOTFLAMERGAS = "You got the gasoline from the Flamethrower!";
 
 //Pistol
 GOTENFPISTOL = "You got the Enforcer Sidearm! (Slot 2)";
-OB_PISTOL = "%o was peppered by %k's Enforcer Sidearm.";
+OB_PISTOL = "%o got peppered by %k's Enforcer Sidearm.";
 
 //SMG
-GOTSMG = "You got the Submachine Gun! (Slot 2)"
+GOTSMG = "You got the Submachine Gun! (Slot 2)";
 OB_SMG = "%o got turned into swiss cheese by %k's Submachine Gun.";
 TAG_SMG = "Submachine Gun";
 
@@ -137,7 +138,7 @@ OB_PUMPSHOTTY = "%o got blasted away by %k's Pump Shotgun.";
 OB_SUPERSHOTGUN = "%o got %p insides eviscerated by %k's SSG.";
 
 //Combat Rifle
-GOTCOMBATRIFLE = "You got the Combat Rifle! (Slot 4)"
+GOTCOMBATRIFLE = "You got the Combat Rifle! (Slot 4)";
 OB_COMBATRIFLE = "%o was shot down by %k's Combat Rifle.";
 TAG_COMBATRIFLE = "Combat Rifle";
 
@@ -145,25 +146,35 @@ TAG_COMBATRIFLE = "Combat Rifle";
 OB_MINIGUN = "%o was shredded to bits by %k's Minigun.";
 
 //BFG 9000
-GOTBFG9000 = "You got the BFG9K! Hell Yeah!";
-TAG_BFG9000 = "BFG9K";
-OB_BFG9000  = "%o felt the extreme power of %k's BFG9K.";
-OB_BFG9000SPLS = "%o couldn't escape from %k's BFG9K.";
+MO_GOTBFG9000 = "You got the \cdBFG9K!\c- Hell Yeah!";
+TAG_MO_BFG9000 = "BFG9K";
+OBMO_BFG9000  = "\cg%o\c- felt the extreme power of \cy%k's\c- BFG9K.";
+OBMO_BFG9000SPLSH = "\cg%o\c- couldn't escape from \cy%k's\c- BFG9K.";
+OBMO_BFG10K = "\cg%o\c- got vaporized by \cy%k's\c- BFG10K fire mode.";
 
 //Heavy Combat Rifle
 TAG_HEAVYRIFLE = "Heavy Marksman Rifle";
 OB_HEAVYRIFLE = "%o got sniped by %k's Heavy Marksman Rifle.";
 OB_HEAVYRIFLE_GRENADE = "%o swallowed a 40mm Grenade fired from %k's Heavy Marksman Rifle.";
+OB_HEAVYRIFLE_GRENADESPLASH = "%o almost evaded a 40mm Grenade fired from %k's Heavy Marksman Rifle.";
 
 //Unmaker
-GOTUNMAKER = "You got the Unmaker! Unleash the power of Hell itself on your foes! (Slot 7)";
+GOTUNMAKER = "You got the \caUnmaker!\c- Unleash the power of Hell itself on your foes! (Slot 7)";
 GOTUNMAKER2 = "What The Fuck is this?! (Slot 7)";
 TAG_UNMAKER = "Unmaker";
 OB_UNMAKER = "%o was decimated by %k's Unmaker.";
-OB_UNMAKER2 = "%o got a taste of Hell's power from %k's Unmaker."
+OB_UNMAKER2 = "%o got a taste of Hell's power from %k's Unmaker.";
 
 //Plasma Repeater
+MO_GOTPLASMA = "You got the Plasma Repeater! (Slot 6)";
+TAG_PLASMA = "Plasma Repeater";
 OB_PLASMA = "%o got melted by %k's Plasma Repeater.";
+OB_PLASMABEAM = "%o couldn't handle the energy of %k's Plasma Beam.";
+OB_HEATPLASMA = "%o was scorched %k's Super Heated Plasma Rounds.";
+
+//Rocket Launcher
+OB_MOROCKET = "%k's rocket took %o for a ride.";
+OB_MOROCKETSPLASH = "%o couldn't dodge %k's rocket.";
 
 //Secret Messages randomized
 //SECRETMESSAGE = "Secret Revealed!";
@@ -179,7 +190,7 @@ MO_NVISOPTN = "Night Vision Shader Color";
 MO_NVISGREN = "Green Phosphor";
 MO_NVISGREN2 = "Digital Green Phosphor";
 MO_NVISWHT = "White Phosphor";
-MO_NVISTIP = "\czWhite Phosphor: A modern teal color, may have better visibility. \n\cdGreen Phosphor: The classic green that everyone knows and loves." ;
+MO_NVISTIP = "\czWhite Phosphor: \c-A modern teal color, may have better visibility. \n\cdGreen Phosphor: \c-The classic green that everyone knows and loves." ;
 MO_SSGTIP = "The SSG will randomly spawn in place of the Shotgun. \n\cuThis option should only be used if you're playing Doom 1 or Freedoom Phase 1 if you want too.";
 MO_ADSOPT = "ADS/Minigun Spin Control Type";
 MO_ADSTIP = "Toggle: Click alt fire once to aim down the sights, click alt fire again to to unzoom. \nHold: Click alt fire to aim down the sights, release to unzoom. \nHybrid: Based on BDv21's system that combines both Toggle and Hold." ;

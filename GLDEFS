@@ -64,11 +64,41 @@ flickerlight2 PlasmaWepLight
 	attenuate 1
 }
 
+flickerlight2 FreezethrowerLight
+{
+    color 0.1 0.3 0.8
+    size 72
+    secondarySize 84
+    interval 1
+    offset 0 40 0
+	attenuate 1
+}
+
 flickerlight2 HeatedPlasmaWepLight
 {
     color 1.0 0.2 0.0
     size 72
     secondarySize 84
+    interval 1
+    offset 0 40 0
+	attenuate 1
+}
+
+pulselight BFGLight
+{
+    color 0.2 1.0 0.3
+    size 72
+    secondarySize 84
+    interval 1
+    offset 0 40 0
+	attenuate 1
+}
+
+pulselight BFGSmallLight
+{
+    color 0.2 1.0 0.3
+    size 56
+    secondarySize 69
     interval 1
     offset 0 40 0
 	attenuate 1

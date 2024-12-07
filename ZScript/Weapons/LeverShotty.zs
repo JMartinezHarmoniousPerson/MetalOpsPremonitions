@@ -16,7 +16,7 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		Inventory.PickupSound "weapons/levershotty/pickup";
 		Inventory.AltHUDIcon "W87CA0";
 		JMWeapon.inspectToken "NeverUsedLAS";
-+Weapon.NoAlert
+		+Weapon.NoAlert
 	}
 	States
 	{
@@ -64,6 +64,7 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 			JM_UseAmmo("LeverShottyAmmo",1);
 			 JM_CheckForQuadDamage();
 			A_AlertMonsters();
+			A_GunFlash();
 		}
 		W87F B 1 BRIGHT JM_GunRecoil(-1.2,.09);
 		 W87F C 1 BRIGHT JM_GunRecoil(-1.2,.09);
@@ -118,6 +119,11 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 	   W87G A 0;
 	   PSTG A 0 MO_CheckMag;
 	   Goto ReadyToFire;
+
+	Flash:
+			TNT1 A 2 A_AttachLightDef('GunLighting', 'GunFireLight');
+			TNT1 A 0 A_RemoveLight('GunLighting');
+			Stop;
 	
 	AltFire:
 		PSTG A 0 MO_CheckMag;
@@ -127,6 +133,7 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 			JM_UseAmmo("LeverShottyAmmo",1);
 			 JM_CheckForQuadDamage();
 			A_AlertMonsters();
+			A_GunFlash();
 		}
 		W87F B 1 BRIGHT JM_GunRecoil(-1.2,.09);
 		 W87A A 1 JM_GunRecoil(-1.2,.09);
@@ -251,11 +258,6 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 			return JM_WeaponReady();
 		}
 		Goto ChamberLastShell;
-		
-	Flash:
-		TNT1 A 1 Bright A_Light1;
-		TNT1 B 3 Bright A_Light2;
-		Goto LightDone;
 		
 	FlashKick:
 		W87P ABCDEF 1;

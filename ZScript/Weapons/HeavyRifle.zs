@@ -8,6 +8,7 @@ Class HCR_6XZoom : MO_ZSToken{}
 Class MO_HeavyRifle : JMWeapon
 {
 	bool hcrFiredGrenade;
+	const PSP_MUZZLESMOKE = -2;
     Default
     {
         Weapon.AmmoGive 20;
@@ -110,7 +111,7 @@ Class MO_HeavyRifle : JMWeapon
                 A_FireBullets(5.6, 0, 1, 30, "UpdatedBulletPuff",FBF_NORANDOM);
                 A_TakeInventory("HCRAmmo", 1,TIF_NOTAKEINFINITE);
                 A_StartSound("hcr/fire", 0);
-				A_Overlay(-2, "MuzzleSmoke");
+				A_Overlay(PSP_MUZZLESMOKE, "MuzzleSmoke");
 				A_AlertMonsters();
             }
             TNT1 B 1 BRIGHT 
@@ -147,21 +148,27 @@ Class MO_HeavyRifle : JMWeapon
             Goto ReadyToFire;
 
 		Flash:
+			TNT1 A 0 A_AttachLightDef('GunLighting', 'GunFireLight');
 			TNT1 A 0 A_Jump(256, "FlashAB", "FlashHI", "FlashJK", "FlashLM");
 		FlashAB:
 			HCRF AB 1 BRIGHT;
-			Stop;
+			TNT1 A 0 A_RemoveLight('GunLighting');
+			Goto FlashDone;
 
 		FlashHI: //Frames H and I
 			HCRF HI 1 BRIGHT;
-			Stop;
+			Goto FlashDone;
 
 		FlashJK: //Frames J and K
 			HCRF JK 1 BRIGHT;
-			Stop;
+			Goto FlashDone;
 
 		FlashLM: //Frames L and M
 			HCRF JK 1 BRIGHT;
+			Goto FlashDone;
+
+		FlashDone:
+			TNT1 A 0 A_RemoveLight('GunLighting');
 			Stop;
 
 		Fire2:
@@ -230,8 +237,8 @@ Class MO_HeavyRifle : JMWeapon
             HC2Z D 1 BRIGHT {
                 A_FireBullets(5.6, 0, 1, 85, "UpdatedBulletPuff",FBF_NORANDOM);
                 A_TakeInventory("HCRAmmo", 3,TIF_NOTAKEINFINITE);
-                A_StartSound("hcr/fire", 0);
-				A_SpawnItemEx("ShotGunSmoke",20, zofs: 40, xvel: 2);
+                A_StartSound("hcr/sniperfire", 0);
+	//			A_SpawnItemEx("ShotGunSmoke",20, zofs: 40, xvel: 2);
 				A_AlertMonsters();
             }
             HC2Z D 1 BRIGHT 
@@ -473,7 +480,7 @@ Class MO_HeavyRifle : JMWeapon
 			HCRH A 1  bright
 			{
 				A_StartSound("hcr/glfire",0);
-				A_Overlay(-3, "GrenMuzzleSmoke");
+				A_Overlay(PSP_MUZZLESMOKE, "GrenMuzzleSmoke");
 				A_FireProjectile("HCRGrenade",0,0,0,0);
 				A_AlertMonsters();
 			}
@@ -531,7 +538,8 @@ Class MO_HeavyRifle : JMWeapon
 			Stop;
 
 		ZoomedFlash:
-			HC2M AB 1 BRIGHT;
+			HC2M AB 1 BRIGHT A_AttachLightDef('GunLighting', 'GunFireLight');
+			TNT1 A 0 A_RemoveLight('GunLighting');
 			STOP;
 	
 		NoAmmoZoomed:

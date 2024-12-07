@@ -1,32 +1,6 @@
 //Rawket Lawnchair
 class MiniNukeMode :  Inventory {Default{Inventory.MaxAmount 1;}}
 
-class MiniNukeCooldown : Powerup
-{
-	//Thanks Blue Shadow!
-	//From this forum: https://forum.zdoom.org/viewtopic.php?p=1222796#p1222796
-	override void DoEffect ()
-    {
-        Super.DoEffect();
-
-        if (Owner && EffectTics > 0 && EffectTics <= 1)
-        {
-            Owner.A_StartSound("weapons/rocket/nukemodeact", CHAN_5, CHANF_NOSTOP, 1.0, ATTN_NONE);
-			Owner.A_Print("Mini nuke ready!");
-        }
-    }
-	Default{Powerup.Duration 700;}
-}
-
-class MiniNukeCoolerGiver : PowerupGiver
-{
-	Default
-	{
-		Powerup.Type "MiniNukeCooldown";
-		+INVENTORY.AUTOACTIVATE;
-	}
-}
-
 class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 {
 	
@@ -34,6 +8,24 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 	{
 		LineAttack(angle,8192,pitch,0,'None', "LaserGuide", LAF_NORANDOMPUFFZ|LAF_NOINTERACT,t);
 */
+	int burstCount;
+	const maxBurst = 3;
+
+	action void MO_CountRLBurst()
+	{
+		invoker.burstCount++;
+	}
+
+	action void MO_ResetRLBurstCount()
+	{
+		invoker.burstCount = 0;
+	}
+
+	 action int MO_GetBurstCount()
+	{
+		return invoker.burstCount;
+	}
+
     Default
 	{
 		Weapon.AmmoUse 1;
@@ -44,6 +36,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 		Inventory.PickupMessage "You got the Rocket Launcher (Slot 5)!";
 		Tag "$TAG_ROCKETLAUNCHER";
         Inventory.PickupSound "weapons/rocket/pickup";
+		Obituary "$OB_MOROCKETSPLASH";
 	}
 
     States
@@ -79,15 +72,14 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			Wait;
         Fire:
 			RLAS A 0 A_CheckReload();
-//			RLAS A 0 A_JumpIfInventory("MiniNukeMode",1,"FireNuke");
             RLAF A 1 BRIGHT
             {
-				A_StartSound("weapons/rocket/fire", 4, starttime: 0.09);
+				A_StartSound("weapons/rocket/fire", 4, starttime: 0.05);
                 A_Overlay(-5, "MuzzleFlash");
 				JM_CheckForQuadDamage();
 				A_FireProjectile("MO_Rocket",0,true,0,0,0);
             }
-            RLAF BCD 1 BRIGHT JM_GunRecoil(-1.5, .05);
+            RLAF BCD 1 BRIGHT JM_GunRecoil(-0.95, .05);
 			TNT1 A 0 A_JumpIf(CountInv("MO_RocketAmmo") < 1,2);
 			RLAF A 0 A_StartSound("weapons/rocket/loading",6);
 			TNT1 AAA 0;
@@ -116,7 +108,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			}
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			RLAF HHH 1 A_WeaponOffset(0,32);
-			RLAF II 1 JM_GunRecoil(+0.6, -.04);
+			RLAF II 1 JM_GunRecoil(+0.45, -.04);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			RLAF EJ 1 
 			{
@@ -138,23 +130,25 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
             {
                 A_FireProjectile("MO_Rocket",0,0,0,7,0);
                 A_StartSound("weapons/rocket/fire", 1);
-				A_Overlay(-5, "MuzzleFlashRapid");
+				A_Overlay(-5, "MuzzleFlash");
 				JM_CheckForQuadDamage();
+				MO_CountRLBurst();
 				A_TakeInventory("MO_RocketAmmo",1);
             }
-            RLAF B 1 BRIGHT JM_GunRecoil(-1.0, .05);
-			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-            RLAF CC 1 JM_GunRecoil(-0.95, .05);
+            RLAF B 1 BRIGHT JM_GunRecoil(-0.95, .05);
+			TNT1 A 0 A_JumpIf(MO_GetBurstCount() == maxBurst, "BurstDone");
 			TNT1 A 0 A_JumpIf(CountInv("MO_RocketAmmo") < 1,"BurstDone");
+            RLAF CC 1 JM_GunRecoil(-0.65, .05);
+			Loop;
             RLAF A 1 BRIGHT
             {
                 A_FireProjectile("MO_Rocket",0,0,0,0,0);
 				A_TakeInventory("MO_RocketAmmo",1);
                 A_StartSound("weapons/rocket/fire", 1);
             }
-            RLAF B 1 BRIGHT JM_GunRecoil(-1.0, .05);
+            RLAF B 1 BRIGHT JM_GunRecoil(-0.95, .05);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-            RLAF CC 1 JM_GunRecoil(-0.95, .05);
+            RLAF CC 1 JM_GunRecoil(-0.65, .05);
 			TNT1 A 0 A_JumpIf(CountInv("MO_RocketAmmo") < 1,"BurstDone");
             RLAF A 1 BRIGHT
             {
@@ -162,11 +156,11 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 				A_TakeInventory("MO_RocketAmmo",1);
                 A_StartSound("weapons/rocket/fire", 1, starttime: 0.1);
             }
-            RLAF B 1 BRIGHT JM_GunRecoil(-1.0, .05);
+            RLAF B 1 BRIGHT JM_GunRecoil(-0.95, .05);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-            RLAF CC 1 JM_GunRecoil(-0.95, .05);
 		BurstDone:
-            RLAF D 1 JM_GunRecoil(-1.0, .05);
+			TNT1 A 0 MO_ResetRLBurstCount;
+            RLAF CD 1 JM_GunRecoil(-0.95, .05);
 			TNT1 A 0 A_JumpIf(CountInv("MO_RocketAmmo") < 1,2);
 			RLAF A 0 A_StartSound("weapons/rocket/loading",6);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
@@ -212,16 +206,18 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			"####" A 0;// A_Print("You can't do alt fire on nuke mode");
 			Goto ReadyTofire;
         MuzzleFlash:
-            MUZR ABCD 1 BRIGHT;
+            MUZR ABC 1 BRIGHT A_AttachLightDef('GunLighting', 'GunFireLight');
+			MUZR D 1 BRIGHT A_RemoveLight('GunLighting'); 
             Stop;
 		MuzzleFlashRapid:
-			MUZR ABC 1 BRIGHT;
-			TNT1 A 1;
-			MUZR ABC 1 BRIGHT;
-			TNT1 A 1;
-			MUZR ABCD 1 BRIGHT;
+			MUZR ABC 1 BRIGHT A_AttachLightDef('GunLighting', 'GunFireLight');
+			TNT1 A 1 A_RemoveLight('GunLighting');
+			MUZR ABC 1 BRIGHT A_AttachLightDef('GunLighting', 'GunFireLight');
+			TNT1 A 1 A_RemoveLight('GunLighting');
+			MUZR ABC 1 BRIGHT A_AttachLightDef('GunLighting', 'GunFireLight');
+			MUZR D 1 BRIGHT A_RemoveLight('GunLighting'); 
 			Stop;
-/*		
+
 		ActionSpecial:
 			TNT1 A 0 A_JumpIfInventory("MiniNukeMode",1,"ActionBackToNormal");
 			RLAS F 1;// A_StartSound("weapons/rocket/special1",0);
@@ -271,7 +267,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 					A_SetInventory("MiniNukeMode",0);
 					A_Print("Rockets selected");
 			}
-			Goto ReadyTofire;*/
+			Goto ReadyTofire;
 		NukeOverlayIdle:
 			RNUK A 1;
 			Stop;
@@ -303,6 +299,7 @@ Class MO_Rocket : Rocket// replaces rocket
 		DamageFunction (random(50, 70));
 		DamageType "Explosive";
 		Decal "Scorch";
+		Obituary "$OB_MOROCKET";
     }
 	States
 	{
@@ -322,16 +319,9 @@ Class MO_Rocket : Rocket// replaces rocket
 			TNT1 A 0 A_StartSound("rocket/explosion");
 			TNT1 A 1 A_SpawnItemEx("RocketExplosionFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
 			TNT1 A 0 A_Explode(200, 180);
+			TNT1 A 1;
 			Stop;
     }
-}
-
-Class MO_WeakRocket : MO_Rocket
-{
-	Default
-	{
-		Damage 16;
-	}
 }
 
 Class MO_MiniNukeRocket : MO_Rocket

@@ -165,7 +165,7 @@ Class MO_ThrownGrenade : Actor
 			nade.timer = player.CountInv("GrenadeCookTimer");
 		}
 	SpawnLoop:
-		HGRN AABBCCDDEEFF 1 
+		GNDE AABBCCDDEEFF 1 
 		{	
 			timer++;
 			if(waterlevel < 1) 
@@ -177,10 +177,9 @@ Class MO_ThrownGrenade : Actor
 		}
 		Loop;
 	Death:
-	    HGRN H 0 A_Jump(128, 2);
-	    HGRN G 0;
+		GNDE G 0 {bXFLIP = random(0,1);}
 	RestLoop:
-	    HGRN "#" 1
+	    GNDE G 1
 		{	
 			timer++;
 			if(waterlevel < 1) 
@@ -190,7 +189,7 @@ Class MO_ThrownGrenade : Actor
 			if(timer >= 105) {Return ResolveState("Explode");}
 			return ResolveState(Null);
 		}
-		TNT1 "#" 0 A_JumpIf(timer >= 105, "Explode");
+		#### # 0 A_JumpIf(timer >= 105, "Explode");
 		Loop;
 
 	XDeath:

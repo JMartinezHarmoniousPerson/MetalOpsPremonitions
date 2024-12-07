@@ -64,7 +64,7 @@ Class AssaultRifle : JMWeapon
                 A_FireBullets(5.6, 0, 1, 18, "UpdatedBulletPuff",FBF_NORANDOM,0,"MO_BulletTracer",0);
                 A_TakeInventory("ARAmmo", 1, TIF_NOTAKEINFINITE);
                 A_StartSound("weapons/ar/fire", 0);
-//				A_SpawnItemEx("GunSmoke",15,0,34,2,0,0);
+				A_GunFlash();
 				JM_CheckForQuadDamage();
             }
 			AR1F A 0 {
@@ -80,7 +80,7 @@ Class AssaultRifle : JMWeapon
             AR1F C 1 
 			{
 				JM_WeaponReady(WRF_NOFIRE);
-				JM_GunRecoil(-0.6, .04);
+				JM_GunRecoil(-0.45, .04);
 			}
 			AR1F D 1 JM_WeaponReady(WRF_NOPRIMARY);
 			TNT1 A 0 MO_CheckMag;		
@@ -94,6 +94,11 @@ Class AssaultRifle : JMWeapon
 				}
 			}
             Goto ReadyToFire;
+
+		Flash:
+			TNT1 A 2 A_AttachLightDef('GunLighting', 'GunFireLight');
+			TNT1 A 0 A_RemoveLight('GunLighting');
+			Stop;
 
 		AltFire:
 			TNT1 A 0 A_JumpIf(invoker.isZoomed, "UnZoom");
@@ -151,7 +156,7 @@ Class AssaultRifle : JMWeapon
                  A_FireBullets(5.6, 0, 1, 18, "UpdatedBulletPuff",FBF_NORANDOM,0,"MO_BulletTracer",0);
                 A_TakeInventory("ARAmmo", 1, TIF_NOTAKEINFINITE);
                 A_StartSound("weapons/ar/fire", 0);
-//				A_SpawnItemEx("GunSmoke",15,0,34,2,0,0);
+				A_GunFlash();
 				JM_CheckForQuadDamage();
             }
             AR1Z G 1 BRIGHT 
@@ -163,7 +168,7 @@ Class AssaultRifle : JMWeapon
 			AR1Z H 1 
 			{
 				JM_WeaponReady(WRF_NOFIRE);
-				JM_GunRecoil(-0.58, .04);
+				JM_GunRecoil(-0.42, .04);
 			}
             AR1Z I 1 JM_WeaponReady(WRF_NOFIRE);
 			AR1F A 0 {
