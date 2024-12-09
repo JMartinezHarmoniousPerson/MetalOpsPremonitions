@@ -315,7 +315,7 @@ Class MO_HeavyRifle : JMWeapon
 		ZoomSniper:
 			TNT1 A 0 A_JumpIfInventory("HCR_6XZoom",1, "ReturnToNormalAim");
 			TNT1 A 0 A_StartSound("hcr/sniperzoom");
-			TNT1 A 0 A_JumpIfInventory("HCR_3XZoom",1, "Zoom5X");
+			TNT1 A 0 A_JumpIfInventory("HCR_3XZoom",1, "Zoom6X");
 			TNT1 A 0
 			{
 				A_SetInventory("HCR_3XZoom",1);
@@ -327,7 +327,7 @@ Class MO_HeavyRifle : JMWeapon
 			HC2Z ABC 1;
 			Goto SniperReady;
 
-		Zoom5X:
+		Zoom6X:
 			TNT1 A 0
 			{
 					A_SetInventory("HCR_3XZoom",0);
