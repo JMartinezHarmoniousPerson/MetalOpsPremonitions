@@ -1497,7 +1497,7 @@ Graphic "MOLOICO", 41, 61
 
 Graphic "GRENICO", 56, 61
 {
-	Patch "HGRNC0", 1, 7
+	Patch "GNDEC0", 1, 7
 }
 
 // End of texture definitions
