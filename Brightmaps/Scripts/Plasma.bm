@@ -57,14 +57,3 @@ brightmap sprite 2RGNI0 {MAP "PRGNI_BM" disablefullbright}
 brightmap sprite 2RGNJ0 {MAP "PRGNJ_BM" disablefullbright}
 brightmap sprite 2RGNK0 {MAP "PRGNK_BM" disablefullbright}
 
-brightmap sprite CELLA0 {map "Brightmaps/Items/PlasmaCells/CELLA0_BM.png"}
-brightmap sprite CELLB0 {map "Brightmaps/Items/PlasmaCells/CELLB0_BM.png"}
-brightmap sprite CELLC0 {map "Brightmaps/Items/PlasmaCells/CELLC0_BM.png"}
-brightmap sprite CELLD0 {map "Brightmaps/Items/PlasmaCells/CELLD0_BM.png"}
-brightmap sprite CELLE0 {map "Brightmaps/Items/PlasmaCells/CELLE0_BM.png"}
-brightmap sprite CELLF0 {map "Brightmaps/Items/PlasmaCells/CELLF0_BM.png"}
-brightmap sprite CELPA0 {map "Brightmaps/Items/PlasmaCells/CELPA0_BM.png"}
-brightmap sprite CELPB0 {map "Brightmaps/Items/PlasmaCells/CELPB0_BM.png"}
-brightmap sprite CELPC0 {map "Brightmaps/Items/PlasmaCells/CELPC0_BM.png"}
-brightmap sprite CELPD0 {map "Brightmaps/Items/PlasmaCells/CELPD0_BM.png"}
-

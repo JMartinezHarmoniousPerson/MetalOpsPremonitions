@@ -51,3 +51,17 @@ brightmap sprite 80N2D0 {map "Brightmaps/Items/Armor/80N2D0_BM.png" DisableFullB
 brightmap sprite 90N2B0 {map "Brightmaps/Items/Armor/90N2B0_BM.png" DisableFullBright}
 brightmap sprite 90N2C0 {map "Brightmaps/Items/Armor/90N2C0_BM.png" DisableFullBright}
 brightmap sprite 90N2D0 {map "Brightmaps/Items/Armor/90N2C0_BM.png" DisableFullBright}
+
+//Cells
+brightmap sprite CEL1A0 {map "Brightmaps/Items/PlasmaCells/CELLA0_BM.png"}
+brightmap sprite CEL1C0 {map "Brightmaps/Items/PlasmaCells/CELLB0_BM.png"}
+brightmap sprite CEL1D0 {map "Brightmaps/Items/PlasmaCells/CELLC0_BM.png"}
+brightmap sprite CEL1E0 {map "Brightmaps/Items/PlasmaCells/CELLD0_BM.png"}
+brightmap sprite CEL1F0 {map "Brightmaps/Items/PlasmaCells/CELLE0_BM.png"}
+brightmap sprite CEL1G0 {map "Brightmaps/Items/PlasmaCells/CELLF0_BM.png"}
+
+//Cell Pack
+brightmap sprite CE1PA0 {map "Brightmaps/Items/PlasmaCells/CELPA0_BM.png"}
+brightmap sprite CE1PB0 {map "Brightmaps/Items/PlasmaCells/CELPB0_BM.png"}
+brightmap sprite CE1PC0 {map "Brightmaps/Items/PlasmaCells/CELPC0_BM.png"}
+brightmap sprite CE1PD0 {map "Brightmaps/Items/PlasmaCells/CELPD0_BM.png"}

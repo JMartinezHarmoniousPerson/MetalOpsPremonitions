@@ -46,7 +46,6 @@ class MO_LowCalBox : MO_LowCaliber// replaces Clipbox
 	  Ammo.BackpackAmount 30;
 	  Ammo.BackpackMaxAmount 400;
 	  Inventory.Icon "CLIPA0";
-	  Scale 0.3;
 	  Inventory.PickUpSound "misc/ammopickup";
 	 }
 	  States
@@ -63,7 +62,6 @@ class MO_LowCalBox : MO_LowCaliber// replaces Clipbox
 	{
 	  Inventory.PickupMessage "Picked up a box of high caliber bullets."; // "Picked up a box of bullets."
 	  Inventory.Amount 50;
-	  Scale 0.25;
 	  Inventory.PickUpSound "misc/ammobox";
 	}
 	  States
@@ -103,7 +101,6 @@ class MO_ShotShell : Ammo
 	  Ammo.BackpackAmount 8;
 	  Ammo.BackpackMaxAmount 100;
 	  Inventory.Icon "SHELA0";
-	  Scale 0.25;
 	  Inventory.PickUpSound "misc/shells";
 	  }
 	  States
@@ -114,27 +111,6 @@ class MO_ShotShell : Ammo
 	  }
 }
  	
-class MO_FlakShell : Ammo
-{
-	Default
-	{
-	  Inventory.PickupMessage "Picked up 4 flak shells.";
-	  Inventory.Amount 4;
-	  Inventory.MaxAmount 50;
-	  Ammo.BackpackAmount 8;
-	  Ammo.BackpackMaxAmount 100;
-	  Inventory.Icon "SHELC0";
-	  Scale 0.25;
-	  Inventory.PickUpSound "misc/shells";
-	  }
-	  States
-	  {
-	  Spawn:
-		SHEL C -1;
-		Stop;
-	  }
-}
-
 Class MO_ShellBox : MO_ShotShell
 {
 	Default
@@ -199,15 +175,13 @@ Class MO_Cell : Ammo replaces Cell
   Inventory.MaxAmount 300;
   Ammo.BackpackAmount 20;
   Ammo.BackpackMaxAmount 600;
-  Inventory.Icon "CELLA0";
+  Inventory.Icon "CEL1A0";
   inventory.pickupsound "misc/cell";
-  Scale 0.25;
   }
   States
   {
   Spawn:
-    CELL A 1;
-	CELL BCDEF 3;
+	CEL1 BCDEFG 3;
     Loop;
   }
 }
@@ -219,12 +193,11 @@ Class MO_CellPack: MO_Cell replaces Cellpack
   Inventory.PickupMessage "$GOTCELLBOX";
   Inventory.Amount 100;
   inventory.pickupsound "misc/cellpak";
-  Scale 0.25;
   }
   States
   {
   Spawn:
-    CELP ABCD 3;
+    CE1P ABCD 3;
     Loop;
   }
 }
