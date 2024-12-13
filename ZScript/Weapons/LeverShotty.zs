@@ -185,7 +185,7 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 			return JM_WeaponReady(WRF_NOFIRE);
 			}
 		W87G A 0 JM_LoadShell("LeverShottyAmmo","MO_ShotShell",1);
-		W8R2 DE 1
+		W8R2 DE 1;
 		W8R2 FGHI 1
 		{
 			if(JustPressed(BT_ATTACK)) {return ResolveState("Fire");}

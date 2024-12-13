@@ -190,7 +190,7 @@ class MO_PumpShotgun : JMWeapon
 				if(JustPressed(BT_ALTATTACK)) {return ResolveState("AltFire");}
 				return JM_WeaponReady(WRF_NOFIRE);
 			}
-			PSTG A 0 A_JumpIf(invoker.OwnerHasSpeed(), 2)
+			PSTG A 0 A_JumpIf(invoker.OwnerHasSpeed(), 2);
             PGR1 IIII 1 {
 				if(JustPressed(BT_ATTACK)) {return ResolveState("Fire");}
 				if(JustPressed(BT_ALTATTACK)) {return ResolveState("AltFire");}
