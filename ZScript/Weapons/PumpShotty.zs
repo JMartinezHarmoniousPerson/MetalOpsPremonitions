@@ -15,7 +15,7 @@ class MO_PumpShotgun : JMWeapon
         Tag "Pump Shotgun";
 		Inventory.PickupSound "weapons/pumpshot/pump";
 		JMWeapon.inspectToken "NeverUsedPSG";
-+Weapon.NoAlert
+		+Weapon.NoAlert
     }
     States
     {
@@ -198,8 +198,8 @@ class MO_PumpShotgun : JMWeapon
 			}
             PISG A 0
 			{
-				if(JustPressed(BT_ATTACK)) {return ResolveState("Fire");}
-				if(JustPressed(BT_ALTATTACK)) {return ResolveState("AltFire");}
+				if(PressingFire()) {return ResolveState("Fire");}
+				if(PressingAltFire()) {return ResolveState("AltFire");}
 				return JM_WeaponReady(WRF_NOFIRE);
 			}
             Loop;
